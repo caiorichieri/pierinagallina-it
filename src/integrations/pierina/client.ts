@@ -38,6 +38,14 @@ export type Poem = {
   sort_order: number
 }
 
+export type FiabaCollection = {
+  id: string
+  title: string
+  subtitle: string | null
+  slug: string
+  sort_order: number
+}
+
 export type FiabaTrack = {
   id: string
   collection_id: string | null
