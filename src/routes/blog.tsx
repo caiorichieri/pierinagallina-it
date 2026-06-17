@@ -1,19 +1,19 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
-import { db } from "@/integrations/pierina/client";
+import { db, type Post } from "@/integrations/pierina/client";
 import { Reveal } from "@/components/Reveal";
 import { PageHero } from "@/components/PageHero";
 
 const blogList = queryOptions({
   queryKey: ["blog-list"],
-  queryFn: async () => {
+  queryFn: async (): Promise<Post[]> => {
     const { data, error } = await db
       .from("posts")
-      .select("id,title,slug,excerpt,featured_image,published_at")
+      .select("id,title,slug,excerpt,featured_image,published_at,content,created_at")
       .order("published_at", { ascending: false })
       .limit(60);
     if (error) throw error;
-    return data ?? [];
+    return (data as Post[] | null) ?? [];
   },
 });
 

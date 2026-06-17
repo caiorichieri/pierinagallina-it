@@ -1,20 +1,20 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
 import { ArrowLeft } from "lucide-react";
-import { db } from "@/integrations/pierina/client";
+import { db, type Post } from "@/integrations/pierina/client";
 
 const postQuery = (slug: string) =>
   queryOptions({
     queryKey: ["blog-post", slug],
-    queryFn: async () => {
+    queryFn: async (): Promise<Post> => {
       const { data, error } = await db
         .from("posts")
-        .select("id,title,slug,excerpt,content,featured_image,published_at")
+        .select("id,title,slug,excerpt,content,featured_image,published_at,created_at")
         .eq("slug", slug)
         .maybeSingle();
       if (error) throw error;
       if (!data) throw notFound();
-      return data;
+      return data as Post;
     },
   });
 

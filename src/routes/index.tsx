@@ -1,21 +1,21 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
 import { ArrowRight, BookOpen, Feather, Headphones, Image as ImageIcon, Mail } from "lucide-react";
-import { db } from "@/integrations/pierina/client";
+import { db, type Post, type Book, type Poem } from "@/integrations/pierina/client";
 import { Reveal } from "@/components/Reveal";
 
 const homeData = queryOptions({
   queryKey: ["home-pierina"],
-  queryFn: async () => {
+  queryFn: async (): Promise<{ posts: Post[]; books: Book[]; poems: Poem[] }> => {
     const [posts, books, poems] = await Promise.all([
-      db.from("posts").select("id,title,slug,excerpt,featured_image,published_at").order("published_at", { ascending: false }).limit(3),
-      db.from("books").select("id,title,year,cover_url,description,type").order("sort_order", { ascending: true }).limit(3),
-      db.from("poems").select("id,title,slug,content_italian,written_at").order("sort_order", { ascending: true }).limit(2),
+      db.from("posts").select("id,title,slug,excerpt,featured_image,published_at,content,created_at").order("published_at", { ascending: false }).limit(3),
+      db.from("books").select("id,title,year,price,description,buy_url,youtube_id,type,cover_url,sort_order").order("sort_order", { ascending: true }).limit(3),
+      db.from("poems").select("id,title,slug,content_friulian,content_italian,written_at,sort_order").order("sort_order", { ascending: true }).limit(2),
     ]);
     return {
-      posts: posts.data ?? [],
-      books: books.data ?? [],
-      poems: poems.data ?? [],
+      posts: (posts.data as Post[] | null) ?? [],
+      books: (books.data as Book[] | null) ?? [],
+      poems: (poems.data as Poem[] | null) ?? [],
     };
   },
 });
