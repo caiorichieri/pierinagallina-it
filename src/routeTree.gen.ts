@@ -18,6 +18,7 @@ import { Route as GalleriaRouteImport } from './routes/galleria'
 import { Route as CookiePolicyRouteImport } from './routes/cookie-policy'
 import { Route as ContattiRouteImport } from './routes/contatti'
 import { Route as CodroipoCeRouteImport } from './routes/codroipo-ce'
+import { Route as BlogRouteImport } from './routes/blog'
 import { Route as BioRouteImport } from './routes/bio'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as Atletica2000RouteImport } from './routes/atletica-2000'
@@ -27,6 +28,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as NewsIndexRouteImport } from './routes/news.index'
 import { Route as NewsSlugRouteImport } from './routes/news.$slug'
 import { Route as GalleriaSlugRouteImport } from './routes/galleria.$slug'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
 import { Route as AuthenticatedAdminNewsRouteImport } from './routes/_authenticated/admin.news'
@@ -78,6 +80,11 @@ const CodroipoCeRoute = CodroipoCeRouteImport.update({
   path: '/codroipo-ce',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BioRoute = BioRouteImport.update({
   id: '/bio',
   path: '/bio',
@@ -122,6 +129,11 @@ const GalleriaSlugRoute = GalleriaSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => GalleriaRoute,
 } as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BlogRoute,
+} as any)
 const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
   id: '/admin',
   path: '/admin',
@@ -156,6 +168,7 @@ export interface FileRoutesByFullPath {
   '/atletica-2000': typeof Atletica2000Route
   '/auth': typeof AuthRoute
   '/bio': typeof BioRoute
+  '/blog': typeof BlogRouteWithChildren
   '/codroipo-ce': typeof CodroipoCeRoute
   '/contatti': typeof ContattiRoute
   '/cookie-policy': typeof CookiePolicyRoute
@@ -166,6 +179,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/valori': typeof ValoriRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/blog/$slug': typeof BlogSlugRoute
   '/galleria/$slug': typeof GalleriaSlugRoute
   '/news/$slug': typeof NewsSlugRoute
   '/news/': typeof NewsIndexRoute
@@ -180,6 +194,7 @@ export interface FileRoutesByTo {
   '/atletica-2000': typeof Atletica2000Route
   '/auth': typeof AuthRoute
   '/bio': typeof BioRoute
+  '/blog': typeof BlogRouteWithChildren
   '/codroipo-ce': typeof CodroipoCeRoute
   '/contatti': typeof ContattiRoute
   '/cookie-policy': typeof CookiePolicyRoute
@@ -189,6 +204,7 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/valori': typeof ValoriRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/galleria/$slug': typeof GalleriaSlugRoute
   '/news/$slug': typeof NewsSlugRoute
   '/news': typeof NewsIndexRoute
@@ -205,6 +221,7 @@ export interface FileRoutesById {
   '/atletica-2000': typeof Atletica2000Route
   '/auth': typeof AuthRoute
   '/bio': typeof BioRoute
+  '/blog': typeof BlogRouteWithChildren
   '/codroipo-ce': typeof CodroipoCeRoute
   '/contatti': typeof ContattiRoute
   '/cookie-policy': typeof CookiePolicyRoute
@@ -215,6 +232,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/valori': typeof ValoriRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/blog/$slug': typeof BlogSlugRoute
   '/galleria/$slug': typeof GalleriaSlugRoute
   '/news/$slug': typeof NewsSlugRoute
   '/news/': typeof NewsIndexRoute
@@ -231,6 +249,7 @@ export interface FileRouteTypes {
     | '/atletica-2000'
     | '/auth'
     | '/bio'
+    | '/blog'
     | '/codroipo-ce'
     | '/contatti'
     | '/cookie-policy'
@@ -241,6 +260,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/valori'
     | '/admin'
+    | '/blog/$slug'
     | '/galleria/$slug'
     | '/news/$slug'
     | '/news/'
@@ -255,6 +275,7 @@ export interface FileRouteTypes {
     | '/atletica-2000'
     | '/auth'
     | '/bio'
+    | '/blog'
     | '/codroipo-ce'
     | '/contatti'
     | '/cookie-policy'
@@ -264,6 +285,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/sitemap.xml'
     | '/valori'
+    | '/blog/$slug'
     | '/galleria/$slug'
     | '/news/$slug'
     | '/news'
@@ -279,6 +301,7 @@ export interface FileRouteTypes {
     | '/atletica-2000'
     | '/auth'
     | '/bio'
+    | '/blog'
     | '/codroipo-ce'
     | '/contatti'
     | '/cookie-policy'
@@ -289,6 +312,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/valori'
     | '/_authenticated/admin'
+    | '/blog/$slug'
     | '/galleria/$slug'
     | '/news/$slug'
     | '/news/'
@@ -305,6 +329,7 @@ export interface RootRouteChildren {
   Atletica2000Route: typeof Atletica2000Route
   AuthRoute: typeof AuthRoute
   BioRoute: typeof BioRoute
+  BlogRoute: typeof BlogRouteWithChildren
   CodroipoCeRoute: typeof CodroipoCeRoute
   ContattiRoute: typeof ContattiRoute
   CookiePolicyRoute: typeof CookiePolicyRoute
@@ -383,6 +408,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CodroipoCeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/bio': {
       id: '/bio'
       path: '/bio'
@@ -445,6 +477,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/galleria/$slug'
       preLoaderRoute: typeof GalleriaSlugRouteImport
       parentRoute: typeof GalleriaRoute
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof BlogRoute
     }
     '/_authenticated/admin': {
       id: '/_authenticated/admin'
@@ -512,6 +551,16 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
+interface BlogRouteChildren {
+  BlogSlugRoute: typeof BlogSlugRoute
+}
+
+const BlogRouteChildren: BlogRouteChildren = {
+  BlogSlugRoute: BlogSlugRoute,
+}
+
+const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
+
 interface GalleriaRouteChildren {
   GalleriaSlugRoute: typeof GalleriaSlugRoute
 }
@@ -531,6 +580,7 @@ const rootRouteChildren: RootRouteChildren = {
   Atletica2000Route: Atletica2000Route,
   AuthRoute: AuthRoute,
   BioRoute: BioRoute,
+  BlogRoute: BlogRouteWithChildren,
   CodroipoCeRoute: CodroipoCeRoute,
   ContattiRoute: ContattiRoute,
   CookiePolicyRoute: CookiePolicyRoute,

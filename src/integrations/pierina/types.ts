@@ -3,6 +3,7 @@
 // is bound to the original Lovable Cloud project. Do not edit that file.
 
 export type PierinaDatabase = {
+  __InternalSupabase: { PostgrestVersion: "14.5" }
   public: {
     Tables: {
       posts: {
