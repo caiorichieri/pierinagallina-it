@@ -157,5 +157,10 @@ export type PierinaDatabase = {
         Update: Partial<PierinaDatabase["public"]["Tables"]["site_visits"]["Insert"]>
       }
     }
+    Views: { [_ in never]: never }
+    Functions: { [_ in never]: never }
+    Enums: { [_ in never]: never }
+    CompositeTypes: { [_ in never]: never }
   }
 }
+
