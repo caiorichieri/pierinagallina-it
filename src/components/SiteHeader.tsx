@@ -35,7 +35,7 @@ export function SiteHeader() {
               className="rounded-md px-2.5 py-1.5 text-[13px] font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
               activeProps={{ className: "text-foreground bg-secondary" }}
             >
-              {t(n.key)}
+              {n.label}
             </Link>
           ))}
           <LangSwitch lang={lang} setLang={setLang} />
@@ -66,7 +66,7 @@ export function SiteHeader() {
                 className="rounded-md px-2 py-2 text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground"
                 activeProps={{ className: "text-foreground bg-secondary" }}
               >
-                {t(n.key)}
+                {n.label}
               </Link>
             ))}
           </div>
