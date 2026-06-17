@@ -4,21 +4,14 @@ import { useT, type Lang } from "../i18n";
 import { Menu, X } from "lucide-react";
 
 const navItems = [
-  { to: "/", key: "nav_home" },
-  { to: "/bio", key: "nav_bio" },
-  { to: "/atletica-2000", key: "nav_atletica" },
-  { to: "/meeting", key: "nav_meeting" },
-  { to: "/codroipo-ce", key: "nav_codroipo" },
-  { to: "/memindsport", key: "nav_memindsport" },
-  { to: "/valori", key: "nav_valori" },
-  { to: "/galleria", key: "nav_galleria" },
-  { to: "/agenda", key: "nav_agenda" },
-  { to: "/news", key: "nav_news" },
-  { to: "/contatti", key: "nav_contatti" },
+  { to: "/", key: "nav_home", label: "Home" },
+  { to: "/blog", key: "nav_blog", label: "Blog" },
+  { to: "/bio", key: "nav_bio", label: "Chi sono" },
+  { to: "/contatti", key: "nav_contatti", label: "Contatti" },
 ] as const;
 
 export function SiteHeader() {
-  const { t, lang, setLang } = useT();
+  const { lang, setLang } = useT();
   const [open, setOpen] = useState(false);
 
   return (
@@ -26,10 +19,10 @@ export function SiteHeader() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
         <Link to="/" className="flex items-baseline gap-2" onClick={() => setOpen(false)}>
           <span className="font-serif text-xl font-semibold tracking-tight text-foreground">
-            Piergiorgio Iacuzzo
+            Pierina Gallina
           </span>
           <span className="hidden text-[10px] uppercase tracking-[0.18em] text-muted-foreground sm:inline">
-            Medio Friuli
+            Codroipo · Friuli
           </span>
         </Link>
 
@@ -42,7 +35,7 @@ export function SiteHeader() {
               className="rounded-md px-2.5 py-1.5 text-[13px] font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
               activeProps={{ className: "text-foreground bg-secondary" }}
             >
-              {t(n.key)}
+              {n.label}
             </Link>
           ))}
           <LangSwitch lang={lang} setLang={setLang} />
@@ -73,7 +66,7 @@ export function SiteHeader() {
                 className="rounded-md px-2 py-2 text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground"
                 activeProps={{ className: "text-foreground bg-secondary" }}
               >
-                {t(n.key)}
+                {n.label}
               </Link>
             ))}
           </div>

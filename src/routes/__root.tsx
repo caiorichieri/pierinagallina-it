@@ -81,28 +81,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Piergiorgio Iacuzzo — Medio Friuli" },
+      { title: "Pierina Gallina — scrittrice di Codroipo, Friuli" },
       {
         name: "description",
         content:
-          "Profilo ufficiale di Piergiorgio Iacuzzo: imprenditore e presidente delle realtà associative del Medio Friuli.",
+          "Pierina Gallina, scrittrice di Codroipo (Friuli) — paroliera per passione. Libri, fiabe sonore, poesie in friulano e italiano, fotografie e racconti.",
       },
-      { name: "author", content: "Piergiorgio Iacuzzo" },
-      { property: "og:site_name", content: "Piergiorgio Iacuzzo" },
+      { name: "author", content: "Pierina Gallina" },
+      { property: "og:site_name", content: "Pierina Gallina" },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "it_IT" },
       { name: "twitter:card", content: "summary_large_image" },
-      {
-        property: "og:image",
-        content:
-          "https://storage.googleapis.com/gpt-engineer-file-uploads/iME4qutiMvQWTfEWBPjGKRFf98H3/social-images/social-1780337717485-1000396576.webp",
-      },
-      {
-        name: "twitter:image",
-        content:
-          "https://storage.googleapis.com/gpt-engineer-file-uploads/iME4qutiMvQWTfEWBPjGKRFf98H3/social-images/social-1780337717485-1000396576.webp",
-      },
-      { name: "google-site-verification", content: "-8VyxbWcPfCyA7uFOeclNX3GZZ-POSUgWHENKls1Rc8" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -110,7 +99,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap",
       },
     ],
     scripts: [
@@ -119,8 +108,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebSite",
-          name: "Piergiorgio Iacuzzo",
-          url: "https://piergiorgioiacuzzo.it",
+          name: "Pierina Gallina",
           inLanguage: "it-IT",
         }),
       },
@@ -129,13 +117,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Person",
-          name: "Piergiorgio Iacuzzo",
-          url: "https://piergiorgioiacuzzo.it",
-          jobTitle: "Presidente ASD Atletica 2000 e Codroipo C'è",
-          worksFor: [
-            { "@type": "SportsOrganization", name: "ASD Atletica 2000", url: "https://www.atletica2000.it" },
-            { "@type": "Organization", name: "Codroipo C'è", url: "https://www.codroipoce.it" },
-          ],
+          name: "Pierina Gallina",
+          jobTitle: "Scrittrice, paroliera",
           address: {
             "@type": "PostalAddress",
             addressLocality: "Codroipo",
