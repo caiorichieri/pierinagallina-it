@@ -1,0 +1,187 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  Outlet,
+  Link,
+  createRootRouteWithContext,
+  useRouter,
+  HeadContent,
+  Scripts,
+} from "@tanstack/react-router";
+import { useEffect, type ReactNode } from "react";
+
+import appCss from "../styles.css?url";
+import { reportLovableError } from "../lib/lovable-error-reporting";
+import { LanguageProvider } from "../i18n";
+import { SiteHeader } from "../components/SiteHeader";
+import { SiteFooter } from "../components/SiteFooter";
+import { CookieBanner } from "../components/CookieBanner";
+
+function NotFoundComponent() {
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+      <div className="max-w-md text-center">
+        <h1 className="text-7xl font-bold text-foreground">404</h1>
+        <h2 className="mt-4 text-xl font-semibold text-foreground">Pagina non trovata</h2>
+        <p className="mt-2 text-sm text-muted-foreground">
+          La pagina che cerchi non esiste o è stata spostata.
+        </p>
+        <div className="mt-6">
+          <Link
+            to="/"
+            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+          >
+            Torna alla home
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+  console.error(error);
+  const router = useRouter();
+  useEffect(() => {
+    reportLovableError(error, { boundary: "tanstack_root_error_component" });
+  }, [error]);
+
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+      <div className="max-w-md text-center">
+        <h1 className="text-xl font-semibold tracking-tight text-foreground">
+          Questa pagina non è stata caricata
+        </h1>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Qualcosa è andato storto. Prova a ricaricare o torna alla home.
+        </p>
+        <div className="mt-6 flex flex-wrap justify-center gap-2">
+          <button
+            onClick={() => {
+              router.invalidate();
+              reset();
+            }}
+            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+          >
+            Riprova
+          </button>
+          <a
+            href="/"
+            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+          >
+            Home
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+  head: () => ({
+    meta: [
+      { charSet: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { title: "Piergiorgio Iacuzzo — Medio Friuli" },
+      {
+        name: "description",
+        content:
+          "Profilo ufficiale di Piergiorgio Iacuzzo: imprenditore e presidente delle realtà associative del Medio Friuli.",
+      },
+      { name: "author", content: "Piergiorgio Iacuzzo" },
+      { property: "og:site_name", content: "Piergiorgio Iacuzzo" },
+      { property: "og:type", content: "website" },
+      { property: "og:locale", content: "it_IT" },
+      { name: "twitter:card", content: "summary_large_image" },
+      {
+        property: "og:image",
+        content:
+          "https://storage.googleapis.com/gpt-engineer-file-uploads/iME4qutiMvQWTfEWBPjGKRFf98H3/social-images/social-1780337717485-1000396576.webp",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://storage.googleapis.com/gpt-engineer-file-uploads/iME4qutiMvQWTfEWBPjGKRFf98H3/social-images/social-1780337717485-1000396576.webp",
+      },
+      { name: "google-site-verification", content: "-8VyxbWcPfCyA7uFOeclNX3GZZ-POSUgWHENKls1Rc8" },
+    ],
+    links: [
+      { rel: "stylesheet", href: appCss },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap",
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "Piergiorgio Iacuzzo",
+          url: "https://piergiorgioiacuzzo.it",
+          inLanguage: "it-IT",
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Person",
+          name: "Piergiorgio Iacuzzo",
+          url: "https://piergiorgioiacuzzo.it",
+          jobTitle: "Presidente ASD Atletica 2000 e Codroipo C'è",
+          worksFor: [
+            { "@type": "SportsOrganization", name: "ASD Atletica 2000", url: "https://www.atletica2000.it" },
+            { "@type": "Organization", name: "Codroipo C'è", url: "https://www.codroipoce.it" },
+          ],
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "Codroipo",
+            addressRegion: "Friuli-Venezia Giulia",
+            addressCountry: "IT",
+          },
+        }),
+      },
+    ],
+  }),
+  shellComponent: RootShell,
+  component: RootComponent,
+  notFoundComponent: NotFoundComponent,
+  errorComponent: ErrorComponent,
+});
+
+
+function RootShell({ children }: { children: ReactNode }) {
+  return (
+    <html lang="it">
+      <head>
+        <HeadContent />
+      </head>
+      <body>
+        {children}
+        <Scripts />
+      </body>
+    </html>
+  );
+}
+
+function RootComponent() {
+  const { queryClient } = Route.useRouteContext();
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <LanguageProvider>
+        <div className="flex min-h-screen flex-col bg-background text-foreground">
+          <SiteHeader />
+          <main className="flex-1">
+            <Outlet />
+          </main>
+          <SiteFooter />
+          <CookieBanner />
+        </div>
+      </LanguageProvider>
+    </QueryClientProvider>
+  );
+}
