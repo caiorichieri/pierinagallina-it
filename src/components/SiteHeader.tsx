@@ -6,7 +6,11 @@ import { Menu, X } from "lucide-react";
 const navItems = [
   { to: "/", key: "nav_home", label: "Home" },
   { to: "/blog", key: "nav_blog", label: "Blog" },
-  { to: "/bio", key: "nav_bio", label: "Chi sono" },
+  { to: "/libri", key: "nav_libri", label: "Libri" },
+  { to: "/fiabe", key: "nav_fiabe", label: "Fiabe sonore" },
+  { to: "/poesie", key: "nav_poesie", label: "Poesie" },
+  { to: "/fotografie", key: "nav_foto", label: "Fotografie" },
+  { to: "/chi-sono", key: "nav_chi", label: "Chi sono" },
   { to: "/contatti", key: "nav_contatti", label: "Contatti" },
 ] as const;
 
