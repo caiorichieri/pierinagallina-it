@@ -113,10 +113,10 @@ function HomePage() {
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {[
-              { icon: BookOpen, t: "Libri", d: "Fiabe e racconti illustrati", href: "/blog" },
-              { icon: Headphones, t: "Fiabe sonore", d: "Voci, suoni, storie da ascoltare", href: "/blog" },
-              { icon: Feather, t: "Poesie", d: "In friulano e in italiano", href: "/blog" },
-              { icon: ImageIcon, t: "Fotografie", d: "Momenti, incontri, paesaggi", href: "/blog" },
+              { icon: BookOpen, t: "Libri", d: "Fiabe e racconti illustrati", href: "/libri" as const },
+              { icon: Headphones, t: "Fiabe sonore", d: "Voci, suoni, storie da ascoltare", href: "/fiabe" as const },
+              { icon: Feather, t: "Poesie", d: "In friulano e in italiano", href: "/poesie" as const },
+              { icon: ImageIcon, t: "Fotografie", d: "Momenti, incontri, paesaggi", href: "/fotografie" as const },
             ].map((s, i) => (
               <Reveal key={s.t} delay={i * 80}>
                 <Link
