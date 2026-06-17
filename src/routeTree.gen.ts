@@ -12,12 +12,17 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ValoriRouteImport } from './routes/valori'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as PoesieRouteImport } from './routes/poesie'
 import { Route as MemindsportRouteImport } from './routes/memindsport'
 import { Route as MeetingRouteImport } from './routes/meeting'
+import { Route as LibriRouteImport } from './routes/libri'
 import { Route as GalleriaRouteImport } from './routes/galleria'
+import { Route as FotografieRouteImport } from './routes/fotografie'
+import { Route as FiabeRouteImport } from './routes/fiabe'
 import { Route as CookiePolicyRouteImport } from './routes/cookie-policy'
 import { Route as ContattiRouteImport } from './routes/contatti'
 import { Route as CodroipoCeRouteImport } from './routes/codroipo-ce'
+import { Route as ChiSonoRouteImport } from './routes/chi-sono'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as BioRouteImport } from './routes/bio'
 import { Route as AuthRouteImport } from './routes/auth'
@@ -50,6 +55,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PoesieRoute = PoesieRouteImport.update({
+  id: '/poesie',
+  path: '/poesie',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MemindsportRoute = MemindsportRouteImport.update({
   id: '/memindsport',
   path: '/memindsport',
@@ -60,9 +70,24 @@ const MeetingRoute = MeetingRouteImport.update({
   path: '/meeting',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LibriRoute = LibriRouteImport.update({
+  id: '/libri',
+  path: '/libri',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GalleriaRoute = GalleriaRouteImport.update({
   id: '/galleria',
   path: '/galleria',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FotografieRoute = FotografieRouteImport.update({
+  id: '/fotografie',
+  path: '/fotografie',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FiabeRoute = FiabeRouteImport.update({
+  id: '/fiabe',
+  path: '/fiabe',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CookiePolicyRoute = CookiePolicyRouteImport.update({
@@ -78,6 +103,11 @@ const ContattiRoute = ContattiRouteImport.update({
 const CodroipoCeRoute = CodroipoCeRouteImport.update({
   id: '/codroipo-ce',
   path: '/codroipo-ce',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChiSonoRoute = ChiSonoRouteImport.update({
+  id: '/chi-sono',
+  path: '/chi-sono',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogRoute = BlogRouteImport.update({
@@ -169,12 +199,17 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/bio': typeof BioRoute
   '/blog': typeof BlogRouteWithChildren
+  '/chi-sono': typeof ChiSonoRoute
   '/codroipo-ce': typeof CodroipoCeRoute
   '/contatti': typeof ContattiRoute
   '/cookie-policy': typeof CookiePolicyRoute
+  '/fiabe': typeof FiabeRoute
+  '/fotografie': typeof FotografieRoute
   '/galleria': typeof GalleriaRouteWithChildren
+  '/libri': typeof LibriRoute
   '/meeting': typeof MeetingRoute
   '/memindsport': typeof MemindsportRoute
+  '/poesie': typeof PoesieRoute
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/valori': typeof ValoriRoute
@@ -195,12 +230,17 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/bio': typeof BioRoute
   '/blog': typeof BlogRouteWithChildren
+  '/chi-sono': typeof ChiSonoRoute
   '/codroipo-ce': typeof CodroipoCeRoute
   '/contatti': typeof ContattiRoute
   '/cookie-policy': typeof CookiePolicyRoute
+  '/fiabe': typeof FiabeRoute
+  '/fotografie': typeof FotografieRoute
   '/galleria': typeof GalleriaRouteWithChildren
+  '/libri': typeof LibriRoute
   '/meeting': typeof MeetingRoute
   '/memindsport': typeof MemindsportRoute
+  '/poesie': typeof PoesieRoute
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/valori': typeof ValoriRoute
@@ -222,12 +262,17 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/bio': typeof BioRoute
   '/blog': typeof BlogRouteWithChildren
+  '/chi-sono': typeof ChiSonoRoute
   '/codroipo-ce': typeof CodroipoCeRoute
   '/contatti': typeof ContattiRoute
   '/cookie-policy': typeof CookiePolicyRoute
+  '/fiabe': typeof FiabeRoute
+  '/fotografie': typeof FotografieRoute
   '/galleria': typeof GalleriaRouteWithChildren
+  '/libri': typeof LibriRoute
   '/meeting': typeof MeetingRoute
   '/memindsport': typeof MemindsportRoute
+  '/poesie': typeof PoesieRoute
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/valori': typeof ValoriRoute
@@ -250,12 +295,17 @@ export interface FileRouteTypes {
     | '/auth'
     | '/bio'
     | '/blog'
+    | '/chi-sono'
     | '/codroipo-ce'
     | '/contatti'
     | '/cookie-policy'
+    | '/fiabe'
+    | '/fotografie'
     | '/galleria'
+    | '/libri'
     | '/meeting'
     | '/memindsport'
+    | '/poesie'
     | '/privacy'
     | '/sitemap.xml'
     | '/valori'
@@ -276,12 +326,17 @@ export interface FileRouteTypes {
     | '/auth'
     | '/bio'
     | '/blog'
+    | '/chi-sono'
     | '/codroipo-ce'
     | '/contatti'
     | '/cookie-policy'
+    | '/fiabe'
+    | '/fotografie'
     | '/galleria'
+    | '/libri'
     | '/meeting'
     | '/memindsport'
+    | '/poesie'
     | '/privacy'
     | '/sitemap.xml'
     | '/valori'
@@ -302,12 +357,17 @@ export interface FileRouteTypes {
     | '/auth'
     | '/bio'
     | '/blog'
+    | '/chi-sono'
     | '/codroipo-ce'
     | '/contatti'
     | '/cookie-policy'
+    | '/fiabe'
+    | '/fotografie'
     | '/galleria'
+    | '/libri'
     | '/meeting'
     | '/memindsport'
+    | '/poesie'
     | '/privacy'
     | '/sitemap.xml'
     | '/valori'
@@ -330,12 +390,17 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   BioRoute: typeof BioRoute
   BlogRoute: typeof BlogRouteWithChildren
+  ChiSonoRoute: typeof ChiSonoRoute
   CodroipoCeRoute: typeof CodroipoCeRoute
   ContattiRoute: typeof ContattiRoute
   CookiePolicyRoute: typeof CookiePolicyRoute
+  FiabeRoute: typeof FiabeRoute
+  FotografieRoute: typeof FotografieRoute
   GalleriaRoute: typeof GalleriaRouteWithChildren
+  LibriRoute: typeof LibriRoute
   MeetingRoute: typeof MeetingRoute
   MemindsportRoute: typeof MemindsportRoute
+  PoesieRoute: typeof PoesieRoute
   PrivacyRoute: typeof PrivacyRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ValoriRoute: typeof ValoriRoute
@@ -366,6 +431,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/poesie': {
+      id: '/poesie'
+      path: '/poesie'
+      fullPath: '/poesie'
+      preLoaderRoute: typeof PoesieRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/memindsport': {
       id: '/memindsport'
       path: '/memindsport'
@@ -380,11 +452,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MeetingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/libri': {
+      id: '/libri'
+      path: '/libri'
+      fullPath: '/libri'
+      preLoaderRoute: typeof LibriRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/galleria': {
       id: '/galleria'
       path: '/galleria'
       fullPath: '/galleria'
       preLoaderRoute: typeof GalleriaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fotografie': {
+      id: '/fotografie'
+      path: '/fotografie'
+      fullPath: '/fotografie'
+      preLoaderRoute: typeof FotografieRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fiabe': {
+      id: '/fiabe'
+      path: '/fiabe'
+      fullPath: '/fiabe'
+      preLoaderRoute: typeof FiabeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cookie-policy': {
@@ -406,6 +499,13 @@ declare module '@tanstack/react-router' {
       path: '/codroipo-ce'
       fullPath: '/codroipo-ce'
       preLoaderRoute: typeof CodroipoCeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chi-sono': {
+      id: '/chi-sono'
+      path: '/chi-sono'
+      fullPath: '/chi-sono'
+      preLoaderRoute: typeof ChiSonoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog': {
@@ -581,12 +681,17 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   BioRoute: BioRoute,
   BlogRoute: BlogRouteWithChildren,
+  ChiSonoRoute: ChiSonoRoute,
   CodroipoCeRoute: CodroipoCeRoute,
   ContattiRoute: ContattiRoute,
   CookiePolicyRoute: CookiePolicyRoute,
+  FiabeRoute: FiabeRoute,
+  FotografieRoute: FotografieRoute,
   GalleriaRoute: GalleriaRouteWithChildren,
+  LibriRoute: LibriRoute,
   MeetingRoute: MeetingRoute,
   MemindsportRoute: MemindsportRoute,
+  PoesieRoute: PoesieRoute,
   PrivacyRoute: PrivacyRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   ValoriRoute: ValoriRoute,
