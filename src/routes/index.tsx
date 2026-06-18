@@ -3,6 +3,7 @@ import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
 import { ArrowRight, BookOpen, Feather, Headphones, Image as ImageIcon, Mail } from "lucide-react";
 import { db, type Post, type Book, type Poem } from "@/integrations/pierina/client";
 import { Reveal } from "@/components/Reveal";
+import pierinaHome from "@/assets/pierina-home.png.asset.json";
 
 const homeData = queryOptions({
   queryKey: ["home-pierina"],
@@ -66,44 +67,54 @@ function HomePage() {
           />
         </div>
 
-        <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 md:py-32">
-          <div className="flex items-center gap-3">
-            <span className="flag-italy" aria-label="Italia"><span /><span /><span /></span>
-            <span className="flag-friuli" aria-label="Friuli">FVG</span>
-            <span className="font-sans text-[11px] uppercase tracking-[0.22em] text-primary-foreground/70">
-              Codroipo · Friuli
-            </span>
+        <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-24 sm:px-6 md:grid-cols-[1.2fr_1fr] md:items-center md:gap-8 md:py-32">
+          <div>
+            <div className="flex items-center gap-3">
+              <span className="flag-italy" aria-label="Italia"><span /><span /><span /></span>
+              <span className="flag-friuli" aria-label="Friuli">FVG</span>
+              <span className="font-sans text-[11px] uppercase tracking-[0.22em] text-primary-foreground/70">
+                Codroipo · Friuli
+              </span>
+            </div>
+
+            <h1 className="mt-8 font-serif text-5xl leading-[1.02] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">
+              Pierina
+              <br />
+              <span className="italic" style={{ color: "var(--brand-gold)" }}>Gallina.</span>
+            </h1>
+
+            <p className="mt-8 max-w-2xl font-serif text-xl italic leading-snug text-primary-foreground/85 md:text-2xl">
+              Scrittrice di Codroipo, Friuli &nbsp;—&nbsp; paroliera per passione.
+            </p>
+
+            <p className="mt-6 max-w-2xl text-base leading-relaxed text-primary-foreground/80 md:text-lg">
+              Libri per bambini, fiabe sonore, poesie in friulano e in italiano. Parole che nascono dalla
+              terra, dalla scuola, dal vento di casa.
+            </p>
+
+            <div className="mt-10 flex flex-wrap gap-3">
+              <Link
+                to="/blog"
+                className="group inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground transition-transform hover:-translate-y-0.5"
+              >
+                Leggi il blog
+                <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+              </Link>
+              <Link
+                to="/contatti"
+                className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/30 px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary-foreground/10"
+              >
+                Scrivimi
+              </Link>
+            </div>
           </div>
 
-          <h1 className="mt-8 max-w-4xl font-serif text-5xl leading-[1.02] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">
-            Pierina
-            <br />
-            <span className="italic" style={{ color: "var(--brand-gold)" }}>Gallina.</span>
-          </h1>
-
-          <p className="mt-8 max-w-2xl font-serif text-xl italic leading-snug text-primary-foreground/85 md:text-2xl">
-            Scrittrice di Codroipo, Friuli &nbsp;—&nbsp; paroliera per passione.
-          </p>
-
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-primary-foreground/80 md:text-lg">
-            Libri per bambini, fiabe sonore, poesie in friulano e in italiano. Parole che nascono dalla
-            terra, dalla scuola, dal vento di casa.
-          </p>
-
-          <div className="mt-10 flex flex-wrap gap-3">
-            <Link
-              to="/blog"
-              className="group inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground transition-transform hover:-translate-y-0.5"
-            >
-              Leggi il blog
-              <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-            </Link>
-            <Link
-              to="/contatti"
-              className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/30 px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary-foreground/10"
-            >
-              Scrivimi
-            </Link>
+          <div className="relative flex justify-center md:justify-end">
+            <img
+              src={pierinaHome.url}
+              alt="Pierina Gallina"
+              className="relative z-10 w-full max-w-md object-contain drop-shadow-2xl md:max-w-lg"
+            />
           </div>
         </div>
       </section>
