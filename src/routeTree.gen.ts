@@ -28,17 +28,15 @@ import { Route as BioRouteImport } from './routes/bio'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as Atletica2000RouteImport } from './routes/atletica-2000'
 import { Route as AgendaRouteImport } from './routes/agenda'
-import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as NewsIndexRouteImport } from './routes/news.index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as NewsSlugRouteImport } from './routes/news.$slug'
 import { Route as GalleriaSlugRouteImport } from './routes/galleria.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
-import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
-import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
-import { Route as AuthenticatedAdminNewsRouteImport } from './routes/_authenticated/admin.news'
-import { Route as AuthenticatedAdminGalleryRouteImport } from './routes/_authenticated/admin.gallery'
-import { Route as AuthenticatedAdminAgendaRouteImport } from './routes/_authenticated/admin.agenda'
+import { Route as AdminPostsRouteImport } from './routes/admin.posts'
+import { Route as AdminPostsIdRouteImport } from './routes/admin.posts.$id'
 
 const ValoriRoute = ValoriRouteImport.update({
   id: '/valori',
@@ -135,8 +133,9 @@ const AgendaRoute = AgendaRouteImport.update({
   path: '/agenda',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
-  id: '/_authenticated',
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -148,6 +147,11 @@ const NewsIndexRoute = NewsIndexRouteImport.update({
   id: '/news/',
   path: '/news/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
 } as any)
 const NewsSlugRoute = NewsSlugRouteImport.update({
   id: '/news/$slug',
@@ -164,36 +168,20 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => BlogRoute,
 } as any)
-const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
-  getParentRoute: () => AuthenticatedRouteRoute,
+const AdminPostsRoute = AdminPostsRouteImport.update({
+  id: '/posts',
+  path: '/posts',
+  getParentRoute: () => AdminRoute,
 } as any)
-const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => AuthenticatedAdminRoute,
+const AdminPostsIdRoute = AdminPostsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => AdminPostsRoute,
 } as any)
-const AuthenticatedAdminNewsRoute = AuthenticatedAdminNewsRouteImport.update({
-  id: '/news',
-  path: '/news',
-  getParentRoute: () => AuthenticatedAdminRoute,
-} as any)
-const AuthenticatedAdminGalleryRoute =
-  AuthenticatedAdminGalleryRouteImport.update({
-    id: '/gallery',
-    path: '/gallery',
-    getParentRoute: () => AuthenticatedAdminRoute,
-  } as any)
-const AuthenticatedAdminAgendaRoute =
-  AuthenticatedAdminAgendaRouteImport.update({
-    id: '/agenda',
-    path: '/agenda',
-    getParentRoute: () => AuthenticatedAdminRoute,
-  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/agenda': typeof AgendaRoute
   '/atletica-2000': typeof Atletica2000Route
   '/auth': typeof AuthRoute
@@ -213,15 +201,13 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/valori': typeof ValoriRoute
-  '/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/admin/posts': typeof AdminPostsRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
   '/galleria/$slug': typeof GalleriaSlugRoute
   '/news/$slug': typeof NewsSlugRoute
+  '/admin/': typeof AdminIndexRoute
   '/news/': typeof NewsIndexRoute
-  '/admin/agenda': typeof AuthenticatedAdminAgendaRoute
-  '/admin/gallery': typeof AuthenticatedAdminGalleryRoute
-  '/admin/news': typeof AuthenticatedAdminNewsRoute
-  '/admin/': typeof AuthenticatedAdminIndexRoute
+  '/admin/posts/$id': typeof AdminPostsIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -244,19 +230,18 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/valori': typeof ValoriRoute
+  '/admin/posts': typeof AdminPostsRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
   '/galleria/$slug': typeof GalleriaSlugRoute
   '/news/$slug': typeof NewsSlugRoute
+  '/admin': typeof AdminIndexRoute
   '/news': typeof NewsIndexRoute
-  '/admin/agenda': typeof AuthenticatedAdminAgendaRoute
-  '/admin/gallery': typeof AuthenticatedAdminGalleryRoute
-  '/admin/news': typeof AuthenticatedAdminNewsRoute
-  '/admin': typeof AuthenticatedAdminIndexRoute
+  '/admin/posts/$id': typeof AdminPostsIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/admin': typeof AdminRouteWithChildren
   '/agenda': typeof AgendaRoute
   '/atletica-2000': typeof Atletica2000Route
   '/auth': typeof AuthRoute
@@ -276,20 +261,19 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/valori': typeof ValoriRoute
-  '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/admin/posts': typeof AdminPostsRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
   '/galleria/$slug': typeof GalleriaSlugRoute
   '/news/$slug': typeof NewsSlugRoute
+  '/admin/': typeof AdminIndexRoute
   '/news/': typeof NewsIndexRoute
-  '/_authenticated/admin/agenda': typeof AuthenticatedAdminAgendaRoute
-  '/_authenticated/admin/gallery': typeof AuthenticatedAdminGalleryRoute
-  '/_authenticated/admin/news': typeof AuthenticatedAdminNewsRoute
-  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
+  '/admin/posts/$id': typeof AdminPostsIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/agenda'
     | '/atletica-2000'
     | '/auth'
@@ -309,15 +293,13 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/sitemap.xml'
     | '/valori'
-    | '/admin'
+    | '/admin/posts'
     | '/blog/$slug'
     | '/galleria/$slug'
     | '/news/$slug'
-    | '/news/'
-    | '/admin/agenda'
-    | '/admin/gallery'
-    | '/admin/news'
     | '/admin/'
+    | '/news/'
+    | '/admin/posts/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -340,18 +322,17 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/sitemap.xml'
     | '/valori'
+    | '/admin/posts'
     | '/blog/$slug'
     | '/galleria/$slug'
     | '/news/$slug'
-    | '/news'
-    | '/admin/agenda'
-    | '/admin/gallery'
-    | '/admin/news'
     | '/admin'
+    | '/news'
+    | '/admin/posts/$id'
   id:
     | '__root__'
     | '/'
-    | '/_authenticated'
+    | '/admin'
     | '/agenda'
     | '/atletica-2000'
     | '/auth'
@@ -371,20 +352,18 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/sitemap.xml'
     | '/valori'
-    | '/_authenticated/admin'
+    | '/admin/posts'
     | '/blog/$slug'
     | '/galleria/$slug'
     | '/news/$slug'
+    | '/admin/'
     | '/news/'
-    | '/_authenticated/admin/agenda'
-    | '/_authenticated/admin/gallery'
-    | '/_authenticated/admin/news'
-    | '/_authenticated/admin/'
+    | '/admin/posts/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AdminRoute: typeof AdminRouteWithChildren
   AgendaRoute: typeof AgendaRoute
   Atletica2000Route: typeof Atletica2000Route
   AuthRoute: typeof AuthRoute
@@ -543,11 +522,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AgendaRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated': {
-      id: '/_authenticated'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -563,6 +542,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/news/'
       preLoaderRoute: typeof NewsIndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
     }
     '/news/$slug': {
       id: '/news/$slug'
@@ -585,71 +571,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof BlogRoute
     }
-    '/_authenticated/admin': {
-      id: '/_authenticated/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AuthenticatedAdminRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+    '/admin/posts': {
+      id: '/admin/posts'
+      path: '/posts'
+      fullPath: '/admin/posts'
+      preLoaderRoute: typeof AdminPostsRouteImport
+      parentRoute: typeof AdminRoute
     }
-    '/_authenticated/admin/': {
-      id: '/_authenticated/admin/'
-      path: '/'
-      fullPath: '/admin/'
-      preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
-      parentRoute: typeof AuthenticatedAdminRoute
-    }
-    '/_authenticated/admin/news': {
-      id: '/_authenticated/admin/news'
-      path: '/news'
-      fullPath: '/admin/news'
-      preLoaderRoute: typeof AuthenticatedAdminNewsRouteImport
-      parentRoute: typeof AuthenticatedAdminRoute
-    }
-    '/_authenticated/admin/gallery': {
-      id: '/_authenticated/admin/gallery'
-      path: '/gallery'
-      fullPath: '/admin/gallery'
-      preLoaderRoute: typeof AuthenticatedAdminGalleryRouteImport
-      parentRoute: typeof AuthenticatedAdminRoute
-    }
-    '/_authenticated/admin/agenda': {
-      id: '/_authenticated/admin/agenda'
-      path: '/agenda'
-      fullPath: '/admin/agenda'
-      preLoaderRoute: typeof AuthenticatedAdminAgendaRouteImport
-      parentRoute: typeof AuthenticatedAdminRoute
+    '/admin/posts/$id': {
+      id: '/admin/posts/$id'
+      path: '/$id'
+      fullPath: '/admin/posts/$id'
+      preLoaderRoute: typeof AdminPostsIdRouteImport
+      parentRoute: typeof AdminPostsRoute
     }
   }
 }
 
-interface AuthenticatedAdminRouteChildren {
-  AuthenticatedAdminAgendaRoute: typeof AuthenticatedAdminAgendaRoute
-  AuthenticatedAdminGalleryRoute: typeof AuthenticatedAdminGalleryRoute
-  AuthenticatedAdminNewsRoute: typeof AuthenticatedAdminNewsRoute
-  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+interface AdminPostsRouteChildren {
+  AdminPostsIdRoute: typeof AdminPostsIdRoute
 }
 
-const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
-  AuthenticatedAdminAgendaRoute: AuthenticatedAdminAgendaRoute,
-  AuthenticatedAdminGalleryRoute: AuthenticatedAdminGalleryRoute,
-  AuthenticatedAdminNewsRoute: AuthenticatedAdminNewsRoute,
-  AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+const AdminPostsRouteChildren: AdminPostsRouteChildren = {
+  AdminPostsIdRoute: AdminPostsIdRoute,
 }
 
-const AuthenticatedAdminRouteWithChildren =
-  AuthenticatedAdminRoute._addFileChildren(AuthenticatedAdminRouteChildren)
+const AdminPostsRouteWithChildren = AdminPostsRoute._addFileChildren(
+  AdminPostsRouteChildren,
+)
 
-interface AuthenticatedRouteRouteChildren {
-  AuthenticatedAdminRoute: typeof AuthenticatedAdminRouteWithChildren
+interface AdminRouteChildren {
+  AdminPostsRoute: typeof AdminPostsRouteWithChildren
+  AdminIndexRoute: typeof AdminIndexRoute
 }
 
-const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedAdminRoute: AuthenticatedAdminRouteWithChildren,
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminPostsRoute: AdminPostsRouteWithChildren,
+  AdminIndexRoute: AdminIndexRoute,
 }
 
-const AuthenticatedRouteRouteWithChildren =
-  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface BlogRouteChildren {
   BlogSlugRoute: typeof BlogSlugRoute
@@ -675,7 +636,7 @@ const GalleriaRouteWithChildren = GalleriaRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AdminRoute: AdminRouteWithChildren,
   AgendaRoute: AgendaRoute,
   Atletica2000Route: Atletica2000Route,
   AuthRoute: AuthRoute,
@@ -701,3 +662,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
