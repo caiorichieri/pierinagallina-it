@@ -38,6 +38,7 @@ import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AdminPostsRouteImport } from './routes/admin.posts'
 import { Route as AdminPoesieRouteImport } from './routes/admin.poesie'
 import { Route as AdminNewsletterRouteImport } from './routes/admin.newsletter'
+import { Route as AdminMigrazioneRouteImport } from './routes/admin.migrazione'
 import { Route as AdminMessaggiRouteImport } from './routes/admin.messaggi'
 import { Route as AdminLibriRouteImport } from './routes/admin.libri'
 import { Route as AdminFotografieRouteImport } from './routes/admin.fotografie'
@@ -189,6 +190,11 @@ const AdminNewsletterRoute = AdminNewsletterRouteImport.update({
   path: '/newsletter',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminMigrazioneRoute = AdminMigrazioneRouteImport.update({
+  id: '/migrazione',
+  path: '/migrazione',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminMessaggiRoute = AdminMessaggiRouteImport.update({
   id: '/messaggi',
   path: '/messaggi',
@@ -241,6 +247,7 @@ export interface FileRoutesByFullPath {
   '/admin/fotografie': typeof AdminFotografieRoute
   '/admin/libri': typeof AdminLibriRoute
   '/admin/messaggi': typeof AdminMessaggiRoute
+  '/admin/migrazione': typeof AdminMigrazioneRoute
   '/admin/newsletter': typeof AdminNewsletterRoute
   '/admin/poesie': typeof AdminPoesieRoute
   '/admin/posts': typeof AdminPostsRouteWithChildren
@@ -276,6 +283,7 @@ export interface FileRoutesByTo {
   '/admin/fotografie': typeof AdminFotografieRoute
   '/admin/libri': typeof AdminLibriRoute
   '/admin/messaggi': typeof AdminMessaggiRoute
+  '/admin/migrazione': typeof AdminMigrazioneRoute
   '/admin/newsletter': typeof AdminNewsletterRoute
   '/admin/poesie': typeof AdminPoesieRoute
   '/admin/posts': typeof AdminPostsRouteWithChildren
@@ -313,6 +321,7 @@ export interface FileRoutesById {
   '/admin/fotografie': typeof AdminFotografieRoute
   '/admin/libri': typeof AdminLibriRoute
   '/admin/messaggi': typeof AdminMessaggiRoute
+  '/admin/migrazione': typeof AdminMigrazioneRoute
   '/admin/newsletter': typeof AdminNewsletterRoute
   '/admin/poesie': typeof AdminPoesieRoute
   '/admin/posts': typeof AdminPostsRouteWithChildren
@@ -351,6 +360,7 @@ export interface FileRouteTypes {
     | '/admin/fotografie'
     | '/admin/libri'
     | '/admin/messaggi'
+    | '/admin/migrazione'
     | '/admin/newsletter'
     | '/admin/poesie'
     | '/admin/posts'
@@ -386,6 +396,7 @@ export interface FileRouteTypes {
     | '/admin/fotografie'
     | '/admin/libri'
     | '/admin/messaggi'
+    | '/admin/migrazione'
     | '/admin/newsletter'
     | '/admin/poesie'
     | '/admin/posts'
@@ -422,6 +433,7 @@ export interface FileRouteTypes {
     | '/admin/fotografie'
     | '/admin/libri'
     | '/admin/messaggi'
+    | '/admin/migrazione'
     | '/admin/newsletter'
     | '/admin/poesie'
     | '/admin/posts'
@@ -664,6 +676,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminNewsletterRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/migrazione': {
+      id: '/admin/migrazione'
+      path: '/migrazione'
+      fullPath: '/admin/migrazione'
+      preLoaderRoute: typeof AdminMigrazioneRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/messaggi': {
       id: '/admin/messaggi'
       path: '/messaggi'
@@ -719,6 +738,7 @@ interface AdminRouteChildren {
   AdminFotografieRoute: typeof AdminFotografieRoute
   AdminLibriRoute: typeof AdminLibriRoute
   AdminMessaggiRoute: typeof AdminMessaggiRoute
+  AdminMigrazioneRoute: typeof AdminMigrazioneRoute
   AdminNewsletterRoute: typeof AdminNewsletterRoute
   AdminPoesieRoute: typeof AdminPoesieRoute
   AdminPostsRoute: typeof AdminPostsRouteWithChildren
@@ -730,6 +750,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminFotografieRoute: AdminFotografieRoute,
   AdminLibriRoute: AdminLibriRoute,
   AdminMessaggiRoute: AdminMessaggiRoute,
+  AdminMigrazioneRoute: AdminMigrazioneRoute,
   AdminNewsletterRoute: AdminNewsletterRoute,
   AdminPoesieRoute: AdminPoesieRoute,
   AdminPostsRoute: AdminPostsRouteWithChildren,
