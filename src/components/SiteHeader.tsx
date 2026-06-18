@@ -46,7 +46,6 @@ export function SiteHeader() {
 
 
         <div className="flex items-center gap-2 lg:hidden">
-          <LangSwitch lang={lang} setLang={setLang} />
           <button
             type="button"
             aria-label="Menu"
@@ -56,6 +55,7 @@ export function SiteHeader() {
             {open ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
+
       </div>
 
       {open && (
