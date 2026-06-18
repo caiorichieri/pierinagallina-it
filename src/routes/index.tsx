@@ -111,22 +111,36 @@ function HomePage() {
       {/* SEZIONI — mondo letterario */}
       <section className="border-b border-border bg-card">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {[
-              { icon: BookOpen, t: "Libri", d: "Fiabe e racconti illustrati", href: "/libri" as const },
-              { icon: Headphones, t: "Fiabe sonore", d: "Voci, suoni, storie da ascoltare", href: "/fiabe" as const },
-              { icon: Feather, t: "Poesie", d: "In friulano e in italiano", href: "/poesie" as const },
-              { icon: ImageIcon, t: "Fotografie", d: "Momenti, incontri, paesaggi", href: "/fotografie" as const },
+              { icon: BookOpen,   t: "Libri",       d: "Fiabe e racconti illustrati",       href: "/libri" as const,      bg: "#f7e3ea", ink: "#7a1d3a", accent: "#c44569" },
+              { icon: Headphones, t: "Fiabe sonore",d: "Voci, suoni, storie da ascoltare",  href: "/fiabe" as const,      bg: "#f8ebcf", ink: "#6b4a1a", accent: "#c98a1f" },
+              { icon: Feather,    t: "Poesie",      d: "In friulano e in italiano",         href: "/poesie" as const,     bg: "#e4ecdf", ink: "#2f4a3a", accent: "#6b8e5a" },
+              { icon: ImageIcon,  t: "Fotografie",  d: "Momenti, incontri, paesaggi",       href: "/fotografie" as const, bg: "#dee5ee", ink: "#1e3a5f", accent: "#3b6fa0" },
             ].map((s, i) => (
               <Reveal key={s.t} delay={i * 80}>
                 <Link
                   to={s.href}
-                  className="group flex h-full flex-col rounded-md border border-border bg-background p-6 transition-all hover:-translate-y-1 hover:border-accent hover:shadow-lg"
+                  className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border/60 p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl"
+                  style={{ background: s.bg, color: s.ink }}
                 >
-                  <s.icon size={22} className="text-accent" />
-                  <div className="mt-4 font-serif text-2xl text-foreground">{s.t}</div>
-                  <div className="mt-1 text-sm text-muted-foreground">{s.d}</div>
-                  <span className="mt-6 inline-flex items-center gap-1.5 text-xs font-medium text-primary group-hover:text-accent">
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full opacity-30 blur-2xl transition-opacity duration-500 group-hover:opacity-60"
+                    style={{ background: s.accent }}
+                  />
+                  <span
+                    className="inline-flex h-11 w-11 items-center justify-center rounded-2xl shadow-sm transition-transform duration-300 group-hover:scale-110 group-hover:rotate-[-4deg]"
+                    style={{ background: "rgba(255,255,255,0.7)", color: s.accent }}
+                  >
+                    <s.icon size={22} />
+                  </span>
+                  <div className="mt-5 font-serif text-2xl" style={{ color: s.ink }}>{s.t}</div>
+                  <div className="mt-1 text-sm opacity-80">{s.d}</div>
+                  <span
+                    className="mt-6 inline-flex items-center gap-1.5 text-xs font-medium transition-transform duration-300 group-hover:translate-x-1"
+                    style={{ color: s.accent }}
+                  >
                     Esplora <ArrowRight size={12} />
                   </span>
                 </Link>
@@ -135,6 +149,7 @@ function HomePage() {
           </div>
         </div>
       </section>
+
 
       {/* BLOG RECENTI */}
       {data.posts.length > 0 && (

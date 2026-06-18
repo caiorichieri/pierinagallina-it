@@ -39,7 +39,7 @@ function FotografiePage() {
 
   return (
     <>
-      <PageHero
+      <PageHero tone="fotografie"
         eyebrow="Fotografie"
         title={<>Momenti, incontri, <span className="italic" style={{ color: "var(--brand-gold)" }}>paesaggi.</span></>}
         intro="Una galleria di istantanee: presentazioni di libri, letture nelle scuole, radio, amici e luoghi del Friuli."

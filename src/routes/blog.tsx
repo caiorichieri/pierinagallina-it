@@ -137,8 +137,10 @@ function BlogPage() {
                     day: "2-digit",
                     month: "short",
                     year: "numeric",
+                    timeZone: "UTC",
                   })
                 : null;
+
               const cat = categories.find((c) => c.id === p.category_id);
               return (
                 <Reveal key={p.id} delay={Math.min(i, 6) * 60}>
