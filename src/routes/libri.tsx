@@ -46,7 +46,7 @@ function LibriPage() {
 
   return (
     <>
-      <PageHero
+      <PageHero tone="libri"
         eyebrow="Libri"
         title={<>Le pagine che ho <span className="italic" style={{ color: "var(--brand-gold)" }}>seminato.</span></>}
         intro="Fiabe, racconti per bambini e raccolte illustrate. Storie che nascono dalle scuole di Codroipo e dai paesi del Friuli."

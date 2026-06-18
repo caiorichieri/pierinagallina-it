@@ -35,7 +35,7 @@ function PoesiePage() {
 
   return (
     <>
-      <PageHero
+      <PageHero tone="poesie"
         eyebrow="Poesia"
         title={<>Versi in friulano <span className="italic" style={{ color: "var(--brand-gold)" }}>e in italiano.</span></>}
         intro="Parole della terra, della scuola, dell'affetto. Una raccolta che cresce nel tempo, fra la lingua di casa e quella di tutti."
