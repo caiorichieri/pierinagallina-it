@@ -16,8 +16,8 @@ export function SiteFooter() {
         <div className="flex-1" style={{ background: "#CD212A" }} />
       </div>
 
-      <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 md:grid-cols-12">
-        <div className="md:col-span-5">
+      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-12">
+        <div className="md:col-span-4">
           <div className="font-serif text-2xl font-semibold">Pierina Gallina</div>
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-primary-foreground/75 italic">
             «Paroliera per passione» — scrittrice di Codroipo, nel cuore del Friuli.
@@ -34,7 +34,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="md:col-span-4">
+        <div className="md:col-span-3">
           <div className="mb-4 text-xs font-mono uppercase tracking-[0.18em] text-primary-foreground/55">
             Navigazione
           </div>
@@ -61,7 +61,7 @@ export function SiteFooter() {
           </ul>
         </div>
 
-        <div className="md:col-span-3">
+        <div className="md:col-span-2">
           <div className="mb-4 text-xs font-mono uppercase tracking-[0.18em] text-primary-foreground/55">
             Contatti
           </div>
@@ -83,6 +83,17 @@ export function SiteFooter() {
               </Link>
             </li>
           </ul>
+        </div>
+
+        <div className="flex items-end justify-center md:col-span-3 md:justify-end">
+          <img
+            src={pierinaFooter.url}
+            alt="Pierina Gallina"
+            width={280}
+            height={350}
+            loading="lazy"
+            className="max-h-64 w-auto object-contain drop-shadow-lg"
+          />
         </div>
       </div>
 
