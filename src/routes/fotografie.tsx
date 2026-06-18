@@ -55,7 +55,7 @@ function FotografiePage() {
                 <button
                   type="button"
                   onClick={() => setOpen(p)}
-                  className="mb-4 block w-full overflow-hidden rounded-md bg-secondary transition-transform hover:-translate-y-0.5"
+                  className="mb-4 block w-full overflow-hidden rounded-xl bg-secondary transition-transform hover:-translate-y-0.5"
                 >
                   <img
                     src={p.image_url}
@@ -87,7 +87,7 @@ function FotografiePage() {
             <X size={20} />
           </button>
           <figure className="max-h-[90vh] max-w-6xl" onClick={(e) => e.stopPropagation()}>
-            <img src={open.image_url} alt={open.title ?? ""} className="max-h-[80vh] w-auto rounded-md object-contain" />
+            <img src={open.image_url} alt={open.title ?? ""} className="max-h-[80vh] w-auto rounded-xl object-contain" />
             {open.title && (
               <figcaption className="mt-3 text-center font-serif text-base italic text-white/85">{open.title}</figcaption>
             )}

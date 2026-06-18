@@ -61,11 +61,11 @@ function LibriPage() {
               <Reveal key={b.id} delay={Math.min(i, 6) * 80}>
                 <article className="group flex h-full flex-col">
                   {b.cover_url ? (
-                    <div className="photo-frame aspect-[3/4] overflow-hidden">
+                    <div className="overflow-hidden rounded-xl aspect-[3/4]">
                       <img src={b.cover_url} alt={b.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                     </div>
                   ) : (
-                    <div className="flex aspect-[3/4] items-center justify-center rounded-md bg-primary p-8 text-primary-foreground">
+                    <div className="flex aspect-[3/4] items-center justify-center rounded-xl bg-primary p-8 text-primary-foreground">
                       <span className="text-center font-serif text-2xl italic leading-tight">{b.title}</span>
                     </div>
                   )}

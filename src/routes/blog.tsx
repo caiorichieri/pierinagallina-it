@@ -145,7 +145,7 @@ function BlogPage() {
                   <Link
                     to="/blog/$slug"
                     params={{ slug: p.slug }}
-                    className="group block h-full overflow-hidden rounded-md border border-border bg-card transition-all hover:-translate-y-1 hover:border-accent hover:shadow-lg"
+                    className="group block h-full overflow-hidden rounded-xl border border-border bg-card transition-all hover:-translate-y-1 hover:border-accent hover:shadow-lg"
                   >
                     {p.featured_image ? (
                       <div className="aspect-[16/9] overflow-hidden bg-secondary">

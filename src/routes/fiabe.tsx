@@ -60,7 +60,7 @@ function FiabePage() {
                       <h2 className="font-serif text-3xl italic leading-tight text-foreground md:text-4xl">{c.title}</h2>
                       {c.subtitle && <p className="mt-2 text-sm text-muted-foreground md:text-base">{c.subtitle}</p>}
                     </div>
-                    <ul className="mt-8 divide-y divide-border rounded-md border border-border bg-card">
+                    <ul className="mt-8 divide-y divide-border rounded-xl border border-border bg-card">
                       {tracks.length === 0 ? (
                         <li className="px-5 py-6 text-sm text-muted-foreground">Nessuna traccia.</li>
                       ) : (
