@@ -37,6 +37,7 @@ import { Route as GalleriaSlugRouteImport } from './routes/galleria.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AdminPostsRouteImport } from './routes/admin.posts'
 import { Route as AdminPoesieRouteImport } from './routes/admin.poesie'
+import { Route as AdminMessaggiRouteImport } from './routes/admin.messaggi'
 import { Route as AdminLibriRouteImport } from './routes/admin.libri'
 import { Route as AdminFotografieRouteImport } from './routes/admin.fotografie'
 import { Route as AdminFiabeRouteImport } from './routes/admin.fiabe'
@@ -182,6 +183,11 @@ const AdminPoesieRoute = AdminPoesieRouteImport.update({
   path: '/poesie',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminMessaggiRoute = AdminMessaggiRouteImport.update({
+  id: '/messaggi',
+  path: '/messaggi',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminLibriRoute = AdminLibriRouteImport.update({
   id: '/libri',
   path: '/libri',
@@ -228,6 +234,7 @@ export interface FileRoutesByFullPath {
   '/admin/fiabe': typeof AdminFiabeRoute
   '/admin/fotografie': typeof AdminFotografieRoute
   '/admin/libri': typeof AdminLibriRoute
+  '/admin/messaggi': typeof AdminMessaggiRoute
   '/admin/poesie': typeof AdminPoesieRoute
   '/admin/posts': typeof AdminPostsRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
@@ -261,6 +268,7 @@ export interface FileRoutesByTo {
   '/admin/fiabe': typeof AdminFiabeRoute
   '/admin/fotografie': typeof AdminFotografieRoute
   '/admin/libri': typeof AdminLibriRoute
+  '/admin/messaggi': typeof AdminMessaggiRoute
   '/admin/poesie': typeof AdminPoesieRoute
   '/admin/posts': typeof AdminPostsRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
@@ -296,6 +304,7 @@ export interface FileRoutesById {
   '/admin/fiabe': typeof AdminFiabeRoute
   '/admin/fotografie': typeof AdminFotografieRoute
   '/admin/libri': typeof AdminLibriRoute
+  '/admin/messaggi': typeof AdminMessaggiRoute
   '/admin/poesie': typeof AdminPoesieRoute
   '/admin/posts': typeof AdminPostsRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
@@ -332,6 +341,7 @@ export interface FileRouteTypes {
     | '/admin/fiabe'
     | '/admin/fotografie'
     | '/admin/libri'
+    | '/admin/messaggi'
     | '/admin/poesie'
     | '/admin/posts'
     | '/blog/$slug'
@@ -365,6 +375,7 @@ export interface FileRouteTypes {
     | '/admin/fiabe'
     | '/admin/fotografie'
     | '/admin/libri'
+    | '/admin/messaggi'
     | '/admin/poesie'
     | '/admin/posts'
     | '/blog/$slug'
@@ -399,6 +410,7 @@ export interface FileRouteTypes {
     | '/admin/fiabe'
     | '/admin/fotografie'
     | '/admin/libri'
+    | '/admin/messaggi'
     | '/admin/poesie'
     | '/admin/posts'
     | '/blog/$slug'
@@ -633,6 +645,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminPoesieRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/messaggi': {
+      id: '/admin/messaggi'
+      path: '/messaggi'
+      fullPath: '/admin/messaggi'
+      preLoaderRoute: typeof AdminMessaggiRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/libri': {
       id: '/admin/libri'
       path: '/libri'
@@ -680,6 +699,7 @@ interface AdminRouteChildren {
   AdminFiabeRoute: typeof AdminFiabeRoute
   AdminFotografieRoute: typeof AdminFotografieRoute
   AdminLibriRoute: typeof AdminLibriRoute
+  AdminMessaggiRoute: typeof AdminMessaggiRoute
   AdminPoesieRoute: typeof AdminPoesieRoute
   AdminPostsRoute: typeof AdminPostsRouteWithChildren
   AdminIndexRoute: typeof AdminIndexRoute
@@ -689,6 +709,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminFiabeRoute: AdminFiabeRoute,
   AdminFotografieRoute: AdminFotografieRoute,
   AdminLibriRoute: AdminLibriRoute,
+  AdminMessaggiRoute: AdminMessaggiRoute,
   AdminPoesieRoute: AdminPoesieRoute,
   AdminPostsRoute: AdminPostsRouteWithChildren,
   AdminIndexRoute: AdminIndexRoute,
