@@ -79,26 +79,4 @@ export function SiteHeader() {
     </header>
   );
 }
-
-function LangSwitch({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
-  return (
-    <div className="ml-2 inline-flex overflow-hidden rounded-md border border-border text-[11px] font-mono">
-      {(["it", "en"] as const).map((l) => (
-        <button
-          key={l}
-          type="button"
-          onClick={() => setLang(l)}
-          aria-pressed={lang === l}
-          className={
-            "px-2 py-1 uppercase tracking-wider transition-colors " +
-            (lang === l
-              ? "bg-foreground text-background"
-              : "bg-background text-muted-foreground hover:text-foreground")
-          }
-        >
-          {l}
-        </button>
-      ))}
-    </div>
-  );
 }
