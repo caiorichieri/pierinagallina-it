@@ -42,8 +42,8 @@ export function SiteHeader() {
               {n.label}
             </Link>
           ))}
-          <LangSwitch lang={lang} setLang={setLang} />
         </nav>
+
 
         <div className="flex items-center gap-2 lg:hidden">
           <LangSwitch lang={lang} setLang={setLang} />
