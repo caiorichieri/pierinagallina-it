@@ -108,6 +108,12 @@ function LibriPage() {
           </div>
         )}
       </section>
+
+      <BookInterestDialog
+        bookTitle={interest?.title ?? ""}
+        open={!!interest}
+        onClose={() => setInterest(null)}
+      />
     </>
   );
 }
