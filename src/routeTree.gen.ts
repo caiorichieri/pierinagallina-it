@@ -36,6 +36,7 @@ import { Route as NewsSlugRouteImport } from './routes/news.$slug'
 import { Route as GalleriaSlugRouteImport } from './routes/galleria.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AdminPostsRouteImport } from './routes/admin.posts'
+import { Route as AdminPoesieRouteImport } from './routes/admin.poesie'
 import { Route as AdminLibriRouteImport } from './routes/admin.libri'
 import { Route as AdminPostsIdRouteImport } from './routes/admin.posts.$id'
 
@@ -174,6 +175,11 @@ const AdminPostsRoute = AdminPostsRouteImport.update({
   path: '/posts',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminPoesieRoute = AdminPoesieRouteImport.update({
+  id: '/poesie',
+  path: '/poesie',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminLibriRoute = AdminLibriRouteImport.update({
   id: '/libri',
   path: '/libri',
@@ -208,6 +214,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/valori': typeof ValoriRoute
   '/admin/libri': typeof AdminLibriRoute
+  '/admin/poesie': typeof AdminPoesieRoute
   '/admin/posts': typeof AdminPostsRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
   '/galleria/$slug': typeof GalleriaSlugRoute
@@ -238,6 +245,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/valori': typeof ValoriRoute
   '/admin/libri': typeof AdminLibriRoute
+  '/admin/poesie': typeof AdminPoesieRoute
   '/admin/posts': typeof AdminPostsRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
   '/galleria/$slug': typeof GalleriaSlugRoute
@@ -270,6 +278,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/valori': typeof ValoriRoute
   '/admin/libri': typeof AdminLibriRoute
+  '/admin/poesie': typeof AdminPoesieRoute
   '/admin/posts': typeof AdminPostsRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
   '/galleria/$slug': typeof GalleriaSlugRoute
@@ -303,6 +312,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/valori'
     | '/admin/libri'
+    | '/admin/poesie'
     | '/admin/posts'
     | '/blog/$slug'
     | '/galleria/$slug'
@@ -333,6 +343,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/valori'
     | '/admin/libri'
+    | '/admin/poesie'
     | '/admin/posts'
     | '/blog/$slug'
     | '/galleria/$slug'
@@ -364,6 +375,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/valori'
     | '/admin/libri'
+    | '/admin/poesie'
     | '/admin/posts'
     | '/blog/$slug'
     | '/galleria/$slug'
@@ -590,6 +602,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminPostsRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/poesie': {
+      id: '/admin/poesie'
+      path: '/poesie'
+      fullPath: '/admin/poesie'
+      preLoaderRoute: typeof AdminPoesieRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/libri': {
       id: '/admin/libri'
       path: '/libri'
@@ -621,12 +640,14 @@ const AdminPostsRouteWithChildren = AdminPostsRoute._addFileChildren(
 
 interface AdminRouteChildren {
   AdminLibriRoute: typeof AdminLibriRoute
+  AdminPoesieRoute: typeof AdminPoesieRoute
   AdminPostsRoute: typeof AdminPostsRouteWithChildren
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
   AdminLibriRoute: AdminLibriRoute,
+  AdminPoesieRoute: AdminPoesieRoute,
   AdminPostsRoute: AdminPostsRouteWithChildren,
   AdminIndexRoute: AdminIndexRoute,
 }
