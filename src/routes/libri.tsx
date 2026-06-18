@@ -80,10 +80,18 @@ function LibriPage() {
                     <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{b.description}</p>
                   )}
                   <div className="mt-5 flex flex-wrap gap-3">
-                    {b.buy_url && (
+                    {isExternalBuy(b.buy_url) ? (
                       <a href={b.buy_url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-xs font-medium text-primary-foreground transition-transform hover:-translate-y-0.5">
                         Acquista <ExternalLink size={12} />
                       </a>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => setInterest(b)}
+                        className="inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-xs font-medium text-primary-foreground transition-transform hover:-translate-y-0.5"
+                      >
+                        <Mail size={12} /> Richiedi informazioni
+                      </button>
                     )}
                     {b.youtube_id && (
                       <a href={`https://youtu.be/${b.youtube_id}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded-full border border-border px-4 py-2 text-xs font-medium text-foreground hover:border-accent hover:text-accent">
