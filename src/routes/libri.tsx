@@ -42,6 +42,7 @@ export const Route = createFileRoute("/libri")({
 
 function LibriPage() {
   const { data: books } = useSuspenseQuery(booksQ);
+  const [interest, setInterest] = useState<Book | null>(null);
 
   return (
     <>
