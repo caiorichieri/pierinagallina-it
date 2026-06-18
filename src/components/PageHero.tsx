@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import logoStamp from "../assets/logo-pg-friuli-trasparente.png.asset.json";
 
 export function PageHero({
   eyebrow,
@@ -18,12 +17,6 @@ export function PageHero({
         <div
           className="absolute -right-24 -top-24 h-72 w-72 rounded-full opacity-25 blur-3xl"
           style={{ background: "var(--brand-gold)" }}
-        />
-        <img
-          src={logoStamp.url}
-          alt=""
-          aria-hidden
-          className="absolute -right-10 top-1/2 hidden h-56 w-56 -translate-y-1/2 select-none opacity-20 mix-blend-screen md:block lg:h-72 lg:w-72"
         />
       </div>
       <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 md:py-28">
