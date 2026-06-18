@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { useT, type Lang } from "../i18n";
 import { Menu, X } from "lucide-react";
+
 
 const navItems = [
   { to: "/", key: "nav_home", label: "Home" },
