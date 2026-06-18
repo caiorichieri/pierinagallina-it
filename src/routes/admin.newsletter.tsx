@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { db } from "@/integrations/pierina/client";
-import { Trash2, Download } from "lucide-react";
+import { Trash2, Download, Upload } from "lucide-react";
 
 type Sub = { id: string; email: string; created_at: string; confirmed?: boolean | null };
 
@@ -10,6 +10,9 @@ export const Route = createFileRoute("/admin/newsletter")({ component: AdminNews
 function AdminNewsletter() {
   const [items, setItems] = useState<Sub[]>([]);
   const [err, setErr] = useState<string | null>(null);
+  const [importing, setImporting] = useState(false);
+  const [importMsg, setImportMsg] = useState<string | null>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
 
   async function reload() {
     const { data, error } = await db.from("newsletter_subscribers").select("*").order("created_at", { ascending: false }).limit(2000);
@@ -33,17 +36,91 @@ function AdminNewsletter() {
     URL.revokeObjectURL(url);
   }
 
+  function parseEmails(text: string): string[] {
+    const emailRe = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi;
+    const matches = text.match(emailRe) ?? [];
+    const seen = new Set<string>();
+    const out: string[] = [];
+    for (const m of matches) {
+      const e = m.trim().toLowerCase();
+      if (!seen.has(e)) { seen.add(e); out.push(e); }
+    }
+    return out;
+  }
+
+  async function handleImport(file: File) {
+    setImporting(true);
+    setImportMsg(null);
+    try {
+      const text = await file.text();
+      const emails = parseEmails(text);
+      if (emails.length === 0) {
+        setImportMsg("Nessuna email valida trovata nel file.");
+        return;
+      }
+      const existing = new Set(items.map((i) => i.email.toLowerCase()));
+      const toInsert = emails.filter((e) => !existing.has(e));
+      if (toInsert.length === 0) {
+        setImportMsg(`Tutte le ${emails.length} email sono già iscritte.`);
+        return;
+      }
+      const rows = toInsert.map((email) => ({ email }));
+      // chunk inserts to avoid payload limits
+      let inserted = 0;
+      const chunkSize = 500;
+      for (let i = 0; i < rows.length; i += chunkSize) {
+        const chunk = rows.slice(i, i + chunkSize);
+        const { error } = await db.from("newsletter_subscribers").insert(chunk);
+        if (error) throw error;
+        inserted += chunk.length;
+      }
+      setImportMsg(`Importate ${inserted} nuove email (${emails.length - toInsert.length} già presenti).`);
+      reload();
+    } catch (e: any) {
+      setImportMsg(`Errore: ${e.message ?? e}`);
+    } finally {
+      setImporting(false);
+      if (fileRef.current) fileRef.current.value = "";
+    }
+  }
+
   return (
     <div>
-      <header className="mb-6 flex items-end justify-between">
+      <header className="mb-6 flex flex-wrap items-end justify-between gap-3">
         <div>
           <p className="text-xs uppercase tracking-widest text-muted-foreground">Lista</p>
           <h1 className="mt-1 font-serif text-3xl italic text-primary">Newsletter ({items.length})</h1>
         </div>
-        <button onClick={exportCsv} className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm hover:border-accent hover:text-accent">
-          <Download size={14} /> Esporta CSV
-        </button>
+        <div className="flex flex-wrap gap-2">
+          <input
+            ref={fileRef}
+            type="file"
+            accept=".csv,.txt,text/csv,text/plain"
+            className="hidden"
+            onChange={(e) => {
+              const f = e.target.files?.[0];
+              if (f) handleImport(f);
+            }}
+          />
+          <button
+            onClick={() => fileRef.current?.click()}
+            disabled={importing}
+            className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm hover:border-accent hover:text-accent disabled:opacity-50"
+          >
+            <Upload size={14} /> {importing ? "Importazione…" : "Importa CSV"}
+          </button>
+          <button onClick={exportCsv} className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm hover:border-accent hover:text-accent">
+            <Download size={14} /> Esporta CSV
+          </button>
+        </div>
       </header>
+
+      {importMsg && (
+        <div className="mb-3 rounded-md border border-border bg-card px-3 py-2 text-sm">{importMsg}</div>
+      )}
+      <p className="mb-3 text-xs text-muted-foreground">
+        Accetta file .csv o .txt: una email per riga o separate da virgole. I duplicati vengono ignorati.
+      </p>
       {err && <p className="mb-3 text-sm text-destructive">{err}</p>}
 
       <div className="overflow-hidden rounded-md border border-border bg-card">
