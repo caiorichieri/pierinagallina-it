@@ -36,6 +36,13 @@ import { Route as NewsSlugRouteImport } from './routes/news.$slug'
 import { Route as GalleriaSlugRouteImport } from './routes/galleria.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AdminPostsRouteImport } from './routes/admin.posts'
+import { Route as AdminPoesieRouteImport } from './routes/admin.poesie'
+import { Route as AdminNewsletterRouteImport } from './routes/admin.newsletter'
+import { Route as AdminMigrazioneRouteImport } from './routes/admin.migrazione'
+import { Route as AdminMessaggiRouteImport } from './routes/admin.messaggi'
+import { Route as AdminLibriRouteImport } from './routes/admin.libri'
+import { Route as AdminFotografieRouteImport } from './routes/admin.fotografie'
+import { Route as AdminFiabeRouteImport } from './routes/admin.fiabe'
 import { Route as AdminPostsIdRouteImport } from './routes/admin.posts.$id'
 
 const ValoriRoute = ValoriRouteImport.update({
@@ -173,6 +180,41 @@ const AdminPostsRoute = AdminPostsRouteImport.update({
   path: '/posts',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminPoesieRoute = AdminPoesieRouteImport.update({
+  id: '/poesie',
+  path: '/poesie',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminNewsletterRoute = AdminNewsletterRouteImport.update({
+  id: '/newsletter',
+  path: '/newsletter',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminMigrazioneRoute = AdminMigrazioneRouteImport.update({
+  id: '/migrazione',
+  path: '/migrazione',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminMessaggiRoute = AdminMessaggiRouteImport.update({
+  id: '/messaggi',
+  path: '/messaggi',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLibriRoute = AdminLibriRouteImport.update({
+  id: '/libri',
+  path: '/libri',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminFotografieRoute = AdminFotografieRouteImport.update({
+  id: '/fotografie',
+  path: '/fotografie',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminFiabeRoute = AdminFiabeRouteImport.update({
+  id: '/fiabe',
+  path: '/fiabe',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminPostsIdRoute = AdminPostsIdRouteImport.update({
   id: '/$id',
   path: '/$id',
@@ -201,6 +243,13 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/valori': typeof ValoriRoute
+  '/admin/fiabe': typeof AdminFiabeRoute
+  '/admin/fotografie': typeof AdminFotografieRoute
+  '/admin/libri': typeof AdminLibriRoute
+  '/admin/messaggi': typeof AdminMessaggiRoute
+  '/admin/migrazione': typeof AdminMigrazioneRoute
+  '/admin/newsletter': typeof AdminNewsletterRoute
+  '/admin/poesie': typeof AdminPoesieRoute
   '/admin/posts': typeof AdminPostsRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
   '/galleria/$slug': typeof GalleriaSlugRoute
@@ -230,6 +279,13 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/valori': typeof ValoriRoute
+  '/admin/fiabe': typeof AdminFiabeRoute
+  '/admin/fotografie': typeof AdminFotografieRoute
+  '/admin/libri': typeof AdminLibriRoute
+  '/admin/messaggi': typeof AdminMessaggiRoute
+  '/admin/migrazione': typeof AdminMigrazioneRoute
+  '/admin/newsletter': typeof AdminNewsletterRoute
+  '/admin/poesie': typeof AdminPoesieRoute
   '/admin/posts': typeof AdminPostsRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
   '/galleria/$slug': typeof GalleriaSlugRoute
@@ -261,6 +317,13 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/valori': typeof ValoriRoute
+  '/admin/fiabe': typeof AdminFiabeRoute
+  '/admin/fotografie': typeof AdminFotografieRoute
+  '/admin/libri': typeof AdminLibriRoute
+  '/admin/messaggi': typeof AdminMessaggiRoute
+  '/admin/migrazione': typeof AdminMigrazioneRoute
+  '/admin/newsletter': typeof AdminNewsletterRoute
+  '/admin/poesie': typeof AdminPoesieRoute
   '/admin/posts': typeof AdminPostsRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
   '/galleria/$slug': typeof GalleriaSlugRoute
@@ -293,6 +356,13 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/sitemap.xml'
     | '/valori'
+    | '/admin/fiabe'
+    | '/admin/fotografie'
+    | '/admin/libri'
+    | '/admin/messaggi'
+    | '/admin/migrazione'
+    | '/admin/newsletter'
+    | '/admin/poesie'
     | '/admin/posts'
     | '/blog/$slug'
     | '/galleria/$slug'
@@ -322,6 +392,13 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/sitemap.xml'
     | '/valori'
+    | '/admin/fiabe'
+    | '/admin/fotografie'
+    | '/admin/libri'
+    | '/admin/messaggi'
+    | '/admin/migrazione'
+    | '/admin/newsletter'
+    | '/admin/poesie'
     | '/admin/posts'
     | '/blog/$slug'
     | '/galleria/$slug'
@@ -352,6 +429,13 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/sitemap.xml'
     | '/valori'
+    | '/admin/fiabe'
+    | '/admin/fotografie'
+    | '/admin/libri'
+    | '/admin/messaggi'
+    | '/admin/migrazione'
+    | '/admin/newsletter'
+    | '/admin/poesie'
     | '/admin/posts'
     | '/blog/$slug'
     | '/galleria/$slug'
@@ -578,6 +662,55 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminPostsRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/poesie': {
+      id: '/admin/poesie'
+      path: '/poesie'
+      fullPath: '/admin/poesie'
+      preLoaderRoute: typeof AdminPoesieRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/newsletter': {
+      id: '/admin/newsletter'
+      path: '/newsletter'
+      fullPath: '/admin/newsletter'
+      preLoaderRoute: typeof AdminNewsletterRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/migrazione': {
+      id: '/admin/migrazione'
+      path: '/migrazione'
+      fullPath: '/admin/migrazione'
+      preLoaderRoute: typeof AdminMigrazioneRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/messaggi': {
+      id: '/admin/messaggi'
+      path: '/messaggi'
+      fullPath: '/admin/messaggi'
+      preLoaderRoute: typeof AdminMessaggiRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/libri': {
+      id: '/admin/libri'
+      path: '/libri'
+      fullPath: '/admin/libri'
+      preLoaderRoute: typeof AdminLibriRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/fotografie': {
+      id: '/admin/fotografie'
+      path: '/fotografie'
+      fullPath: '/admin/fotografie'
+      preLoaderRoute: typeof AdminFotografieRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/fiabe': {
+      id: '/admin/fiabe'
+      path: '/fiabe'
+      fullPath: '/admin/fiabe'
+      preLoaderRoute: typeof AdminFiabeRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/posts/$id': {
       id: '/admin/posts/$id'
       path: '/$id'
@@ -601,11 +734,25 @@ const AdminPostsRouteWithChildren = AdminPostsRoute._addFileChildren(
 )
 
 interface AdminRouteChildren {
+  AdminFiabeRoute: typeof AdminFiabeRoute
+  AdminFotografieRoute: typeof AdminFotografieRoute
+  AdminLibriRoute: typeof AdminLibriRoute
+  AdminMessaggiRoute: typeof AdminMessaggiRoute
+  AdminMigrazioneRoute: typeof AdminMigrazioneRoute
+  AdminNewsletterRoute: typeof AdminNewsletterRoute
+  AdminPoesieRoute: typeof AdminPoesieRoute
   AdminPostsRoute: typeof AdminPostsRouteWithChildren
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminFiabeRoute: AdminFiabeRoute,
+  AdminFotografieRoute: AdminFotografieRoute,
+  AdminLibriRoute: AdminLibriRoute,
+  AdminMessaggiRoute: AdminMessaggiRoute,
+  AdminMigrazioneRoute: AdminMigrazioneRoute,
+  AdminNewsletterRoute: AdminNewsletterRoute,
+  AdminPoesieRoute: AdminPoesieRoute,
   AdminPostsRoute: AdminPostsRouteWithChildren,
   AdminIndexRoute: AdminIndexRoute,
 }
