@@ -1,9 +1,18 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
+import { useState } from "react";
 import { db, type Book } from "@/integrations/pierina/client";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
-import { ExternalLink, Play } from "lucide-react";
+import { BookInterestDialog } from "@/components/BookInterestDialog";
+import { ExternalLink, Mail, Play } from "lucide-react";
+
+function isExternalBuy(url: string | null | undefined): url is string {
+  if (!url) return false;
+  // Old site cart links are broken — treat as "no buy link"
+  if (/pierinagallina\.it/i.test(url)) return false;
+  return /^https?:\/\//i.test(url);
+}
 
 const booksQ = queryOptions({
   queryKey: ["books-all"],
