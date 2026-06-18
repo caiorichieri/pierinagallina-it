@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { useT, type Lang } from "../i18n";
 import { Menu, X } from "lucide-react";
+
 
 const navItems = [
   { to: "/", key: "nav_home", label: "Home" },
@@ -15,8 +15,8 @@ const navItems = [
 ] as const;
 
 export function SiteHeader() {
-  const { lang, setLang } = useT();
   const [open, setOpen] = useState(false);
+
 
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
@@ -42,11 +42,10 @@ export function SiteHeader() {
               {n.label}
             </Link>
           ))}
-          <LangSwitch lang={lang} setLang={setLang} />
         </nav>
 
+
         <div className="flex items-center gap-2 lg:hidden">
-          <LangSwitch lang={lang} setLang={setLang} />
           <button
             type="button"
             aria-label="Menu"
@@ -56,6 +55,7 @@ export function SiteHeader() {
             {open ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
+
       </div>
 
       {open && (
@@ -77,28 +77,5 @@ export function SiteHeader() {
         </nav>
       )}
     </header>
-  );
-}
-
-function LangSwitch({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
-  return (
-    <div className="ml-2 inline-flex overflow-hidden rounded-md border border-border text-[11px] font-mono">
-      {(["it", "en"] as const).map((l) => (
-        <button
-          key={l}
-          type="button"
-          onClick={() => setLang(l)}
-          aria-pressed={lang === l}
-          className={
-            "px-2 py-1 uppercase tracking-wider transition-colors " +
-            (lang === l
-              ? "bg-foreground text-background"
-              : "bg-background text-muted-foreground hover:text-foreground")
-          }
-        >
-          {l}
-        </button>
-      ))}
-    </div>
   );
 }
