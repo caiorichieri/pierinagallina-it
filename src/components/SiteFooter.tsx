@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Mail, MapPin, BookOpen } from "lucide-react";
 import { useT } from "../i18n";
 import { openCookiePreferences } from "./CookieBanner";
+import pierinaFooter from "../assets/pierina-footer.png.asset.json";
 
 export function SiteFooter() {
   const { t } = useT();
