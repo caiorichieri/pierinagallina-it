@@ -65,17 +65,17 @@ function HomePage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative bg-primary text-primary-foreground">
+      <section className="relative text-primary-foreground" style={{ background: "linear-gradient(165deg, #9b1b30 0%, #6b1528 50%, #3d0a0a 100%)" }}>
         <div aria-hidden className="pointer-events-none absolute inset-0">
           <div className="hero-line" style={{ top: "24%", animationDelay: "0s" }} />
           <div className="hero-line" style={{ top: "62%", animationDelay: "2.5s" }} />
           <div
-            className="absolute -right-32 -top-32 h-[28rem] w-[28rem] rounded-full opacity-25 blur-3xl"
-            style={{ background: "var(--brand-gold)" }}
+            className="absolute -right-32 -top-32 h-[28rem] w-[28rem] rounded-full opacity-30 blur-3xl"
+            style={{ background: "radial-gradient(circle, rgba(220,120,60,0.4) 0%, transparent 70%)" }}
           />
           <div
-            className="absolute -bottom-40 -left-20 h-96 w-96 rounded-full opacity-15 blur-3xl"
-            style={{ background: "var(--brand-magenta)" }}
+            className="absolute -bottom-40 -left-20 h-96 w-96 rounded-full opacity-25 blur-3xl"
+            style={{ background: "radial-gradient(circle, rgba(180,40,40,0.35) 0%, transparent 70%)" }}
           />
         </div>
 
