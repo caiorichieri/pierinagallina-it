@@ -79,7 +79,7 @@ function HomePage() {
           />
         </div>
 
-        <div className="relative mx-auto grid max-w-7xl gap-10 px-4 pt-24 pb-12 sm:px-6 md:grid-cols-[1.2fr_1fr] md:items-end md:gap-8 md:pt-32 md:pb-16">
+        <div className="relative mx-auto grid max-w-7xl gap-10 px-4 pt-24 pb-12 sm:px-6 md:grid-cols-[1.2fr_1fr] md:items-start md:gap-8 md:pt-32 md:pb-16">
           <div>
             <div className="flex items-center gap-3">
               <span className="flag-italy" aria-label="Italia"><span /><span /><span /></span>
@@ -121,11 +121,11 @@ function HomePage() {
             </div>
           </div>
 
-          <div className="relative z-20 -mb-24 flex justify-center md:-mb-32 md:justify-end">
+          <div className="relative z-20 -mb-28 flex justify-center md:-mb-40 md:justify-end">
             <img
               src={pierinaHome.url}
               alt="Pierina Gallina"
-              className="relative z-10 w-full max-w-xl object-contain drop-shadow-2xl md:max-w-2xl"
+              className="relative z-10 h-auto w-[130%] max-w-none origin-top object-contain drop-shadow-2xl md:w-[170%]"
             />
           </div>
         </div>
