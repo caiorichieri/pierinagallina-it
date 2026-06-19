@@ -125,7 +125,7 @@ function HomePage() {
             <img
               src={pierinaHome.url}
               alt="Pierina Gallina"
-              className="relative z-10 h-auto w-[130%] max-w-none origin-top object-contain drop-shadow-2xl md:w-[170%]"
+              className="relative z-10 h-auto w-[140%] max-w-none origin-top object-contain drop-shadow-2xl md:w-[190%] md:translate-x-10 lg:translate-x-14"
             />
           </div>
         </div>
