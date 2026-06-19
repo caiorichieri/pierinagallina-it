@@ -47,13 +47,25 @@ function stripHtml(s: string | null | undefined, max = 180) {
   return txt.length > max ? txt.slice(0, max) + "…" : txt;
 }
 
+function formatDateIt(dateStr: string | null | undefined): string {
+  if (!dateStr) return "";
+  const d = new Date(dateStr);
+  const day = d.getUTCDate();
+  const month = [
+    "gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno",
+    "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre",
+  ][d.getUTCMonth()];
+  const year = d.getUTCFullYear();
+  return `${day} ${month} ${year}`;
+}
+
 function HomePage() {
   const { data } = useSuspenseQuery(homeData);
 
   return (
     <>
       {/* HERO */}
-      <section className="relative overflow-hidden bg-primary text-primary-foreground">
+      <section className="relative bg-primary text-primary-foreground">
         <div aria-hidden className="pointer-events-none absolute inset-0">
           <div className="hero-line" style={{ top: "24%", animationDelay: "0s" }} />
           <div className="hero-line" style={{ top: "62%", animationDelay: "2.5s" }} />
@@ -67,7 +79,7 @@ function HomePage() {
           />
         </div>
 
-        <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-24 sm:px-6 md:grid-cols-[1.2fr_1fr] md:items-center md:gap-8 md:py-32">
+        <div className="relative mx-auto grid max-w-7xl gap-10 px-4 pt-24 pb-12 sm:px-6 md:grid-cols-[1.2fr_1fr] md:items-end md:gap-8 md:pt-32 md:pb-16">
           <div>
             <div className="flex items-center gap-3">
               <span className="flag-italy" aria-label="Italia"><span /><span /><span /></span>
@@ -109,7 +121,7 @@ function HomePage() {
             </div>
           </div>
 
-          <div className="relative flex justify-center md:justify-end">
+          <div className="relative z-20 -mb-24 flex justify-center md:-mb-32 md:justify-end">
             <img
               src={pierinaHome.url}
               alt="Pierina Gallina"
@@ -120,7 +132,7 @@ function HomePage() {
       </section>
 
       {/* SEZIONI — mondo letterario */}
-      <section className="border-b border-border bg-card">
+      <section className="relative z-0 border-b border-border bg-card pt-32 md:pt-40">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {[
@@ -198,7 +210,7 @@ function HomePage() {
                     )}
                     {p.published_at && (
                       <div className="font-sans text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-                        {new Date(p.published_at).toLocaleDateString("it-IT", { day: "numeric", month: "long", year: "numeric" })}
+                        {formatDateIt(p.published_at)}
                       </div>
                     )}
                     <h3 className="mt-2 font-serif text-2xl leading-snug text-foreground transition-colors group-hover:text-accent">
