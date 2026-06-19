@@ -122,6 +122,14 @@ function HomePage() {
           </div>
 
           <div className="relative z-20 -mb-28 flex justify-center md:-mt-24 md:-mb-40 md:justify-end lg:-mt-28">
+            {/* Fundo decorativo orgânico atrás da foto */}
+            <div
+              aria-hidden
+              className="absolute -top-8 left-1/2 -z-10 h-[120%] w-[90%] -translate-x-1/2 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] opacity-60 blur-2xl md:left-auto md:right-0 md:top-0 md:h-[110%] md:w-[85%] md:translate-x-[1cm]"
+              style={{
+                background: "radial-gradient(ellipse at 50% 45%, rgba(232,184,74,0.45) 0%, rgba(196,69,105,0.22) 55%, transparent 85%)",
+              }}
+            />
             <img
               src={pierinaHome.url}
               alt="Pierina Gallina"
