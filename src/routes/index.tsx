@@ -107,7 +107,7 @@ function HomePage() {
             <div className="mt-10 flex flex-wrap gap-3">
               <Link
                 to="/blog"
-                className="group inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground transition-transform hover:-translate-y-0.5"
+                className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-transform hover:-translate-y-0.5"
               >
                 Leggi il blog
                 <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
@@ -127,7 +127,7 @@ function HomePage() {
               aria-hidden
               className="absolute -top-8 left-1/2 -z-10 h-[120%] w-[90%] -translate-x-1/2 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] opacity-60 blur-2xl md:left-auto md:right-0 md:top-0 md:h-[110%] md:w-[85%] md:translate-x-[1cm]"
               style={{
-                background: "radial-gradient(ellipse at 50% 45%, rgba(232,184,74,0.45) 0%, rgba(196,69,105,0.22) 55%, transparent 85%)",
+                background: "radial-gradient(ellipse at 50% 45%, rgba(200,60,60,0.50) 0%, rgba(160,40,40,0.30) 55%, transparent 85%)",
               }}
             />
             <img
