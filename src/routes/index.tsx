@@ -125,9 +125,9 @@ function HomePage() {
             {/* Fundo decorativo orgânico atrás da foto */}
             <div
               aria-hidden
-              className="absolute -top-8 left-1/2 -z-10 h-[120%] w-[90%] -translate-x-1/2 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] opacity-60 blur-2xl md:left-auto md:right-0 md:top-0 md:h-[110%] md:w-[85%] md:translate-x-[1cm]"
+              className="absolute -top-8 left-1/2 -z-10 h-[120%] w-[90%] -translate-x-1/2 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] opacity-70 blur-2xl md:left-auto md:right-0 md:top-0 md:h-[110%] md:w-[85%] md:translate-x-[1cm]"
               style={{
-                background: "radial-gradient(ellipse at 50% 45%, rgba(200,60,60,0.50) 0%, rgba(160,40,40,0.30) 55%, transparent 85%)",
+                background: "radial-gradient(ellipse at 50% 45%, rgba(255,120,100,0.50) 0%, rgba(180,50,50,0.35) 55%, transparent 85%)",
               }}
             />
             <img
