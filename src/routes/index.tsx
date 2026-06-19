@@ -65,7 +65,7 @@ function HomePage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative overflow-hidden bg-primary text-primary-foreground">
+      <section className="relative bg-primary text-primary-foreground">
         <div aria-hidden className="pointer-events-none absolute inset-0">
           <div className="hero-line" style={{ top: "24%", animationDelay: "0s" }} />
           <div className="hero-line" style={{ top: "62%", animationDelay: "2.5s" }} />
@@ -79,7 +79,7 @@ function HomePage() {
           />
         </div>
 
-        <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-24 sm:px-6 md:grid-cols-[1.2fr_1fr] md:items-center md:gap-8 md:py-32">
+        <div className="relative mx-auto grid max-w-7xl gap-10 px-4 pt-24 pb-12 sm:px-6 md:grid-cols-[1.2fr_1fr] md:items-end md:gap-8 md:pt-32 md:pb-16">
           <div>
             <div className="flex items-center gap-3">
               <span className="flag-italy" aria-label="Italia"><span /><span /><span /></span>
