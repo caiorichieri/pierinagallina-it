@@ -210,7 +210,7 @@ function HomePage() {
                     )}
                     {p.published_at && (
                       <div className="font-sans text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-                        {new Date(p.published_at).toLocaleDateString("it-IT", { day: "numeric", month: "long", year: "numeric" })}
+                        {formatDateIt(p.published_at)}
                       </div>
                     )}
                     <h3 className="mt-2 font-serif text-2xl leading-snug text-foreground transition-colors group-hover:text-accent">
