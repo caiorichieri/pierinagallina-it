@@ -121,7 +121,7 @@ function HomePage() {
             </div>
           </div>
 
-          <div className="relative flex justify-center md:justify-end">
+          <div className="relative z-20 -mb-24 flex justify-center md:-mb-32 md:justify-end">
             <img
               src={pierinaHome.url}
               alt="Pierina Gallina"
