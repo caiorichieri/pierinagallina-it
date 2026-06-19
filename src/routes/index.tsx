@@ -3,7 +3,7 @@ import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
 import { ArrowRight, BookOpen, Feather, Headphones, Image as ImageIcon, Mail } from "lucide-react";
 import { db, type Post, type Book, type Poem } from "@/integrations/pierina/client";
 import { Reveal } from "@/components/Reveal";
-import pierinaHome from "@/assets/pierina-home.png.asset.json";
+import pierinaHome from "@/assets/pierina-home-v2.png.asset.json";
 
 const homeData = queryOptions({
   queryKey: ["home-pierina"],
@@ -121,11 +121,11 @@ function HomePage() {
             </div>
           </div>
 
-          <div className="relative z-20 -mb-28 flex justify-center md:-mb-40 md:justify-end">
+          <div className="relative z-20 -mb-28 flex justify-center md:-mt-24 md:-mb-40 md:justify-end lg:-mt-28">
             <img
               src={pierinaHome.url}
               alt="Pierina Gallina"
-              className="relative z-10 h-auto w-[140%] max-w-none origin-top object-contain drop-shadow-2xl md:w-[190%] md:translate-x-10 lg:translate-x-14"
+              className="relative z-10 h-auto w-[140%] max-w-none origin-top object-contain drop-shadow-2xl md:w-[170%] md:translate-x-8 lg:w-[180%] lg:translate-x-12"
             />
           </div>
         </div>
