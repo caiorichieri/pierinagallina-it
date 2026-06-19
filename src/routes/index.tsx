@@ -65,17 +65,17 @@ function HomePage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative bg-primary text-primary-foreground">
+      <section className="relative text-primary-foreground overflow-hidden" style={{ background: "linear-gradient(165deg, #a81c2e 0%, #7c1818 35%, #4a0e0e 70%, #2d0808 100%)" }}>
         <div aria-hidden className="pointer-events-none absolute inset-0">
           <div className="hero-line" style={{ top: "24%", animationDelay: "0s" }} />
           <div className="hero-line" style={{ top: "62%", animationDelay: "2.5s" }} />
           <div
-            className="absolute -right-32 -top-32 h-[28rem] w-[28rem] rounded-full opacity-25 blur-3xl"
-            style={{ background: "var(--brand-gold)" }}
+            className="absolute -right-32 -top-32 h-[28rem] w-[28rem] rounded-full opacity-30 blur-3xl"
+            style={{ background: "radial-gradient(circle, rgba(220,120,60,0.4) 0%, transparent 70%)" }}
           />
           <div
-            className="absolute -bottom-40 -left-20 h-96 w-96 rounded-full opacity-15 blur-3xl"
-            style={{ background: "var(--brand-magenta)" }}
+            className="absolute -bottom-40 -left-20 h-96 w-96 rounded-full opacity-25 blur-3xl"
+            style={{ background: "radial-gradient(circle, rgba(180,40,40,0.35) 0%, transparent 70%)" }}
           />
         </div>
 
@@ -125,9 +125,9 @@ function HomePage() {
             {/* Fundo decorativo orgânico atrás da foto */}
             <div
               aria-hidden
-              className="absolute -top-8 left-1/2 -z-10 h-[120%] w-[90%] -translate-x-1/2 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] opacity-60 blur-2xl md:left-auto md:right-0 md:top-0 md:h-[110%] md:w-[85%] md:translate-x-[1cm]"
+              className="absolute -top-8 left-1/2 -z-10 h-[120%] w-[90%] -translate-x-1/2 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] opacity-70 blur-2xl md:left-auto md:right-0 md:top-0 md:h-[110%] md:w-[85%] md:translate-x-[1cm]"
               style={{
-                background: "radial-gradient(ellipse at 50% 45%, rgba(200,60,60,0.50) 0%, rgba(160,40,40,0.30) 55%, transparent 85%)",
+                background: "radial-gradient(ellipse at 50% 45%, rgba(255,120,100,0.50) 0%, rgba(180,50,50,0.35) 55%, transparent 85%)",
               }}
             />
             <img
