@@ -47,6 +47,18 @@ function stripHtml(s: string | null | undefined, max = 180) {
   return txt.length > max ? txt.slice(0, max) + "…" : txt;
 }
 
+function formatDateIt(dateStr: string | null | undefined): string {
+  if (!dateStr) return "";
+  const d = new Date(dateStr);
+  const day = d.getUTCDate();
+  const month = [
+    "gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno",
+    "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre",
+  ][d.getUTCMonth()];
+  const year = d.getUTCFullYear();
+  return `${day} ${month} ${year}`;
+}
+
 function HomePage() {
   const { data } = useSuspenseQuery(homeData);
 
