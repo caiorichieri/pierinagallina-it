@@ -79,7 +79,7 @@ function HomePage() {
           />
         </div>
 
-        <div className="relative mx-auto grid max-w-7xl gap-10 px-4 pt-24 pb-12 sm:px-6 md:grid-cols-[1.2fr_1fr] md:items-end md:gap-8 md:pt-32 md:pb-16">
+        <div className="relative mx-auto grid max-w-7xl gap-10 px-4 pt-24 pb-12 sm:px-6 md:grid-cols-[1.2fr_1fr] md:items-start md:gap-8 md:pt-32 md:pb-16">
           <div>
             <div className="flex items-center gap-3">
               <span className="flag-italy" aria-label="Italia"><span /><span /><span /></span>
