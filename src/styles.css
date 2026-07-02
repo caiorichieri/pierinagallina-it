@@ -50,12 +50,15 @@
   /* Pierina Gallina — letteraria, calda, friulana */
   --brand-bg: #faf5ec;                /* carta avorio */
   --brand-bg-2: #f3ead8;              /* carta più calda */
-  --brand-primary: #1e3a5f;           /* blu notte profondo */
-  --brand-primary-2: #294a73;
-  --brand-magenta: #c44569;           /* magenta accento, fiore selvatico */
+  --brand-primary: #7c1818;           /* bordô profondo */
+  --brand-primary-2: #a81c2e;         /* bordô caldo */
+  --brand-magenta: #c44569;           /* magenta accento */
   --brand-gold: #e8b84a;              /* oro caldo, miele */
   --brand-ink: #1a2233;               /* inchiostro */
   --brand-border: #e2d8c1;            /* bordo carta */
+
+  /* Gradiente bordô condiviso (hero / header / footer / poesia) */
+  --gradient-bordeaux: linear-gradient(165deg, #a81c2e 0%, #7c1818 35%, #4a0e0e 70%, #2d0808 100%);
 
   --background: var(--brand-bg);
   --foreground: var(--brand-ink);
@@ -209,4 +212,30 @@
   padding: 0.35rem 0.6rem 0 0;
   color: var(--brand-primary);
   font-style: italic;
+}
+
+/* Superficie bordô condivisa: hero, header, footer, poesia */
+.surface-bordeaux {
+  background: var(--gradient-bordeaux);
+  color: var(--primary-foreground);
+}
+.surface-bordeaux-glow::before,
+.surface-bordeaux-glow::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  border-radius: 9999px;
+  filter: blur(60px);
+}
+.surface-bordeaux-glow::before {
+  top: -8rem; right: -8rem;
+  width: 28rem; height: 28rem;
+  background: radial-gradient(circle, rgba(220,120,60,0.40) 0%, transparent 70%);
+  opacity: 0.55;
+}
+.surface-bordeaux-glow::after {
+  bottom: -10rem; left: -5rem;
+  width: 24rem; height: 24rem;
+  background: radial-gradient(circle, rgba(180,40,40,0.35) 0%, transparent 70%);
+  opacity: 0.5;
 }
