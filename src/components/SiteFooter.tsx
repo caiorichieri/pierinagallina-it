@@ -8,7 +8,7 @@ export function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-24 bg-primary text-primary-foreground">
+    <footer className="surface-bordeaux surface-bordeaux-glow relative mt-24 overflow-hidden text-primary-foreground">
       <div className="flex h-1 w-full">
         <div className="flex-1" style={{ background: "#008C45" }} />
         <div className="flex-1" style={{ background: "#F4F5F0" }} />

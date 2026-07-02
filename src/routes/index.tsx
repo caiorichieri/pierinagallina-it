@@ -65,7 +65,7 @@ function HomePage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative text-primary-foreground overflow-hidden" style={{ background: "linear-gradient(165deg, #a81c2e 0%, #7c1818 35%, #4a0e0e 70%, #2d0808 100%)" }}>
+      <section className="surface-bordeaux surface-bordeaux-glow relative overflow-hidden">
         <div aria-hidden className="pointer-events-none absolute inset-0">
           <div className="hero-line" style={{ top: "24%", animationDelay: "0s" }} />
           <div className="hero-line" style={{ top: "62%", animationDelay: "2.5s" }} />
@@ -107,7 +107,7 @@ function HomePage() {
             <div className="mt-10 flex flex-wrap gap-3">
               <Link
                 to="/blog"
-                className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-transform hover:-translate-y-0.5"
+                className="group inline-flex items-center gap-2 rounded-full bg-primary-foreground px-6 py-3 text-sm font-medium text-primary shadow-lg transition-transform hover:-translate-y-0.5"
               >
                 Leggi il blog
                 <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
@@ -278,7 +278,7 @@ function HomePage() {
 
       {/* POESIA */}
       {data.poems.length > 0 && (
-        <section className="relative overflow-hidden bg-primary text-primary-foreground">
+        <section className="surface-bordeaux surface-bordeaux-glow relative overflow-hidden text-primary-foreground">
           <div aria-hidden className="pointer-events-none absolute inset-0">
             <div
               className="absolute -right-20 top-10 h-72 w-72 rounded-full opacity-20 blur-3xl"
