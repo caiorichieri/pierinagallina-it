@@ -65,7 +65,7 @@ function HomePage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative text-primary-foreground overflow-hidden" style={{ background: "linear-gradient(165deg, #a81c2e 0%, #7c1818 35%, #4a0e0e 70%, #2d0808 100%)" }}>
+      <section className="surface-bordeaux surface-bordeaux-glow relative overflow-hidden">
         <div aria-hidden className="pointer-events-none absolute inset-0">
           <div className="hero-line" style={{ top: "24%", animationDelay: "0s" }} />
           <div className="hero-line" style={{ top: "62%", animationDelay: "2.5s" }} />
