@@ -89,7 +89,7 @@ function HomePage() {
               </span>
             </div>
 
-            <div className="mt-8 flex items-end gap-4 md:block">
+            <div className="mt-6 flex items-end justify-between gap-4 md:block">
               <h1 className="font-serif text-5xl leading-[1.02] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">
                 Pierina
                 <br />
@@ -97,10 +97,15 @@ function HomePage() {
               </h1>
 
               <div className="relative z-10 shrink-0 md:hidden">
+                <div
+                  aria-hidden
+                  className="absolute inset-0 -z-10 scale-110 rounded-full opacity-60 blur-2xl"
+                  style={{ background: "radial-gradient(circle, rgba(255,140,120,0.55) 0%, transparent 70%)" }}
+                />
                 <img
                   src={pierinaHome.url}
                   alt="Pierina Gallina"
-                  className="h-auto w-36 origin-bottom object-contain drop-shadow-2xl sm:w-44"
+                  className="relative h-auto w-44 origin-bottom object-contain drop-shadow-2xl sm:w-56"
                 />
               </div>
             </div>
