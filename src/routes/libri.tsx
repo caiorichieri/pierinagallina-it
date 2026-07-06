@@ -88,15 +88,15 @@ function LibriPage() {
             {books.map((b, i) => (
               <Reveal key={b.id} delay={Math.min(i, 6) * 80}>
                 <article className="group flex h-full flex-col">
-                  {b.cover_url ? (
-                    <div className="overflow-hidden rounded-xl aspect-[3/4]">
-                      <img src={b.cover_url} alt={b.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  {(() => { const cover = coverFor(b); return cover ? (
+                    <div className="overflow-hidden rounded-xl aspect-[3/4] bg-secondary/40 flex items-center justify-center p-4">
+                      <img src={cover} alt={b.title} loading="lazy" className="max-h-full max-w-full object-contain transition-transform duration-700 group-hover:scale-105 drop-shadow-xl" />
                     </div>
                   ) : (
                     <div className="flex aspect-[3/4] items-center justify-center rounded-xl bg-primary p-8 text-primary-foreground">
                       <span className="text-center font-serif text-2xl italic leading-tight">{b.title}</span>
                     </div>
-                  )}
+                  ); })()}
                   <div className="mt-5 flex items-baseline justify-between gap-3">
                     <h2 className="font-serif text-2xl leading-tight text-foreground">{b.title}</h2>
                     {b.year && <span className="font-sans text-xs text-muted-foreground">{b.year}</span>}
