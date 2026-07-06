@@ -172,7 +172,7 @@ function CookiePage() {
             </button>
             <H>Controller</H>
             <P>
-              Piergiorgio Iacuzzo, Via Piave 91, 33033 Codroipo (UD) — Tax code CZZPGR66A24C817Q.
+              FriuliOn di Silvestre Richieri Caio, Via Piave 91, 33033 Codroipo (UD) — VAT number 0357410303.
               See the <a href="/privacy" className="underline hover:text-accent">Privacy Policy</a>{" "}
               for more information.
             </P>
