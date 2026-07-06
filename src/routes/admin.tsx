@@ -2,7 +2,7 @@ import { createFileRoute, Outlet, Link, useRouter, useLocation } from "@tanstack
 import { useState } from "react";
 import { usePierinaAuth } from "@/integrations/pierina/auth";
 import { db } from "@/integrations/pierina/client";
-import { FileText, BookOpen, Headphones, Feather, Image as ImageIcon, Mail, Send, Database, LogOut, LayoutDashboard } from "lucide-react";
+import { FileText, BookOpen, Headphones, Feather, Image as ImageIcon, Mail, Send, LogOut, LayoutDashboard } from "lucide-react";
 
 export const Route = createFileRoute("/admin")({
   ssr: false,
