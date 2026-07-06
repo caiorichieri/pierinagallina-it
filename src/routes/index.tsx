@@ -79,7 +79,7 @@ function HomePage() {
           />
         </div>
 
-        <div className="relative mx-auto grid max-w-7xl gap-10 px-4 pt-24 pb-12 sm:px-6 md:grid-cols-[1.2fr_1fr] md:items-start md:gap-8 md:pt-32 md:pb-16">
+        <div className="relative mx-auto grid max-w-7xl gap-10 px-4 pt-24 pb-8 sm:px-6 md:grid-cols-[1.2fr_1fr] md:items-start md:gap-8 md:pt-32 md:pb-16">
           <div>
             <div className="flex items-center gap-3">
               <span className="flag-italy" aria-label="Italia"><span /><span /><span /></span>
@@ -89,11 +89,21 @@ function HomePage() {
               </span>
             </div>
 
-            <h1 className="mt-8 font-serif text-5xl leading-[1.02] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">
-              Pierina
-              <br />
-              <span className="italic" style={{ color: "var(--brand-gold)" }}>Gallina.</span>
-            </h1>
+            <div className="mt-8 flex items-end gap-4 md:block">
+              <h1 className="font-serif text-5xl leading-[1.02] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">
+                Pierina
+                <br />
+                <span className="italic" style={{ color: "var(--brand-gold)" }}>Gallina.</span>
+              </h1>
+
+              <div className="relative z-10 shrink-0 md:hidden">
+                <img
+                  src={pierinaHome.url}
+                  alt="Pierina Gallina"
+                  className="h-auto w-36 origin-bottom object-contain drop-shadow-2xl sm:w-44"
+                />
+              </div>
+            </div>
 
             <p className="mt-8 max-w-2xl font-serif text-xl italic leading-snug text-primary-foreground/85 md:text-2xl">
               Scrittrice di Codroipo, Friuli &nbsp;—&nbsp; paroliera per passione.
@@ -121,7 +131,7 @@ function HomePage() {
             </div>
           </div>
 
-          <div className="relative z-20 -mb-28 flex justify-center md:-mt-24 md:-mb-40 md:justify-end lg:-mt-28">
+          <div className="relative z-20 -mb-28 hidden justify-center md:-mt-24 md:-mb-40 md:flex md:justify-end lg:-mt-28">
             {/* Fundo decorativo orgânico atrás da foto */}
             <div
               aria-hidden
@@ -140,7 +150,7 @@ function HomePage() {
       </section>
 
       {/* SEZIONI — mondo letterario */}
-      <section className="relative z-0 border-b border-border bg-card pt-32 md:pt-40">
+      <section className="relative z-0 border-b border-border bg-card pt-20 md:pt-40">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {[
