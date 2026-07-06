@@ -131,7 +131,7 @@ function CookiePage() {
 
             <H>Titolare</H>
             <P>
-              Piergiorgio Iacuzzo, Via Piave 91, 33033 Codroipo (UD) — C.F. CZZPGR66A24C817Q. Per
+              FriuliOn di Silvestre Richieri Caio, Via Piave 91, 33033 Codroipo (UD) — P. IVA 0357410303. Per
               maggiori informazioni si rinvia alla{" "}
               <a href="/privacy" className="underline hover:text-accent">Informativa Privacy</a>.
             </P>
