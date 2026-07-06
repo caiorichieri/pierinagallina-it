@@ -6,13 +6,13 @@ import { openCookiePreferences } from "../components/CookieBanner";
 export const Route = createFileRoute("/cookie-policy")({
   head: () => ({
     meta: [
-      { title: "Cookie Policy — Piergiorgio Iacuzzo" },
+      { title: "Cookie Policy — FriuliOn di Silvestre Richieri Caio" },
       {
         name: "description",
         content:
           "Informativa sui cookie utilizzati dal sito ai sensi delle Linee Guida del Garante Privacy del 10 giugno 2021.",
       },
-      { property: "og:title", content: "Cookie Policy — Piergiorgio Iacuzzo" },
+      { property: "og:title", content: "Cookie Policy — FriuliOn di Silvestre Richieri Caio" },
       {
         property: "og:description",
         content:
@@ -131,7 +131,7 @@ function CookiePage() {
 
             <H>Titolare</H>
             <P>
-              Piergiorgio Iacuzzo, Via Piave 91, 33033 Codroipo (UD) — C.F. CZZPGR66A24C817Q. Per
+              FriuliOn di Silvestre Richieri Caio, Via Piave 91, 33033 Codroipo (UD) — P. IVA 0357410303. Per
               maggiori informazioni si rinvia alla{" "}
               <a href="/privacy" className="underline hover:text-accent">Informativa Privacy</a>.
             </P>
@@ -172,7 +172,7 @@ function CookiePage() {
             </button>
             <H>Controller</H>
             <P>
-              Piergiorgio Iacuzzo, Via Piave 91, 33033 Codroipo (UD) — Tax code CZZPGR66A24C817Q.
+              FriuliOn di Silvestre Richieri Caio, Via Piave 91, 33033 Codroipo (UD) — VAT number 0357410303.
               See the <a href="/privacy" className="underline hover:text-accent">Privacy Policy</a>{" "}
               for more information.
             </P>

@@ -5,13 +5,13 @@ import { PageHero } from "../components/PageHero";
 export const Route = createFileRoute("/privacy")({
   head: () => ({
     meta: [
-      { title: "Informativa Privacy — Piergiorgio Iacuzzo" },
+      { title: "Informativa Privacy — FriuliOn di Silvestre Richieri Caio" },
       {
         name: "description",
         content:
           "Informativa sul trattamento dei dati personali ai sensi del Regolamento UE 2016/679 (GDPR).",
       },
-      { property: "og:title", content: "Informativa Privacy — Piergiorgio Iacuzzo" },
+      { property: "og:title", content: "Informativa Privacy — FriuliOn di Silvestre Richieri Caio" },
       {
         property: "og:description",
         content:
@@ -64,8 +64,8 @@ function ContentIT() {
     <>
       <H>1. Titolare del trattamento</H>
       <P>
-        Titolare del trattamento dei dati è <strong>Piergiorgio Iacuzzo</strong>, Via Piave 91, 33033
-        Codroipo (UD), Italia — C.F. CZZPGR66A24C817Q.
+        Titolare del trattamento dei dati è <strong>FriuliOn di Silvestre Richieri Caio</strong>, Via Piave 91, 33033
+        Codroipo (UD), Italia — P. IVA 0357410303.
       </P>
       <P>
         Per esercitare i propri diritti o per qualsiasi richiesta in materia di protezione dei dati è
@@ -159,8 +159,8 @@ function ContentEN() {
     <>
       <H>1. Data controller</H>
       <P>
-        The data controller is <strong>Piergiorgio Iacuzzo</strong>, Via Piave 91, 33033 Codroipo
-        (UD), Italy — Tax code CZZPGR66A24C817Q.
+        The data controller is <strong>FriuliOn di Silvestre Richieri Caio</strong>, Via Piave 91, 33033 Codroipo
+        (UD), Italy — VAT number 0357410303.
       </P>
       <P>
         To exercise your rights or for any data-protection request, please use the contact address
