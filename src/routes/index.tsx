@@ -155,37 +155,56 @@ function HomePage() {
       </section>
 
       {/* SEZIONI — mondo letterario */}
-      <section className="relative z-0 border-b border-border bg-card pt-20 md:pt-40">
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+      <section className="relative z-0 overflow-hidden border-b border-border bg-[#fbf3ee] pt-20 md:pt-40">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-60"
+          style={{
+            background:
+              "radial-gradient(ellipse at 20% 0%, rgba(168,28,46,0.12) 0%, transparent 55%), radial-gradient(ellipse at 80% 100%, rgba(201,138,31,0.10) 0%, transparent 55%)",
+          }}
+        />
+        <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6">
+          <div className="mb-14 max-w-3xl">
+            <div className="inline-flex items-center gap-2 font-sans text-[11px] uppercase tracking-[0.22em] text-primary">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary" /> Il mio mondo
+            </div>
+            <h2 className="mt-3 font-serif text-4xl leading-tight text-primary md:text-5xl">
+              Quattro sentieri di <span className="italic" style={{ color: "var(--brand-gold)" }}>parole.</span>
+            </h2>
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
+              Libri illustrati, fiabe da ascoltare, poesie in due lingue e fotografie del Friuli. Scegli da dove cominciare.
+            </p>
+          </div>
+
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {[
-              { icon: BookOpen,   t: "Libri",       d: "Fiabe e racconti illustrati",       href: "/libri" as const,      bg: "#f7e3ea", ink: "#7a1d3a", accent: "#c44569" },
-              { icon: Headphones, t: "Fiabe sonore",d: "Voci, suoni, storie da ascoltare",  href: "/fiabe" as const,      bg: "#f8ebcf", ink: "#6b4a1a", accent: "#c98a1f" },
-              { icon: Feather,    t: "Poesie",      d: "In friulano e in italiano",         href: "/poesie" as const,     bg: "#e4ecdf", ink: "#2f4a3a", accent: "#6b8e5a" },
-              { icon: ImageIcon,  t: "Fotografie",  d: "Momenti, incontri, paesaggi",       href: "/fotografie" as const, bg: "#dee5ee", ink: "#1e3a5f", accent: "#3b6fa0" },
+              { icon: BookOpen,   t: "Libri",        d: "Fiabe e racconti illustrati",       href: "/libri" as const },
+              { icon: Headphones, t: "Fiabe sonore", d: "Voci, suoni, storie da ascoltare",  href: "/fiabe" as const },
+              { icon: Feather,    t: "Poesie",       d: "In friulano e in italiano",         href: "/poesie" as const },
+              { icon: ImageIcon,  t: "Fotografie",   d: "Momenti, incontri, paesaggi",       href: "/fotografie" as const },
             ].map((s, i) => (
               <Reveal key={s.t} delay={i * 80}>
                 <Link
                   to={s.href}
-                  className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border/60 p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl"
-                  style={{ background: s.bg, color: s.ink }}
+                  className="group surface-bordeaux relative flex h-full flex-col overflow-hidden rounded-3xl border border-primary-foreground/15 p-6 text-primary-foreground shadow-lg transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl"
                 >
                   <div
                     aria-hidden
-                    className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full opacity-30 blur-2xl transition-opacity duration-500 group-hover:opacity-60"
-                    style={{ background: s.accent }}
+                    className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full opacity-40 blur-2xl transition-opacity duration-500 group-hover:opacity-70"
+                    style={{ background: "radial-gradient(circle, var(--brand-gold) 0%, transparent 70%)" }}
                   />
                   <span
-                    className="inline-flex h-11 w-11 items-center justify-center rounded-2xl shadow-sm transition-transform duration-300 group-hover:scale-110 group-hover:rotate-[-4deg]"
-                    style={{ background: "rgba(255,255,255,0.7)", color: s.accent }}
+                    className="relative inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-primary-foreground/25 bg-primary-foreground/10 backdrop-blur-sm transition-transform duration-300 group-hover:scale-110 group-hover:rotate-[-4deg]"
+                    style={{ color: "var(--brand-gold)" }}
                   >
                     <s.icon size={22} />
                   </span>
-                  <div className="mt-5 font-serif text-2xl" style={{ color: s.ink }}>{s.t}</div>
-                  <div className="mt-1 text-sm opacity-80">{s.d}</div>
+                  <div className="mt-6 font-serif text-2xl leading-tight">{s.t}</div>
+                  <div className="mt-2 text-sm leading-relaxed text-primary-foreground/75">{s.d}</div>
                   <span
-                    className="mt-6 inline-flex items-center gap-1.5 text-xs font-medium transition-transform duration-300 group-hover:translate-x-1"
-                    style={{ color: s.accent }}
+                    className="mt-8 inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-[0.18em] transition-transform duration-300 group-hover:translate-x-1"
+                    style={{ color: "var(--brand-gold)" }}
                   >
                     Esplora <ArrowRight size={12} />
                   </span>
