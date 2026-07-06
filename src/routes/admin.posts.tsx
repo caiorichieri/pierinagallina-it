@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { db, type Post } from "@/integrations/pierina/client";
+import { sanitizeHtml } from "@/lib/sanitize";
 import { Pencil, Plus, Trash2, Eye, EyeOff } from "lucide-react";
 
 export const Route = createFileRoute("/admin/posts")({
@@ -76,7 +77,7 @@ function AdminPosts() {
                   <td className="px-4 py-3">
                     <div className="font-serif text-base text-foreground">{p.title}</div>
                     {p.excerpt && (
-                      <div className="mt-0.5 line-clamp-1 text-xs text-muted-foreground" dangerouslySetInnerHTML={{ __html: p.excerpt }} />
+                      <div className="mt-0.5 line-clamp-1 text-xs text-muted-foreground" dangerouslySetInnerHTML={{ __html: sanitizeHtml(p.excerpt) }} />
                     )}
                   </td>
                   <td className="px-4 py-3 hidden font-mono text-xs text-muted-foreground md:table-cell">{p.slug}</td>

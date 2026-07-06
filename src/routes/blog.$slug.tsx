@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
 import { ArrowLeft } from "lucide-react";
 import { db, type Post } from "@/integrations/pierina/client";
+import { sanitizeHtml } from "@/lib/sanitize";
 
 const postQuery = (slug: string) =>
   queryOptions({
@@ -73,7 +74,7 @@ function PostPage() {
 
       <div
         className="prose-pierina mx-auto max-w-3xl px-4 py-12 font-serif text-lg leading-relaxed text-foreground/90 sm:px-6"
-        dangerouslySetInnerHTML={{ __html: p.content ?? "" }}
+        dangerouslySetInnerHTML={{ __html: sanitizeHtml(p.content) }}
       />
 
       <div className="mx-auto max-w-3xl px-4 pb-20 sm:px-6">
