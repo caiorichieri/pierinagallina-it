@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
-import { getNewsList } from "../lib/content.functions";
 
-const BASE_URL = "https://piergiorgioiacuzzo.it";
+// TODO: sostituire con il dominio reale di Pierina Gallina
+const BASE_URL = "https://pierinagallina.it";
 
 interface SitemapEntry {
   path: string;
@@ -17,34 +17,36 @@ export const Route = createFileRoute("/sitemap.xml")({
       GET: async () => {
         const staticEntries: SitemapEntry[] = [
           { path: "/", changefreq: "weekly", priority: "1.0" },
-          { path: "/bio", changefreq: "monthly", priority: "0.8" },
-          { path: "/atletica-2000", changefreq: "monthly", priority: "0.8" },
-          { path: "/meeting", changefreq: "monthly", priority: "0.7" },
-          { path: "/codroipo-ce", changefreq: "monthly", priority: "0.8" },
-          { path: "/memindsport", changefreq: "monthly", priority: "0.7" },
-          { path: "/valori", changefreq: "monthly", priority: "0.6" },
-          { path: "/galleria", changefreq: "weekly", priority: "0.6" },
-          { path: "/agenda", changefreq: "weekly", priority: "0.7" },
-          { path: "/news", changefreq: "weekly", priority: "0.8" },
+          { path: "/chi-sono", changefreq: "monthly", priority: "0.8" },
+          { path: "/libri", changefreq: "monthly", priority: "0.8" },
+          { path: "/fiabe", changefreq: "monthly", priority: "0.7" },
+          { path: "/poesie", changefreq: "monthly", priority: "0.7" },
+          { path: "/fotografie", changefreq: "weekly", priority: "0.6" },
+          { path: "/blog", changefreq: "weekly", priority: "0.8" },
           { path: "/contatti", changefreq: "yearly", priority: "0.5" },
           { path: "/privacy", changefreq: "yearly", priority: "0.3" },
           { path: "/cookie-policy", changefreq: "yearly", priority: "0.3" },
         ];
 
-        let newsEntries: SitemapEntry[] = [];
+        let blogEntries: SitemapEntry[] = [];
         try {
-          const { news } = await getNewsList();
-          newsEntries = news.map((n) => ({
-            path: `/news/${n.slug}`,
-            lastmod: new Date(n.published_at).toISOString().slice(0, 10),
+          const { supabaseAdmin } = await import("../integrations/supabase/client.server");
+          const { data } = await supabaseAdmin
+            .from("posts")
+            .select("slug, published_at")
+            .eq("status", "published")
+            .order("published_at", { ascending: false });
+          blogEntries = (data ?? []).map((p) => ({
+            path: `/blog/${p.slug}`,
+            lastmod: p.published_at ? new Date(p.published_at).toISOString().slice(0, 10) : undefined,
             changefreq: "monthly",
             priority: "0.6",
           }));
         } catch {
-          newsEntries = [];
+          blogEntries = [];
         }
 
-        const entries = [...staticEntries, ...newsEntries];
+        const entries = [...staticEntries, ...blogEntries];
 
         const urls = entries.map((e) =>
           [

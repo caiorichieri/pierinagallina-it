@@ -9,31 +9,20 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as ValoriRouteImport } from './routes/valori'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PoesieRouteImport } from './routes/poesie'
-import { Route as MemindsportRouteImport } from './routes/memindsport'
-import { Route as MeetingRouteImport } from './routes/meeting'
 import { Route as LibriRouteImport } from './routes/libri'
-import { Route as GalleriaRouteImport } from './routes/galleria'
 import { Route as FotografieRouteImport } from './routes/fotografie'
 import { Route as FiabeRouteImport } from './routes/fiabe'
 import { Route as CookiePolicyRouteImport } from './routes/cookie-policy'
 import { Route as ContattiRouteImport } from './routes/contatti'
-import { Route as CodroipoCeRouteImport } from './routes/codroipo-ce'
 import { Route as ChiSonoRouteImport } from './routes/chi-sono'
 import { Route as BlogRouteImport } from './routes/blog'
-import { Route as BioRouteImport } from './routes/bio'
 import { Route as AuthRouteImport } from './routes/auth'
-import { Route as Atletica2000RouteImport } from './routes/atletica-2000'
-import { Route as AgendaRouteImport } from './routes/agenda'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as NewsIndexRouteImport } from './routes/news.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
-import { Route as NewsSlugRouteImport } from './routes/news.$slug'
-import { Route as GalleriaSlugRouteImport } from './routes/galleria.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AdminPostsRouteImport } from './routes/admin.posts'
 import { Route as AdminPoesieRouteImport } from './routes/admin.poesie'
@@ -45,11 +34,6 @@ import { Route as AdminFotografieRouteImport } from './routes/admin.fotografie'
 import { Route as AdminFiabeRouteImport } from './routes/admin.fiabe'
 import { Route as AdminPostsIdRouteImport } from './routes/admin.posts.$id'
 
-const ValoriRoute = ValoriRouteImport.update({
-  id: '/valori',
-  path: '/valori',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -65,24 +49,9 @@ const PoesieRoute = PoesieRouteImport.update({
   path: '/poesie',
   getParentRoute: () => rootRouteImport,
 } as any)
-const MemindsportRoute = MemindsportRouteImport.update({
-  id: '/memindsport',
-  path: '/memindsport',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MeetingRoute = MeetingRouteImport.update({
-  id: '/meeting',
-  path: '/meeting',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const LibriRoute = LibriRouteImport.update({
   id: '/libri',
   path: '/libri',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const GalleriaRoute = GalleriaRouteImport.update({
-  id: '/galleria',
-  path: '/galleria',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FotografieRoute = FotografieRouteImport.update({
@@ -105,11 +74,6 @@ const ContattiRoute = ContattiRouteImport.update({
   path: '/contatti',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CodroipoCeRoute = CodroipoCeRouteImport.update({
-  id: '/codroipo-ce',
-  path: '/codroipo-ce',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ChiSonoRoute = ChiSonoRouteImport.update({
   id: '/chi-sono',
   path: '/chi-sono',
@@ -120,24 +84,9 @@ const BlogRoute = BlogRouteImport.update({
   path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BioRoute = BioRouteImport.update({
-  id: '/bio',
-  path: '/bio',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const Atletica2000Route = Atletica2000RouteImport.update({
-  id: '/atletica-2000',
-  path: '/atletica-2000',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AgendaRoute = AgendaRouteImport.update({
-  id: '/agenda',
-  path: '/agenda',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRoute = AdminRouteImport.update({
@@ -150,25 +99,10 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const NewsIndexRoute = NewsIndexRouteImport.update({
-  id: '/news/',
-  path: '/news/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AdminRoute,
-} as any)
-const NewsSlugRoute = NewsSlugRouteImport.update({
-  id: '/news/$slug',
-  path: '/news/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const GalleriaSlugRoute = GalleriaSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => GalleriaRoute,
 } as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/$slug',
@@ -224,25 +158,17 @@ const AdminPostsIdRoute = AdminPostsIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
-  '/agenda': typeof AgendaRoute
-  '/atletica-2000': typeof Atletica2000Route
   '/auth': typeof AuthRoute
-  '/bio': typeof BioRoute
   '/blog': typeof BlogRouteWithChildren
   '/chi-sono': typeof ChiSonoRoute
-  '/codroipo-ce': typeof CodroipoCeRoute
   '/contatti': typeof ContattiRoute
   '/cookie-policy': typeof CookiePolicyRoute
   '/fiabe': typeof FiabeRoute
   '/fotografie': typeof FotografieRoute
-  '/galleria': typeof GalleriaRouteWithChildren
   '/libri': typeof LibriRoute
-  '/meeting': typeof MeetingRoute
-  '/memindsport': typeof MemindsportRoute
   '/poesie': typeof PoesieRoute
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/valori': typeof ValoriRoute
   '/admin/fiabe': typeof AdminFiabeRoute
   '/admin/fotografie': typeof AdminFotografieRoute
   '/admin/libri': typeof AdminLibriRoute
@@ -252,33 +178,22 @@ export interface FileRoutesByFullPath {
   '/admin/poesie': typeof AdminPoesieRoute
   '/admin/posts': typeof AdminPostsRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
-  '/galleria/$slug': typeof GalleriaSlugRoute
-  '/news/$slug': typeof NewsSlugRoute
   '/admin/': typeof AdminIndexRoute
-  '/news/': typeof NewsIndexRoute
   '/admin/posts/$id': typeof AdminPostsIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/agenda': typeof AgendaRoute
-  '/atletica-2000': typeof Atletica2000Route
   '/auth': typeof AuthRoute
-  '/bio': typeof BioRoute
   '/blog': typeof BlogRouteWithChildren
   '/chi-sono': typeof ChiSonoRoute
-  '/codroipo-ce': typeof CodroipoCeRoute
   '/contatti': typeof ContattiRoute
   '/cookie-policy': typeof CookiePolicyRoute
   '/fiabe': typeof FiabeRoute
   '/fotografie': typeof FotografieRoute
-  '/galleria': typeof GalleriaRouteWithChildren
   '/libri': typeof LibriRoute
-  '/meeting': typeof MeetingRoute
-  '/memindsport': typeof MemindsportRoute
   '/poesie': typeof PoesieRoute
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/valori': typeof ValoriRoute
   '/admin/fiabe': typeof AdminFiabeRoute
   '/admin/fotografie': typeof AdminFotografieRoute
   '/admin/libri': typeof AdminLibriRoute
@@ -288,35 +203,24 @@ export interface FileRoutesByTo {
   '/admin/poesie': typeof AdminPoesieRoute
   '/admin/posts': typeof AdminPostsRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
-  '/galleria/$slug': typeof GalleriaSlugRoute
-  '/news/$slug': typeof NewsSlugRoute
   '/admin': typeof AdminIndexRoute
-  '/news': typeof NewsIndexRoute
   '/admin/posts/$id': typeof AdminPostsIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
-  '/agenda': typeof AgendaRoute
-  '/atletica-2000': typeof Atletica2000Route
   '/auth': typeof AuthRoute
-  '/bio': typeof BioRoute
   '/blog': typeof BlogRouteWithChildren
   '/chi-sono': typeof ChiSonoRoute
-  '/codroipo-ce': typeof CodroipoCeRoute
   '/contatti': typeof ContattiRoute
   '/cookie-policy': typeof CookiePolicyRoute
   '/fiabe': typeof FiabeRoute
   '/fotografie': typeof FotografieRoute
-  '/galleria': typeof GalleriaRouteWithChildren
   '/libri': typeof LibriRoute
-  '/meeting': typeof MeetingRoute
-  '/memindsport': typeof MemindsportRoute
   '/poesie': typeof PoesieRoute
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/valori': typeof ValoriRoute
   '/admin/fiabe': typeof AdminFiabeRoute
   '/admin/fotografie': typeof AdminFotografieRoute
   '/admin/libri': typeof AdminLibriRoute
@@ -326,10 +230,7 @@ export interface FileRoutesById {
   '/admin/poesie': typeof AdminPoesieRoute
   '/admin/posts': typeof AdminPostsRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
-  '/galleria/$slug': typeof GalleriaSlugRoute
-  '/news/$slug': typeof NewsSlugRoute
   '/admin/': typeof AdminIndexRoute
-  '/news/': typeof NewsIndexRoute
   '/admin/posts/$id': typeof AdminPostsIdRoute
 }
 export interface FileRouteTypes {
@@ -337,25 +238,17 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/admin'
-    | '/agenda'
-    | '/atletica-2000'
     | '/auth'
-    | '/bio'
     | '/blog'
     | '/chi-sono'
-    | '/codroipo-ce'
     | '/contatti'
     | '/cookie-policy'
     | '/fiabe'
     | '/fotografie'
-    | '/galleria'
     | '/libri'
-    | '/meeting'
-    | '/memindsport'
     | '/poesie'
     | '/privacy'
     | '/sitemap.xml'
-    | '/valori'
     | '/admin/fiabe'
     | '/admin/fotografie'
     | '/admin/libri'
@@ -365,33 +258,22 @@ export interface FileRouteTypes {
     | '/admin/poesie'
     | '/admin/posts'
     | '/blog/$slug'
-    | '/galleria/$slug'
-    | '/news/$slug'
     | '/admin/'
-    | '/news/'
     | '/admin/posts/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/agenda'
-    | '/atletica-2000'
     | '/auth'
-    | '/bio'
     | '/blog'
     | '/chi-sono'
-    | '/codroipo-ce'
     | '/contatti'
     | '/cookie-policy'
     | '/fiabe'
     | '/fotografie'
-    | '/galleria'
     | '/libri'
-    | '/meeting'
-    | '/memindsport'
     | '/poesie'
     | '/privacy'
     | '/sitemap.xml'
-    | '/valori'
     | '/admin/fiabe'
     | '/admin/fotografie'
     | '/admin/libri'
@@ -401,34 +283,23 @@ export interface FileRouteTypes {
     | '/admin/poesie'
     | '/admin/posts'
     | '/blog/$slug'
-    | '/galleria/$slug'
-    | '/news/$slug'
     | '/admin'
-    | '/news'
     | '/admin/posts/$id'
   id:
     | '__root__'
     | '/'
     | '/admin'
-    | '/agenda'
-    | '/atletica-2000'
     | '/auth'
-    | '/bio'
     | '/blog'
     | '/chi-sono'
-    | '/codroipo-ce'
     | '/contatti'
     | '/cookie-policy'
     | '/fiabe'
     | '/fotografie'
-    | '/galleria'
     | '/libri'
-    | '/meeting'
-    | '/memindsport'
     | '/poesie'
     | '/privacy'
     | '/sitemap.xml'
-    | '/valori'
     | '/admin/fiabe'
     | '/admin/fotografie'
     | '/admin/libri'
@@ -438,48 +309,28 @@ export interface FileRouteTypes {
     | '/admin/poesie'
     | '/admin/posts'
     | '/blog/$slug'
-    | '/galleria/$slug'
-    | '/news/$slug'
     | '/admin/'
-    | '/news/'
     | '/admin/posts/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
-  AgendaRoute: typeof AgendaRoute
-  Atletica2000Route: typeof Atletica2000Route
   AuthRoute: typeof AuthRoute
-  BioRoute: typeof BioRoute
   BlogRoute: typeof BlogRouteWithChildren
   ChiSonoRoute: typeof ChiSonoRoute
-  CodroipoCeRoute: typeof CodroipoCeRoute
   ContattiRoute: typeof ContattiRoute
   CookiePolicyRoute: typeof CookiePolicyRoute
   FiabeRoute: typeof FiabeRoute
   FotografieRoute: typeof FotografieRoute
-  GalleriaRoute: typeof GalleriaRouteWithChildren
   LibriRoute: typeof LibriRoute
-  MeetingRoute: typeof MeetingRoute
-  MemindsportRoute: typeof MemindsportRoute
   PoesieRoute: typeof PoesieRoute
   PrivacyRoute: typeof PrivacyRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
-  ValoriRoute: typeof ValoriRoute
-  NewsSlugRoute: typeof NewsSlugRoute
-  NewsIndexRoute: typeof NewsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/valori': {
-      id: '/valori'
-      path: '/valori'
-      fullPath: '/valori'
-      preLoaderRoute: typeof ValoriRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -501,32 +352,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PoesieRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/memindsport': {
-      id: '/memindsport'
-      path: '/memindsport'
-      fullPath: '/memindsport'
-      preLoaderRoute: typeof MemindsportRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/meeting': {
-      id: '/meeting'
-      path: '/meeting'
-      fullPath: '/meeting'
-      preLoaderRoute: typeof MeetingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/libri': {
       id: '/libri'
       path: '/libri'
       fullPath: '/libri'
       preLoaderRoute: typeof LibriRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/galleria': {
-      id: '/galleria'
-      path: '/galleria'
-      fullPath: '/galleria'
-      preLoaderRoute: typeof GalleriaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/fotografie': {
@@ -557,13 +387,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContattiRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/codroipo-ce': {
-      id: '/codroipo-ce'
-      path: '/codroipo-ce'
-      fullPath: '/codroipo-ce'
-      preLoaderRoute: typeof CodroipoCeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/chi-sono': {
       id: '/chi-sono'
       path: '/chi-sono'
@@ -578,32 +401,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/bio': {
-      id: '/bio'
-      path: '/bio'
-      fullPath: '/bio'
-      preLoaderRoute: typeof BioRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/auth': {
       id: '/auth'
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/atletica-2000': {
-      id: '/atletica-2000'
-      path: '/atletica-2000'
-      fullPath: '/atletica-2000'
-      preLoaderRoute: typeof Atletica2000RouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/agenda': {
-      id: '/agenda'
-      path: '/agenda'
-      fullPath: '/agenda'
-      preLoaderRoute: typeof AgendaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -620,33 +422,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/news/': {
-      id: '/news/'
-      path: '/news'
-      fullPath: '/news/'
-      preLoaderRoute: typeof NewsIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/admin/': {
       id: '/admin/'
       path: '/'
       fullPath: '/admin/'
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
-    }
-    '/news/$slug': {
-      id: '/news/$slug'
-      path: '/news/$slug'
-      fullPath: '/news/$slug'
-      preLoaderRoute: typeof NewsSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/galleria/$slug': {
-      id: '/galleria/$slug'
-      path: '/$slug'
-      fullPath: '/galleria/$slug'
-      preLoaderRoute: typeof GalleriaSlugRouteImport
-      parentRoute: typeof GalleriaRoute
     }
     '/blog/$slug': {
       id: '/blog/$slug'
@@ -769,53 +550,21 @@ const BlogRouteChildren: BlogRouteChildren = {
 
 const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 
-interface GalleriaRouteChildren {
-  GalleriaSlugRoute: typeof GalleriaSlugRoute
-}
-
-const GalleriaRouteChildren: GalleriaRouteChildren = {
-  GalleriaSlugRoute: GalleriaSlugRoute,
-}
-
-const GalleriaRouteWithChildren = GalleriaRoute._addFileChildren(
-  GalleriaRouteChildren,
-)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
-  AgendaRoute: AgendaRoute,
-  Atletica2000Route: Atletica2000Route,
   AuthRoute: AuthRoute,
-  BioRoute: BioRoute,
   BlogRoute: BlogRouteWithChildren,
   ChiSonoRoute: ChiSonoRoute,
-  CodroipoCeRoute: CodroipoCeRoute,
   ContattiRoute: ContattiRoute,
   CookiePolicyRoute: CookiePolicyRoute,
   FiabeRoute: FiabeRoute,
   FotografieRoute: FotografieRoute,
-  GalleriaRoute: GalleriaRouteWithChildren,
   LibriRoute: LibriRoute,
-  MeetingRoute: MeetingRoute,
-  MemindsportRoute: MemindsportRoute,
   PoesieRoute: PoesieRoute,
   PrivacyRoute: PrivacyRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
-  ValoriRoute: ValoriRoute,
-  NewsSlugRoute: NewsSlugRoute,
-  NewsIndexRoute: NewsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
