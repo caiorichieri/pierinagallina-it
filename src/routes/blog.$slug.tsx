@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
 import { ArrowLeft } from "lucide-react";
 import { db, type Post } from "@/integrations/pierina/client";
+import { sanitizeHtml } from "@/lib/sanitize";
 
 const postQuery = (slug: string) =>
   queryOptions({
