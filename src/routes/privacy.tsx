@@ -159,8 +159,8 @@ function ContentEN() {
     <>
       <H>1. Data controller</H>
       <P>
-        The data controller is <strong>Piergiorgio Iacuzzo</strong>, Via Piave 91, 33033 Codroipo
-        (UD), Italy — Tax code CZZPGR66A24C817Q.
+        The data controller is <strong>FriuliOn di Silvestre Richieri Caio</strong>, Via Piave 91, 33033 Codroipo
+        (UD), Italy — VAT number 0357410303.
       </P>
       <P>
         To exercise your rights or for any data-protection request, please use the contact address
