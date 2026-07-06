@@ -7,6 +7,34 @@ import { Reveal } from "@/components/Reveal";
 import { BookInterestDialog } from "@/components/BookInterestDialog";
 import { ExternalLink, Mail, Play } from "lucide-react";
 
+import coverVitaEmotiva from "@/assets/libri/vita-da-emotiva.png.asset.json";
+import coverGastone from "@/assets/libri/gastone.png.asset.json";
+import coverFataNatura from "@/assets/libri/fata-natura.png.asset.json";
+import coverAnnoFiaba from "@/assets/libri/un-anno-da-fiaba.png.asset.json";
+import coverNonni from "@/assets/libri/nonni.png.asset.json";
+import coverPrincipessa from "@/assets/libri/principessa-tic.png.asset.json";
+import coverAngeli from "@/assets/libri/come-angeli.png.asset.json";
+import coverMassimo from "@/assets/libri/massimo-folletto.png.asset.json";
+import coverPetali from "@/assets/libri/petali-luna.png.asset.json";
+import coverAerei from "@/assets/libri/aerei-carta.png.asset.json";
+
+const COVER_OVERRIDES: Record<string, string> = {
+  "vita da emotiva": coverVitaEmotiva.url,
+  "gastone, il tassista coccolone": coverGastone.url,
+  "fata natura e l'orto magico": coverFataNatura.url,
+  "un anno da fiaba": coverAnnoFiaba.url,
+  "nonni": coverNonni.url,
+  "la principessa tic e il pirata tac nel pianeta fifablu": coverPrincipessa.url,
+  "come angeli in vacanza": coverAngeli.url,
+  "il volo perfetto di massimo il folletto": coverMassimo.url,
+  "come petali di luna": coverPetali.url,
+  "come aerei di carta": coverAerei.url,
+};
+
+function coverFor(b: Book): string | null {
+  return b.cover_url ?? COVER_OVERRIDES[b.title.trim().toLowerCase()] ?? null;
+}
+
 function isExternalBuy(url: string | null | undefined): url is string {
   if (!url) return false;
   // Old site cart links are broken — treat as "no buy link"
