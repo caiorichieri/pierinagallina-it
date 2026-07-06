@@ -64,8 +64,8 @@ function ContentIT() {
     <>
       <H>1. Titolare del trattamento</H>
       <P>
-        Titolare del trattamento dei dati è <strong>FriuliOn di Silvestre Richieri Caio</strong>, Via Piave 91, 33033
-        Codroipo (UD), Italia — P. IVA 0357410303.
+        Titolare del trattamento dei dati è <strong>FriuliOn di Silvestre Richieri Caio</strong>, Sia Sedegliano, 30,
+        Codroipo (Ud), Italia — P. IVA 0357410303.
       </P>
       <P>
         Per esercitare i propri diritti o per qualsiasi richiesta in materia di protezione dei dati è
@@ -159,8 +159,8 @@ function ContentEN() {
     <>
       <H>1. Data controller</H>
       <P>
-        The data controller is <strong>FriuliOn di Silvestre Richieri Caio</strong>, Via Piave 91, 33033 Codroipo
-        (UD), Italy — VAT number 0357410303.
+        The data controller is <strong>FriuliOn di Silvestre Richieri Caio</strong>, Sia Sedegliano, 30, Codroipo
+        (Ud), Italy — VAT number 0357410303.
       </P>
       <P>
         To exercise your rights or for any data-protection request, please use the contact address

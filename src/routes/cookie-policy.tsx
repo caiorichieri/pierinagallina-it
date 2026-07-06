@@ -131,7 +131,7 @@ function CookiePage() {
 
             <H>Titolare</H>
             <P>
-              FriuliOn di Silvestre Richieri Caio, Via Piave 91, 33033 Codroipo (UD) — P. IVA 0357410303. Per
+              FriuliOn di Silvestre Richieri Caio, Sia Sedegliano, 30, Codroipo (Ud) — P. IVA 0357410303. Per
               maggiori informazioni si rinvia alla{" "}
               <a href="/privacy" className="underline hover:text-accent">Informativa Privacy</a>.
             </P>
@@ -172,7 +172,7 @@ function CookiePage() {
             </button>
             <H>Controller</H>
             <P>
-              FriuliOn di Silvestre Richieri Caio, Via Piave 91, 33033 Codroipo (UD) — VAT number 0357410303.
+              FriuliOn di Silvestre Richieri Caio, Sia Sedegliano, 30, Codroipo (Ud) — VAT number 0357410303.
               See the <a href="/privacy" className="underline hover:text-accent">Privacy Policy</a>{" "}
               for more information.
             </P>
