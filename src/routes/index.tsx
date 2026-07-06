@@ -89,7 +89,7 @@ function HomePage() {
               </span>
             </div>
 
-            <div className="mt-8 flex items-start gap-4 md:block">
+            <div className="mt-8 flex items-end gap-4 md:block">
               <h1 className="font-serif text-5xl leading-[1.02] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">
                 Pierina
                 <br />
@@ -100,7 +100,7 @@ function HomePage() {
                 <img
                   src={pierinaHome.url}
                   alt="Pierina Gallina"
-                  className="h-auto w-28 origin-top object-contain drop-shadow-2xl sm:w-36"
+                  className="h-auto w-36 origin-bottom object-contain drop-shadow-2xl sm:w-44"
                 />
               </div>
             </div>
