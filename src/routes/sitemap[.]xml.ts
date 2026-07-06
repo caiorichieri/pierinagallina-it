@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
+import { db } from "../integrations/pierina/client";
 
 // TODO: sostituire con il dominio reale di Pierina Gallina
 const BASE_URL = "https://pierinagallina.it";
@@ -30,18 +31,18 @@ export const Route = createFileRoute("/sitemap.xml")({
 
         let blogEntries: SitemapEntry[] = [];
         try {
-          const { supabaseAdmin } = await import("../integrations/supabase/client.server");
-          const { data } = await supabaseAdmin
+          const { data, error } = await db
             .from("posts")
             .select("slug, published_at")
-            .eq("status", "published")
             .order("published_at", { ascending: false });
-          blogEntries = (data ?? []).map((p) => ({
-            path: `/blog/${p.slug}`,
-            lastmod: p.published_at ? new Date(p.published_at).toISOString().slice(0, 10) : undefined,
-            changefreq: "monthly",
-            priority: "0.6",
-          }));
+          if (!error) {
+            blogEntries = (data ?? []).map((p) => ({
+              path: `/blog/${p.slug}`,
+              lastmod: p.published_at ? new Date(p.published_at).toISOString().slice(0, 10) : undefined,
+              changefreq: "monthly",
+              priority: "0.6",
+            }));
+          }
         } catch {
           blogEntries = [];
         }
