@@ -150,7 +150,7 @@ function HomePage() {
       </section>
 
       {/* SEZIONI — mondo letterario */}
-      <section className="relative z-0 border-b border-border bg-card pt-32 md:pt-40">
+      <section className="relative z-0 border-b border-border bg-card pt-20 md:pt-40">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {[
