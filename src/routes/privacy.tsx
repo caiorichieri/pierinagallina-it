@@ -5,13 +5,13 @@ import { PageHero } from "../components/PageHero";
 export const Route = createFileRoute("/privacy")({
   head: () => ({
     meta: [
-      { title: "Informativa Privacy — Piergiorgio Iacuzzo" },
+      { title: "Informativa Privacy — FriuliOn di Silvestre Richieri Caio" },
       {
         name: "description",
         content:
           "Informativa sul trattamento dei dati personali ai sensi del Regolamento UE 2016/679 (GDPR).",
       },
-      { property: "og:title", content: "Informativa Privacy — Piergiorgio Iacuzzo" },
+      { property: "og:title", content: "Informativa Privacy — FriuliOn di Silvestre Richieri Caio" },
       {
         property: "og:description",
         content:
