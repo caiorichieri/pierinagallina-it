@@ -89,18 +89,23 @@ function HomePage() {
               </span>
             </div>
 
-            <div className="mt-8 flex items-end gap-4 md:block">
-              <h1 className="font-serif text-5xl leading-[1.02] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">
+            <div className="mt-4 flex items-end justify-between gap-1 md:block">
+              <h1 className="font-serif text-4xl leading-[1.02] tracking-tight sm:text-5xl md:text-7xl lg:text-8xl">
                 Pierina
                 <br />
                 <span className="italic" style={{ color: "var(--brand-gold)" }}>Gallina.</span>
               </h1>
 
               <div className="relative z-10 shrink-0 md:hidden">
+                <div
+                  aria-hidden
+                  className="absolute inset-0 -z-10 scale-[1.35] rounded-full opacity-80 blur-2xl"
+                  style={{ background: "radial-gradient(circle, rgba(255,150,130,0.65) 0%, transparent 70%)" }}
+                />
                 <img
                   src={pierinaHome.url}
                   alt="Pierina Gallina"
-                  className="h-auto w-36 origin-bottom object-contain drop-shadow-2xl sm:w-44"
+                  className="relative h-auto w-60 origin-bottom object-contain drop-shadow-2xl sm:w-64"
                 />
               </div>
             </div>
