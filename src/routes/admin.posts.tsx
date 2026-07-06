@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { db, type Post } from "@/integrations/pierina/client";
+import { sanitizeHtml } from "@/lib/sanitize";
 import { Pencil, Plus, Trash2, Eye, EyeOff } from "lucide-react";
 
 export const Route = createFileRoute("/admin/posts")({
