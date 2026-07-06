@@ -6,13 +6,13 @@ import { openCookiePreferences } from "../components/CookieBanner";
 export const Route = createFileRoute("/cookie-policy")({
   head: () => ({
     meta: [
-      { title: "Cookie Policy — Piergiorgio Iacuzzo" },
+      { title: "Cookie Policy — FriuliOn di Silvestre Richieri Caio" },
       {
         name: "description",
         content:
           "Informativa sui cookie utilizzati dal sito ai sensi delle Linee Guida del Garante Privacy del 10 giugno 2021.",
       },
-      { property: "og:title", content: "Cookie Policy — Piergiorgio Iacuzzo" },
+      { property: "og:title", content: "Cookie Policy — FriuliOn di Silvestre Richieri Caio" },
       {
         property: "og:description",
         content:
