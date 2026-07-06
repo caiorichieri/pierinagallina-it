@@ -19,7 +19,7 @@ const NAV = [
   { to: "/admin/fotografie", label: "Fotografie", icon: ImageIcon },
   { to: "/admin/messaggi", label: "Messaggi", icon: Mail },
   { to: "/admin/newsletter", label: "Newsletter", icon: Send },
-  { to: "/admin/migrazione", label: "Migrazione", icon: Database },
+  
 ] as const;
 
 function AdminLayout() {
