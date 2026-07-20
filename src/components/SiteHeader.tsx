@@ -18,13 +18,13 @@ export function SiteHeader() {
 
 
   return (
-    <header className="surface-bordeaux sticky top-0 z-40 border-b border-primary-foreground/10 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.4)]">
+    <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
         <Link to="/" className="flex items-baseline gap-2" onClick={() => setOpen(false)}>
-          <span className="font-serif text-xl font-semibold tracking-tight text-primary-foreground">
+          <span className="font-serif text-xl font-semibold tracking-tight text-primary">
             Pierina Gallina
           </span>
-          <span className="hidden text-[10px] uppercase tracking-[0.18em] text-primary-foreground/60 sm:inline">
+          <span className="hidden text-[10px] uppercase tracking-[0.18em] text-muted-foreground sm:inline">
             Codroipo · Friuli
           </span>
         </Link>
@@ -35,8 +35,8 @@ export function SiteHeader() {
               key={n.to}
               to={n.to}
               activeOptions={{ exact: n.to === "/" }}
-              className="rounded-md px-2.5 py-1.5 text-[13px] font-medium text-primary-foreground/75 transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground"
-              activeProps={{ className: "text-primary-foreground bg-primary-foreground/15" }}
+              className="rounded-md px-2.5 py-1.5 text-[13px] font-medium text-foreground/70 transition-colors hover:bg-secondary hover:text-primary"
+              activeProps={{ className: "text-primary bg-secondary" }}
             >
               {n.label}
             </Link>
