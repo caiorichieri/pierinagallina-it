@@ -212,24 +212,22 @@ function HomePage() {
               <Reveal key={s.t} delay={i * 80}>
                 <Link
                   to={s.href}
-                  className="group surface-bordeaux relative flex h-full flex-col overflow-hidden rounded-3xl border border-primary-foreground/15 p-6 text-primary-foreground shadow-lg transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl"
+                  className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-primary hover:shadow-xl"
                 >
                   <div
                     aria-hidden
-                    className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full opacity-40 blur-2xl transition-opacity duration-500 group-hover:opacity-70"
+                    className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full opacity-30 blur-2xl transition-opacity duration-500 group-hover:opacity-60"
                     style={{ background: "radial-gradient(circle, var(--brand-gold) 0%, transparent 70%)" }}
                   />
                   <span
-                    className="relative inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-primary-foreground/25 bg-primary-foreground/10 backdrop-blur-sm transition-transform duration-300 group-hover:scale-110 group-hover:rotate-[-4deg]"
-                    style={{ color: "var(--brand-gold)" }}
+                    className="relative inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-border bg-secondary text-primary transition-transform duration-300 group-hover:scale-110 group-hover:rotate-[-4deg]"
                   >
                     <s.icon size={22} />
                   </span>
-                  <div className="mt-6 font-serif text-2xl leading-tight">{s.t}</div>
-                  <div className="mt-2 text-sm leading-relaxed text-primary-foreground/75">{s.d}</div>
+                  <div className="mt-6 font-serif text-2xl leading-tight text-primary">{s.t}</div>
+                  <div className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.d}</div>
                   <span
-                    className="mt-8 inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-[0.18em] transition-transform duration-300 group-hover:translate-x-1"
-                    style={{ color: "var(--brand-gold)" }}
+                    className="mt-8 inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-[0.18em] text-accent transition-transform duration-300 group-hover:translate-x-1"
                   >
                     Esplora <ArrowRight size={12} />
                   </span>
