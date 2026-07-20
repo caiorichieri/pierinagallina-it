@@ -91,33 +91,31 @@ function HomePage() {
 
   return (
     <>
-      {/* HERO */}
-      <section className="surface-bordeaux surface-bordeaux-glow relative overflow-hidden">
+      {/* HERO — carta avorio, bordô come accento */}
+      <section className="relative overflow-hidden border-b border-border bg-background paper-grain">
         <div aria-hidden className="pointer-events-none absolute inset-0">
-          <div className="hero-line" style={{ top: "24%", animationDelay: "0s" }} />
-          <div className="hero-line" style={{ top: "62%", animationDelay: "2.5s" }} />
           <div
-            className="absolute -right-32 -top-32 h-[28rem] w-[28rem] rounded-full opacity-30 blur-3xl"
-            style={{ background: "radial-gradient(circle, rgba(220,120,60,0.4) 0%, transparent 70%)" }}
+            className="absolute -right-32 -top-32 h-[28rem] w-[28rem] rounded-full opacity-25 blur-3xl"
+            style={{ background: "radial-gradient(circle, rgba(232,184,74,0.55) 0%, transparent 70%)" }}
           />
           <div
-            className="absolute -bottom-40 -left-20 h-96 w-96 rounded-full opacity-25 blur-3xl"
-            style={{ background: "radial-gradient(circle, rgba(180,40,40,0.35) 0%, transparent 70%)" }}
+            className="absolute -bottom-40 -left-20 h-96 w-96 rounded-full opacity-20 blur-3xl"
+            style={{ background: "radial-gradient(circle, rgba(124,24,24,0.35) 0%, transparent 70%)" }}
           />
         </div>
 
-        <div className="relative mx-auto grid max-w-7xl gap-10 px-4 pt-24 pb-8 sm:px-6 md:grid-cols-[1.2fr_1fr] md:items-start md:gap-8 md:pt-32 md:pb-16">
+        <div className="relative mx-auto grid max-w-7xl gap-10 px-4 pt-20 pb-8 sm:px-6 md:grid-cols-[1.2fr_1fr] md:items-start md:gap-8 md:pt-28 md:pb-16">
           <div>
             <div className="flex items-center gap-3">
               <span className="flag-italy" aria-label="Italia"><span /><span /><span /></span>
               <span className="flag-friuli" aria-label="Friuli">FVG</span>
-              <span className="font-sans text-[11px] uppercase tracking-[0.22em] text-primary-foreground/70">
+              <span className="font-sans text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
                 Codroipo · Friuli
               </span>
             </div>
 
             <div className="mt-4 flex items-end justify-between gap-1 md:block">
-              <h1 className="font-serif text-4xl leading-[1.02] tracking-tight sm:text-5xl md:text-7xl lg:text-8xl">
+              <h1 className="font-serif text-4xl leading-[1.02] tracking-tight text-primary sm:text-5xl md:text-7xl lg:text-8xl">
                 Pierina
                 <br />
                 <span className="italic" style={{ color: "var(--brand-gold)" }}>Gallina.</span>
@@ -126,22 +124,22 @@ function HomePage() {
               <div className="relative z-10 shrink-0 md:hidden">
                 <div
                   aria-hidden
-                  className="absolute inset-0 -z-10 scale-[1.35] rounded-full opacity-80 blur-2xl"
-                  style={{ background: "radial-gradient(circle, rgba(255,150,130,0.65) 0%, transparent 70%)" }}
+                  className="absolute inset-0 -z-10 scale-[1.35] rounded-full opacity-70 blur-2xl"
+                  style={{ background: "radial-gradient(circle, rgba(232,184,74,0.6) 0%, transparent 70%)" }}
                 />
                 <img
                   src={pierinaHome.url}
                   alt="Pierina Gallina"
-                  className="relative h-auto w-60 origin-bottom object-contain drop-shadow-2xl sm:w-64"
+                  className="relative h-auto w-60 origin-bottom object-contain drop-shadow-xl sm:w-64"
                 />
               </div>
             </div>
 
-            <p className="mt-8 max-w-2xl font-serif text-xl italic leading-snug text-primary-foreground/90 md:text-2xl">
-              Scrivo per dare voce a ciò che rischierebbe di <span style={{ color: "var(--brand-gold)" }}>passare inosservato.</span>
+            <p className="mt-8 max-w-2xl font-serif text-xl italic leading-snug text-foreground/90 md:text-2xl">
+              Scrivo per dare voce a ciò che rischierebbe di <span className="ink-underline" style={{ color: "var(--brand-primary)" }}>passare inosservato.</span>
             </p>
 
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-primary-foreground/80 md:text-lg">
+            <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
               Scrittrice di Codroipo, Friuli — paroliera per passione. Libri, fiabe sonore, poesie in
               friulano e in italiano. Un'imbranata cacciatrice di emozioni.
             </p>
@@ -149,14 +147,14 @@ function HomePage() {
             <div className="mt-10 flex flex-wrap gap-3">
               <Link
                 to="/scritti"
-                className="group inline-flex items-center gap-2 rounded-full bg-primary-foreground px-6 py-3 text-sm font-medium text-primary shadow-lg transition-transform hover:-translate-y-0.5"
+                className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow-md transition-transform hover:-translate-y-0.5"
               >
                 Leggi gli scritti
                 <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
                 to="/contatti"
-                className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/30 px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary-foreground/10"
+                className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium text-foreground transition-colors hover:border-primary hover:text-primary"
               >
                 Scrivimi
               </Link>
@@ -164,12 +162,11 @@ function HomePage() {
           </div>
 
           <div className="relative z-20 -mb-28 hidden justify-center md:-mt-24 md:-mb-40 md:flex md:justify-end lg:-mt-28">
-            {/* Fundo decorativo orgânico atrás da foto */}
             <div
               aria-hidden
-              className="absolute -top-8 left-1/2 -z-10 h-[120%] w-[90%] -translate-x-1/2 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] opacity-70 blur-2xl md:left-auto md:right-0 md:top-0 md:h-[110%] md:w-[85%] md:translate-x-[1cm]"
+              className="absolute -top-8 left-1/2 -z-10 h-[120%] w-[90%] -translate-x-1/2 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] opacity-60 blur-2xl md:left-auto md:right-0 md:top-0 md:h-[110%] md:w-[85%] md:translate-x-[1cm]"
               style={{
-                background: "radial-gradient(ellipse at 50% 45%, rgba(255,120,100,0.50) 0%, rgba(180,50,50,0.35) 55%, transparent 85%)",
+                background: "radial-gradient(ellipse at 50% 45%, rgba(232,184,74,0.55) 0%, rgba(124,24,24,0.20) 55%, transparent 85%)",
               }}
             />
             <img
@@ -180,6 +177,7 @@ function HomePage() {
           </div>
         </div>
       </section>
+
 
       {/* SEZIONI — mondo letterario */}
       <section className="relative z-0 overflow-hidden border-b border-border bg-[#fbf3ee] pt-20 md:pt-40">
@@ -214,24 +212,22 @@ function HomePage() {
               <Reveal key={s.t} delay={i * 80}>
                 <Link
                   to={s.href}
-                  className="group surface-bordeaux relative flex h-full flex-col overflow-hidden rounded-3xl border border-primary-foreground/15 p-6 text-primary-foreground shadow-lg transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl"
+                  className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-primary hover:shadow-xl"
                 >
                   <div
                     aria-hidden
-                    className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full opacity-40 blur-2xl transition-opacity duration-500 group-hover:opacity-70"
+                    className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full opacity-30 blur-2xl transition-opacity duration-500 group-hover:opacity-60"
                     style={{ background: "radial-gradient(circle, var(--brand-gold) 0%, transparent 70%)" }}
                   />
                   <span
-                    className="relative inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-primary-foreground/25 bg-primary-foreground/10 backdrop-blur-sm transition-transform duration-300 group-hover:scale-110 group-hover:rotate-[-4deg]"
-                    style={{ color: "var(--brand-gold)" }}
+                    className="relative inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-border bg-secondary text-primary transition-transform duration-300 group-hover:scale-110 group-hover:rotate-[-4deg]"
                   >
                     <s.icon size={22} />
                   </span>
-                  <div className="mt-6 font-serif text-2xl leading-tight">{s.t}</div>
-                  <div className="mt-2 text-sm leading-relaxed text-primary-foreground/75">{s.d}</div>
+                  <div className="mt-6 font-serif text-2xl leading-tight text-primary">{s.t}</div>
+                  <div className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.d}</div>
                   <span
-                    className="mt-8 inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-[0.18em] transition-transform duration-300 group-hover:translate-x-1"
-                    style={{ color: "var(--brand-gold)" }}
+                    className="mt-8 inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-[0.18em] text-accent transition-transform duration-300 group-hover:translate-x-1"
                   >
                     Esplora <ArrowRight size={12} />
                   </span>
