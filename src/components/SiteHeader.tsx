@@ -5,11 +5,10 @@ import { Menu, X } from "lucide-react";
 
 const navItems = [
   { to: "/", key: "nav_home", label: "Home" },
-  { to: "/chi-sono", key: "nav_chi", label: "Chi sono" },
-  { to: "/libri", key: "nav_libri", label: "Libri" },
   { to: "/scritti", key: "nav_scritti", label: "Scritti" },
-  { to: "/fiabe", key: "nav_fiabe", label: "Fiabe sonore" },
   { to: "/fotografie", key: "nav_foto", label: "Fotografie" },
+  { to: "/fiabe", key: "nav_fiabe", label: "Fiabe sonore" },
+  { to: "/chi-sono", key: "nav_chi", label: "Chi Sono" },
   { to: "/contatti", key: "nav_contatti", label: "Contatti" },
 ] as const;
 
