@@ -207,8 +207,8 @@ function HomePage() {
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {[
               { icon: BookOpen,   t: "Libri",        d: "Fiabe e racconti illustrati",       href: "/libri" as const },
+              { icon: Feather,    t: "Scritti",      d: "Articoli, racconti e poesie",       href: "/scritti" as const },
               { icon: Headphones, t: "Fiabe sonore", d: "Voci, suoni, storie da ascoltare",  href: "/fiabe" as const },
-              { icon: Feather,    t: "Poesie",       d: "In friulano e in italiano",         href: "/poesie" as const },
               { icon: ImageIcon,  t: "Fotografie",   d: "Momenti, incontri, paesaggi",       href: "/fotografie" as const },
             ].map((s, i) => (
               <Reveal key={s.t} delay={i * 80}>
