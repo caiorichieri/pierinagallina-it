@@ -250,12 +250,12 @@ function HomePage() {
             <div className="flex items-end justify-between gap-6">
               <div>
                 <div className="inline-flex items-center gap-2 font-sans text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-                  <span className="h-1.5 w-1.5 rounded-full bg-accent" /> Dal blog
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent" /> Dagli scritti
                 </div>
                 <h2 className="mt-3 font-serif text-4xl leading-tight md:text-5xl">Ultimi racconti</h2>
               </div>
-              <Link to="/blog" className="hidden text-sm font-medium text-primary hover:text-accent sm:inline-flex sm:items-center sm:gap-1.5">
-                Tutti gli articoli <ArrowRight size={14} />
+              <Link to="/scritti" className="hidden text-sm font-medium text-primary hover:text-accent sm:inline-flex sm:items-center sm:gap-1.5">
+                Tutti gli scritti <ArrowRight size={14} />
               </Link>
             </div>
 
