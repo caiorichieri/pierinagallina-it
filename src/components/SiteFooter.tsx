@@ -40,12 +40,10 @@ export function SiteFooter() {
           <ul className="grid grid-cols-2 gap-y-1.5 text-sm">
             {[
               ["/", "Home"],
-              ["/chi-sono", "Chi sono"],
-              ["/libri", "Libri"],
-              ["/fiabe", "Fiabe sonore"],
-              ["/poesie", "Poesie"],
+              ["/scritti", "Scritti"],
               ["/fotografie", "Fotografie"],
-              ["/blog", "Blog"],
+              ["/fiabe", "Fiabe sonore"],
+              ["/chi-sono", "Chi Sono"],
               ["/contatti", "Contatti"],
             ].map(([to, label]) => (
               <li key={to}>
