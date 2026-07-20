@@ -50,7 +50,7 @@ export function SiteHeader() {
             type="button"
             aria-label="Menu"
             onClick={() => setOpen((v) => !v)}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-primary-foreground/20 bg-primary-foreground/10 text-primary-foreground"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border bg-secondary text-primary"
           >
             {open ? <X size={18} /> : <Menu size={18} />}
           </button>
@@ -59,7 +59,7 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <nav className="surface-bordeaux border-t border-primary-foreground/10 lg:hidden">
+        <nav className="border-t border-border bg-background lg:hidden">
           <div className="mx-auto flex max-w-7xl flex-col px-4 py-2 sm:px-6">
             {navItems.map((n) => (
               <Link
@@ -67,8 +67,8 @@ export function SiteHeader() {
                 to={n.to}
                 activeOptions={{ exact: n.to === "/" }}
                 onClick={() => setOpen(false)}
-                className="rounded-md px-2 py-2 text-sm font-medium text-primary-foreground/80 hover:bg-primary-foreground/10 hover:text-primary-foreground"
-                activeProps={{ className: "text-primary-foreground bg-primary-foreground/15" }}
+                className="rounded-md px-2 py-2 text-sm font-medium text-foreground/75 hover:bg-secondary hover:text-primary"
+                activeProps={{ className: "text-primary bg-secondary" }}
               >
                 {n.label}
               </Link>
