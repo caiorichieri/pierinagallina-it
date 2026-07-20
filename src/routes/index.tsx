@@ -368,6 +368,11 @@ function HomePage() {
                 </Reveal>
               ))}
             </div>
+            <div className="mt-12">
+              <Link to="/scritti" className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/30 px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary-foreground/10">
+                Leggi tutte le poesie <ArrowRight size={14} />
+              </Link>
+            </div>
           </div>
         </section>
       )}
