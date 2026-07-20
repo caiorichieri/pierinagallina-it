@@ -137,21 +137,21 @@ function HomePage() {
               </div>
             </div>
 
-            <p className="mt-8 max-w-2xl font-serif text-xl italic leading-snug text-primary-foreground/85 md:text-2xl">
-              Scrittrice di Codroipo, Friuli &nbsp;—&nbsp; paroliera per passione.
+            <p className="mt-8 max-w-2xl font-serif text-xl italic leading-snug text-primary-foreground/90 md:text-2xl">
+              Scrivo per dare voce a ciò che rischierebbe di <span style={{ color: "var(--brand-gold)" }}>passare inosservato.</span>
             </p>
 
             <p className="mt-6 max-w-2xl text-base leading-relaxed text-primary-foreground/80 md:text-lg">
-              Libri per bambini, fiabe sonore, poesie in friulano e in italiano. Parole che nascono dalla
-              terra, dalla scuola, dal vento di casa.
+              Scrittrice di Codroipo, Friuli — paroliera per passione. Libri, fiabe sonore, poesie in
+              friulano e in italiano. Un'imbranata cacciatrice di emozioni.
             </p>
 
             <div className="mt-10 flex flex-wrap gap-3">
               <Link
-                to="/blog"
+                to="/scritti"
                 className="group inline-flex items-center gap-2 rounded-full bg-primary-foreground px-6 py-3 text-sm font-medium text-primary shadow-lg transition-transform hover:-translate-y-0.5"
               >
-                Leggi il blog
+                Leggi gli scritti
                 <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
@@ -207,8 +207,8 @@ function HomePage() {
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {[
               { icon: BookOpen,   t: "Libri",        d: "Fiabe e racconti illustrati",       href: "/libri" as const },
+              { icon: Feather,    t: "Scritti",      d: "Articoli, racconti e poesie",       href: "/scritti" as const },
               { icon: Headphones, t: "Fiabe sonore", d: "Voci, suoni, storie da ascoltare",  href: "/fiabe" as const },
-              { icon: Feather,    t: "Poesie",       d: "In friulano e in italiano",         href: "/poesie" as const },
               { icon: ImageIcon,  t: "Fotografie",   d: "Momenti, incontri, paesaggi",       href: "/fotografie" as const },
             ].map((s, i) => (
               <Reveal key={s.t} delay={i * 80}>
@@ -250,12 +250,12 @@ function HomePage() {
             <div className="flex items-end justify-between gap-6">
               <div>
                 <div className="inline-flex items-center gap-2 font-sans text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-                  <span className="h-1.5 w-1.5 rounded-full bg-accent" /> Dal blog
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent" /> Dagli scritti
                 </div>
                 <h2 className="mt-3 font-serif text-4xl leading-tight md:text-5xl">Ultimi racconti</h2>
               </div>
-              <Link to="/blog" className="hidden text-sm font-medium text-primary hover:text-accent sm:inline-flex sm:items-center sm:gap-1.5">
-                Tutti gli articoli <ArrowRight size={14} />
+              <Link to="/scritti" className="hidden text-sm font-medium text-primary hover:text-accent sm:inline-flex sm:items-center sm:gap-1.5">
+                Tutti gli scritti <ArrowRight size={14} />
               </Link>
             </div>
 
@@ -367,6 +367,11 @@ function HomePage() {
                   </article>
                 </Reveal>
               ))}
+            </div>
+            <div className="mt-12">
+              <Link to="/scritti" className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/30 px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary-foreground/10">
+                Leggi tutte le poesie <ArrowRight size={14} />
+              </Link>
             </div>
           </div>
         </section>
