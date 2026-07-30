@@ -47,7 +47,7 @@ const HERO_PHOTO = {
     offsetY: "-2rem",        // sobe a foto em direção aos botões
     scale: 1.15,             // tamanho da foto no celular
     height: "30rem",         // altura do container mobile
-    objectPosition: "50% 22%", // foca no rosto/tonco de Pierina (imagem centrada)
+    objectPosition: "50% 12%", // foca no rosto de Pierina (parte superior da imagem)
   },
   desktop: {
     offsetY: "-0.5rem",      // posição vertical no desktop (negativo sobe)
