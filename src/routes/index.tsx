@@ -142,16 +142,16 @@ function HomePage() {
             </div>
 
             {/* Foto mobile: grande, sotto i testi, sfumata verso lo sfondo */}
-            <div className="relative -mx-4 mt-8 h-[24rem] overflow-hidden sm:h-[28rem] md:hidden">
+            <div className="relative -mx-4 -mt-2 h-[28rem] overflow-hidden sm:h-[32rem] md:hidden">
               <div
                 aria-hidden
-                className="absolute inset-x-0 bottom-0 top-6 -z-10 rounded-full opacity-80 blur-3xl"
+                className="absolute inset-x-0 bottom-0 top-2 -z-10 rounded-full opacity-90 blur-3xl"
                 style={{ background: "radial-gradient(ellipse at 50% 55%, rgba(232,184,74,0.55) 0%, rgba(124,24,24,0.16) 55%, transparent 80%)" }}
               />
               <img
                 src={pierinaHome.url}
                 alt="Pierina Gallina"
-                className="fade-bottom absolute inset-0 h-full w-full origin-top scale-[1.9] object-contain drop-shadow-2xl"
+                className="fade-bottom absolute inset-0 h-full w-full origin-top scale-[2.1] object-contain drop-shadow-2xl"
               />
             </div>
 
