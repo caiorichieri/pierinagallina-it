@@ -16,14 +16,14 @@ export function SiteFooter() {
         <div className="flex-1" style={{ background: "#CD212A" }} />
       </div>
 
-      <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 md:grid-cols-12">
+      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-12">
         <div className="md:col-span-5">
           <div className="font-serif text-2xl font-semibold">Pierina Gallina</div>
-          <p className="mt-3 max-w-sm text-sm leading-relaxed text-primary-foreground/75 italic">
+          <p className="mt-2 max-w-sm text-sm leading-relaxed text-primary-foreground/80 italic">
             «Paroliera per passione» — scrittrice di Codroipo, nel cuore del Friuli.
             Libri, fiabe sonore, poesie in friulano e italiano, fotografie e racconti.
           </p>
-          <div className="mt-5 flex items-center gap-3">
+          <div className="mt-4 flex items-center gap-3">
             <span className="flag-italy" aria-label="Italia">
               <span /><span /><span />
             </span>
@@ -32,16 +32,16 @@ export function SiteFooter() {
               Codroipo · Friuli · Italia
             </span>
           </div>
-          <div className="mt-6">
-            <div className="mb-2 text-xs font-mono uppercase tracking-[0.18em] text-primary-foreground/55">
+          <div className="mt-5">
+            <div className="mb-2 text-xs font-mono uppercase tracking-[0.18em] text-primary-foreground/70">
               Seguimi
             </div>
-            <SocialLinks variant="dark" size={20} />
+            <SocialLinks variant="dark-prominent" size={22} />
           </div>
         </div>
 
         <div className="md:col-span-4">
-          <div className="mb-4 text-xs font-mono uppercase tracking-[0.18em] text-primary-foreground/55">
+          <div className="mb-3 text-xs font-mono uppercase tracking-[0.18em] text-primary-foreground/70">
             Navigazione
           </div>
           <ul className="grid grid-cols-2 gap-y-1.5 text-sm">
@@ -50,43 +50,61 @@ export function SiteFooter() {
               ["/scritti", "Scritti"],
               ["/fotografie", "Fotografie"],
               ["/fiabe", "Fiabe sonore"],
+              ["/libri", "Libri"],
               ["/chi-sono", "Chi Sono"],
               ["/contatti", "Contatti"],
             ].map(([to, label]) => (
               <li key={to}>
                 <Link
                   to={to}
-                  className="text-primary-foreground/80 transition-colors hover:text-accent"
+                  className="text-primary-foreground/85 transition-colors hover:text-accent"
                 >
                   {label}
                 </Link>
               </li>
             ))}
           </ul>
+          <div className="mt-5">
+            <div className="mb-2 text-xs font-mono uppercase tracking-[0.18em] text-primary-foreground/70">
+              Resta aggiornato
+            </div>
+            <p className="max-w-xs text-sm text-primary-foreground/75">
+              Iscriviti alla newsletter per ricevere novità su libri, eventi e nuovi scritti.
+            </p>
+            <Link
+              to="/contatti"
+              className="mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:underline"
+            >
+              Iscriviti <Mail size={14} />
+            </Link>
+          </div>
         </div>
 
         <div className="md:col-span-3">
-          <div className="mb-4 text-xs font-mono uppercase tracking-[0.18em] text-primary-foreground/55">
+          <div className="mb-3 text-xs font-mono uppercase tracking-[0.18em] text-primary-foreground/70">
             Contatti
           </div>
-          <ul className="space-y-3 text-sm text-primary-foreground/80">
+          <ul className="space-y-2.5 text-sm text-primary-foreground/85">
             <li className="flex items-start gap-2">
-              <MapPin size={14} className="mt-1 shrink-0 text-accent" />
-              <span>Codroipo (Ud)<br />Friuli-Venezia Giulia</span>
+              <MapPin size={15} className="mt-0.5 shrink-0 text-accent" />
+              <span>Codroipo (Ud)<br />Friuli-Venezia Giulia, Italia</span>
             </li>
             <li className="flex items-start gap-2">
-              <Mail size={14} className="mt-1 shrink-0 text-accent" />
+              <Mail size={15} className="mt-0.5 shrink-0 text-accent" />
               <Link to="/contatti" className="hover:text-accent">
-                Scrivimi
+                Scrivimi un messaggio
               </Link>
             </li>
             <li className="flex items-start gap-2">
-              <BookOpen size={14} className="mt-1 shrink-0 text-accent" />
+              <BookOpen size={15} className="mt-0.5 shrink-0 text-accent" />
               <Link to="/libri" className="hover:text-accent">
-                Catalogo libri
+                Esplora i libri
               </Link>
             </li>
           </ul>
+          <p className="mt-4 max-w-[16rem] text-xs leading-relaxed text-primary-foreground/55">
+            Per collaborazioni, letture, eventi o semplicemente per scambiare due parole.
+          </p>
         </div>
       </div>
 
