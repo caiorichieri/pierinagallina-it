@@ -3,6 +3,7 @@ import { useState } from "react";
 import { PageHero } from "@/components/PageHero";
 import { db } from "@/integrations/pierina/client";
 import { MapPin, Send } from "lucide-react";
+import { SocialLinksRow } from "@/components/SocialLinks";
 
 export const Route = createFileRoute("/contatti")({
   head: () => ({
