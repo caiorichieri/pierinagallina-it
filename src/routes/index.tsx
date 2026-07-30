@@ -1,6 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
-import { ArrowRight, BookOpen, Feather, Headphones, Image as ImageIcon, Mail } from "lucide-react";
+import { ArrowRight, Mail } from "lucide-react";
+import iconLibri from "@/assets/icone/libri.png";
+import iconScritti from "@/assets/icone/scritti.png";
+import iconFiabe from "@/assets/icone/fiabe.png";
+import iconFotografie from "@/assets/icone/fotografie.png";
 import { db, type Post, type Book, type Poem } from "@/integrations/pierina/client";
 import { Reveal } from "@/components/Reveal";
 import pierinaHome from "@/assets/pierina-home-v2.png.asset.json";
@@ -104,28 +108,13 @@ function HomePage() {
           />
         </div>
 
-        <div className="relative mx-auto grid max-w-7xl gap-8 px-4 pt-10 pb-6 sm:px-6 md:grid-cols-[1.2fr_1fr] md:items-start md:gap-8 md:pt-14 md:pb-10">
+        <div className="relative mx-auto grid max-w-7xl gap-8 px-4 pt-10 pb-0 sm:px-6 md:grid-cols-[1.2fr_1fr] md:items-start md:gap-8 md:pt-14 md:pb-10">
           <div>
-            <div className="flex items-end justify-between gap-3 md:block">
-              <h1 className="font-serif text-4xl leading-[1.02] tracking-tight text-primary sm:text-5xl md:text-7xl lg:text-8xl">
-                Pierina
-                <br />
-                <span className="italic" style={{ color: "var(--brand-gold)" }}>Gallina.</span>
-              </h1>
-
-              <div className="relative z-10 shrink-0 md:hidden">
-                <div
-                  aria-hidden
-                  className="absolute inset-0 -z-10 scale-[1.45] rounded-full opacity-75 blur-2xl"
-                  style={{ background: "radial-gradient(circle, rgba(232,184,74,0.6) 0%, transparent 70%)" }}
-                />
-                <img
-                  src={pierinaHome.url}
-                  alt="Pierina Gallina"
-                  className="relative h-auto w-72 origin-bottom object-contain drop-shadow-2xl sm:w-80"
-                />
-              </div>
-            </div>
+            <h1 className="font-serif text-5xl leading-[1.02] tracking-tight text-primary sm:text-6xl md:text-7xl lg:text-8xl">
+              Pierina
+              <br />
+              <span className="italic" style={{ color: "var(--brand-gold)" }}>Gallina.</span>
+            </h1>
 
             <p className="mt-6 max-w-2xl font-serif text-xl italic leading-snug text-foreground/90 md:text-2xl">
               Scrivo per dare voce a ciò che rischierebbe di <span className="ink-underline" style={{ color: "var(--brand-primary)" }}>passare inosservato.</span>
@@ -151,6 +140,21 @@ function HomePage() {
                 Scrivimi
               </Link>
             </div>
+
+            {/* Foto mobile: grande, sotto i testi, sfumata verso lo sfondo */}
+            <div className="relative -mx-4 mt-8 h-[24rem] overflow-hidden sm:h-[28rem] md:hidden">
+              <div
+                aria-hidden
+                className="absolute inset-x-0 bottom-0 top-6 -z-10 rounded-full opacity-80 blur-3xl"
+                style={{ background: "radial-gradient(ellipse at 50% 55%, rgba(232,184,74,0.55) 0%, rgba(124,24,24,0.16) 55%, transparent 80%)" }}
+              />
+              <img
+                src={pierinaHome.url}
+                alt="Pierina Gallina"
+                className="fade-bottom absolute inset-0 h-full w-full origin-top scale-[1.9] object-contain drop-shadow-2xl"
+              />
+            </div>
+
           </div>
 
           <div className="relative z-20 -mb-16 hidden justify-center md:-mt-24 md:-mb-24 md:flex md:justify-end lg:-mt-28">
@@ -164,15 +168,16 @@ function HomePage() {
             <img
               src={pierinaHome.url}
               alt="Pierina Gallina"
-              className="relative z-10 h-auto w-[168%] max-w-none origin-top object-contain drop-shadow-2xl translate-x-[4cm] md:w-[204%] md:translate-x-[6cm] lg:w-[216%] lg:translate-x-[7cm]"
+              className="fade-bottom relative z-10 h-auto w-[168%] max-w-none origin-top object-contain drop-shadow-2xl translate-x-[4cm] md:w-[204%] md:translate-x-[6cm] lg:w-[216%] lg:translate-x-[7cm]"
             />
           </div>
         </div>
+
       </section>
 
 
       {/* SEZIONI — mondo letterario */}
-      <section className="relative z-0 overflow-hidden border-b border-border bg-[#fbf3ee] pt-10 md:pt-24">
+      <section className="relative z-0 overflow-hidden border-b border-border bg-[#fbf3ee] pt-6 md:pt-10">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-60"
@@ -196,10 +201,10 @@ function HomePage() {
 
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {[
-              { icon: BookOpen,   t: "Libri",        d: "Fiabe e racconti illustrati",       href: "/libri" as const },
-              { icon: Feather,    t: "Scritti",      d: "Articoli, racconti e poesie",       href: "/scritti" as const },
-              { icon: Headphones, t: "Fiabe sonore", d: "Voci, suoni, storie da ascoltare",  href: "/fiabe" as const },
-              { icon: ImageIcon,  t: "Fotografie",   d: "Momenti, incontri, paesaggi",       href: "/fotografie" as const },
+              { icon: iconLibri,      t: "Libri",        d: "Fiabe e racconti illustrati",       href: "/libri" as const },
+              { icon: iconScritti,    t: "Scritti",      d: "Articoli, racconti e poesie",       href: "/scritti" as const },
+              { icon: iconFiabe,      t: "Fiabe sonore", d: "Voci, suoni, storie da ascoltare",  href: "/fiabe" as const },
+              { icon: iconFotografie, t: "Fotografie",   d: "Momenti, incontri, paesaggi",       href: "/fotografie" as const },
             ].map((s, i) => (
               <Reveal key={s.t} delay={i * 80}>
                 <Link
@@ -212,10 +217,12 @@ function HomePage() {
                     style={{ background: "radial-gradient(circle, var(--brand-gold) 0%, transparent 70%)" }}
                   />
                   <span
-                    className="relative inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-border bg-secondary text-primary transition-transform duration-300 group-hover:scale-110 group-hover:rotate-[-4deg]"
+                    className="relative inline-flex h-20 w-20 items-center justify-center rounded-full border bg-background/60 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-[-4deg]"
+                    style={{ borderColor: "color-mix(in oklab, var(--brand-gold) 55%, transparent)" }}
                   >
-                    <s.icon size={22} />
+                    <img src={s.icon} alt="" aria-hidden loading="lazy" width={512} height={512} className="h-16 w-16 object-contain" />
                   </span>
+
                   <div className="mt-6 font-serif text-2xl leading-tight text-primary">{s.t}</div>
                   <div className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.d}</div>
                   <span
