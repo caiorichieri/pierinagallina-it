@@ -104,17 +104,9 @@ function HomePage() {
           />
         </div>
 
-        <div className="relative mx-auto grid max-w-7xl gap-10 px-4 pt-20 pb-8 sm:px-6 md:grid-cols-[1.2fr_1fr] md:items-start md:gap-8 md:pt-28 md:pb-16">
+        <div className="relative mx-auto grid max-w-7xl gap-8 px-4 pt-10 pb-6 sm:px-6 md:grid-cols-[1.2fr_1fr] md:items-start md:gap-8 md:pt-14 md:pb-10">
           <div>
-            <div className="flex items-center gap-3">
-              <span className="flag-italy" aria-label="Italia"><span /><span /><span /></span>
-              <span className="flag-friuli" aria-label="Friuli">FVG</span>
-              <span className="font-sans text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-                Codroipo · Friuli
-              </span>
-            </div>
-
-            <div className="mt-4 flex items-end justify-between gap-1 md:block">
+            <div className="flex items-end justify-between gap-3 md:block">
               <h1 className="font-serif text-4xl leading-[1.02] tracking-tight text-primary sm:text-5xl md:text-7xl lg:text-8xl">
                 Pierina
                 <br />
@@ -124,27 +116,27 @@ function HomePage() {
               <div className="relative z-10 shrink-0 md:hidden">
                 <div
                   aria-hidden
-                  className="absolute inset-0 -z-10 scale-[1.35] rounded-full opacity-70 blur-2xl"
+                  className="absolute inset-0 -z-10 scale-[1.45] rounded-full opacity-75 blur-2xl"
                   style={{ background: "radial-gradient(circle, rgba(232,184,74,0.6) 0%, transparent 70%)" }}
                 />
                 <img
                   src={pierinaHome.url}
                   alt="Pierina Gallina"
-                  className="relative h-auto w-60 origin-bottom object-contain drop-shadow-xl sm:w-64"
+                  className="relative h-auto w-72 origin-bottom object-contain drop-shadow-2xl sm:w-80"
                 />
               </div>
             </div>
 
-            <p className="mt-8 max-w-2xl font-serif text-xl italic leading-snug text-foreground/90 md:text-2xl">
+            <p className="mt-6 max-w-2xl font-serif text-xl italic leading-snug text-foreground/90 md:text-2xl">
               Scrivo per dare voce a ciò che rischierebbe di <span className="ink-underline" style={{ color: "var(--brand-primary)" }}>passare inosservato.</span>
             </p>
 
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
               Scrittrice di Codroipo, Friuli — paroliera per passione. Libri, fiabe sonore, poesie in
               friulano e in italiano. Un'imbranata cacciatrice di emozioni.
             </p>
 
-            <div className="mt-10 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 to="/scritti"
                 className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow-md transition-transform hover:-translate-y-0.5"
