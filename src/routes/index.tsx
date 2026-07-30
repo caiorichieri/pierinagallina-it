@@ -151,7 +151,7 @@ function HomePage() {
               <img
                 src={pierinaHome.url}
                 alt="Pierina Gallina"
-                className="fade-bottom relative h-auto w-[92%] max-w-md object-contain drop-shadow-2xl"
+                className="fade-bottom relative -mx-4 h-auto w-[124%] max-w-none object-contain drop-shadow-2xl"
               />
             </div>
           </div>
