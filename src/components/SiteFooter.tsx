@@ -32,6 +32,12 @@ export function SiteFooter() {
               Codroipo · Friuli · Italia
             </span>
           </div>
+          <div className="mt-6">
+            <div className="mb-2 text-xs font-mono uppercase tracking-[0.18em] text-primary-foreground/55">
+              Seguimi
+            </div>
+            <SocialLinks variant="dark" size={20} />
+          </div>
         </div>
 
         <div className="md:col-span-4">
