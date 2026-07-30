@@ -104,28 +104,13 @@ function HomePage() {
           />
         </div>
 
-        <div className="relative mx-auto grid max-w-7xl gap-8 px-4 pt-10 pb-6 sm:px-6 md:grid-cols-[1.2fr_1fr] md:items-start md:gap-8 md:pt-14 md:pb-10">
+        <div className="relative mx-auto grid max-w-7xl gap-8 px-4 pt-10 pb-0 sm:px-6 md:grid-cols-[1.2fr_1fr] md:items-start md:gap-8 md:pt-14 md:pb-10">
           <div>
-            <div className="flex items-end justify-between gap-3 md:block">
-              <h1 className="font-serif text-4xl leading-[1.02] tracking-tight text-primary sm:text-5xl md:text-7xl lg:text-8xl">
-                Pierina
-                <br />
-                <span className="italic" style={{ color: "var(--brand-gold)" }}>Gallina.</span>
-              </h1>
-
-              <div className="relative z-10 shrink-0 md:hidden">
-                <div
-                  aria-hidden
-                  className="absolute inset-0 -z-10 scale-[1.45] rounded-full opacity-75 blur-2xl"
-                  style={{ background: "radial-gradient(circle, rgba(232,184,74,0.6) 0%, transparent 70%)" }}
-                />
-                <img
-                  src={pierinaHome.url}
-                  alt="Pierina Gallina"
-                  className="relative h-auto w-72 origin-bottom object-contain drop-shadow-2xl sm:w-80"
-                />
-              </div>
-            </div>
+            <h1 className="font-serif text-5xl leading-[1.02] tracking-tight text-primary sm:text-6xl md:text-7xl lg:text-8xl">
+              Pierina
+              <br />
+              <span className="italic" style={{ color: "var(--brand-gold)" }}>Gallina.</span>
+            </h1>
 
             <p className="mt-6 max-w-2xl font-serif text-xl italic leading-snug text-foreground/90 md:text-2xl">
               Scrivo per dare voce a ciò che rischierebbe di <span className="ink-underline" style={{ color: "var(--brand-primary)" }}>passare inosservato.</span>
@@ -151,6 +136,20 @@ function HomePage() {
                 Scrivimi
               </Link>
             </div>
+
+            {/* Foto mobile: grande, sotto i testi, sfumata verso lo sfondo */}
+            <div className="relative mt-10 flex justify-center md:hidden">
+              <div
+                aria-hidden
+                className="absolute inset-x-0 bottom-0 top-4 -z-10 rounded-full opacity-80 blur-3xl"
+                style={{ background: "radial-gradient(ellipse at 50% 55%, rgba(232,184,74,0.55) 0%, rgba(124,24,24,0.16) 55%, transparent 80%)" }}
+              />
+              <img
+                src={pierinaHome.url}
+                alt="Pierina Gallina"
+                className="fade-bottom relative h-auto w-[92%] max-w-md object-contain drop-shadow-2xl"
+              />
+            </div>
           </div>
 
           <div className="relative z-20 -mb-16 hidden justify-center md:-mt-24 md:-mb-24 md:flex md:justify-end lg:-mt-28">
@@ -164,10 +163,11 @@ function HomePage() {
             <img
               src={pierinaHome.url}
               alt="Pierina Gallina"
-              className="relative z-10 h-auto w-[168%] max-w-none origin-top object-contain drop-shadow-2xl translate-x-[4cm] md:w-[204%] md:translate-x-[6cm] lg:w-[216%] lg:translate-x-[7cm]"
+              className="fade-bottom relative z-10 h-auto w-[168%] max-w-none origin-top object-contain drop-shadow-2xl translate-x-[4cm] md:w-[204%] md:translate-x-[6cm] lg:w-[216%] lg:translate-x-[7cm]"
             />
           </div>
         </div>
+
       </section>
 
 
