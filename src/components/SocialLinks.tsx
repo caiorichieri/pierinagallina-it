@@ -35,7 +35,7 @@ const LABELS: Record<Social, string> = {
 };
 
 interface SocialLinksProps {
-  variant?: "light" | "dark";
+  variant?: "light" | "dark" | "dark-prominent";
   size?: number;
   className?: string;
   showLabels?: boolean;
@@ -43,17 +43,19 @@ interface SocialLinksProps {
 
 export function SocialLinks({
   variant = "light",
-  size = 20,
+  size = 22,
   className = "",
   showLabels = false,
 }: SocialLinksProps) {
-  const base =
-    variant === "light"
-      ? "text-primary/80 hover:text-accent"
-      : "text-primary-foreground/80 hover:text-accent";
+  const variantClasses = {
+    light: "text-primary/90 hover:text-accent",
+    dark: "text-primary-foreground/90 hover:text-accent",
+    "dark-prominent":
+      "bg-primary-foreground/10 text-primary-foreground hover:bg-accent hover:text-accent-foreground ring-1 ring-primary-foreground/20",
+  };
 
   return (
-    <div className={`inline-flex items-center gap-2 ${className}`}>
+    <div className={`inline-flex items-center gap-3 ${className}`}>
       {(Object.keys(SOCIAL_URLS) as Social[]).map((key) => (
         <a
           key={key}
@@ -61,11 +63,17 @@ export function SocialLinks({
           target="_blank"
           rel="noopener noreferrer"
           aria-label={LABELS[key]}
-          className={`inline-flex items-center gap-2 rounded-full p-2 transition-colors hover:scale-105 ${base}`}
-          style={{ width: showLabels ? "auto" : size, height: showLabels ? "auto" : size }}
+          className={`inline-flex items-center justify-center gap-2 rounded-full transition-all duration-200 hover:scale-110 ${variantClasses[variant]}`}
+          style={{
+            width: showLabels ? "auto" : size + 16,
+            height: showLabels ? "auto" : size + 16,
+            padding: showLabels ? "0.5rem 0.875rem" : 0,
+          }}
         >
-          <span style={{ width: size, height: size }}>{ICONS[key]}</span>
-          {showLabels && <span className="text-sm">{LABELS[key]}</span>}
+          <span style={{ width: size, height: size, display: "flex", alignItems: "center", justifyContent: "center" }}>
+            {ICONS[key]}
+          </span>
+          {showLabels && <span className="text-sm font-medium">{LABELS[key]}</span>}
         </a>
       ))}
     </div>
