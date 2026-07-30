@@ -36,6 +36,27 @@ function coverFor(b: Book): string | null {
   return b.cover_url ?? COVER_OVERRIDES[b.title.trim().toLowerCase()] ?? null;
 }
 
+// ─────────────────────────────────────────────────────────────
+// Ajustes da foto da Pierina no hero — edite os valores abaixo
+// para subir/descer, aumentar/diminuir ou mover a imagem.
+// offsetY negativo sobe; positivo desce. scale > 1 amplia.
+// objectPosition: "X% Y%" — define qual parte da imagem fica visível.
+// ─────────────────────────────────────────────────────────────
+const HERO_PHOTO = {
+  mobile: {
+    offsetY: "-2rem",        // sobe a foto em direção aos botões
+    scale: 1.25,             // tamanho da foto no celular
+    height: "30rem",         // altura do container mobile
+    objectPosition: "85% 35%", // foca no rosto/tonco de Pierina
+  },
+  desktop: {
+    offsetY: "-0.5rem",      // posição vertical no desktop (negativo sobe)
+    translateX: "3cm",       // empurra a foto para a direita
+    scale: 1.7,              // tamanho da foto no desktop
+    objectPosition: "85% 35%", // foca no lado direito, altura do rosto
+  },
+};
+
 const homeData = queryOptions({
   queryKey: ["home-pierina"],
   queryFn: async (): Promise<{ posts: Post[]; books: Book[]; poems: Poem[] }> => {
@@ -142,7 +163,10 @@ function HomePage() {
             </div>
 
             {/* Foto mobile: grande, sotto i testi, sfumata verso lo sfondo */}
-            <div className="relative -mx-4 -mt-2 h-[28rem] overflow-hidden sm:h-[32rem] md:hidden">
+            <div
+              className="relative -mx-4 overflow-hidden md:hidden"
+              style={{ marginTop: HERO_PHOTO.mobile.offsetY, height: HERO_PHOTO.mobile.height }}
+            >
               <div
                 aria-hidden
                 className="absolute inset-x-0 bottom-0 top-2 -z-10 rounded-full opacity-90 blur-3xl"
@@ -151,13 +175,17 @@ function HomePage() {
               <img
                 src={pierinaHome.url}
                 alt="Pierina Gallina"
-                className="fade-bottom absolute inset-0 h-full w-full origin-top scale-[2.1] object-contain drop-shadow-2xl"
+                className="fade-bottom absolute inset-0 h-full w-full origin-top object-cover drop-shadow-2xl"
+                style={{ transform: `scale(${HERO_PHOTO.mobile.scale})`, objectPosition: HERO_PHOTO.mobile.objectPosition }}
               />
             </div>
 
           </div>
 
-          <div className="relative z-20 -mb-16 hidden justify-center md:-mt-24 md:-mb-24 md:flex md:justify-end lg:-mt-28">
+          <div
+            className="relative z-20 -mb-16 hidden justify-center md:-mb-24 md:flex md:justify-end"
+            style={{ marginTop: HERO_PHOTO.desktop.offsetY }}
+          >
             <div
               aria-hidden
               className="absolute -top-8 left-1/2 -z-10 h-[120%] w-[90%] -translate-x-1/2 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] opacity-60 blur-2xl md:left-auto md:right-0 md:top-0 md:h-[110%] md:w-[85%] md:translate-x-[1cm]"
@@ -168,7 +196,8 @@ function HomePage() {
             <img
               src={pierinaHome.url}
               alt="Pierina Gallina"
-              className="fade-bottom relative z-10 h-auto w-[168%] max-w-none origin-top object-contain drop-shadow-2xl translate-x-[4cm] md:w-[204%] md:translate-x-[6cm] lg:w-[216%] lg:translate-x-[7cm]"
+              className="fade-bottom relative z-10 h-auto w-full max-w-none origin-top object-contain drop-shadow-2xl"
+              style={{ transform: `scale(${HERO_PHOTO.desktop.scale}) translateX(${HERO_PHOTO.desktop.translateX})`, objectPosition: HERO_PHOTO.desktop.objectPosition }}
             />
           </div>
         </div>
