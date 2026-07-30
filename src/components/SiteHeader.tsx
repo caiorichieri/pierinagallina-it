@@ -43,7 +43,9 @@ export function SiteHeader() {
           ))}
         </nav>
 
-
+        <div className="hidden items-center gap-1 lg:flex">
+          <SocialLinks variant="light" size={18} />
+        </div>
 
         <div className="flex items-center gap-2 lg:hidden">
           <button
