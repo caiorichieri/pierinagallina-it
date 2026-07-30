@@ -184,6 +184,12 @@
   background-size: 22px 22px;
 }
 
+/* Foto che svanisce dolcemente verso il basso (niente taglio netto) */
+.fade-bottom {
+  mask-image: linear-gradient(to bottom, #000 0%, #000 62%, rgba(0,0,0,0.55) 82%, transparent 100%);
+}
+
+
 /* Subtle photo treatment */
 .photo-frame {
   position: relative; overflow: hidden; border-radius: 6px;
