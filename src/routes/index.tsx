@@ -53,7 +53,7 @@ const HERO_PHOTO = {
     offsetY: "-0.5rem",      // posição vertical no desktop (negativo sobe)
     translateX: "3cm",       // empurra a foto para a direita
     scale: 1.7,              // tamanho da foto no desktop
-    objectPosition: "50% 22%", // foca no rosto/tonco de Pierina (imagem centrada)
+    objectPosition: "50% 12%", // foca no rosto de Pierina (parte superior da imagem)
   },
 };
 
