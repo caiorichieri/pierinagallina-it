@@ -200,10 +200,10 @@ function HomePage() {
 
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {[
-              { icon: BookOpen,   t: "Libri",        d: "Fiabe e racconti illustrati",       href: "/libri" as const },
-              { icon: Feather,    t: "Scritti",      d: "Articoli, racconti e poesie",       href: "/scritti" as const },
-              { icon: Headphones, t: "Fiabe sonore", d: "Voci, suoni, storie da ascoltare",  href: "/fiabe" as const },
-              { icon: ImageIcon,  t: "Fotografie",   d: "Momenti, incontri, paesaggi",       href: "/fotografie" as const },
+              { icon: iconLibri,      t: "Libri",        d: "Fiabe e racconti illustrati",       href: "/libri" as const },
+              { icon: iconScritti,    t: "Scritti",      d: "Articoli, racconti e poesie",       href: "/scritti" as const },
+              { icon: iconFiabe,      t: "Fiabe sonore", d: "Voci, suoni, storie da ascoltare",  href: "/fiabe" as const },
+              { icon: iconFotografie, t: "Fotografie",   d: "Momenti, incontri, paesaggi",       href: "/fotografie" as const },
             ].map((s, i) => (
               <Reveal key={s.t} delay={i * 80}>
                 <Link
@@ -216,10 +216,12 @@ function HomePage() {
                     style={{ background: "radial-gradient(circle, var(--brand-gold) 0%, transparent 70%)" }}
                   />
                   <span
-                    className="relative inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-border bg-secondary text-primary transition-transform duration-300 group-hover:scale-110 group-hover:rotate-[-4deg]"
+                    className="relative inline-flex h-20 w-20 items-center justify-center rounded-full border bg-background/60 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-[-4deg]"
+                    style={{ borderColor: "color-mix(in oklab, var(--brand-gold) 55%, transparent)" }}
                   >
-                    <s.icon size={22} />
+                    <img src={s.icon} alt="" aria-hidden loading="lazy" width={512} height={512} className="h-14 w-14 object-contain" />
                   </span>
+
                   <div className="mt-6 font-serif text-2xl leading-tight text-primary">{s.t}</div>
                   <div className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.d}</div>
                   <span
