@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Mail, MapPin, BookOpen } from "lucide-react";
 import { useT } from "../i18n";
 import { openCookiePreferences } from "./CookieBanner";
+import { SocialLinks } from "./SocialLinks";
 
 export function SiteFooter() {
   const { t } = useT();
