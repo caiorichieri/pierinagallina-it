@@ -161,7 +161,7 @@ function HomePage() {
             </div>
           </div>
 
-          <div className="relative z-20 -mb-28 hidden justify-center md:-mt-24 md:-mb-40 md:flex md:justify-end lg:-mt-28">
+          <div className="relative z-20 -mb-16 hidden justify-center md:-mt-24 md:-mb-24 md:flex md:justify-end lg:-mt-28">
             <div
               aria-hidden
               className="absolute -top-8 left-1/2 -z-10 h-[120%] w-[90%] -translate-x-1/2 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] opacity-60 blur-2xl md:left-auto md:right-0 md:top-0 md:h-[110%] md:w-[85%] md:translate-x-[1cm]"
@@ -180,7 +180,7 @@ function HomePage() {
 
 
       {/* SEZIONI — mondo letterario */}
-      <section className="relative z-0 overflow-hidden border-b border-border bg-[#fbf3ee] pt-20 md:pt-40">
+      <section className="relative z-0 overflow-hidden border-b border-border bg-[#fbf3ee] pt-10 md:pt-24">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-60"
@@ -189,8 +189,8 @@ function HomePage() {
               "radial-gradient(ellipse at 20% 0%, rgba(168,28,46,0.12) 0%, transparent 55%), radial-gradient(ellipse at 80% 100%, rgba(201,138,31,0.10) 0%, transparent 55%)",
           }}
         />
-        <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6">
-          <div className="mb-14 max-w-3xl">
+        <div className="relative mx-auto max-w-7xl px-4 pb-14 pt-6 sm:px-6">
+          <div className="mb-10 max-w-3xl">
             <div className="inline-flex items-center gap-2 font-sans text-[11px] uppercase tracking-[0.22em] text-primary">
               <span className="h-1.5 w-1.5 rounded-full bg-primary" /> Il mio mondo
             </div>
@@ -375,7 +375,7 @@ function HomePage() {
 
       {/* CTA contatti */}
       <section className="bg-background">
-        <div className="mx-auto max-w-4xl px-4 py-24 text-center sm:px-6">
+        <div className="mx-auto max-w-4xl px-4 py-16 text-center sm:px-6">
           <Mail size={28} className="mx-auto text-accent" />
           <h2 className="mt-5 font-serif text-4xl leading-tight md:text-5xl">
             Una parola, <span className="italic ink-underline">e ci sentiamo.</span>
