@@ -3,6 +3,7 @@ import { useState } from "react";
 import { PageHero } from "@/components/PageHero";
 import { db } from "@/integrations/pierina/client";
 import { MapPin, Send } from "lucide-react";
+import { SocialLinksRow } from "@/components/SocialLinks";
 
 export const Route = createFileRoute("/contatti")({
   head: () => ({
@@ -120,6 +121,10 @@ function ContactPage() {
               <MapPin size={16} className="mt-0.5 shrink-0 text-primary" />
               <span>Codroipo, Friuli‑Venezia Giulia<br />Italia</span>
             </div>
+          </div>
+          <div className="border-t border-border pt-6">
+            <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-accent">Social</div>
+            <SocialLinksRow variant="light" />
           </div>
           <div className="border-t border-border pt-6 text-sm text-muted-foreground">
             <div className="font-medium text-foreground">Pierina Gallina</div>

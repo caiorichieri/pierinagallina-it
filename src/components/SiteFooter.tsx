@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Mail, MapPin, BookOpen } from "lucide-react";
 import { useT } from "../i18n";
 import { openCookiePreferences } from "./CookieBanner";
+import { SocialLinks } from "./SocialLinks";
 
 export function SiteFooter() {
   const { t } = useT();
@@ -30,6 +31,12 @@ export function SiteFooter() {
             <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary-foreground/60">
               Codroipo · Friuli · Italia
             </span>
+          </div>
+          <div className="mt-6">
+            <div className="mb-2 text-xs font-mono uppercase tracking-[0.18em] text-primary-foreground/55">
+              Seguimi
+            </div>
+            <SocialLinks variant="dark" size={20} />
           </div>
         </div>
 

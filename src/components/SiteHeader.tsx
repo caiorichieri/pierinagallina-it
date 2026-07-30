@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { SocialLinks } from "./SocialLinks";
 
 
 const navItems = [
@@ -42,7 +43,9 @@ export function SiteHeader() {
           ))}
         </nav>
 
-
+        <div className="hidden items-center gap-1 lg:flex">
+          <SocialLinks variant="light" size={18} />
+        </div>
 
         <div className="flex items-center gap-2 lg:hidden">
           <button
@@ -72,6 +75,9 @@ export function SiteHeader() {
                 {n.label}
               </Link>
             ))}
+            <div className="mt-3 flex items-center gap-2 border-t border-border px-2 py-3">
+              <SocialLinks variant="light" size={20} />
+            </div>
           </div>
         </nav>
       )}
