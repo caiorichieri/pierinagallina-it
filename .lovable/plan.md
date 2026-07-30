@@ -1,35 +1,24 @@
-## Problema
-- **Mobile**: a foto da Pierina ainda fica longe dos botões no hero.
-- **Desktop**: a foto está cortando levemente a cabeça dela.
-- **Pergunta**: o usuário quer saber se consegue ajustar a posição da foto sozinho.
+## Objetivo
+Deixar claro e acessível como ajustar manualmente a foto da Pierina no hero da home, sem precisar mexer em CSS.
+
+## Estado atual
+Já existe um bloco de configuração no topo de `src/routes/index.tsx` chamado `HERO_PHOTO`, com valores separados para mobile e desktop. Ele controla:
+- `offsetY` — sobe ou desce a foto (valor negativo sobe, positivo desce)
+- `scale` — aumenta ou diminui a foto (`1` = tamanho real, `1.5` = 50% maior)
+- `height` — altura do container da foto no mobile
+- `translateX` — empurra a foto para a direita no desktop
+- `objectPosition` — define qual parte da imagem fica visível (útil porque a foto original é paisagem e a Pierina está à direita)
 
 ## Plano
-
-1. **Criar configuração ajustável no topo da página**
-   - Em `src/routes/index.tsx`, adicionar um objeto `HERO_PHOTO` com valores editáveis:
-     - `mobile.offsetY` (ex: `'-4rem'`)
-     - `mobile.scale` (ex: `2.3`)
-     - `desktop.offsetY` (ex: `'-2rem'`)
-     - `desktop.scale` (ex: `1.9`)
-     - `desktop.translateX` (ex: `'5cm'`)
-   - Assim o usuário pode mexer apenas nesses números sem precisar entender o resto do código.
-
-2. **Corrigir a posição no mobile**
-   - Aumentar o `scale` e subir a foto com `translate-y` negativo ou `margin-top` negativo.
-   - Garantir que a foto não sobreponha o texto dos botões, mas fique bem próxima.
-
-3. **Corrigir o corte da cabeça no desktop**
-   - Reduzir o `scale` da foto para que ela caiba melhor no container.
-   - Ajustar `object-position` para `top center` ou mover a origem da transformação.
-   - Revisar o tamanho/overflow do container para evitar cortes verticais.
-
-4. **Verificação visual**
-   - Tirar screenshots no preview em viewport mobile (375×812) e desktop (1280×892).
-   - Validar que a cabeça está visível no desktop e que a foto fica logo abaixo dos botões no mobile.
-
-## Arquivos envolvidos
-- `src/routes/index.tsx`
-- `src/styles.css` (se for necessário ajustar a máscara `.fade-bottom`)
+1. **Melhorar os comentários** no bloco `HERO_PHOTO` para explicar, linha a linha, o efeito de cada valor.
+2. **Adicionar exemplos práticos** nos comentários, como:
+   - "Para subir a foto no celular, diminua o `offsetY` (ex: `-4rem` em vez de `-2rem`)"
+   - "Para mostrar mais o rosto, ajuste `objectPosition` para `85% 30%`"
+3. **(Opcional)** Criar um arquivo separado `src/config/hero-photo.ts` com o mesmo objeto, importado no `index.tsx`, para facilitar a localização.
+4. **Validar** com screenshots mobile e desktop após a documentação, garantindo que os valores atuais continuam funcionando.
 
 ## Resultado esperado
-Hero ajustado nos dois viewports e com parâmetros de posicionamento centralizados e fáceis de editar no topo do arquivo.
+A dona do site consegue abrir um único arquivo, entender cada número e ajustar a foto sozinha com segurança.
+
+## Pergunta
+Prefere que eu mantenha a configuração dentro de `src/routes/index.tsx` (mais simples) ou crie um arquivo separado `src/config/hero-photo.ts` (mais organizado para ajustes futuros)?
