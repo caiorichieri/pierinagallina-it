@@ -44,10 +44,10 @@ function coverFor(b: Book): string | null {
 // ─────────────────────────────────────────────────────────────
 const HERO_PHOTO = {
   mobile: {
-    offsetY: "-4rem",        // sobe a foto em direção aos botões
-    scale: 1.35,             // tamanho da foto no celular
-    height: "38rem",         // altura do container mobile
-    objectPosition: "85% 12%", // foca no lado direito (Pierina) e um pouco abaixo do topo
+    offsetY: "-6rem",        // sobe a foto em direção aos botões
+    scale: 1.5,              // tamanho da foto no celular
+    height: "42rem",         // altura do container mobile
+    objectPosition: "85% 10%", // foca no lado direito (Pierina) e um pouco abaixo do topo
   },
   desktop: {
     offsetY: "-0.5rem",      // posição vertical no desktop (negativo sobe)
