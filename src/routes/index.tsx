@@ -197,7 +197,7 @@ function HomePage() {
               src={pierinaHome.url}
               alt="Pierina Gallina"
               className="fade-bottom relative z-10 h-auto w-full max-w-none origin-top object-contain drop-shadow-2xl"
-              style={{ transform: `scale(${HERO_PHOTO.desktop.scale}) translateX(${HERO_PHOTO.desktop.translateX})` }}
+              style={{ transform: `scale(${HERO_PHOTO.desktop.scale}) translateX(${HERO_PHOTO.desktop.translateX})`, objectPosition: HERO_PHOTO.desktop.objectPosition }}
             />
           </div>
         </div>
