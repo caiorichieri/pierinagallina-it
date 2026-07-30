@@ -1,43 +1,35 @@
-## Obiettivo
+## Problema
+- **Mobile**: a foto da Pierina ainda fica longe dos botões no hero.
+- **Desktop**: a foto está cortando levemente a cabeça dela.
+- **Pergunta**: o usuário quer saber se consegue ajustar a posição da foto sozinho.
 
-Rendere la home su mobile più armoniosa e sostituire le icone generiche della sezione "Il mio mondo" con illustrazioni line-art su misura.
+## Plano
 
-## 1. Hero mobile — foto grande sotto i testi
+1. **Criar configuração ajustável no topo da página**
+   - Em `src/routes/index.tsx`, adicionar um objeto `HERO_PHOTO` com valores editáveis:
+     - `mobile.offsetY` (ex: `'-4rem'`)
+     - `mobile.scale` (ex: `2.3`)
+     - `desktop.offsetY` (ex: `'-2rem'`)
+     - `desktop.scale` (ex: `1.9`)
+     - `desktop.translateX` (ex: `'5cm'`)
+   - Assim o usuário pode mexer apenas nesses números sem precisar entender o resto do código.
 
-Struttura mobile (in ordine verticale):
+2. **Corrigir a posição no mobile**
+   - Aumentar o `scale` e subir a foto com `translate-y` negativo ou `margin-top` negativo.
+   - Garantir que a foto não sobreponha o texto dos botões, mas fique bem próxima.
 
-```text
-  Pierina
-  Gallina.
-  "Scrivo per dare voce a ciò che
-   rischierebbe di passare inosservato."
-  [breve paragrafo]
-  [Leggi gli scritti] [Scrivimi]
-  ────────────────────────────
-       foto di Pierina
-   (larga quasi tutto lo schermo)
-   che sfuma nello sfondo carta
-```
+3. **Corrigir o corte da cabeça no desktop**
+   - Reduzir o `scale` da foto para que ela caiba melhor no container.
+   - Ajustar `object-position` para `top center` ou mover a origem da transformação.
+   - Revisar o tamanho/overflow do container para evitar cortes verticais.
 
-- Rimuovo la foto affiancata al titolo (il blocco `md:hidden` attuale accanto all'h1) e la sposto sotto i pulsanti.
-- La foto diventa larga circa il 90% dello schermo, centrata, con alone dorato radiale dietro.
-- Il taglio netto in basso viene risolto con una **maschera a sfumatura**: la foto svanisce gradualmente nel colore carta (`mask-image: linear-gradient(to bottom, black 65%, transparent 100%)`), così non c'è più il bordo dritto.
-- Riduco il padding inferiore dell'hero perché la foto stessa chiude la sezione.
-- Il layout desktop resta esattamente com'è oggi (foto a destra, ingrandita), ma applico la stessa sfumatura in basso per coerenza estetica.
+4. **Verificação visual**
+   - Tirar screenshots no preview em viewport mobile (375×812) e desktop (1280×892).
+   - Validar que a cabeça está visível no desktop e que a foto fica logo abaixo dos botões no mobile.
 
-## 2. Sezione "Il mio mondo" — icone disegnate a mano
+## Arquivos envolvidos
+- `src/routes/index.tsx`
+- `src/styles.css` (se for necessário ajustar a máscara `.fade-bottom`)
 
-- Genero 4 illustrazioni line-art dorate su sfondo trasparente, stile inchiostro/penna sottile, coerenti tra loro:
-  - **Libri** — pila di libri aperti
-  - **Scritti** — penna stilografica con svolazzo
-  - **Fiabe sonore** — cuffie con onde sonore
-  - **Fotografie** — macchina fotografica vintage
-- Sostituiscono le icone Lucide dentro le card, mantenendo dimensione e animazione hover (scala + leggera rotazione) già presenti.
-- Il contenitore quadrato attuale diventa un cerchio con bordo dorato sottile, così l'illustrazione respira.
-- Lascio invariati titoli, descrizioni, link e il resto della griglia.
-
-## Dettagli tecnici
-
-- File toccati: `src/routes/index.tsx` (struttura hero + card), `src/styles.css` (utility per la maschera sfumata), nuovi asset in `src/assets/icone/`.
-- Nessuna modifica al database, alle query o alla logica.
-- Verifica finale con screenshot a 393px (mobile) e 1280px (desktop).
+## Resultado esperado
+Hero ajustado nos dois viewports e com parâmetros de posicionamento centralizados e fáceis de editar no topo do arquivo.
