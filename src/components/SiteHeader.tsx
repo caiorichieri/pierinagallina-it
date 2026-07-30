@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { SocialLinks } from "./SocialLinks";
 
 
 const navItems = [
