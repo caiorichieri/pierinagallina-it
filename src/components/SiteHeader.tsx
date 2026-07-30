@@ -75,6 +75,9 @@ export function SiteHeader() {
                 {n.label}
               </Link>
             ))}
+            <div className="mt-3 flex items-center gap-2 border-t border-border px-2 py-3">
+              <SocialLinks variant="light" size={20} />
+            </div>
           </div>
         </nav>
       )}
