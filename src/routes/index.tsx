@@ -36,26 +36,7 @@ function coverFor(b: Book): string | null {
   return b.cover_url ?? COVER_OVERRIDES[b.title.trim().toLowerCase()] ?? null;
 }
 
-// ─────────────────────────────────────────────────────────────
-// Ajustes da foto da Pierina no hero — edite os valores abaixo
-// para subir/descer, aumentar/diminuir ou mover a imagem.
-// offsetY negativo sobe; positivo desce. scale > 1 amplia.
-// objectPosition: "X% Y%" — define qual parte da imagem fica visível.
-// ─────────────────────────────────────────────────────────────
-const HERO_PHOTO = {
-  mobile: {
-    offsetY: "-2rem",        // sobe a foto em direção aos botões
-    scale: 1.15,             // tamanho da foto no celular
-    height: "30rem",         // altura do container mobile
-    objectPosition: "50% 12%", // foca no rosto de Pierina (parte superior da imagem)
-  },
-  desktop: {
-    offsetY: "-0.5rem",      // posição vertical no desktop (negativo sobe)
-    translateX: "3cm",       // empurra a foto para a direita
-    scale: 1.7,              // tamanho da foto no desktop
-    objectPosition: "50% 12%", // foca no rosto de Pierina (parte superior da imagem)
-  },
-};
+import { HERO_PHOTO } from "@/config/hero-photo";
 
 const homeData = queryOptions({
   queryKey: ["home-pierina"],
