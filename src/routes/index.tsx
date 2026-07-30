@@ -176,7 +176,7 @@ function HomePage() {
 
 
       {/* SEZIONI — mondo letterario */}
-      <section className="relative z-0 overflow-hidden border-b border-border bg-[#fbf3ee] pt-10 md:pt-24">
+      <section className="relative z-0 overflow-hidden border-b border-border bg-[#fbf3ee] pt-6 md:pt-10">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-60"
