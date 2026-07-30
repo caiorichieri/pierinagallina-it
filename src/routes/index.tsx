@@ -219,7 +219,7 @@ function HomePage() {
                     className="relative inline-flex h-20 w-20 items-center justify-center rounded-full border bg-background/60 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-[-4deg]"
                     style={{ borderColor: "color-mix(in oklab, var(--brand-gold) 55%, transparent)" }}
                   >
-                    <img src={s.icon} alt="" aria-hidden loading="lazy" width={512} height={512} className="h-14 w-14 object-contain" />
+                    <img src={s.icon} alt="" aria-hidden loading="lazy" width={512} height={512} className="h-16 w-16 object-contain" />
                   </span>
 
                   <div className="mt-6 font-serif text-2xl leading-tight text-primary">{s.t}</div>
