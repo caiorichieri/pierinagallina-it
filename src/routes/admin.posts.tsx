@@ -90,6 +90,13 @@ function AdminPosts() {
                   </td>
                   <td className="px-4 py-3 text-right">
                     <div className="inline-flex gap-1">
+                      <a
+                        href={`/admin/newsletter?post=${p.id}`}
+                        title="Invia newsletter agli iscritti"
+                        className="rounded-md p-1.5 text-muted-foreground hover:bg-secondary hover:text-accent"
+                      >
+                        <Send size={14} />
+                      </a>
                       <Link to="/admin/posts/$id" params={{ id: p.id }} className="rounded-md p-1.5 text-muted-foreground hover:bg-secondary hover:text-foreground">
                         <Pencil size={14} />
                       </Link>
@@ -97,6 +104,7 @@ function AdminPosts() {
                         <Trash2 size={14} />
                       </button>
                     </div>
+
                   </td>
                 </tr>
               ))}
