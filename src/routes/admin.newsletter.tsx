@@ -1,11 +1,18 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { db } from "@/integrations/pierina/client";
-import { Trash2, Download, Upload } from "lucide-react";
+import { Trash2, Download, Upload, Mail, Copy, Check } from "lucide-react";
 
 type Sub = { id: string; email: string; created_at: string; confirmed?: boolean | null };
+type Post = { id: string; title: string; slug: string; excerpt: string | null };
+
+const SITE_URL = "https://pierina.friulion.app";
 
 export const Route = createFileRoute("/admin/newsletter")({ component: AdminNewsletter });
+
+function stripHtml(s: string) {
+  return s.replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
+}
 
 function AdminNewsletter() {
   const [items, setItems] = useState<Sub[]>([]);
@@ -14,11 +21,55 @@ function AdminNewsletter() {
   const [importMsg, setImportMsg] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [postId, setPostId] = useState("");
+  const [subject, setSubject] = useState("");
+  const [body, setBody] = useState("");
+  const [copied, setCopied] = useState<"bcc" | "body" | null>(null);
+
   async function reload() {
     const { data, error } = await db.from("newsletter_subscribers").select("*").order("created_at", { ascending: false }).limit(2000);
     if (error) setErr(error.message); else setItems((data as Sub[]) ?? []);
   }
   useEffect(() => { reload(); }, []);
+
+  useEffect(() => {
+    db.from("posts")
+      .select("id,title,slug,excerpt")
+      .order("published_at", { ascending: false })
+      .limit(30)
+      .then(({ data }) => setPosts((data as Post[]) ?? []));
+  }, []);
+
+  function pickPost(id: string) {
+    setPostId(id);
+    const p = posts.find((x) => x.id === id);
+    if (!p) return;
+    setSubject(`Novità dal sito di Pierina Gallina — ${p.title}`);
+    setBody(
+      `Cara lettrice, caro lettore,\n\n` +
+        `ho pubblicato un nuovo scritto: «${p.title}».\n\n` +
+        (p.excerpt ? `${stripHtml(p.excerpt)}\n\n` : "") +
+        `Puoi leggerlo qui:\n${SITE_URL}/blog/${p.slug}\n\n` +
+        `Grazie di cuore per il tempo che mi dedichi.\nPierina Gallina\n\n` +
+        `—\nRicevi questa email perché ti sei iscritto/a alla newsletter del sito. ` +
+        `Per non riceverla più, rispondi a questo messaggio scrivendo "cancellami".`,
+    );
+  }
+
+  const bcc = items.map((i) => i.email).join(", ");
+
+  async function copy(text: string, what: "bcc" | "body") {
+    await navigator.clipboard.writeText(text);
+    setCopied(what);
+    setTimeout(() => setCopied(null), 2000);
+  }
+
+  function openMailClient() {
+    const href = `mailto:?bcc=${encodeURIComponent(items.map((i) => i.email).join(","))}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = href;
+  }
+
 
   async function remove(id: string) {
     if (!confirm("Rimuovere l'iscritto?")) return;
