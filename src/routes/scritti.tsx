@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
 import { useState } from "react";
 import { db, type Post, type Poem } from "@/integrations/pierina/client";
-import { PageHero } from "@/components/PageHero";
+import { ScrittiHero } from "@/components/ScrittiHero";
 import { Reveal } from "@/components/Reveal";
 import { ArrowRight, Feather, FileText } from "lucide-react";
 
@@ -62,11 +62,8 @@ function ScrittiPage() {
 
   return (
     <>
-      <PageHero
-        eyebrow="Scritti"
-        title={<>Parole che <span className="italic" style={{ color: "var(--brand-gold)" }}>restano.</span></>}
-        intro="Articoli, racconti e poesie. Piccoli semi lasciati lungo la strada — in italiano e in friulano."
-      />
+      <ScrittiHero />
+
 
       <section className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
         {/* filtro */}

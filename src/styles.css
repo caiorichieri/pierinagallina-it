@@ -245,3 +245,45 @@
   background: radial-gradient(circle, rgba(180,40,40,0.35) 0%, transparent 70%);
   opacity: 0.5;
 }
+
+/* --- Hero "Scritti": libro che si apre, lettere che diventano albero --- */
+@keyframes treeDraw {
+  from { stroke-dasharray: 200; stroke-dashoffset: 200; opacity: 0; }
+  to   { stroke-dasharray: 200; stroke-dashoffset: 0; opacity: 1; }
+}
+.tree-draw {
+  animation: treeDraw 1.1s ease-out both;
+}
+
+@keyframes leafFly {
+  0%   { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(.25) rotate(-25deg); }
+  55%  { opacity: 1; }
+  100% { opacity: 1; transform: translate(0, 0) scale(1) rotate(0deg); }
+}
+@keyframes leafSway {
+  0%, 100% { transform: translate(0, 0); }
+  50%      { transform: translate(0, -3px); }
+}
+.leaf-letter {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  animation:
+    leafFly 1.5s cubic-bezier(.22,.9,.28,1) both,
+    leafSway 4.5s ease-in-out infinite;
+}
+
+@keyframes bookOpen {
+  from { opacity: 0; transform: translateY(14px) scaleX(.6); }
+  to   { opacity: 1; transform: translateY(0) scaleX(1); }
+}
+.book-open {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: bookOpen .9s cubic-bezier(.22,.9,.28,1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tree-draw, .leaf-letter, .book-open { animation: none; opacity: 1; }
+}
+
