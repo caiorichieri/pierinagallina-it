@@ -1,11 +1,18 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { db } from "@/integrations/pierina/client";
-import { Trash2, Download, Upload } from "lucide-react";
+import { Trash2, Download, Upload, Mail, Copy, Check } from "lucide-react";
 
 type Sub = { id: string; email: string; created_at: string; confirmed?: boolean | null };
+type Post = { id: string; title: string; slug: string; excerpt: string | null };
+
+const SITE_URL = "https://pierina.friulion.app";
 
 export const Route = createFileRoute("/admin/newsletter")({ component: AdminNewsletter });
+
+function stripHtml(s: string) {
+  return s.replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
+}
 
 function AdminNewsletter() {
   const [items, setItems] = useState<Sub[]>([]);
@@ -14,11 +21,55 @@ function AdminNewsletter() {
   const [importMsg, setImportMsg] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [postId, setPostId] = useState("");
+  const [subject, setSubject] = useState("");
+  const [body, setBody] = useState("");
+  const [copied, setCopied] = useState<"bcc" | "body" | null>(null);
+
   async function reload() {
     const { data, error } = await db.from("newsletter_subscribers").select("*").order("created_at", { ascending: false }).limit(2000);
     if (error) setErr(error.message); else setItems((data as Sub[]) ?? []);
   }
   useEffect(() => { reload(); }, []);
+
+  useEffect(() => {
+    db.from("posts")
+      .select("id,title,slug,excerpt")
+      .order("published_at", { ascending: false })
+      .limit(30)
+      .then(({ data }) => setPosts((data as Post[]) ?? []));
+  }, []);
+
+  function pickPost(id: string) {
+    setPostId(id);
+    const p = posts.find((x) => x.id === id);
+    if (!p) return;
+    setSubject(`Novità dal sito di Pierina Gallina — ${p.title}`);
+    setBody(
+      `Cara lettrice, caro lettore,\n\n` +
+        `ho pubblicato un nuovo scritto: «${p.title}».\n\n` +
+        (p.excerpt ? `${stripHtml(p.excerpt)}\n\n` : "") +
+        `Puoi leggerlo qui:\n${SITE_URL}/blog/${p.slug}\n\n` +
+        `Grazie di cuore per il tempo che mi dedichi.\nPierina Gallina\n\n` +
+        `—\nRicevi questa email perché ti sei iscritto/a alla newsletter del sito. ` +
+        `Per non riceverla più, rispondi a questo messaggio scrivendo "cancellami".`,
+    );
+  }
+
+  const bcc = items.map((i) => i.email).join(", ");
+
+  async function copy(text: string, what: "bcc" | "body") {
+    await navigator.clipboard.writeText(text);
+    setCopied(what);
+    setTimeout(() => setCopied(null), 2000);
+  }
+
+  function openMailClient() {
+    const href = `mailto:?bcc=${encodeURIComponent(items.map((i) => i.email).join(","))}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = href;
+  }
+
 
   async function remove(id: string) {
     if (!confirm("Rimuovere l'iscritto?")) return;
@@ -114,6 +165,81 @@ function AdminNewsletter() {
           </button>
         </div>
       </header>
+
+      <section className="mb-8 rounded-md border border-border bg-card p-4">
+        <h2 className="font-serif text-xl italic text-primary">Invia una newsletter</h2>
+        <p className="mt-1 text-xs text-muted-foreground">
+          Prepara il messaggio qui, poi aprilo nel tuo programma di posta: l'email parte dal tuo indirizzo,
+          con tutti gli iscritti in copia nascosta (Ccn), così nessuno vede gli indirizzi degli altri.
+        </p>
+
+        <div className="mt-4 grid gap-3">
+          <label className="grid gap-1 text-sm">
+            <span className="text-xs uppercase tracking-wider text-muted-foreground">Parti da un articolo (facoltativo)</span>
+            <select
+              value={postId}
+              onChange={(e) => pickPost(e.target.value)}
+              className="rounded-md border border-border bg-background px-3 py-2 text-sm"
+            >
+              <option value="">— Scrivi da zero —</option>
+              {posts.map((p) => (
+                <option key={p.id} value={p.id}>{p.title}</option>
+              ))}
+            </select>
+          </label>
+
+          <label className="grid gap-1 text-sm">
+            <span className="text-xs uppercase tracking-wider text-muted-foreground">Oggetto</span>
+            <input
+              value={subject}
+              onChange={(e) => setSubject(e.target.value)}
+              placeholder="Novità dal sito di Pierina Gallina"
+              className="rounded-md border border-border bg-background px-3 py-2 text-sm"
+            />
+          </label>
+
+          <label className="grid gap-1 text-sm">
+            <span className="text-xs uppercase tracking-wider text-muted-foreground">Messaggio</span>
+            <textarea
+              value={body}
+              onChange={(e) => setBody(e.target.value)}
+              rows={10}
+              placeholder="Cara lettrice, caro lettore…"
+              className="rounded-md border border-border bg-background px-3 py-2 text-sm leading-relaxed"
+            />
+          </label>
+        </div>
+
+        <div className="mt-4 flex flex-wrap gap-2">
+          <button
+            onClick={openMailClient}
+            disabled={items.length === 0 || !subject}
+            className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground hover:opacity-90 disabled:opacity-50"
+          >
+            <Mail size={14} /> Apri nel mio programma email ({items.length} iscritti)
+          </button>
+          <button
+            onClick={() => copy(bcc, "bcc")}
+            className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm hover:border-accent hover:text-accent"
+          >
+            {copied === "bcc" ? <Check size={14} /> : <Copy size={14} />} Copia indirizzi (Ccn)
+          </button>
+          <button
+            onClick={() => copy(body, "body")}
+            className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm hover:border-accent hover:text-accent"
+          >
+            {copied === "body" ? <Check size={14} /> : <Copy size={14} />} Copia testo
+          </button>
+        </div>
+
+        <p className="mt-3 text-xs text-muted-foreground">
+          Se il programma di posta non si apre (succede con liste lunghe), usa «Copia indirizzi (Ccn)» e
+          «Copia testo» e incollali in una nuova email dal tuo Gmail/Outlook. Metti sempre gli indirizzi in
+          <strong> Ccn</strong>, mai in «A».
+        </p>
+      </section>
+
+
 
       {importMsg && (
         <div className="mb-3 rounded-md border border-border bg-card px-3 py-2 text-sm">{importMsg}</div>
