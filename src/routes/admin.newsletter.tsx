@@ -38,13 +38,20 @@ function AdminNewsletter() {
       .select("id,title,slug,excerpt")
       .order("published_at", { ascending: false })
       .limit(30)
-      .then(({ data }) => setPosts((data as Post[]) ?? []));
+      .then(({ data }) => {
+        const list = (data as Post[]) ?? [];
+        setPosts(list);
+        // se arrivo da "Invia newsletter" su un articolo, precompilo tutto
+        const wanted = new URLSearchParams(window.location.search).get("post");
+        if (wanted) {
+          const p = list.find((x) => x.id === wanted);
+          if (p) fill(p);
+        }
+      });
   }, []);
 
-  function pickPost(id: string) {
-    setPostId(id);
-    const p = posts.find((x) => x.id === id);
-    if (!p) return;
+  function fill(p: Post) {
+    setPostId(p.id);
     setSubject(`Novità dal sito di Pierina Gallina — ${p.title}`);
     setBody(
       `Cara lettrice, caro lettore,\n\n` +
@@ -56,6 +63,13 @@ function AdminNewsletter() {
         `Per non riceverla più, rispondi a questo messaggio scrivendo "cancellami".`,
     );
   }
+
+  function pickPost(id: string) {
+    setPostId(id);
+    const p = posts.find((x) => x.id === id);
+    if (p) fill(p);
+  }
+
 
   const bcc = items.map((i) => i.email).join(", ");
 
