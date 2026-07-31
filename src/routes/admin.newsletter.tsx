@@ -166,6 +166,81 @@ function AdminNewsletter() {
         </div>
       </header>
 
+      <section className="mb-8 rounded-md border border-border bg-card p-4">
+        <h2 className="font-serif text-xl italic text-primary">Invia una newsletter</h2>
+        <p className="mt-1 text-xs text-muted-foreground">
+          Prepara il messaggio qui, poi aprilo nel tuo programma di posta: l'email parte dal tuo indirizzo,
+          con tutti gli iscritti in copia nascosta (Ccn), così nessuno vede gli indirizzi degli altri.
+        </p>
+
+        <div className="mt-4 grid gap-3">
+          <label className="grid gap-1 text-sm">
+            <span className="text-xs uppercase tracking-wider text-muted-foreground">Parti da un articolo (facoltativo)</span>
+            <select
+              value={postId}
+              onChange={(e) => pickPost(e.target.value)}
+              className="rounded-md border border-border bg-background px-3 py-2 text-sm"
+            >
+              <option value="">— Scrivi da zero —</option>
+              {posts.map((p) => (
+                <option key={p.id} value={p.id}>{p.title}</option>
+              ))}
+            </select>
+          </label>
+
+          <label className="grid gap-1 text-sm">
+            <span className="text-xs uppercase tracking-wider text-muted-foreground">Oggetto</span>
+            <input
+              value={subject}
+              onChange={(e) => setSubject(e.target.value)}
+              placeholder="Novità dal sito di Pierina Gallina"
+              className="rounded-md border border-border bg-background px-3 py-2 text-sm"
+            />
+          </label>
+
+          <label className="grid gap-1 text-sm">
+            <span className="text-xs uppercase tracking-wider text-muted-foreground">Messaggio</span>
+            <textarea
+              value={body}
+              onChange={(e) => setBody(e.target.value)}
+              rows={10}
+              placeholder="Cara lettrice, caro lettore…"
+              className="rounded-md border border-border bg-background px-3 py-2 text-sm leading-relaxed"
+            />
+          </label>
+        </div>
+
+        <div className="mt-4 flex flex-wrap gap-2">
+          <button
+            onClick={openMailClient}
+            disabled={items.length === 0 || !subject}
+            className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground hover:opacity-90 disabled:opacity-50"
+          >
+            <Mail size={14} /> Apri nel mio programma email ({items.length} iscritti)
+          </button>
+          <button
+            onClick={() => copy(bcc, "bcc")}
+            className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm hover:border-accent hover:text-accent"
+          >
+            {copied === "bcc" ? <Check size={14} /> : <Copy size={14} />} Copia indirizzi (Ccn)
+          </button>
+          <button
+            onClick={() => copy(body, "body")}
+            className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm hover:border-accent hover:text-accent"
+          >
+            {copied === "body" ? <Check size={14} /> : <Copy size={14} />} Copia testo
+          </button>
+        </div>
+
+        <p className="mt-3 text-xs text-muted-foreground">
+          Se il programma di posta non si apre (succede con liste lunghe), usa «Copia indirizzi (Ccn)» e
+          «Copia testo» e incollali in una nuova email dal tuo Gmail/Outlook. Metti sempre gli indirizzi in
+          <strong> Ccn</strong>, mai in «A».
+        </p>
+      </section>
+
+
+
       {importMsg && (
         <div className="mb-3 rounded-md border border-border bg-card px-3 py-2 text-sm">{importMsg}</div>
       )}
