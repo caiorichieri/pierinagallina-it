@@ -38,8 +38,8 @@ export const Route = createFileRoute("/blog/$slug")({
   notFoundComponent: () => (
     <div className="mx-auto max-w-md p-16 text-center">
       <h1 className="font-serif text-3xl">Articolo non trovato</h1>
-      <Link to="/blog" className="mt-6 inline-block text-sm text-primary hover:text-accent">
-        Torna al blog
+      <Link to="/scritti" className="mt-6 inline-block text-sm text-primary hover:text-accent">
+        Torna agli scritti
       </Link>
     </div>
   ),
@@ -59,8 +59,8 @@ function PostPage() {
       )}
 
       <header className="mx-auto max-w-3xl px-4 pt-12 sm:px-6">
-        <Link to="/blog" className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-accent">
-          <ArrowLeft size={14} /> Tutti gli articoli
+        <Link to="/scritti" className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-accent">
+          <ArrowLeft size={14} /> Tutti gli scritti
         </Link>
         {p.published_at && (
           <time className="mt-6 block font-sans text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
@@ -78,8 +78,8 @@ function PostPage() {
       />
 
       <div className="mx-auto max-w-3xl px-4 pb-20 sm:px-6">
-        <Link to="/blog" className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-accent">
-          <ArrowLeft size={14} /> Torna al blog
+        <Link to="/scritti" className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-accent">
+          <ArrowLeft size={14} /> Torna agli scritti
         </Link>
       </div>
     </article>

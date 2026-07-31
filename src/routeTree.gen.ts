@@ -12,14 +12,12 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ScrittiRouteImport } from './routes/scritti'
 import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as PoesieRouteImport } from './routes/poesie'
 import { Route as LibriRouteImport } from './routes/libri'
 import { Route as FotografieRouteImport } from './routes/fotografie'
 import { Route as FiabeRouteImport } from './routes/fiabe'
 import { Route as CookiePolicyRouteImport } from './routes/cookie-policy'
 import { Route as ContattiRouteImport } from './routes/contatti'
 import { Route as ChiSonoRouteImport } from './routes/chi-sono'
-import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
@@ -47,11 +45,6 @@ const ScrittiRoute = ScrittiRouteImport.update({
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PoesieRoute = PoesieRouteImport.update({
-  id: '/poesie',
-  path: '/poesie',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LibriRoute = LibriRouteImport.update({
@@ -84,11 +77,6 @@ const ChiSonoRoute = ChiSonoRouteImport.update({
   path: '/chi-sono',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BlogRoute = BlogRouteImport.update({
-  id: '/blog',
-  path: '/blog',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
@@ -110,9 +98,9 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   getParentRoute: () => AdminRoute,
 } as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => BlogRoute,
+  id: '/blog/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AdminPostsRoute = AdminPostsRouteImport.update({
   id: '/posts',
@@ -159,14 +147,12 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/auth': typeof AuthRoute
-  '/blog': typeof BlogRouteWithChildren
   '/chi-sono': typeof ChiSonoRoute
   '/contatti': typeof ContattiRoute
   '/cookie-policy': typeof CookiePolicyRoute
   '/fiabe': typeof FiabeRoute
   '/fotografie': typeof FotografieRoute
   '/libri': typeof LibriRoute
-  '/poesie': typeof PoesieRoute
   '/privacy': typeof PrivacyRoute
   '/scritti': typeof ScrittiRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -184,14 +170,12 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
-  '/blog': typeof BlogRouteWithChildren
   '/chi-sono': typeof ChiSonoRoute
   '/contatti': typeof ContattiRoute
   '/cookie-policy': typeof CookiePolicyRoute
   '/fiabe': typeof FiabeRoute
   '/fotografie': typeof FotografieRoute
   '/libri': typeof LibriRoute
-  '/poesie': typeof PoesieRoute
   '/privacy': typeof PrivacyRoute
   '/scritti': typeof ScrittiRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -211,14 +195,12 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/auth': typeof AuthRoute
-  '/blog': typeof BlogRouteWithChildren
   '/chi-sono': typeof ChiSonoRoute
   '/contatti': typeof ContattiRoute
   '/cookie-policy': typeof CookiePolicyRoute
   '/fiabe': typeof FiabeRoute
   '/fotografie': typeof FotografieRoute
   '/libri': typeof LibriRoute
-  '/poesie': typeof PoesieRoute
   '/privacy': typeof PrivacyRoute
   '/scritti': typeof ScrittiRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -239,14 +221,12 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/auth'
-    | '/blog'
     | '/chi-sono'
     | '/contatti'
     | '/cookie-policy'
     | '/fiabe'
     | '/fotografie'
     | '/libri'
-    | '/poesie'
     | '/privacy'
     | '/scritti'
     | '/sitemap.xml'
@@ -264,14 +244,12 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
-    | '/blog'
     | '/chi-sono'
     | '/contatti'
     | '/cookie-policy'
     | '/fiabe'
     | '/fotografie'
     | '/libri'
-    | '/poesie'
     | '/privacy'
     | '/scritti'
     | '/sitemap.xml'
@@ -290,14 +268,12 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/auth'
-    | '/blog'
     | '/chi-sono'
     | '/contatti'
     | '/cookie-policy'
     | '/fiabe'
     | '/fotografie'
     | '/libri'
-    | '/poesie'
     | '/privacy'
     | '/scritti'
     | '/sitemap.xml'
@@ -317,17 +293,16 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
   AuthRoute: typeof AuthRoute
-  BlogRoute: typeof BlogRouteWithChildren
   ChiSonoRoute: typeof ChiSonoRoute
   ContattiRoute: typeof ContattiRoute
   CookiePolicyRoute: typeof CookiePolicyRoute
   FiabeRoute: typeof FiabeRoute
   FotografieRoute: typeof FotografieRoute
   LibriRoute: typeof LibriRoute
-  PoesieRoute: typeof PoesieRoute
   PrivacyRoute: typeof PrivacyRoute
   ScrittiRoute: typeof ScrittiRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  BlogSlugRoute: typeof BlogSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -351,13 +326,6 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/poesie': {
-      id: '/poesie'
-      path: '/poesie'
-      fullPath: '/poesie'
-      preLoaderRoute: typeof PoesieRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/libri': {
@@ -402,13 +370,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ChiSonoRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/blog': {
-      id: '/blog'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/auth': {
       id: '/auth'
       path: '/auth'
@@ -439,10 +400,10 @@ declare module '@tanstack/react-router' {
     }
     '/blog/$slug': {
       id: '/blog/$slug'
-      path: '/$slug'
+      path: '/blog/$slug'
       fullPath: '/blog/$slug'
       preLoaderRoute: typeof BlogSlugRouteImport
-      parentRoute: typeof BlogRoute
+      parentRoute: typeof rootRouteImport
     }
     '/admin/posts': {
       id: '/admin/posts'
@@ -539,31 +500,20 @@ const AdminRouteChildren: AdminRouteChildren = {
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
-interface BlogRouteChildren {
-  BlogSlugRoute: typeof BlogSlugRoute
-}
-
-const BlogRouteChildren: BlogRouteChildren = {
-  BlogSlugRoute: BlogSlugRoute,
-}
-
-const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
   AuthRoute: AuthRoute,
-  BlogRoute: BlogRouteWithChildren,
   ChiSonoRoute: ChiSonoRoute,
   ContattiRoute: ContattiRoute,
   CookiePolicyRoute: CookiePolicyRoute,
   FiabeRoute: FiabeRoute,
   FotografieRoute: FotografieRoute,
   LibriRoute: LibriRoute,
-  PoesieRoute: PoesieRoute,
   PrivacyRoute: PrivacyRoute,
   ScrittiRoute: ScrittiRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  BlogSlugRoute: BlogSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

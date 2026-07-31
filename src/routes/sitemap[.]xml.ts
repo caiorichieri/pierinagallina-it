@@ -2,8 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { db } from "../integrations/pierina/client";
 
-// TODO: sostituire con il dominio reale di Pierina Gallina
-const BASE_URL = "https://pierinagallina.it";
+const BASE_URL = "https://pierina.friulion.app";
 
 interface SitemapEntry {
   path: string;
@@ -21,9 +20,8 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/chi-sono", changefreq: "monthly", priority: "0.8" },
           { path: "/libri", changefreq: "monthly", priority: "0.8" },
           { path: "/fiabe", changefreq: "monthly", priority: "0.7" },
-          { path: "/poesie", changefreq: "monthly", priority: "0.7" },
           { path: "/fotografie", changefreq: "weekly", priority: "0.6" },
-          { path: "/blog", changefreq: "weekly", priority: "0.8" },
+          { path: "/scritti", changefreq: "weekly", priority: "0.8" },
           { path: "/contatti", changefreq: "yearly", priority: "0.5" },
           { path: "/privacy", changefreq: "yearly", priority: "0.3" },
           { path: "/cookie-policy", changefreq: "yearly", priority: "0.3" },

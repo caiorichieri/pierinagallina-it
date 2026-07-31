@@ -1,24 +1,23 @@
-## Objetivo
-Deixar claro e acessível como ajustar manualmente a foto da Pierina no hero da home, sem precisar mexer em CSS.
+Obiettivo: eliminare gli URL "fantasma" `/blog` e `/poesie` che oggi sono solo redirect a `/scritti`, evitando che Google indicizzi pagine che non esistono come contenuto proprio.
 
-## Estado atual
-Já existe um bloco de configuração no topo de `src/routes/index.tsx` chamado `HERO_PHOTO`, com valores separados para mobile e desktop. Ele controla:
-- `offsetY` — sobe ou desce a foto (valor negativo sobe, positivo desce)
-- `scale` — aumenta ou diminui a foto (`1` = tamanho real, `1.5` = 50% maior)
-- `height` — altura do container da foto no mobile
-- `translateX` — empurra a foto para a direita no desktop
-- `objectPosition` — define qual parte da imagem fica visível (útil porque a foto original é paisagem e a Pierina está à direita)
+Cosa faremo:
 
-## Plano
-1. **Melhorar os comentários** no bloco `HERO_PHOTO` para explicar, linha a linha, o efeito de cada valor.
-2. **Adicionar exemplos práticos** nos comentários, como:
-   - "Para subir a foto no celular, diminua o `offsetY` (ex: `-4rem` em vez de `-2rem`)"
-   - "Para mostrar mais o rosto, ajuste `objectPosition` para `85% 30%`"
-3. **(Opcional)** Criar um arquivo separado `src/config/hero-photo.ts` com o mesmo objeto, importado no `index.tsx`, para facilitar a localização.
-4. **Validar** com screenshots mobile e desktop após a documentação, garantindo que os valores atuais continuam funcionando.
+1. **Eliminare i file redirect**
+   - `src/routes/blog.tsx`
+   - `src/routes/poesie.tsx`
+   Questi file non contengono contenuto, solo `redirect({ to: "/scritti" })`.
 
-## Resultado esperado
-A dona do site consegue abrir um único arquivo, entender cada número e ajustar a foto sozinha com segurança.
+2. **Aggiornare i link "Torna al blog" dentro l'articolo singolo**
+   - In `src/routes/blog.$slug.tsx` cambiare i 3 `to="/blog"` in `to="/scritti"`.
+   - I singoli articoli restano accessibili al loro URL `/blog/$slug` (non li tocchiamo).
 
-## Pergunta
-Prefere que eu mantenha a configuração dentro de `src/routes/index.tsx` (mais simples) ou crie um arquivo separado `src/config/hero-photo.ts` (mais organizado para ajustes futuros)?
+3. **Aggiornare la sitemap**
+   - In `src/routes/sitemap[.]xml.ts` rimuovere le voci statiche `/blog` e `/poesie`.
+   - Mantenere le voci dinamiche `/blog/${slug}` per i singoli articoli.
+
+4. **Verificare build e rotte**
+   - Eseguire il build per confermare che `routeTree.gen.ts` si rigeneri correttamente.
+   - Verificare che `/blog` e `/poesie` restituiscano 404 (così Google le deindicizza).
+   - Verificare che `/scritti`, `/blog/$slug` e la sitemap continuino a funzionare.
+
+Nota: non eliminiamo `src/routes/blog.$slug.tsx`, perché i singoli post devono restare raggiungibili ai loro URL originali.
