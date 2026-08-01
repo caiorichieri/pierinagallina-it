@@ -104,7 +104,7 @@ function ScrittiPage() {
               </div>
             )}
             <div className="grid gap-10 md:grid-cols-2">
-              {data.posts.map((p, i) => (
+              {visiblePosts.map((p, i) => (
                 <Reveal key={p.id} delay={Math.min(i, 6) * 80}>
                   <Link to="/blog/$slug" params={{ slug: p.slug }} className="group block">
                     {p.featured_image && (
@@ -130,6 +130,17 @@ function ScrittiPage() {
                 </Reveal>
               ))}
             </div>
+            {visible < data.posts.length && (
+              <div className="mt-12 flex justify-center">
+                <button
+                  type="button"
+                  onClick={() => setVisible((v) => v + 12)}
+                  className="rounded-full border border-border px-6 py-2.5 text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:border-accent hover:text-accent"
+                >
+                  Mostra altri articoli
+                </button>
+              </div>
+            )}
           </div>
         )}
 
