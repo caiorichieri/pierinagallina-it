@@ -42,7 +42,7 @@ const homeData = queryOptions({
   queryKey: ["home-pierina"],
   queryFn: async (): Promise<{ posts: Post[]; books: Book[]; poems: Poem[] }> => {
     const [posts, books, poems] = await Promise.all([
-      db.from("posts").select("id,title,slug,excerpt,featured_image,published_at,content,created_at").order("published_at", { ascending: false }).limit(3),
+      db.from("posts").select("id,title,slug,excerpt,featured_image,published_at,created_at").order("published_at", { ascending: false }).limit(3),
       db.from("books").select("id,title,year,price,description,buy_url,youtube_id,type,cover_url,sort_order").order("sort_order", { ascending: true }).limit(3),
       db.from("poems").select("id,title,slug,content_friulian,content_italian,written_at,sort_order").order("sort_order", { ascending: true }).limit(2),
     ]);
