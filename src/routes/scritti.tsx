@@ -12,7 +12,7 @@ const scrittiQ = queryOptions({
   queryKey: ["scritti-all"],
   queryFn: async (): Promise<{ posts: Post[]; poems: Poem[] }> => {
     const [posts, poems] = await Promise.all([
-      db.from("posts").select("id,title,slug,excerpt,featured_image,published_at,content,created_at").order("published_at", { ascending: false }),
+      db.from("posts").select("id,title,slug,excerpt,featured_image,published_at,created_at").order("published_at", { ascending: false }).limit(300),
       db.from("poems").select("id,title,slug,content_friulian,content_italian,written_at,sort_order").order("sort_order", { ascending: true }),
     ]);
     if (posts.error) throw posts.error;
