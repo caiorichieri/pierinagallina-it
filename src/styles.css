@@ -283,7 +283,47 @@
   animation: bookOpen .9s cubic-bezier(.22,.9,.28,1) both;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .tree-draw, .leaf-letter, .book-open { animation: none; opacity: 1; }
+/* --- Fotografie: polaroid che escono dalla macchina e si appendono --- */
+@keyframes polaroidFly {
+  0%   { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(.35) rotate(-14deg); }
+  55%  { opacity: 1; }
+  100% { opacity: 1; transform: translate(0, 0) scale(1) rotate(var(--rot)); }
 }
+@keyframes polaroidSway {
+  0%, 100% { transform: rotate(var(--rot)); }
+  50%      { transform: rotate(calc(var(--rot) + 1.2deg)); }
+}
+.polaroid-shot {
+  transform-box: fill-box;
+  transform-origin: center top;
+  opacity: 0;
+  animation:
+    polaroidFly 1.4s cubic-bezier(.22,.9,.28,1) both,
+    polaroidSway 5s ease-in-out infinite;
+}
+
+/* Cornice polaroid per la galleria */
+.polaroid-card {
+  background: #fffaf0;
+  padding: 10px 10px 34px;
+  border-radius: 3px;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.7) inset,
+    0 18px 30px -18px rgba(45,8,8,.45),
+    0 6px 14px -8px rgba(45,8,8,.3);
+  transition: transform .45s cubic-bezier(.22,.9,.28,1), box-shadow .45s ease;
+}
+.polaroid-card:hover {
+  transform: rotate(0deg) translateY(-6px) scale(1.02);
+  box-shadow: 0 26px 44px -20px rgba(45,8,8,.55);
+}
+.polaroid-caption {
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tree-draw, .leaf-letter, .book-open, .polaroid-shot { animation: none; opacity: 1; }
+}
+
 
