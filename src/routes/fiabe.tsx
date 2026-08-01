@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
 import { db, type FiabaCollection, type FiabaTrack } from "@/integrations/pierina/client";
-import { PageHero } from "@/components/PageHero";
+import { FiabeHero } from "@/components/FiabeHero";
 import { Reveal } from "@/components/Reveal";
 import { Headphones } from "lucide-react";
 
