@@ -56,9 +56,11 @@ function formatDateIt(dateStr: string | null | undefined): string {
 function ScrittiPage() {
   const { data } = useSuspenseQuery(scrittiQ);
   const [tab, setTab] = useState<Tab>("tutti");
+  const [visible, setVisible] = useState(12);
 
   const showArticoli = tab === "tutti" || tab === "articoli";
   const showPoesie = tab === "tutti" || tab === "poesie";
+  const visiblePosts = data.posts.slice(0, visible);
 
   return (
     <>
