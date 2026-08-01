@@ -11,7 +11,7 @@ const CREAM = "#f7ead0";
 export function FiabeHero() {
   return (
     <section className="surface-bordeaux surface-bordeaux-glow relative overflow-hidden border-b border-border">
-      <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-4 py-16 sm:px-6 md:grid-cols-[1.05fr_.95fr] md:py-20">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-4 px-4 pt-16 pb-10 sm:px-6 md:grid-cols-[1.05fr_.95fr] md:gap-8 md:py-20">
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/20 bg-primary-foreground/5 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.18em] text-primary-foreground/80">
             <span className="h-1.5 w-1.5 rounded-full" style={{ background: GOLD }} />
@@ -31,7 +31,7 @@ export function FiabeHero() {
           </p>
         </div>
 
-        <div className="relative mx-auto w-full max-w-[440px]">
+        <div className="relative mx-auto w-full max-w-[340px] -mt-5 md:max-w-[440px] md:mt-0">
           <FairyTaleScene />
         </div>
       </div>
