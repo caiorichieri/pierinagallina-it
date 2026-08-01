@@ -322,8 +322,51 @@
   font-style: italic;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .tree-draw, .leaf-letter, .book-open, .polaroid-shot { animation: none; opacity: 1; }
+/* --- Fiabe: personaggi che entrano in scena e note che salgono --- */
+@keyframes fiabaEnter {
+  0%   { opacity: 0; transform: translate(var(--dx, 0), var(--dy2, 0)) scale(.9); }
+  60%  { opacity: 1; }
+  100% { opacity: 1; transform: translate(0, 0) scale(1); }
 }
+@keyframes fiabaBob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-4px); }
+}
+.fiaba-char {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  animation:
+    fiabaEnter 1.5s cubic-bezier(.22,.9,.28,1) both,
+    fiabaBob 4s ease-in-out infinite;
+}
+
+@keyframes fiabaNote {
+  0%   { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(.3); }
+  40%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(0, 0) scale(1); }
+}
+.fiaba-note {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  animation: fiabaNote 3.2s ease-out infinite;
+}
+
+@keyframes fiabaFlame {
+  0%, 100% { transform: scaleY(1) scaleX(1); opacity: .9; }
+  50%      { transform: scaleY(1.14) scaleX(.92); opacity: 1; }
+}
+.fiaba-flame {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: fiabaFlame 1.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tree-draw, .leaf-letter, .book-open, .polaroid-shot,
+  .fiaba-char, .fiaba-note, .fiaba-flame { animation: none; opacity: 1; }
+}
+
 
 
