@@ -40,11 +40,8 @@ function FiabePage() {
 
   return (
     <>
-      <PageHero tone="fiabe"
-        eyebrow="Fiabe sonore"
-        title={<>Voci, suoni, <span className="italic" style={{ color: "var(--brand-gold)" }}>storie da ascoltare.</span></>}
-        intro="Le fiabe registrate dalla voce di Fata Pierina, nate dai giorni del lockdown e proseguite negli anni come piccolo dono per bambine e bambini."
-      />
+      <FiabeHero />
+
 
       <section className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
         {data.collections.length === 0 ? (
