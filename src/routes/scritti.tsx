@@ -12,7 +12,7 @@ const scrittiQ = queryOptions({
   queryKey: ["scritti-all"],
   queryFn: async (): Promise<{ posts: Post[]; poems: Poem[] }> => {
     const [posts, poems] = await Promise.all([
-      db.from("posts").select("id,title,slug,excerpt,featured_image,published_at,content,created_at").order("published_at", { ascending: false }),
+      db.from("posts").select("id,title,slug,excerpt,featured_image,published_at,created_at").order("published_at", { ascending: false }).limit(300),
       db.from("poems").select("id,title,slug,content_friulian,content_italian,written_at,sort_order").order("sort_order", { ascending: true }),
     ]);
     if (posts.error) throw posts.error;
@@ -56,9 +56,11 @@ function formatDateIt(dateStr: string | null | undefined): string {
 function ScrittiPage() {
   const { data } = useSuspenseQuery(scrittiQ);
   const [tab, setTab] = useState<Tab>("tutti");
+  const [visible, setVisible] = useState(12);
 
   const showArticoli = tab === "tutti" || tab === "articoli";
   const showPoesie = tab === "tutti" || tab === "poesie";
+  const visiblePosts = data.posts.slice(0, visible);
 
   return (
     <>
@@ -102,7 +104,7 @@ function ScrittiPage() {
               </div>
             )}
             <div className="grid gap-10 md:grid-cols-2">
-              {data.posts.map((p, i) => (
+              {visiblePosts.map((p, i) => (
                 <Reveal key={p.id} delay={Math.min(i, 6) * 80}>
                   <Link to="/blog/$slug" params={{ slug: p.slug }} className="group block">
                     {p.featured_image && (
@@ -128,6 +130,17 @@ function ScrittiPage() {
                 </Reveal>
               ))}
             </div>
+            {visible < data.posts.length && (
+              <div className="mt-12 flex justify-center">
+                <button
+                  type="button"
+                  onClick={() => setVisible((v) => v + 12)}
+                  className="rounded-full border border-border px-6 py-2.5 text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:border-accent hover:text-accent"
+                >
+                  Mostra altri articoli
+                </button>
+              </div>
+            )}
           </div>
         )}
 
