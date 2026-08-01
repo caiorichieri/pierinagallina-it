@@ -31,7 +31,7 @@ export function FiabeHero() {
           </p>
         </div>
 
-        <div className="relative mx-auto w-full max-w-[440px]">
+        <div className="relative mx-auto w-full max-w-[340px] -mt-5 md:max-w-[440px] md:mt-0">
           <FairyTaleScene />
         </div>
       </div>
