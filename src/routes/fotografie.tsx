@@ -2,9 +2,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
 import { useState } from "react";
 import { db, type GalleryPhoto } from "@/integrations/pierina/client";
-import { PageHero } from "@/components/PageHero";
+import { FotografieHero } from "@/components/FotografieHero";
 import { Reveal } from "@/components/Reveal";
 import { X } from "lucide-react";
+
 
 const photosQ = queryOptions({
   queryKey: ["gallery-all"],
