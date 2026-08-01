@@ -40,39 +40,37 @@ function FotografiePage() {
 
   return (
     <>
-      <PageHero tone="fotografie"
-        eyebrow="Fotografie"
-        title={<>Momenti, incontri, <span className="italic" style={{ color: "var(--brand-gold)" }}>paesaggi.</span></>}
-        intro="Una galleria di istantanee: presentazioni di libri, letture nelle scuole, radio, amici e luoghi del Friuli."
-      />
+      <FotografieHero />
 
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
         {photos.length === 0 ? (
           <p className="text-center text-muted-foreground">Nessuna foto disponibile.</p>
         ) : (
-          <div className="columns-2 gap-4 md:columns-3 lg:columns-4 [column-fill:_balance]">
+          <div className="columns-2 gap-5 md:columns-3 lg:columns-4 [column-fill:_balance]">
             {photos.map((p, i) => (
-              <Reveal key={p.id} delay={Math.min(i, 10) * 40}>
+              <Reveal key={p.id} delay={Math.min(i, 12) * 70} className="mb-6 break-inside-avoid">
                 <button
                   type="button"
                   onClick={() => setOpen(p)}
-                  className="mb-4 block w-full overflow-hidden rounded-xl bg-secondary transition-transform hover:-translate-y-0.5"
+                  className="polaroid-card block w-full text-left"
+                  style={{ transform: `rotate(${(i % 5) - 2}deg)` }}
                 >
                   <img
                     src={p.image_url}
                     alt={p.title ?? ""}
                     loading="lazy"
-                    className="block h-auto w-full transition-transform duration-700 hover:scale-105"
+                    className="block h-auto w-full bg-secondary"
                   />
-                  {p.title && (
-                    <span className="block px-3 py-2 text-left text-xs text-muted-foreground">{p.title}</span>
-                  )}
+                  <span className="polaroid-caption mt-3 block px-1 text-center text-sm text-foreground/70">
+                    {p.title ?? "—"}
+                  </span>
                 </button>
               </Reveal>
             ))}
           </div>
         )}
       </section>
+
 
       {open && (
         <div
