@@ -121,23 +121,27 @@ function ScrittiPage() {
       <ScrittiHero />
 
 
-      <section className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
+      <section className="mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-14">
         {/* ricerca */}
-        <div className="mx-auto mb-6 flex max-w-xl items-center gap-2 rounded-full border border-border bg-card px-4 py-2.5 focus-within:border-accent">
-          <Search size={16} className="shrink-0 text-muted-foreground" />
+        <p className="mb-3 text-center text-[11px] font-medium uppercase tracking-[0.2em] text-accent">
+          Cerca negli scritti
+        </p>
+        <div className="mx-auto mb-8 flex max-w-2xl items-center gap-3 rounded-full border-2 border-accent/40 bg-card px-5 py-3.5 shadow-md focus-within:border-accent">
+          <Search size={20} className="shrink-0 text-accent" />
           <input
             value={q}
             onChange={(e) => reset(() => setQ(e.target.value))}
-            placeholder="Cerca tra articoli e poesie…"
-            className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+            placeholder="Cerca per titolo, parola o poesia…"
+            className="w-full bg-transparent text-base outline-none placeholder:text-muted-foreground"
             aria-label="Cerca tra gli scritti"
           />
           {q && (
             <button type="button" onClick={() => reset(() => setQ(""))} aria-label="Cancella ricerca" className="text-muted-foreground hover:text-accent">
-              <X size={15} />
+              <X size={18} />
             </button>
           )}
         </div>
+
 
         {/* filtro tipo */}
         <div className="mb-5 flex flex-wrap items-center justify-center gap-2">
