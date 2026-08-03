@@ -265,7 +265,7 @@ function ScrittiPage() {
               </div>
             )}
             <div className="space-y-16">
-              {data.poems.map((p, i) => (
+              {filteredPoems.map((p, i) => (
                 <Reveal key={p.id} delay={Math.min(i, 6) * 80}>
                   <article className="grid gap-8 md:grid-cols-2">
                     <header className="md:col-span-2">
