@@ -61,10 +61,60 @@ function ScrittiPage() {
   const { data } = useSuspenseQuery(scrittiQ);
   const [tab, setTab] = useState<Tab>("tutti");
   const [visible, setVisible] = useState(12);
+  const [q, setQ] = useState("");
+  const [cat, setCat] = useState<string | null>(null);
+
+  const catById = useMemo(
+    () => new Map(data.categories.map((c) => [c.id, c])),
+    [data.categories],
+  );
+
+  // categorie realmente usate dagli articoli
+  const usedCategories = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const p of data.posts) {
+      if (p.category_id) counts.set(p.category_id, (counts.get(p.category_id) ?? 0) + 1);
+    }
+    return [...counts.entries()]
+      .map(([id, n]) => ({ cat: catById.get(id), n }))
+      .filter((x): x is { cat: Category; n: number } => Boolean(x.cat))
+      .sort((a, b) => b.n - a.n);
+  }, [data.posts, catById]);
+
+  const needle = q.trim().toLowerCase();
+
+  const filteredPosts = useMemo(() => {
+    return data.posts.filter((p) => {
+      if (cat && p.category_id !== cat) return false;
+      if (!needle) return true;
+      return (
+        p.title.toLowerCase().includes(needle) ||
+        stripHtml(p.excerpt, 5000).toLowerCase().includes(needle)
+      );
+    });
+  }, [data.posts, cat, needle]);
+
+  const filteredPoems = useMemo(() => {
+    if (!needle) return data.poems;
+    return data.poems.filter(
+      (p) =>
+        p.title.toLowerCase().includes(needle) ||
+        (p.content_italian ?? "").toLowerCase().includes(needle) ||
+        (p.content_friulian ?? "").toLowerCase().includes(needle),
+    );
+  }, [data.poems, needle]);
 
   const showArticoli = tab === "tutti" || tab === "articoli";
-  const showPoesie = tab === "tutti" || tab === "poesie";
-  const visiblePosts = data.posts.slice(0, visible);
+  const showPoesie = (tab === "tutti" || tab === "poesie") && !cat;
+  const visiblePosts = filteredPosts.slice(0, visible);
+  const nothing =
+    (!showArticoli || filteredPosts.length === 0) &&
+    (!showPoesie || filteredPoems.length === 0);
+
+  function reset(fn: () => void) {
+    fn();
+    setVisible(12);
+  }
 
   return (
     <>
@@ -72,8 +122,25 @@ function ScrittiPage() {
 
 
       <section className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
-        {/* filtro */}
-        <div className="mb-12 flex flex-wrap items-center justify-center gap-2">
+        {/* ricerca */}
+        <div className="mx-auto mb-6 flex max-w-xl items-center gap-2 rounded-full border border-border bg-card px-4 py-2.5 focus-within:border-accent">
+          <Search size={16} className="shrink-0 text-muted-foreground" />
+          <input
+            value={q}
+            onChange={(e) => reset(() => setQ(e.target.value))}
+            placeholder="Cerca tra articoli e poesie…"
+            className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+            aria-label="Cerca tra gli scritti"
+          />
+          {q && (
+            <button type="button" onClick={() => reset(() => setQ(""))} aria-label="Cancella ricerca" className="text-muted-foreground hover:text-accent">
+              <X size={15} />
+            </button>
+          )}
+        </div>
+
+        {/* filtro tipo */}
+        <div className="mb-5 flex flex-wrap items-center justify-center gap-2">
           {([
             { k: "tutti", label: "Tutti" },
             { k: "articoli", label: "Articoli" },
@@ -84,7 +151,7 @@ function ScrittiPage() {
               <button
                 key={t.k}
                 type="button"
-                onClick={() => setTab(t.k)}
+                onClick={() => reset(() => setTab(t.k))}
                 className={
                   "rounded-full border px-5 py-2 text-xs font-medium uppercase tracking-[0.16em] transition-colors " +
                   (active
@@ -98,13 +165,49 @@ function ScrittiPage() {
           })}
         </div>
 
+        {/* categorie */}
+        {tab !== "poesie" && usedCategories.length > 0 && (
+          <div className="mb-12 flex flex-wrap items-center justify-center gap-2">
+            <button
+              type="button"
+              onClick={() => reset(() => setCat(null))}
+              className={
+                "rounded-full border px-3.5 py-1.5 text-[11px] tracking-wide transition-colors " +
+                (cat === null
+                  ? "border-accent bg-accent/10 text-accent"
+                  : "border-border text-muted-foreground hover:border-accent hover:text-accent")
+              }
+            >
+              Tutte le categorie
+            </button>
+            {usedCategories.map(({ cat: c, n }) => (
+              <button
+                key={c.id}
+                type="button"
+                onClick={() => reset(() => setCat(cat === c.id ? null : c.id))}
+                className={
+                  "rounded-full border px-3.5 py-1.5 text-[11px] tracking-wide transition-colors " +
+                  (cat === c.id
+                    ? "border-accent bg-accent/10 text-accent"
+                    : "border-border text-muted-foreground hover:border-accent hover:text-accent")
+                }
+              >
+                {c.name} <span className="opacity-60">({n})</span>
+              </button>
+            ))}
+          </div>
+        )}
+
         {/* ARTICOLI */}
-        {showArticoli && data.posts.length > 0 && (
+        {showArticoli && filteredPosts.length > 0 && (
           <div className="mb-20">
             {tab === "tutti" && (
               <div className="mb-8 flex items-center gap-3">
                 <FileText size={16} className="text-accent" />
                 <h2 className="font-serif text-2xl italic text-foreground">Articoli e racconti</h2>
+                <span className="font-sans text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                  {filteredPosts.length}
+                </span>
               </div>
             )}
             <div className="grid gap-10 md:grid-cols-2">
@@ -116,11 +219,13 @@ function ScrittiPage() {
                         <img src={p.featured_image} alt={p.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                       </div>
                     )}
-                    {p.published_at && (
-                      <div className="font-sans text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-                        {formatDateIt(p.published_at)}
-                      </div>
-                    )}
+                    <div className="flex flex-wrap items-center gap-2 font-sans text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                      {p.category_id && catById.get(p.category_id) && (
+                        <span className="text-accent">{catById.get(p.category_id)!.name}</span>
+                      )}
+                      {p.category_id && catById.get(p.category_id) && p.published_at && <span className="opacity-50">·</span>}
+                      {p.published_at && <span>{formatDateIt(p.published_at)}</span>}
+                    </div>
                     <h3 className="mt-2 font-serif text-2xl leading-snug text-foreground transition-colors group-hover:text-accent">
                       {p.title}
                     </h3>
@@ -134,7 +239,7 @@ function ScrittiPage() {
                 </Reveal>
               ))}
             </div>
-            {visible < data.posts.length && (
+            {visible < filteredPosts.length && (
               <div className="mt-12 flex justify-center">
                 <button
                   type="button"
@@ -147,6 +252,8 @@ function ScrittiPage() {
             )}
           </div>
         )}
+
+
 
         {/* POESIE */}
         {showPoesie && data.poems.length > 0 && (
