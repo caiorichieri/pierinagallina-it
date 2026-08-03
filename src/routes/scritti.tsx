@@ -295,8 +295,10 @@ function ScrittiPage() {
           </div>
         )}
 
-        {data.posts.length === 0 && data.poems.length === 0 && (
-          <p className="text-center text-muted-foreground">Nessuno scritto disponibile al momento.</p>
+        {nothing && (
+          <p className="text-center text-muted-foreground">
+            {needle || cat ? "Nessuno scritto corrisponde alla ricerca." : "Nessuno scritto disponibile al momento."}
+          </p>
         )}
       </section>
     </>
