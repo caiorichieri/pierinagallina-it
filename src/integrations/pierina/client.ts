@@ -13,6 +13,14 @@ export type Post = {
   featured_image: string | null
   published_at: string | null
   created_at: string
+  category_id?: string | null
+}
+
+export type Category = {
+  id: string
+  name: string
+  slug: string
+  post_count: number | null
 }
 
 export type Book = {
