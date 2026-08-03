@@ -1,28 +1,32 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
-import { useState } from "react";
-import { db, type Post, type Poem } from "@/integrations/pierina/client";
+import { useMemo, useState } from "react";
+import { db, type Post, type Poem, type Category } from "@/integrations/pierina/client";
 import { ScrittiHero } from "@/components/ScrittiHero";
 import { Reveal } from "@/components/Reveal";
-import { ArrowRight, Feather, FileText } from "lucide-react";
+import { ArrowRight, Feather, FileText, Search, X } from "lucide-react";
 
 type Tab = "tutti" | "articoli" | "poesie";
 
 const scrittiQ = queryOptions({
   queryKey: ["scritti-all"],
-  queryFn: async (): Promise<{ posts: Post[]; poems: Poem[] }> => {
-    const [posts, poems] = await Promise.all([
-      db.from("posts").select("id,title,slug,excerpt,featured_image,published_at,created_at").order("published_at", { ascending: false }).limit(300),
+  queryFn: async (): Promise<{ posts: Post[]; poems: Poem[]; categories: Category[] }> => {
+    const [posts, poems, categories] = await Promise.all([
+      db.from("posts").select("id,title,slug,excerpt,featured_image,published_at,created_at,category_id").order("published_at", { ascending: false }).limit(2000),
       db.from("poems").select("id,title,slug,content_friulian,content_italian,written_at,sort_order").order("sort_order", { ascending: true }),
+      db.from("categories").select("id,name,slug,post_count").order("post_count", { ascending: false }),
     ]);
     if (posts.error) throw posts.error;
     if (poems.error) throw poems.error;
+    if (categories.error) throw categories.error;
     return {
       posts: (posts.data as Post[] | null) ?? [],
       poems: (poems.data as Poem[] | null) ?? [],
+      categories: (categories.data as Category[] | null) ?? [],
     };
   },
 });
+
 
 export const Route = createFileRoute("/scritti")({
   head: () => ({
