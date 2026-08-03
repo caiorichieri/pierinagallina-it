@@ -256,7 +256,7 @@ function ScrittiPage() {
 
 
         {/* POESIE */}
-        {showPoesie && data.poems.length > 0 && (
+        {showPoesie && filteredPoems.length > 0 && (
           <div>
             {tab === "tutti" && (
               <div className="mb-8 flex items-center gap-3">
