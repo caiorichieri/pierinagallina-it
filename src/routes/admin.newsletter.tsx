@@ -1,14 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { db } from "@/integrations/pierina/client";
-import { Trash2, Download, Upload, Mail, Copy, Check } from "lucide-react";
+import { sendNewsletter } from "@/lib/newsletter.functions";
+import { SITE_URL } from "@/lib/newsletter-config";
+import { Trash2, Download, Upload, Mail, Copy, Check, Send } from "lucide-react";
 
 type Sub = { id: string; email: string; created_at: string; confirmed?: boolean | null };
 type Post = { id: string; title: string; slug: string; excerpt: string | null };
 
-const SITE_URL = "https://pierina.friulion.app";
-
 export const Route = createFileRoute("/admin/newsletter")({ component: AdminNewsletter });
+
 
 function stripHtml(s: string) {
   return s.replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
