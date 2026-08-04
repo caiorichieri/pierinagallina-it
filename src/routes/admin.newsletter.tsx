@@ -318,10 +318,11 @@ function AdminNewsletter() {
 
 
         <p className="mt-3 text-xs text-muted-foreground">
-          Se il programma di posta non si apre (succede con liste lunghe), usa «Copia indirizzi (Ccn)» e
-          «Copia testo» e incollali in una nuova email dal tuo Gmail/Outlook. Metti sempre gli indirizzi in
-          <strong> Ccn</strong>, mai in «A».
+          Le email partono da <strong>newsletter@pierinagallina.it</strong> e le risposte arrivano a
+          <strong> info@pierinagallina.it</strong>. Il pulsante «Invio manuale (Ccn)» resta come alternativa
+          di emergenza.
         </p>
+
       </section>
 
 
