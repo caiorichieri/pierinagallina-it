@@ -27,6 +27,10 @@ function AdminNewsletter() {
   const [subject, setSubject] = useState("");
   const [body, setBody] = useState("");
   const [copied, setCopied] = useState<"bcc" | "body" | null>(null);
+  const [sending, setSending] = useState(false);
+  const [sendMsg, setSendMsg] = useState<string | null>(null);
+  const [testTo, setTestTo] = useState("");
+
 
   async function reload() {
     const { data, error } = await db.from("newsletter_subscribers").select("*").order("created_at", { ascending: false }).limit(2000);
