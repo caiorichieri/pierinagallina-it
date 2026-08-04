@@ -42,21 +42,6 @@ function Stat({ label, value, sub }: { label: string; value: number | string; su
   );
 }
 
-function Bars({ data }: { data: { date: string; count: number }[] }) {
-  const max = Math.max(1, ...data.map((d) => d.count));
-  return (
-    <div className="flex h-24 items-end gap-[3px]">
-      {data.map((d) => (
-        <div key={d.date} className="flex-1" title={`${new Date(d.date).toLocaleDateString("it-IT")}: ${d.count}`}>
-          <div
-            className="w-full rounded-sm bg-accent/70 transition-all hover:bg-accent"
-            style={{ height: `${Math.max(2, (d.count / max) * 96)}px` }}
-          />
-        </div>
-      ))}
-    </div>
-  );
-}
 
 function List({ title, rows }: { title: string; rows: { label: string; count: number }[] }) {
   return (
@@ -99,13 +84,6 @@ export function VisitsPanel() {
           value={Math.round((total30 / 30) * 10) / 10}
           sub="ultimi 30 giorni"
         />
-      </div>
-
-      <div className="rounded-lg border border-border bg-card p-4">
-        <h3 className="font-serif text-lg italic text-primary">Visite negli ultimi 30 giorni</h3>
-        <div className="mt-3">
-          <Bars data={stats.daily} />
-        </div>
       </div>
 
       <div className="grid gap-4 lg:grid-cols-3">
