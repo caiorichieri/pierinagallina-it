@@ -235,9 +235,10 @@ function AdminNewsletter() {
       <section className="mb-8 rounded-md border border-border bg-card p-4">
         <h2 className="font-serif text-xl italic text-primary">Invia una newsletter</h2>
         <p className="mt-1 text-xs text-muted-foreground">
-          Prepara il messaggio qui, poi aprilo nel tuo programma di posta: l'email parte dal tuo indirizzo,
-          con tutti gli iscritti in copia nascosta (Ccn), così nessuno vede gli indirizzi degli altri.
+          L'invio è automatico: ogni iscritto riceve la sua copia dal sito, senza passare dal programma di posta.
+          Prima di inviare a tutti, conviene fare una prova su un indirizzo.
         </p>
+
 
         <div className="mt-4 grid gap-3">
           <label className="grid gap-1 text-sm">
