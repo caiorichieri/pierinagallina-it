@@ -51,6 +51,7 @@ function FotografiePage() {
               <Reveal key={p.id} delay={Math.min(i, 12) * 70} className="mb-6 break-inside-avoid">
                 <button
                   type="button"
+                  aria-label={p.title || "Visualizza fotografia"}
                   onClick={() => setOpen(p)}
                   className="polaroid-card block w-full text-left"
                   style={{ transform: `rotate(${(i % 5) - 2}deg)` }}
