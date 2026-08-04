@@ -127,36 +127,11 @@ function AdminSeo() {
         </div>
       </div>
 
-      <section className="mt-6 rounded-lg border border-border bg-card p-4">
-        <h2 className="font-serif text-xl italic text-primary">Tecnico</h2>
-        <ul className="mt-3 grid gap-2 text-sm sm:grid-cols-2">
-          <li>
-            <a href="/sitemap.xml" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 hover:text-accent">
-              <ExternalLink size={13} /> Mappa del sito (sitemap.xml)
-            </a>
-          </li>
-          <li>
-            <a href="/robots.txt" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 hover:text-accent">
-              <ExternalLink size={13} /> Istruzioni per i motori (robots.txt)
-            </a>
-          </li>
-          <li>
-            <a href={`https://search.google.com/search-console?resource_id=${encodeURIComponent(SITE_URL)}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 hover:text-accent">
-              <ExternalLink size={13} /> Google Search Console
-            </a>
-          </li>
-          <li>
-            <a href={`https://www.google.com/search?q=site:pierinagallina.it`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 hover:text-accent">
-              <Search size={13} /> Pagine già indicizzate su Google
-            </a>
-          </li>
-        </ul>
-        {duplicateSlugs.length > 0 && (
-          <p className="mt-3 text-sm text-destructive">
-            Indirizzi duplicati ({duplicateSlugs.length}): {duplicateSlugs.slice(0, 5).join(", ")}
-          </p>
-        )}
-      </section>
+      {duplicateSlugs.length > 0 && (
+        <p className="mt-6 rounded-lg border border-destructive/30 bg-card p-4 text-sm text-destructive">
+          Indirizzi duplicati ({duplicateSlugs.length}): {duplicateSlugs.slice(0, 5).join(", ")}
+        </p>
+      )}
 
       <section className="mt-6">
         <div className="mb-3 flex flex-wrap items-center gap-3">
