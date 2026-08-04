@@ -106,6 +106,7 @@ export const getVisitStats = createServerFn({ method: "POST" })
     }
 
     // Storico del sito precedente (tabella site_visits sul database dei contenuti).
+    const { fetchLegacyVisits } = await import("./analytics-legacy.server");
     const legacy = await fetchLegacyVisits(data.token, since);
 
     // Exclude internal pages, then collapse repeated hits of the same page by
