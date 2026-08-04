@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { db } from "../integrations/pierina/client";
 
-const BASE_URL = "https://pierina.friulion.app";
+const BASE_URL = "https://www.pierinagallina.it";
 
 interface SitemapEntry {
   path: string;

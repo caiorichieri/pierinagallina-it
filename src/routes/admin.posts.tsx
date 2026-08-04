@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { db, type Post } from "@/integrations/pierina/client";
 import { sanitizeHtml } from "@/lib/sanitize";
+import { useVisitStats } from "@/components/admin/VisitsPanel";
 import { Pencil, Plus, Trash2, Eye, EyeOff, Send } from "lucide-react";
 
 export const Route = createFileRoute("/admin/posts")({
@@ -13,6 +14,8 @@ function AdminPosts() {
   const [loading, setLoading] = useState(true);
   const [q, setQ] = useState("");
   const [err, setErr] = useState<string | null>(null);
+  const { stats } = useVisitStats();
+  const views = new Map((stats?.postsLast30 ?? []).map((p) => [p.slug, p.count]));
 
   async function reload() {
     setLoading(true);
@@ -68,6 +71,7 @@ function AdminPosts() {
                 <th className="px-4 py-3">Titolo</th>
                 <th className="px-4 py-3 hidden md:table-cell">Slug</th>
                 <th className="px-4 py-3 hidden lg:table-cell">Pubblicato</th>
+                <th className="px-4 py-3 hidden text-right sm:table-cell">Letture 30gg</th>
                 <th className="px-4 py-3 text-right">Azioni</th>
               </tr>
             </thead>
@@ -87,6 +91,9 @@ function AdminPosts() {
                     ) : (
                       <span className="inline-flex items-center gap-1 text-amber-700"><EyeOff size={12} /> bozza</span>
                     )}
+                  </td>
+                  <td className="px-4 py-3 hidden text-right tabular-nums text-xs text-muted-foreground sm:table-cell">
+                    {views.get(p.slug) ?? 0}
                   </td>
                   <td className="px-4 py-3 text-right">
                     <div className="inline-flex gap-1">
@@ -109,7 +116,7 @@ function AdminPosts() {
                 </tr>
               ))}
               {filtered.length === 0 && (
-                <tr><td colSpan={4} className="px-4 py-10 text-center text-sm text-muted-foreground">Nessun articolo.</td></tr>
+                <tr><td colSpan={5} className="px-4 py-10 text-center text-sm text-muted-foreground">Nessun articolo.</td></tr>
               )}
             </tbody>
           </table>

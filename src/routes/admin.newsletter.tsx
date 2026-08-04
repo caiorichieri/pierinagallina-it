@@ -87,9 +87,23 @@ function AdminNewsletter() {
 
   async function remove(id: string) {
     if (!confirm("Rimuovere l'iscritto?")) return;
-    const { error } = await db.from("newsletter_subscribers").delete().eq("id", id);
-    if (error) return alert(error.message);
-    reload();
+    setErr(null);
+    const { data, error } = await db
+      .from("newsletter_subscribers")
+      .delete()
+      .eq("id", id)
+      .select("id");
+    if (error) {
+      setErr(`Impossibile rimuovere: ${error.message}`);
+      return;
+    }
+    if (!data || data.length === 0) {
+      setErr(
+        "L'iscritto non è stato rimosso: il database non consente la cancellazione con questo accesso. Serve una regola di eliminazione per gli amministratori sulla tabella degli iscritti.",
+      );
+      return;
+    }
+    setItems((prev) => prev.filter((i) => i.id !== id));
   }
 
   function exportCsv() {
