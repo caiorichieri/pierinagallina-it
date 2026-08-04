@@ -2,11 +2,10 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { db } from "@/integrations/pierina/client";
 import { useVisitStats } from "@/components/admin/VisitsPanel";
-import { AlertTriangle, CheckCircle2, ExternalLink, Search } from "lucide-react";
+import { AlertTriangle, CheckCircle2 } from "lucide-react";
 
 export const Route = createFileRoute("/admin/seo")({ component: AdminSeo });
 
-const SITE_URL = "https://www.pierinagallina.it";
 
 type SeoPost = {
   id: string;
