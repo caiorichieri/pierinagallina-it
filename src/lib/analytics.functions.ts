@@ -105,7 +105,23 @@ export const getVisitStats = createServerFn({ method: "POST" })
       throw new Error("read_failed");
     }
 
-    const visits = ((rows ?? []) as VisitRow[]).filter((r) => !r.path.startsWith("/admin"));
+    // Exclude internal pages, then collapse repeated hits of the same page by
+    // the same visitor within 30 minutes (reloads, back/forward navigation).
+    const raw = ((rows ?? []) as VisitRow[]).filter(
+      (r) => !r.path.startsWith("/admin") && !r.path.startsWith("/auth"),
+    );
+    const lastSeen = new Map<string, number>();
+    const visits = raw
+      .slice()
+      .sort((a, b) => a.created_at.localeCompare(b.created_at))
+      .filter((r) => {
+        if (!r.session_id) return true;
+        const key = `${r.session_id}|${r.path}`;
+        const t = new Date(r.created_at).getTime();
+        const prev = lastSeen.get(key);
+        lastSeen.set(key, t);
+        return !(prev && t - prev < 30 * 60 * 1000);
+      });
     const now = Date.now();
     const dayMs = 24 * 3600 * 1000;
 
