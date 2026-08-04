@@ -133,7 +133,10 @@ export function VisitsPanel() {
 
       <p className="text-xs text-muted-foreground">
         Le visite vengono registrate in forma anonima (nessun dato personale, nessun cookie di tracciamento);
-        le pagine dell'area riservata sono escluse.
+        sono escluse l'area riservata, le anteprime di sviluppo e i bot. Le riletture della stessa pagina
+        entro 30 minuti contano una volta sola, quindi i numeri sono più bassi (e più realistici) di altri
+        contatori. I dati partono dal giorno in cui è stato attivato questo conteggio: lo storico del sito
+        precedente non è incluso.
       </p>
     </div>
   );
