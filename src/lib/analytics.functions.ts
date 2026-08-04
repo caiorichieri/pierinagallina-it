@@ -105,10 +105,13 @@ export const getVisitStats = createServerFn({ method: "POST" })
       throw new Error("read_failed");
     }
 
+    // Storico del sito precedente (tabella site_visits sul database dei contenuti).
+    const legacy = await fetchLegacyVisits(data.token, since);
+
     // Exclude internal pages, then collapse repeated hits of the same page by
     // the same visitor within 30 minutes (reloads, back/forward navigation).
-    const raw = ((rows ?? []) as VisitRow[]).filter(
-      (r) => !r.path.startsWith("/admin") && !r.path.startsWith("/auth"),
+    const raw = ([...((rows ?? []) as VisitRow[]), ...legacy] as VisitRow[]).filter(
+      (r) => r.path && !r.path.startsWith("/admin") && !r.path.startsWith("/auth"),
     );
     const lastSeen = new Map<string, number>();
     const visits = raw
