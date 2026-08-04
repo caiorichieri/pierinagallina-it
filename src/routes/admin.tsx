@@ -2,7 +2,7 @@ import { createFileRoute, Outlet, Link, useRouter, useLocation } from "@tanstack
 import { useState } from "react";
 import { usePierinaAuth } from "@/integrations/pierina/auth";
 import { db } from "@/integrations/pierina/client";
-import { FileText, BookOpen, Headphones, Feather, Image as ImageIcon, Mail, Send, LogOut, LayoutDashboard, TrendingUp } from "lucide-react";
+import { FileText, BookOpen, Headphones, Feather, Image as ImageIcon, Mail, Send, LogOut, LayoutDashboard } from "lucide-react";
 
 export const Route = createFileRoute("/admin")({
   ssr: false,
@@ -19,8 +19,6 @@ const NAV = [
   { to: "/admin/fotografie", label: "Fotografie", icon: ImageIcon },
   { to: "/admin/messaggi", label: "Messaggi", icon: Mail },
   { to: "/admin/newsletter", label: "Newsletter", icon: Send },
-  { to: "/admin/seo", label: "SEO e visite", icon: TrendingUp },
-  
 ] as const;
 
 function AdminLayout() {
