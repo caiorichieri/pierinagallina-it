@@ -15,6 +15,7 @@ import { LanguageProvider } from "../i18n";
 import { SiteHeader } from "../components/SiteHeader";
 import { SiteFooter } from "../components/SiteFooter";
 import { CookieBanner } from "../components/CookieBanner";
+import { VisitTracker } from "../components/VisitTracker";
 
 function NotFoundComponent() {
   return (
@@ -170,6 +171,7 @@ function RootComponent() {
           </main>
           <SiteFooter />
           <CookieBanner />
+          <VisitTracker />
         </div>
       </LanguageProvider>
     </QueryClientProvider>
