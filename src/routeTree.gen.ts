@@ -31,6 +31,7 @@ import { Route as AdminMessaggiRouteImport } from './routes/admin.messaggi'
 import { Route as AdminLibriRouteImport } from './routes/admin.libri'
 import { Route as AdminFotografieRouteImport } from './routes/admin.fotografie'
 import { Route as AdminFiabeRouteImport } from './routes/admin.fiabe'
+import { Route as AdminPostsIndexRouteImport } from './routes/admin.posts.index'
 import { Route as AdminPostsIdRouteImport } from './routes/admin.posts.$id'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -143,6 +144,11 @@ const AdminFiabeRoute = AdminFiabeRouteImport.update({
   path: '/fiabe',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminPostsIndexRoute = AdminPostsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminPostsRoute,
+} as any)
 const AdminPostsIdRoute = AdminPostsIdRouteImport.update({
   id: '/$id',
   path: '/$id',
@@ -173,6 +179,7 @@ export interface FileRoutesByFullPath {
   '/blog/$slug': typeof BlogSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/admin/posts/$id': typeof AdminPostsIdRoute
+  '/admin/posts/': typeof AdminPostsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -192,11 +199,11 @@ export interface FileRoutesByTo {
   '/admin/messaggi': typeof AdminMessaggiRoute
   '/admin/newsletter': typeof AdminNewsletterRoute
   '/admin/poesie': typeof AdminPoesieRoute
-  '/admin/posts': typeof AdminPostsRouteWithChildren
   '/admin/seo': typeof AdminSeoRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/admin': typeof AdminIndexRoute
   '/admin/posts/$id': typeof AdminPostsIdRoute
+  '/admin/posts': typeof AdminPostsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -223,6 +230,7 @@ export interface FileRoutesById {
   '/blog/$slug': typeof BlogSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/admin/posts/$id': typeof AdminPostsIdRoute
+  '/admin/posts/': typeof AdminPostsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -250,6 +258,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/admin/'
     | '/admin/posts/$id'
+    | '/admin/posts/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -269,11 +278,11 @@ export interface FileRouteTypes {
     | '/admin/messaggi'
     | '/admin/newsletter'
     | '/admin/poesie'
-    | '/admin/posts'
     | '/admin/seo'
     | '/blog/$slug'
     | '/admin'
     | '/admin/posts/$id'
+    | '/admin/posts'
   id:
     | '__root__'
     | '/'
@@ -299,6 +308,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/admin/'
     | '/admin/posts/$id'
+    | '/admin/posts/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -473,6 +483,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminFiabeRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/posts/': {
+      id: '/admin/posts/'
+      path: '/'
+      fullPath: '/admin/posts/'
+      preLoaderRoute: typeof AdminPostsIndexRouteImport
+      parentRoute: typeof AdminPostsRoute
+    }
     '/admin/posts/$id': {
       id: '/admin/posts/$id'
       path: '/$id'
@@ -485,10 +502,12 @@ declare module '@tanstack/react-router' {
 
 interface AdminPostsRouteChildren {
   AdminPostsIdRoute: typeof AdminPostsIdRoute
+  AdminPostsIndexRoute: typeof AdminPostsIndexRoute
 }
 
 const AdminPostsRouteChildren: AdminPostsRouteChildren = {
   AdminPostsIdRoute: AdminPostsIdRoute,
+  AdminPostsIndexRoute: AdminPostsIndexRoute,
 }
 
 const AdminPostsRouteWithChildren = AdminPostsRoute._addFileChildren(
@@ -539,3 +558,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
