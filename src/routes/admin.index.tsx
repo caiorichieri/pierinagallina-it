@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { db } from "@/integrations/pierina/client";
+import { VisitsPanel } from "@/components/admin/VisitsPanel";
 import { FileText, BookOpen, Headphones, Feather, Image as ImageIcon, Mail, Send } from "lucide-react";
 
 export const Route = createFileRoute("/admin/")({
@@ -43,6 +44,12 @@ function AdminDashboard() {
         </p>
       </header>
 
+      <section className="mb-10">
+        <h2 className="mb-4 font-serif text-2xl italic text-primary">Visite al sito</h2>
+        <VisitsPanel />
+      </section>
+
+      <h2 className="mb-4 font-serif text-2xl italic text-primary">Contenuti</h2>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {TILES.map(({ to, label, table, icon: Icon }) => (
           <Link
