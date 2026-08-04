@@ -113,9 +113,9 @@ function HomePage() {
         <div className="relative mx-auto grid max-w-7xl gap-8 px-4 pt-10 pb-0 sm:px-6 md:grid-cols-[1.2fr_1fr] md:items-start md:gap-8 md:pt-14 md:pb-10">
           <div>
             <h1 className="font-serif text-5xl leading-[1.02] tracking-tight text-primary sm:text-6xl md:text-7xl lg:text-8xl">
-              Pierina
+              Pierina Gallina
               <br />
-              <span className="italic" style={{ color: "var(--brand-gold)" }}>Gallina.</span>
+              <span className="italic" style={{ color: "var(--brand-gold)" }}>— Scrittrice e paroliera.</span>
             </h1>
 
             <p className="mt-6 max-w-2xl font-serif text-xl italic leading-snug text-foreground/90 md:text-2xl">
