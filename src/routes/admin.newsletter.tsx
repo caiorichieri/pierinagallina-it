@@ -89,6 +89,39 @@ function AdminNewsletter() {
     window.location.href = href;
   }
 
+  async function send(test: boolean) {
+    setSendMsg(null);
+    if (!subject.trim() || !body.trim()) {
+      setSendMsg("Inserisci oggetto e messaggio.");
+      return;
+    }
+    if (test && !testTo.trim()) {
+      setSendMsg("Inserisci un indirizzo per la prova.");
+      return;
+    }
+    if (!test && !confirm(`Inviare la newsletter a ${items.length} iscritti?`)) return;
+
+    setSending(true);
+    try {
+      const { data: s } = await db.auth.getSession();
+      const token = s.session?.access_token ?? "";
+      const res = await sendNewsletter({
+        data: { token, subject: subject.trim(), body, testTo: test ? testTo.trim() : undefined },
+      });
+      setSendMsg(
+        res.test
+          ? `Email di prova inviata a ${testTo.trim()}.`
+          : `Newsletter inviata a ${res.sent} iscritti.`,
+      );
+    } catch (e: any) {
+      setSendMsg(`Errore nell'invio: ${e?.message ?? e}`);
+    } finally {
+      setSending(false);
+    }
+  }
+
+
+
 
   async function remove(id: string) {
     if (!confirm("Rimuovere l'iscritto?")) return;
