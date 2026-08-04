@@ -1,14 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { db } from "@/integrations/pierina/client";
-import { Trash2, Download, Upload, Mail, Copy, Check } from "lucide-react";
+import { sendNewsletter } from "@/lib/newsletter.functions";
+import { SITE_URL } from "@/lib/newsletter-config";
+import { Trash2, Download, Upload, Mail, Copy, Check, Send } from "lucide-react";
 
 type Sub = { id: string; email: string; created_at: string; confirmed?: boolean | null };
 type Post = { id: string; title: string; slug: string; excerpt: string | null };
 
-const SITE_URL = "https://pierina.friulion.app";
-
 export const Route = createFileRoute("/admin/newsletter")({ component: AdminNewsletter });
+
 
 function stripHtml(s: string) {
   return s.replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
@@ -26,6 +27,10 @@ function AdminNewsletter() {
   const [subject, setSubject] = useState("");
   const [body, setBody] = useState("");
   const [copied, setCopied] = useState<"bcc" | "body" | null>(null);
+  const [sending, setSending] = useState(false);
+  const [sendMsg, setSendMsg] = useState<string | null>(null);
+  const [testTo, setTestTo] = useState("");
+
 
   async function reload() {
     const { data, error } = await db.from("newsletter_subscribers").select("*").order("created_at", { ascending: false }).limit(2000);
@@ -83,6 +88,39 @@ function AdminNewsletter() {
     const href = `mailto:?bcc=${encodeURIComponent(items.map((i) => i.email).join(","))}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.location.href = href;
   }
+
+  async function send(test: boolean) {
+    setSendMsg(null);
+    if (!subject.trim() || !body.trim()) {
+      setSendMsg("Inserisci oggetto e messaggio.");
+      return;
+    }
+    if (test && !testTo.trim()) {
+      setSendMsg("Inserisci un indirizzo per la prova.");
+      return;
+    }
+    if (!test && !confirm(`Inviare la newsletter a ${items.length} iscritti?`)) return;
+
+    setSending(true);
+    try {
+      const { data: s } = await db.auth.getSession();
+      const token = s.session?.access_token ?? "";
+      const res = await sendNewsletter({
+        data: { token, subject: subject.trim(), body, testTo: test ? testTo.trim() : undefined },
+      });
+      setSendMsg(
+        res.test
+          ? `Email di prova inviata a ${testTo.trim()}.`
+          : `Newsletter inviata a ${res.sent} iscritti.`,
+      );
+    } catch (e: any) {
+      setSendMsg(`Errore nell'invio: ${e?.message ?? e}`);
+    } finally {
+      setSending(false);
+    }
+  }
+
+
 
 
   async function remove(id: string) {
@@ -197,9 +235,10 @@ function AdminNewsletter() {
       <section className="mb-8 rounded-md border border-border bg-card p-4">
         <h2 className="font-serif text-xl italic text-primary">Invia una newsletter</h2>
         <p className="mt-1 text-xs text-muted-foreground">
-          Prepara il messaggio qui, poi aprilo nel tuo programma di posta: l'email parte dal tuo indirizzo,
-          con tutti gli iscritti in copia nascosta (Ccn), così nessuno vede gli indirizzi degli altri.
+          L'invio è automatico: ogni iscritto riceve la sua copia dal sito, senza passare dal programma di posta.
+          Prima di inviare a tutti, conviene fare una prova su un indirizzo.
         </p>
+
 
         <div className="mt-4 grid gap-3">
           <label className="grid gap-1 text-sm">
@@ -238,19 +277,26 @@ function AdminNewsletter() {
           </label>
         </div>
 
-        <div className="mt-4 flex flex-wrap gap-2">
+        <div className="mt-4 flex flex-wrap items-center gap-2">
           <button
-            onClick={openMailClient}
-            disabled={items.length === 0 || !subject}
+            onClick={() => send(false)}
+            disabled={sending || items.length === 0 || !subject.trim() || !body.trim()}
             className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground hover:opacity-90 disabled:opacity-50"
           >
-            <Mail size={14} /> Apri nel mio programma email ({items.length} iscritti)
+            <Send size={14} /> {sending ? "Invio in corso…" : `Invia a ${items.length} iscritti`}
           </button>
+          <input
+            value={testTo}
+            onChange={(e) => setTestTo(e.target.value)}
+            placeholder="prova@esempio.it"
+            className="rounded-md border border-border bg-background px-3 py-2 text-sm"
+          />
           <button
-            onClick={() => copy(bcc, "bcc")}
-            className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm hover:border-accent hover:text-accent"
+            onClick={() => send(true)}
+            disabled={sending}
+            className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm hover:border-accent hover:text-accent disabled:opacity-50"
           >
-            {copied === "bcc" ? <Check size={14} /> : <Copy size={14} />} Copia indirizzi (Ccn)
+            <Mail size={14} /> Invia una prova
           </button>
           <button
             onClick={() => copy(body, "body")}
@@ -258,13 +304,25 @@ function AdminNewsletter() {
           >
             {copied === "body" ? <Check size={14} /> : <Copy size={14} />} Copia testo
           </button>
+          <button
+            onClick={openMailClient}
+            className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm text-muted-foreground hover:border-accent hover:text-accent"
+          >
+            {copied === "bcc" ? <Check size={14} /> : <Copy size={14} />} Invio manuale (Ccn)
+          </button>
         </div>
 
+        {sendMsg && (
+          <div className="mt-3 rounded-md border border-border bg-background px-3 py-2 text-sm">{sendMsg}</div>
+        )}
+
+
         <p className="mt-3 text-xs text-muted-foreground">
-          Se il programma di posta non si apre (succede con liste lunghe), usa «Copia indirizzi (Ccn)» e
-          «Copia testo» e incollali in una nuova email dal tuo Gmail/Outlook. Metti sempre gli indirizzi in
-          <strong> Ccn</strong>, mai in «A».
+          Le email partono da <strong>newsletter@pierinagallina.it</strong> e le risposte arrivano a
+          <strong> info@pierinagallina.it</strong>. Il pulsante «Invio manuale (Ccn)» resta come alternativa
+          di emergenza.
         </p>
+
       </section>
 
 
