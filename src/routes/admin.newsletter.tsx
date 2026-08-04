@@ -277,19 +277,26 @@ function AdminNewsletter() {
           </label>
         </div>
 
-        <div className="mt-4 flex flex-wrap gap-2">
+        <div className="mt-4 flex flex-wrap items-center gap-2">
           <button
-            onClick={openMailClient}
-            disabled={items.length === 0 || !subject}
+            onClick={() => send(false)}
+            disabled={sending || items.length === 0 || !subject.trim() || !body.trim()}
             className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground hover:opacity-90 disabled:opacity-50"
           >
-            <Mail size={14} /> Apri nel mio programma email ({items.length} iscritti)
+            <Send size={14} /> {sending ? "Invio in corso…" : `Invia a ${items.length} iscritti`}
           </button>
+          <input
+            value={testTo}
+            onChange={(e) => setTestTo(e.target.value)}
+            placeholder="prova@esempio.it"
+            className="rounded-md border border-border bg-background px-3 py-2 text-sm"
+          />
           <button
-            onClick={() => copy(bcc, "bcc")}
-            className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm hover:border-accent hover:text-accent"
+            onClick={() => send(true)}
+            disabled={sending}
+            className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm hover:border-accent hover:text-accent disabled:opacity-50"
           >
-            {copied === "bcc" ? <Check size={14} /> : <Copy size={14} />} Copia indirizzi (Ccn)
+            <Mail size={14} /> Invia una prova
           </button>
           <button
             onClick={() => copy(body, "body")}
@@ -297,7 +304,18 @@ function AdminNewsletter() {
           >
             {copied === "body" ? <Check size={14} /> : <Copy size={14} />} Copia testo
           </button>
+          <button
+            onClick={openMailClient}
+            className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm text-muted-foreground hover:border-accent hover:text-accent"
+          >
+            {copied === "bcc" ? <Check size={14} /> : <Copy size={14} />} Invio manuale (Ccn)
+          </button>
         </div>
+
+        {sendMsg && (
+          <div className="mt-3 rounded-md border border-border bg-background px-3 py-2 text-sm">{sendMsg}</div>
+        )}
+
 
         <p className="mt-3 text-xs text-muted-foreground">
           Se il programma di posta non si apre (succede con liste lunghe), usa «Copia indirizzi (Ccn)» e
