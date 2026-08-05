@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { db, type GalleryPhoto } from "@/integrations/pierina/client";
 import { Plus, Trash2, Save } from "lucide-react";
+import { ImageUpload } from "@/components/ImageUpload";
+import { MultiImageUpload } from "@/components/MultiImageUpload";
 
 export const Route = createFileRoute("/admin/fotografie")({ component: AdminFoto });
 
