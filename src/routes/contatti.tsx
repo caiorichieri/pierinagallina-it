@@ -13,8 +13,11 @@ export const Route = createFileRoute("/contatti")({
       { property: "og:title", content: "Contatti — Pierina Gallina" },
       { property: "og:description", content: "Scrivi a Pierina Gallina per presentazioni di libri, letture nelle scuole, laboratori e collaborazioni in Friuli." },
       { name: "twitter:description", content: "Scrivi a Pierina Gallina per presentazioni di libri, letture nelle scuole, laboratori e collaborazioni in Friuli." },
+      { property: "og:url", content: "https://www.pierinagallina.it/contatti" },
     ],
+    links: [{ rel: "canonical", href: "https://www.pierinagallina.it/contatti" }],
   }),
+
   component: ContactPage,
 });
 
