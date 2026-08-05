@@ -5,21 +5,21 @@ import { PageHero } from "../components/PageHero";
 export const Route = createFileRoute("/privacy")({
   head: () => ({
     meta: [
-      { title: "Informativa Privacy — FriuliOn di Silvestre Richieri Caio" },
+      { title: "Informativa Privacy — Pierina Gallina" },
       {
         name: "description",
         content:
           "Informativa sul trattamento dei dati personali ai sensi del Regolamento UE 2016/679 (GDPR).",
       },
-      { property: "og:title", content: "Informativa Privacy — FriuliOn di Silvestre Richieri Caio" },
+      { property: "og:title", content: "Informativa Privacy — Pierina Gallina" },
       {
         property: "og:description",
         content:
           "Informativa sul trattamento dei dati personali ai sensi del Regolamento UE 2016/679 (GDPR).",
       },
-      { property: "og:url", content: "https://piergiorgioiacuzzo.it/privacy" },
+      { property: "og:url", content: "/privacy" },
     ],
-    links: [{ rel: "canonical", href: "https://piergiorgioiacuzzo.it/privacy" }],
+    links: [{ rel: "canonical", href: "/privacy" }],
   }),
   component: PrivacyPage,
 });

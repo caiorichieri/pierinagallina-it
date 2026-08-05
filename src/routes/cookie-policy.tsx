@@ -6,21 +6,21 @@ import { openCookiePreferences } from "../components/CookieBanner";
 export const Route = createFileRoute("/cookie-policy")({
   head: () => ({
     meta: [
-      { title: "Cookie Policy — FriuliOn di Silvestre Richieri Caio" },
+      { title: "Cookie Policy — Pierina Gallina" },
       {
         name: "description",
         content:
           "Informativa sui cookie utilizzati dal sito ai sensi delle Linee Guida del Garante Privacy del 10 giugno 2021.",
       },
-      { property: "og:title", content: "Cookie Policy — FriuliOn di Silvestre Richieri Caio" },
+      { property: "og:title", content: "Cookie Policy — Pierina Gallina" },
       {
         property: "og:description",
         content:
           "Informativa sui cookie utilizzati dal sito ai sensi delle Linee Guida del Garante Privacy del 10 giugno 2021.",
       },
-      { property: "og:url", content: "https://piergiorgioiacuzzo.it/cookie-policy" },
+      { property: "og:url", content: "/cookie-policy" },
     ],
-    links: [{ rel: "canonical", href: "https://piergiorgioiacuzzo.it/cookie-policy" }],
+    links: [{ rel: "canonical", href: "/cookie-policy" }],
   }),
   component: CookiePage,
 });
