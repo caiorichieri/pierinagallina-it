@@ -3,16 +3,11 @@ import type {} from "@tanstack/react-start";
 
 const CANONICAL_HOST = "https://www.pierinagallina.it";
 
-/** Uses the host the request came in on, so the sitemap link always matches it. */
-function baseUrl(request: Request): string {
-  try {
-    const url = new URL(request.url);
-    if (url.hostname === "localhost" || url.hostname === "127.0.0.1") return CANONICAL_HOST;
-    return `${url.protocol}//${url.host}`;
-  } catch {
-    return CANONICAL_HOST;
-  }
+/** Il sitemap punta sempre al dominio canonico del sito. */
+function baseUrl(_request: Request): string {
+  return CANONICAL_HOST;
 }
+
 
 export const Route = createFileRoute("/robots.txt")({
   server: {
