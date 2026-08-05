@@ -89,6 +89,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Pierina Gallina, scrittrice di Codroipo (Friuli) — paroliera per passione. Libri, fiabe sonore, poesie in friulano e italiano, fotografie e racconti.",
       },
       { name: "author", content: "Pierina Gallina" },
+      { name: "google-site-verification", content: "KSAZAf-9y3ywEoNCzXKhcGmqZdtQ4xXbaUgHNEJPwjU" },
+
       { property: "og:site_name", content: "Pierina Gallina" },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "it_IT" },
