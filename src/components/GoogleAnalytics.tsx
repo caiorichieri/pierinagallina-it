@@ -2,11 +2,18 @@ import { useEffect } from "react";
 import { useRouterState } from "@tanstack/react-router";
 
 import { getConsent, type Consent } from "./CookieBanner";
-import { loadGa4, trackPageView, isGa4Loaded, GA_MEASUREMENT_ID } from "../lib/ga4";
+import {
+  loadGa4,
+  trackPageView,
+  isGa4Loaded,
+  updateConsent,
+  GA_MEASUREMENT_ID,
+} from "../lib/ga4";
 
 /**
- * Inizializza GA4 quando l'utente ha dato il consenso analitico
- * e invia un page_view a ogni cambio di rotta (SPA).
+ * GA4 con Consent Mode v2: lo script parte subito con tutti i consensi negati
+ * (nessun cookie, solo ping cookieless) e viene aggiornato appena l'utente
+ * esprime le sue scelte nel banner cookie.
  */
 export function GoogleAnalytics() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -15,15 +22,19 @@ export function GoogleAnalytics() {
   useEffect(() => {
     if (!GA_MEASUREMENT_ID) return;
 
-    const apply = (c: Consent | null) => {
-      if (!c?.analytics || isGa4Loaded()) return;
-      loadGa4();
-      trackPageView(`${window.location.pathname}${window.location.search}`);
+    loadGa4();
+
+    const stored = getConsent();
+    if (stored) {
+      updateConsent({ analytics: stored.analytics, marketing: stored.marketing });
+    }
+    trackPageView(`${window.location.pathname}${window.location.search}`);
+
+    const onChange = (e: Event) => {
+      const c = (e as CustomEvent<Consent>).detail;
+      if (!c) return;
+      updateConsent({ analytics: c.analytics, marketing: c.marketing });
     };
-
-    apply(getConsent());
-
-    const onChange = (e: Event) => apply((e as CustomEvent<Consent>).detail);
     window.addEventListener("consent-change", onChange);
     return () => window.removeEventListener("consent-change", onChange);
   }, []);
