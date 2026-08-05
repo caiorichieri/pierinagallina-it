@@ -23,7 +23,7 @@ export const Route = createFileRoute("/contatti")({
   component: ContactPage,
 });
 
-type Status = "idle" | "sending" | "ok" | "err";
+type Status = "idle" | "sending" | "ok" | "ok-no-mail" | "err";
 
 function ContactPage() {
   const [status, setStatus] = useState<Status>("idle");
@@ -53,10 +53,13 @@ function ContactPage() {
         setStatus("err");
       } else {
         // Avvisa Pierina via email (non blocca l'esito del form)
-        notify({ data: { ...payload, subject: payload.subject ?? "" } }).catch((e) =>
-          console.error("notifica email", e),
+        const notifyResult = await notify({ data: { ...payload, subject: payload.subject ?? "" } }).catch(
+          (e) => {
+            console.error("notifica email", e);
+            return { ok: false, sent: false } as const;
+          },
         );
-        setStatus("ok");
+        setStatus(notifyResult.ok && notifyResult.sent ? "ok" : "ok-no-mail");
         setForm({ name: "", email: "", subject: "", message: "" });
         setPrivacy(false);
       }
@@ -123,6 +126,9 @@ function ContactPage() {
               {status === "sending" ? "Invio…" : "Invia"}
             </button>
             {status === "ok" && <span className="text-sm text-primary">Messaggio inviato, grazie!</span>}
+            {status === "ok-no-mail" && (
+              <span className="text-sm text-amber-600">Messaggio salvato, ma l'avviso email non è partito (dominio in attesa di verifica).</span>
+            )}
             {status === "err" && <span className="text-sm text-destructive">Errore nell'invio. Riprova.</span>}
           </div>
         </form>

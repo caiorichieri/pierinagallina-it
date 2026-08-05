@@ -1,3 +1,4 @@
+import process from "node:process";
 import { NEWSLETTER_FROM } from "./newsletter-config";
 
 const GATEWAY = "https://connector-gateway.lovable.dev/resend";

@@ -11,21 +11,22 @@ const schema = z.object({
 /**
  * Avvisa Pierina via email quando qualcuno lascia un messaggio dal sito.
  * Il messaggio è già stato salvato nel database dal form.
+ * L'errore di invio non blocca l'utente: viene loggato e ritornato come ok:false.
  */
 export const notifyNewContactMessage = createServerFn({ method: "POST" })
   .inputValidator((input) => schema.parse(input))
   .handler(async ({ data }) => {
-    const { sendContactNotification } = await import("./contact-mail.server");
     try {
+      const { sendContactNotification } = await import("./contact-mail.server");
       await sendContactNotification({
         name: data.name,
         email: data.email,
         subject: data.subject || null,
         message: data.message,
       });
-      return { ok: true as const };
+      return { ok: true as const, sent: true as const };
     } catch (e) {
       console.error("[contact] notifica email fallita", e);
-      return { ok: false as const };
+      return { ok: true as const, sent: false as const, error: String(e) };
     }
   });
