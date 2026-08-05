@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ScrittiRouteImport } from './routes/scritti'
+import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as LibriRouteImport } from './routes/libri'
 import { Route as FotografieRouteImport } from './routes/fotografie'
@@ -42,6 +43,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const ScrittiRoute = ScrittiRouteImport.update({
   id: '/scritti',
   path: '/scritti',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
+  id: '/robots.txt',
+  path: '/robots.txt',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyRoute = PrivacyRouteImport.update({
@@ -167,6 +173,7 @@ export interface FileRoutesByFullPath {
   '/fotografie': typeof FotografieRoute
   '/libri': typeof LibriRoute
   '/privacy': typeof PrivacyRoute
+  '/robots.txt': typeof RobotsDottxtRoute
   '/scritti': typeof ScrittiRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/fiabe': typeof AdminFiabeRoute
@@ -192,6 +199,7 @@ export interface FileRoutesByTo {
   '/fotografie': typeof FotografieRoute
   '/libri': typeof LibriRoute
   '/privacy': typeof PrivacyRoute
+  '/robots.txt': typeof RobotsDottxtRoute
   '/scritti': typeof ScrittiRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/fiabe': typeof AdminFiabeRoute
@@ -218,6 +226,7 @@ export interface FileRoutesById {
   '/fotografie': typeof FotografieRoute
   '/libri': typeof LibriRoute
   '/privacy': typeof PrivacyRoute
+  '/robots.txt': typeof RobotsDottxtRoute
   '/scritti': typeof ScrittiRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/fiabe': typeof AdminFiabeRoute
@@ -246,6 +255,7 @@ export interface FileRouteTypes {
     | '/fotografie'
     | '/libri'
     | '/privacy'
+    | '/robots.txt'
     | '/scritti'
     | '/sitemap.xml'
     | '/admin/fiabe'
@@ -271,6 +281,7 @@ export interface FileRouteTypes {
     | '/fotografie'
     | '/libri'
     | '/privacy'
+    | '/robots.txt'
     | '/scritti'
     | '/sitemap.xml'
     | '/admin/fiabe'
@@ -296,6 +307,7 @@ export interface FileRouteTypes {
     | '/fotografie'
     | '/libri'
     | '/privacy'
+    | '/robots.txt'
     | '/scritti'
     | '/sitemap.xml'
     | '/admin/fiabe'
@@ -323,6 +335,7 @@ export interface RootRouteChildren {
   FotografieRoute: typeof FotografieRoute
   LibriRoute: typeof LibriRoute
   PrivacyRoute: typeof PrivacyRoute
+  RobotsDottxtRoute: typeof RobotsDottxtRoute
   ScrittiRoute: typeof ScrittiRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   BlogSlugRoute: typeof BlogSlugRoute
@@ -342,6 +355,13 @@ declare module '@tanstack/react-router' {
       path: '/scritti'
       fullPath: '/scritti'
       preLoaderRoute: typeof ScrittiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/robots.txt': {
+      id: '/robots.txt'
+      path: '/robots.txt'
+      fullPath: '/robots.txt'
+      preLoaderRoute: typeof RobotsDottxtRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy': {
@@ -551,6 +571,7 @@ const rootRouteChildren: RootRouteChildren = {
   FotografieRoute: FotografieRoute,
   LibriRoute: LibriRoute,
   PrivacyRoute: PrivacyRoute,
+  RobotsDottxtRoute: RobotsDottxtRoute,
   ScrittiRoute: ScrittiRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   BlogSlugRoute: BlogSlugRoute,
@@ -558,13 +579,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

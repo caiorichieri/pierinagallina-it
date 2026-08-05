@@ -2,7 +2,18 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { db } from "../integrations/pierina/client";
 
-const BASE_URL = "https://www.pierinagallina.it";
+const CANONICAL_HOST = "https://www.pierinagallina.it";
+
+/** Uses the host the request came in on, so entries always match the domain being crawled. */
+function baseUrl(request: Request): string {
+  try {
+    const url = new URL(request.url);
+    if (url.hostname === "localhost" || url.hostname === "127.0.0.1") return CANONICAL_HOST;
+    return `${url.protocol}//${url.host}`;
+  } catch {
+    return CANONICAL_HOST;
+  }
+}
 
 interface SitemapEntry {
   path: string;
@@ -14,7 +25,8 @@ interface SitemapEntry {
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
-      GET: async () => {
+      GET: async ({ request }) => {
+        const BASE_URL = baseUrl(request);
         const staticEntries: SitemapEntry[] = [
           { path: "/", changefreq: "weekly", priority: "1.0" },
           { path: "/chi-sono", changefreq: "monthly", priority: "0.8" },
