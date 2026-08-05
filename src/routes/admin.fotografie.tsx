@@ -27,6 +27,13 @@ function AdminFoto() {
     if (error) return setErr(error.message);
     setEditing(null); reload();
   }
+  async function addMany(urls: string[]) {
+    const base = items.length;
+    const rows = urls.map((image_url, i) => ({ image_url, title: "", sort_order: base + i }));
+    const { error } = await db.from("gallery_photos").insert(rows);
+    if (error) return setErr(error.message);
+    reload();
+  }
   async function remove(id: string) {
     if (!confirm("Eliminare la fotografia?")) return;
     const { error } = await db.from("gallery_photos").delete().eq("id", id);
