@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
+import { notifyNewContactMessage } from "@/lib/contact-notify.functions";
 import { PageHero } from "@/components/PageHero";
 import { db } from "@/integrations/pierina/client";
 import { MapPin, Send } from "lucide-react";
@@ -25,6 +27,7 @@ type Status = "idle" | "sending" | "ok" | "err";
 
 function ContactPage() {
   const [status, setStatus] = useState<Status>("idle");
+  const notify = useServerFn(notifyNewContactMessage);
   const [privacy, setPrivacy] = useState(false);
   const [privacyErr, setPrivacyErr] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
@@ -38,16 +41,21 @@ function ContactPage() {
     setPrivacyErr(false);
     setStatus("sending");
     try {
-      const { error } = await db.from("contact_messages").insert({
+      const payload = {
         name: form.name.trim(),
         email: form.email.trim(),
         subject: form.subject.trim() || null,
         message: form.message.trim(),
-      });
+      };
+      const { error } = await db.from("contact_messages").insert(payload);
       if (error) {
         console.error(error);
         setStatus("err");
       } else {
+        // Avvisa Pierina via email (non blocca l'esito del form)
+        notify({ data: { ...payload, subject: payload.subject ?? "" } }).catch((e) =>
+          console.error("notifica email", e),
+        );
         setStatus("ok");
         setForm({ name: "", email: "", subject: "", message: "" });
         setPrivacy(false);
