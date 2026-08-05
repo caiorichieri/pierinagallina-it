@@ -1,8 +1,10 @@
+import { useEffect } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
 import { ArrowLeft } from "lucide-react";
 import { db, type Post } from "@/integrations/pierina/client";
 import { sanitizeHtml } from "@/lib/sanitize";
+import { trackArticleRead, trackArticleView } from "@/lib/ga4-events";
 
 const postQuery = (slug: string) =>
   queryOptions({
@@ -78,6 +80,24 @@ export const Route = createFileRoute("/blog/$slug")({
 function PostPage() {
   const { slug } = Route.useParams();
   const { data: p } = useSuspenseQuery(postQuery(slug));
+
+  // Report "pagine più lette": apertura + lettura completata (>=75% di scroll)
+  useEffect(() => {
+    trackArticleView(p.title, slug);
+    const start = Date.now();
+    let done = false;
+    const onScroll = () => {
+      if (done) return;
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      if (scrollable <= 0) return;
+      if (window.scrollY / scrollable >= 0.75) {
+        done = true;
+        trackArticleRead(p.title, slug, Math.round((Date.now() - start) / 1000));
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [p.title, slug]);
 
   return (
     <article className="bg-background">

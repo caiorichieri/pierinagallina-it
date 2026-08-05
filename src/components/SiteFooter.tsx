@@ -3,6 +3,7 @@ import { Mail, MapPin, BookOpen } from "lucide-react";
 import { useT } from "../i18n";
 import { openCookiePreferences } from "./CookieBanner";
 import { SocialLinks } from "./SocialLinks";
+import { trackNewsletterIntent } from "@/lib/ga4-events";
 
 export function SiteFooter() {
   const { t } = useT();
@@ -73,6 +74,7 @@ export function SiteFooter() {
             </p>
             <Link
               to="/contatti"
+              onClick={() => trackNewsletterIntent("footer")}
               className="mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:underline"
             >
               Iscriviti <Mail size={14} />
