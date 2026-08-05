@@ -19,6 +19,7 @@ import { Route as CookiePolicyRouteImport } from './routes/cookie-policy'
 import { Route as ContattiRouteImport } from './routes/contatti'
 import { Route as ChiSonoRouteImport } from './routes/chi-sono'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AudiolibriPerBambiniRouteImport } from './routes/audiolibri-per-bambini'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
@@ -81,6 +82,11 @@ const ChiSonoRoute = ChiSonoRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AudiolibriPerBambiniRoute = AudiolibriPerBambiniRouteImport.update({
+  id: '/audiolibri-per-bambini',
+  path: '/audiolibri-per-bambini',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRoute = AdminRouteImport.update({
@@ -152,6 +158,7 @@ const AdminPostsIdRoute = AdminPostsIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/audiolibri-per-bambini': typeof AudiolibriPerBambiniRoute
   '/auth': typeof AuthRoute
   '/chi-sono': typeof ChiSonoRoute
   '/contatti': typeof ContattiRoute
@@ -176,6 +183,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/audiolibri-per-bambini': typeof AudiolibriPerBambiniRoute
   '/auth': typeof AuthRoute
   '/chi-sono': typeof ChiSonoRoute
   '/contatti': typeof ContattiRoute
@@ -201,6 +209,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/audiolibri-per-bambini': typeof AudiolibriPerBambiniRoute
   '/auth': typeof AuthRoute
   '/chi-sono': typeof ChiSonoRoute
   '/contatti': typeof ContattiRoute
@@ -228,6 +237,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/admin'
+    | '/audiolibri-per-bambini'
     | '/auth'
     | '/chi-sono'
     | '/contatti'
@@ -252,6 +262,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/audiolibri-per-bambini'
     | '/auth'
     | '/chi-sono'
     | '/contatti'
@@ -276,6 +287,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/admin'
+    | '/audiolibri-per-bambini'
     | '/auth'
     | '/chi-sono'
     | '/contatti'
@@ -302,6 +314,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
+  AudiolibriPerBambiniRoute: typeof AudiolibriPerBambiniRoute
   AuthRoute: typeof AuthRoute
   ChiSonoRoute: typeof ChiSonoRoute
   ContattiRoute: typeof ContattiRoute
@@ -385,6 +398,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/audiolibri-per-bambini': {
+      id: '/audiolibri-per-bambini'
+      path: '/audiolibri-per-bambini'
+      fullPath: '/audiolibri-per-bambini'
+      preLoaderRoute: typeof AudiolibriPerBambiniRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -522,6 +542,7 @@ const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
+  AudiolibriPerBambiniRoute: AudiolibriPerBambiniRoute,
   AuthRoute: AuthRoute,
   ChiSonoRoute: ChiSonoRoute,
   ContattiRoute: ContattiRoute,

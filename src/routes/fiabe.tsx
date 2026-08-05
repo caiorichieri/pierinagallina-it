@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
 import { db, type FiabaCollection, type FiabaTrack } from "@/integrations/pierina/client";
 import { FiabeHero } from "@/components/FiabeHero";
@@ -43,6 +43,17 @@ function FiabePage() {
   return (
     <>
       <FiabeHero />
+
+      <div className="mx-auto max-w-5xl px-4 pt-10 text-center sm:px-6">
+        <Link
+          to="/audiolibri-per-bambini"
+          className="text-sm underline underline-offset-4 text-muted-foreground transition-colors hover:text-foreground"
+        >
+          Scopri tutti gli audiolibri per bambini da ascoltare gratis →
+        </Link>
+      </div>
+
+
 
 
       <section className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
