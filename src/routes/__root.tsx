@@ -162,6 +162,7 @@ function RootComponent() {
           <SiteFooter />
           <CookieBanner />
           <VisitTracker />
+          <GoogleAnalytics />
         </div>
       </LanguageProvider>
     </QueryClientProvider>
