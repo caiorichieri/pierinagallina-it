@@ -34,14 +34,17 @@ function AdminFoto() {
 
   return (
     <div>
-      <header className="mb-6 flex items-end justify-between">
+      <header className="mb-6 flex flex-wrap items-end justify-between gap-3">
         <div>
           <p className="text-xs uppercase tracking-widest text-muted-foreground">Galleria</p>
           <h1 className="mt-1 font-serif text-3xl italic text-primary">Fotografie ({items.length})</h1>
         </div>
-        <button onClick={() => setEditing({ title: "", image_url: "", sort_order: items.length })} className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground hover:opacity-90">
-          <Plus size={14} /> Nuova foto
-        </button>
+        <div className="flex items-center gap-2">
+          <MultiImageUpload label="Carica più foto" onUploaded={addMany} />
+          <button onClick={() => setEditing({ title: "", image_url: "", sort_order: items.length })} className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground hover:opacity-90">
+            <Plus size={14} /> Nuova foto
+          </button>
+        </div>
       </header>
       {err && <p className="mb-3 text-sm text-destructive">{err}</p>}
 
