@@ -16,6 +16,7 @@ import { SiteHeader } from "../components/SiteHeader";
 import { SiteFooter } from "../components/SiteFooter";
 import { CookieBanner } from "../components/CookieBanner";
 import { VisitTracker } from "../components/VisitTracker";
+import { GoogleAnalytics } from "../components/GoogleAnalytics";
 
 function NotFoundComponent() {
   return (
