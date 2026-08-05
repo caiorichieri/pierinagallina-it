@@ -1,9 +1,9 @@
-import { NEWSLETTER_FROM, NEWSLETTER_REPLY_TO } from "./newsletter-config";
+import { NEWSLETTER_FROM } from "./newsletter-config";
 
 const GATEWAY = "https://connector-gateway.lovable.dev/resend";
 
 /** Indirizzo che riceve la notifica di ogni nuovo messaggio dal sito. */
-export const CONTACT_NOTIFY_TO = NEWSLETTER_REPLY_TO;
+export const CONTACT_NOTIFY_TO = "padovani@qnetmail.it";
 
 function esc(s: string) {
   return s
