@@ -35,8 +35,26 @@ export const Route = createFileRoute("/scritti")({
       { name: "description", content: "Articoli, racconti e poesie di Pierina Gallina. Parole in friulano e in italiano che nascono dalla terra, dalla scuola e dall'ascolto." },
       { property: "og:title", content: "Scritti — Pierina Gallina" },
       { property: "og:description", content: "Articoli e poesie. Una raccolta di parole che continua a crescere." },
+      { name: "twitter:description", content: "Articoli e poesie. Una raccolta di parole che continua a crescere." },
+      { property: "og:url", content: "https://www.pierinagallina.it/scritti" },
+    ],
+    links: [{ rel: "canonical", href: "https://www.pierinagallina.it/scritti" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: "Scritti di Pierina Gallina",
+          description:
+            "Articoli, racconti e poesie di Pierina Gallina, in friulano e in italiano.",
+          url: "https://www.pierinagallina.it/scritti",
+          inLanguage: "it-IT",
+        }),
+      },
     ],
   }),
+
   loader: ({ context }) => context.queryClient.ensureQueryData(scrittiQ),
   component: ScrittiPage,
   errorComponent: ({ error }) => <div className="p-10 text-center text-sm text-muted-foreground">{(error as Error).message}</div>,
