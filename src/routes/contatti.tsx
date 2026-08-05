@@ -27,6 +27,7 @@ type Status = "idle" | "sending" | "ok" | "err";
 
 function ContactPage() {
   const [status, setStatus] = useState<Status>("idle");
+  const notify = useServerFn(notifyNewContactMessage);
   const [privacy, setPrivacy] = useState(false);
   const [privacyErr, setPrivacyErr] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
