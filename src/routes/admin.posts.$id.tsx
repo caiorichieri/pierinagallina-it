@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { db, type Post } from "@/integrations/pierina/client";
 import { ArrowLeft, Save } from "lucide-react";
 import { Link } from "@tanstack/react-router";
+import { ImageUpload } from "@/components/ImageUpload";
+import { RichTextEditor } from "@/components/RichTextEditor";
 
 export const Route = createFileRoute("/admin/posts/$id")({
   component: PostEditor,
