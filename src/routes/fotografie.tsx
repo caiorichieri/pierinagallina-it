@@ -26,6 +26,8 @@ export const Route = createFileRoute("/fotografie")({
       { title: "Fotografie — Pierina Gallina" },
       { name: "description", content: "Galleria fotografica di Pierina Gallina: incontri, presentazioni, scuola e paesaggi del Friuli." },
       { property: "og:title", content: "Fotografie — Pierina Gallina" },
+      { property: "og:description", content: "Galleria fotografica di Pierina Gallina: incontri con i lettori, presentazioni, letture nelle scuole e paesaggi del Friuli." },
+      { name: "twitter:description", content: "Galleria fotografica di Pierina Gallina: incontri con i lettori, presentazioni, letture nelle scuole e paesaggi del Friuli." },
     ],
   }),
   loader: ({ context }) => context.queryClient.ensureQueryData(photosQ),
