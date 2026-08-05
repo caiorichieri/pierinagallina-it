@@ -68,8 +68,27 @@ export const Route = createFileRoute("/")({
         property: "og:description",
         content: "Scrittrice di Codroipo (Friuli). Libri, fiabe sonore, poesie e fotografie.",
       },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Pierina Gallina — paroliera per passione" },
+      {
+        name: "twitter:description",
+        content: "Scrittrice di Codroipo (Friuli). Libri, fiabe sonore, poesie e fotografie.",
+      },
+      { property: "og:url", content: "https://www.pierinagallina.it/" },
+      {
+        property: "og:image",
+        content:
+          "https://storage.googleapis.com/gpt-engineer-file-uploads/iME4qutiMvQWTfEWBPjGKRFf98H3/social-images/social-1783412112132-18_marzo_26.webp",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://storage.googleapis.com/gpt-engineer-file-uploads/iME4qutiMvQWTfEWBPjGKRFf98H3/social-images/social-1783412112132-18_marzo_26.webp",
+      },
     ],
+    links: [{ rel: "canonical", href: "https://www.pierinagallina.it/" }],
   }),
+
   loader: ({ context }) => context.queryClient.ensureQueryData(homeData),
   component: HomePage,
 });
