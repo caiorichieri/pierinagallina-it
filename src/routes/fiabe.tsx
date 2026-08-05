@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
 import { db, type FiabaCollection, type FiabaTrack } from "@/integrations/pierina/client";
 import { FiabeHero } from "@/components/FiabeHero";
