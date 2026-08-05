@@ -83,7 +83,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "author", content: "Pierina Gallina" },
-      { name: "google-site-verification", content: "KSAZAf-9y3ywEoNCzXKhcGmqZdtQ4xXbaUgHNEJPwjU" },
+      { name: "google-site-verification", content: "Uzx94LV5EySl4vXKAxcWQjLGcZZp7bQVRObpg2h3lKA" },
 
       { property: "og:site_name", content: "Pierina Gallina" },
       { property: "og:type", content: "website" },
