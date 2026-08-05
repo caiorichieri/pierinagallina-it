@@ -1,0 +1,18 @@
+# Pierina Gallina
+
+> Sito ufficiale di Pierina Gallina, scrittrice e paroliera di Codroipo (Friuli): fiabe, racconti, poesie, libri e fotografie.
+
+## Pagine
+
+- [Home](/): Presentazione di Pierina Gallina, scrittrice e paroliera friulana.
+- [Chi sono](/chi-sono): Biografia e percorso di scrittura di Pierina Gallina.
+- [Libri](/libri): Catalogo dei libri: fiabe, racconti per bambini e raccolte illustrate.
+- [Scritti](/scritti): Articoli e poesie, con ricerca e filtri per categoria.
+- [Fiabe sonore](/fiabe): Fiabe da ascoltare.
+- [Fotografie](/fotografie): Galleria di incontri, presentazioni e paesaggi del Friuli.
+- [Contatti](/contatti): Modulo di contatto e profili social.
+
+## Optional
+
+- [Informativa Privacy](/privacy): Trattamento dei dati personali (GDPR).
+- [Cookie Policy](/cookie-policy): Cookie utilizzati e gestione del consenso.
