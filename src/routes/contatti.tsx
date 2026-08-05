@@ -53,10 +53,13 @@ function ContactPage() {
         setStatus("err");
       } else {
         // Avvisa Pierina via email (non blocca l'esito del form)
-        notify({ data: { ...payload, subject: payload.subject ?? "" } }).catch((e) =>
-          console.error("notifica email", e),
+        const notifyResult = await notify({ data: { ...payload, subject: payload.subject ?? "" } }).catch(
+          (e) => {
+            console.error("notifica email", e);
+            return { ok: false, sent: false } as const;
+          },
         );
-        setStatus("ok");
+        setStatus(notifyResult.ok && notifyResult.sent ? "ok" : "ok-no-mail");
         setForm({ name: "", email: "", subject: "", message: "" });
         setPrivacy(false);
       }
