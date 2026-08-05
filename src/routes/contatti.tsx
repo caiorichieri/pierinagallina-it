@@ -38,16 +38,21 @@ function ContactPage() {
     setPrivacyErr(false);
     setStatus("sending");
     try {
-      const { error } = await db.from("contact_messages").insert({
+      const payload = {
         name: form.name.trim(),
         email: form.email.trim(),
         subject: form.subject.trim() || null,
         message: form.message.trim(),
-      });
+      };
+      const { error } = await db.from("contact_messages").insert(payload);
       if (error) {
         console.error(error);
         setStatus("err");
       } else {
+        // Avvisa Pierina via email (non blocca l'esito del form)
+        notify({ data: { ...payload, subject: payload.subject ?? "" } }).catch((e) =>
+          console.error("notifica email", e),
+        );
         setStatus("ok");
         setForm({ name: "", email: "", subject: "", message: "" });
         setPrivacy(false);
