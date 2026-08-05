@@ -9,90 +9,35 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as ScrittiRouteImport } from './routes/scritti'
-import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
-import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as LibriRouteImport } from './routes/libri'
-import { Route as FotografieRouteImport } from './routes/fotografie'
-import { Route as FiabeRouteImport } from './routes/fiabe'
-import { Route as CookiePolicyRouteImport } from './routes/cookie-policy'
-import { Route as ContattiRouteImport } from './routes/contatti'
-import { Route as ChiSonoRouteImport } from './routes/chi-sono'
-import { Route as AuthRouteImport } from './routes/auth'
-import { Route as AudiolibriPerBambiniRouteImport } from './routes/audiolibri-per-bambini'
-import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AudiolibriPerBambiniRouteImport } from './routes/audiolibri-per-bambini'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ChiSonoRouteImport } from './routes/chi-sono'
+import { Route as ContattiRouteImport } from './routes/contatti'
+import { Route as CookiePolicyRouteImport } from './routes/cookie-policy'
+import { Route as FiabeRouteImport } from './routes/fiabe'
+import { Route as FotografieRouteImport } from './routes/fotografie'
+import { Route as LibriRouteImport } from './routes/libri'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
+import { Route as ScrittiRouteImport } from './routes/scritti'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
-import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
-import { Route as AdminPostsRouteImport } from './routes/admin.posts'
-import { Route as AdminPoesieRouteImport } from './routes/admin.poesie'
-import { Route as AdminNewsletterRouteImport } from './routes/admin.newsletter'
-import { Route as AdminMessaggiRouteImport } from './routes/admin.messaggi'
-import { Route as AdminLibriRouteImport } from './routes/admin.libri'
-import { Route as AdminFotografieRouteImport } from './routes/admin.fotografie'
 import { Route as AdminFiabeRouteImport } from './routes/admin.fiabe'
+import { Route as AdminFotografieRouteImport } from './routes/admin.fotografie'
+import { Route as AdminLibriRouteImport } from './routes/admin.libri'
+import { Route as AdminMessaggiRouteImport } from './routes/admin.messaggi'
+import { Route as AdminNewsletterRouteImport } from './routes/admin.newsletter'
+import { Route as AdminPoesieRouteImport } from './routes/admin.poesie'
+import { Route as AdminPostsRouteImport } from './routes/admin.posts'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AdminPostsIndexRouteImport } from './routes/admin.posts.index'
 import { Route as AdminPostsIdRouteImport } from './routes/admin.posts.$id'
 
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ScrittiRoute = ScrittiRouteImport.update({
-  id: '/scritti',
-  path: '/scritti',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
-  id: '/robots.txt',
-  path: '/robots.txt',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrivacyRoute = PrivacyRouteImport.update({
-  id: '/privacy',
-  path: '/privacy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LibriRoute = LibriRouteImport.update({
-  id: '/libri',
-  path: '/libri',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FotografieRoute = FotografieRouteImport.update({
-  id: '/fotografie',
-  path: '/fotografie',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FiabeRoute = FiabeRouteImport.update({
-  id: '/fiabe',
-  path: '/fiabe',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CookiePolicyRoute = CookiePolicyRouteImport.update({
-  id: '/cookie-policy',
-  path: '/cookie-policy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContattiRoute = ContattiRouteImport.update({
-  id: '/contatti',
-  path: '/contatti',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ChiSonoRoute = ChiSonoRouteImport.update({
-  id: '/chi-sono',
-  path: '/chi-sono',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthRoute = AuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AudiolibriPerBambiniRoute = AudiolibriPerBambiniRouteImport.update({
-  id: '/audiolibri-per-bambini',
-  path: '/audiolibri-per-bambini',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRoute = AdminRouteImport.update({
@@ -100,9 +45,64 @@ const AdminRoute = AdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const AudiolibriPerBambiniRoute = AudiolibriPerBambiniRouteImport.update({
+  id: '/audiolibri-per-bambini',
+  path: '/audiolibri-per-bambini',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChiSonoRoute = ChiSonoRouteImport.update({
+  id: '/chi-sono',
+  path: '/chi-sono',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContattiRoute = ContattiRouteImport.update({
+  id: '/contatti',
+  path: '/contatti',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CookiePolicyRoute = CookiePolicyRouteImport.update({
+  id: '/cookie-policy',
+  path: '/cookie-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FiabeRoute = FiabeRouteImport.update({
+  id: '/fiabe',
+  path: '/fiabe',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FotografieRoute = FotografieRouteImport.update({
+  id: '/fotografie',
+  path: '/fotografie',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LibriRoute = LibriRouteImport.update({
+  id: '/libri',
+  path: '/libri',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
+  id: '/robots.txt',
+  path: '/robots.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScrittiRoute = ScrittiRouteImport.update({
+  id: '/scritti',
+  path: '/scritti',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
@@ -110,34 +110,9 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
-const BlogSlugRoute = BlogSlugRouteImport.update({
-  id: '/blog/$slug',
-  path: '/blog/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminPostsRoute = AdminPostsRouteImport.update({
-  id: '/posts',
-  path: '/posts',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminPoesieRoute = AdminPoesieRouteImport.update({
-  id: '/poesie',
-  path: '/poesie',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminNewsletterRoute = AdminNewsletterRouteImport.update({
-  id: '/newsletter',
-  path: '/newsletter',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminMessaggiRoute = AdminMessaggiRouteImport.update({
-  id: '/messaggi',
-  path: '/messaggi',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminLibriRoute = AdminLibriRouteImport.update({
-  id: '/libri',
-  path: '/libri',
+const AdminFiabeRoute = AdminFiabeRouteImport.update({
+  id: '/fiabe',
+  path: '/fiabe',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminFotografieRoute = AdminFotografieRouteImport.update({
@@ -145,10 +120,35 @@ const AdminFotografieRoute = AdminFotografieRouteImport.update({
   path: '/fotografie',
   getParentRoute: () => AdminRoute,
 } as any)
-const AdminFiabeRoute = AdminFiabeRouteImport.update({
-  id: '/fiabe',
-  path: '/fiabe',
+const AdminLibriRoute = AdminLibriRouteImport.update({
+  id: '/libri',
+  path: '/libri',
   getParentRoute: () => AdminRoute,
+} as any)
+const AdminMessaggiRoute = AdminMessaggiRouteImport.update({
+  id: '/messaggi',
+  path: '/messaggi',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminNewsletterRoute = AdminNewsletterRouteImport.update({
+  id: '/newsletter',
+  path: '/newsletter',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPoesieRoute = AdminPoesieRouteImport.update({
+  id: '/poesie',
+  path: '/poesie',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPostsRoute = AdminPostsRouteImport.update({
+  id: '/posts',
+  path: '/posts',
+  getParentRoute: () => AdminRoute,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AdminPostsIndexRoute = AdminPostsIndexRouteImport.update({
   id: '/',
@@ -343,88 +343,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/scritti': {
-      id: '/scritti'
-      path: '/scritti'
-      fullPath: '/scritti'
-      preLoaderRoute: typeof ScrittiRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/robots.txt': {
-      id: '/robots.txt'
-      path: '/robots.txt'
-      fullPath: '/robots.txt'
-      preLoaderRoute: typeof RobotsDottxtRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/privacy': {
-      id: '/privacy'
-      path: '/privacy'
-      fullPath: '/privacy'
-      preLoaderRoute: typeof PrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/libri': {
-      id: '/libri'
-      path: '/libri'
-      fullPath: '/libri'
-      preLoaderRoute: typeof LibriRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/fotografie': {
-      id: '/fotografie'
-      path: '/fotografie'
-      fullPath: '/fotografie'
-      preLoaderRoute: typeof FotografieRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/fiabe': {
-      id: '/fiabe'
-      path: '/fiabe'
-      fullPath: '/fiabe'
-      preLoaderRoute: typeof FiabeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/cookie-policy': {
-      id: '/cookie-policy'
-      path: '/cookie-policy'
-      fullPath: '/cookie-policy'
-      preLoaderRoute: typeof CookiePolicyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contatti': {
-      id: '/contatti'
-      path: '/contatti'
-      fullPath: '/contatti'
-      preLoaderRoute: typeof ContattiRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/chi-sono': {
-      id: '/chi-sono'
-      path: '/chi-sono'
-      fullPath: '/chi-sono'
-      preLoaderRoute: typeof ChiSonoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/audiolibri-per-bambini': {
-      id: '/audiolibri-per-bambini'
-      path: '/audiolibri-per-bambini'
-      fullPath: '/audiolibri-per-bambini'
-      preLoaderRoute: typeof AudiolibriPerBambiniRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -434,11 +357,88 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/audiolibri-per-bambini': {
+      id: '/audiolibri-per-bambini'
+      path: '/audiolibri-per-bambini'
+      fullPath: '/audiolibri-per-bambini'
+      preLoaderRoute: typeof AudiolibriPerBambiniRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chi-sono': {
+      id: '/chi-sono'
+      path: '/chi-sono'
+      fullPath: '/chi-sono'
+      preLoaderRoute: typeof ChiSonoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contatti': {
+      id: '/contatti'
+      path: '/contatti'
+      fullPath: '/contatti'
+      preLoaderRoute: typeof ContattiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cookie-policy': {
+      id: '/cookie-policy'
+      path: '/cookie-policy'
+      fullPath: '/cookie-policy'
+      preLoaderRoute: typeof CookiePolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fiabe': {
+      id: '/fiabe'
+      path: '/fiabe'
+      fullPath: '/fiabe'
+      preLoaderRoute: typeof FiabeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fotografie': {
+      id: '/fotografie'
+      path: '/fotografie'
+      fullPath: '/fotografie'
+      preLoaderRoute: typeof FotografieRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/libri': {
+      id: '/libri'
+      path: '/libri'
+      fullPath: '/libri'
+      preLoaderRoute: typeof LibriRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/robots.txt': {
+      id: '/robots.txt'
+      path: '/robots.txt'
+      fullPath: '/robots.txt'
+      preLoaderRoute: typeof RobotsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/scritti': {
+      id: '/scritti'
+      path: '/scritti'
+      fullPath: '/scritti'
+      preLoaderRoute: typeof ScrittiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/': {
@@ -448,46 +448,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/blog/$slug': {
-      id: '/blog/$slug'
-      path: '/blog/$slug'
-      fullPath: '/blog/$slug'
-      preLoaderRoute: typeof BlogSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin/posts': {
-      id: '/admin/posts'
-      path: '/posts'
-      fullPath: '/admin/posts'
-      preLoaderRoute: typeof AdminPostsRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/poesie': {
-      id: '/admin/poesie'
-      path: '/poesie'
-      fullPath: '/admin/poesie'
-      preLoaderRoute: typeof AdminPoesieRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/newsletter': {
-      id: '/admin/newsletter'
-      path: '/newsletter'
-      fullPath: '/admin/newsletter'
-      preLoaderRoute: typeof AdminNewsletterRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/messaggi': {
-      id: '/admin/messaggi'
-      path: '/messaggi'
-      fullPath: '/admin/messaggi'
-      preLoaderRoute: typeof AdminMessaggiRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/libri': {
-      id: '/admin/libri'
-      path: '/libri'
-      fullPath: '/admin/libri'
-      preLoaderRoute: typeof AdminLibriRouteImport
+    '/admin/fiabe': {
+      id: '/admin/fiabe'
+      path: '/fiabe'
+      fullPath: '/admin/fiabe'
+      preLoaderRoute: typeof AdminFiabeRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/fotografie': {
@@ -497,12 +462,47 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminFotografieRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/admin/fiabe': {
-      id: '/admin/fiabe'
-      path: '/fiabe'
-      fullPath: '/admin/fiabe'
-      preLoaderRoute: typeof AdminFiabeRouteImport
+    '/admin/libri': {
+      id: '/admin/libri'
+      path: '/libri'
+      fullPath: '/admin/libri'
+      preLoaderRoute: typeof AdminLibriRouteImport
       parentRoute: typeof AdminRoute
+    }
+    '/admin/messaggi': {
+      id: '/admin/messaggi'
+      path: '/messaggi'
+      fullPath: '/admin/messaggi'
+      preLoaderRoute: typeof AdminMessaggiRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/newsletter': {
+      id: '/admin/newsletter'
+      path: '/newsletter'
+      fullPath: '/admin/newsletter'
+      preLoaderRoute: typeof AdminNewsletterRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/poesie': {
+      id: '/admin/poesie'
+      path: '/poesie'
+      fullPath: '/admin/poesie'
+      preLoaderRoute: typeof AdminPoesieRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/posts': {
+      id: '/admin/posts'
+      path: '/posts'
+      fullPath: '/admin/posts'
+      preLoaderRoute: typeof AdminPostsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/admin/posts/': {
       id: '/admin/posts/'
@@ -579,3 +579,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
