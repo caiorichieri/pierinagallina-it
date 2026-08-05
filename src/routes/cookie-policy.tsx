@@ -131,7 +131,7 @@ function CookiePage() {
 
             <H>Titolare</H>
             <P>
-              FriuliOn di Silvestre Richieri Caio, Sia Sedegliano, 30, Codroipo (Ud) — P. IVA 0357410303. Per
+              Pierina Gallina, Sia Sedegliano, 30, Codroipo (Ud). Per
               maggiori informazioni si rinvia alla{" "}
               <a href="/privacy" className="underline hover:text-accent">Informativa Privacy</a>.
             </P>
@@ -172,7 +172,7 @@ function CookiePage() {
             </button>
             <H>Controller</H>
             <P>
-              FriuliOn di Silvestre Richieri Caio, Sia Sedegliano, 30, Codroipo (Ud) — VAT number 0357410303.
+              Pierina Gallina, Sia Sedegliano, 30, Codroipo (Ud).
               See the <a href="/privacy" className="underline hover:text-accent">Privacy Policy</a>{" "}
               for more information.
             </P>
