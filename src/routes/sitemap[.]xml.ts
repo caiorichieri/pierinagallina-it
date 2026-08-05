@@ -4,16 +4,11 @@ import { db } from "../integrations/pierina/client";
 
 const CANONICAL_HOST = "https://www.pierinagallina.it";
 
-/** Uses the host the request came in on, so entries always match the domain being crawled. */
-function baseUrl(request: Request): string {
-  try {
-    const url = new URL(request.url);
-    if (url.hostname === "localhost" || url.hostname === "127.0.0.1") return CANONICAL_HOST;
-    return `${url.protocol}//${url.host}`;
-  } catch {
-    return CANONICAL_HOST;
-  }
+/** Le voci della sitemap puntano sempre al dominio canonico del sito. */
+function baseUrl(_request: Request): string {
+  return CANONICAL_HOST;
 }
+
 
 interface SitemapEntry {
   path: string;
