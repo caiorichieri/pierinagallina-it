@@ -55,14 +55,39 @@ const booksQ = queryOptions({
 });
 
 export const Route = createFileRoute("/libri")({
-  head: () => ({
+  head: ({ loaderData }) => ({
     meta: [
       { title: "Libri — Pierina Gallina" },
       { name: "description", content: "I libri di Pierina Gallina: fiabe, racconti e storie illustrate dal Friuli." },
       { property: "og:title", content: "Libri — Pierina Gallina" },
+      { property: "og:description", content: "I libri di Pierina Gallina: fiabe, racconti e storie illustrate dal Friuli." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://www.pierinagallina.it/libri" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [{ rel: "canonical", href: "https://www.pierinagallina.it/libri" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: "Libri di Pierina Gallina",
+          description: "Fiabe, racconti per bambini e raccolte illustrate di Pierina Gallina.",
+          url: "https://www.pierinagallina.it/libri",
+          hasPart: ((loaderData as Book[] | undefined) ?? []).map((b) => ({
+            "@type": "Book",
+            name: b.title,
+            ...(b.description ? { description: String(b.description).replace(/<[^>]*>/g, "").slice(0, 300) } : {}),
+            ...(b.year ? { datePublished: String(b.year) } : {}),
+            author: { "@type": "Person", name: "Pierina Gallina" },
+          })),
+        }),
+      },
     ],
   }),
   loader: ({ context }) => context.queryClient.ensureQueryData(booksQ),
+
   component: LibriPage,
   errorComponent: ({ error }) => <div className="p-10 text-center text-sm text-muted-foreground">{(error as Error).message}</div>,
   notFoundComponent: () => <div className="p-10 text-center">Nessun libro</div>,

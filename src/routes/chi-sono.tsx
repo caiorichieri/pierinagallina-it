@@ -9,8 +9,28 @@ export const Route = createFileRoute("/chi-sono")({
       { title: "Chi sono — Pierina Gallina" },
       { name: "description", content: "Pierina Gallina, scrittrice di Codroipo (Friuli). Un'imbranata cacciatrice di emozioni: le cerca, ma spesso sono loro a trovarla." },
       { property: "og:title", content: "Chi sono — Pierina Gallina" },
+      { property: "og:description", content: "Pierina Gallina, scrittrice di Codroipo (Friuli). Un'imbranata cacciatrice di emozioni." },
+      { property: "og:type", content: "profile" },
+      { property: "og:url", content: "https://www.pierinagallina.it/chi-sono" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [{ rel: "canonical", href: "https://www.pierinagallina.it/chi-sono" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Person",
+          name: "Pierina Gallina",
+          jobTitle: "Scrittrice e paroliera",
+          description: "Scrittrice di Codroipo (Friuli), autrice di fiabe, racconti e poesie.",
+          url: "https://www.pierinagallina.it/chi-sono",
+          address: { "@type": "PostalAddress", addressLocality: "Codroipo", addressRegion: "Friuli-Venezia Giulia", addressCountry: "IT" },
+        }),
+      },
     ],
   }),
+
   component: ChiSonoPage,
 });
 
