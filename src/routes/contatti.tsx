@@ -23,7 +23,7 @@ export const Route = createFileRoute("/contatti")({
   component: ContactPage,
 });
 
-type Status = "idle" | "sending" | "ok" | "err";
+type Status = "idle" | "sending" | "ok" | "ok-no-mail" | "err";
 
 function ContactPage() {
   const [status, setStatus] = useState<Status>("idle");
