@@ -22,7 +22,7 @@ function sessionId(): string {
 /** Only the real public site counts: no localhost, no preview builds. */
 function isPublicSite(): boolean {
   const h = window.location.hostname;
-  return h === "pierinagallina.it" || h === "www.pierinagallina.it" || h === "pierinagallina-it.lovable.app";
+  return h === "pierinagallina.it" || h === "www.pierinagallina.it";
 }
 
 /** Avoids counting the same page twice for the same visitor within 30 minutes. */
