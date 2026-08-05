@@ -27,6 +27,8 @@ export const Route = createFileRoute("/fiabe")({
       { title: "Fiabe sonore — Pierina Gallina" },
       { name: "description", content: "Fiabe sonore raccontate dalla voce di Fata Pierina. Storie da ascoltare per bambini e famiglie." },
       { property: "og:title", content: "Fiabe sonore — Pierina Gallina" },
+      { property: "og:description", content: "Raccolta di fiabe sonore raccontate dalla voce di Fata Pierina: storie da ascoltare per bambini e famiglie, in italiano e friulano." },
+      { name: "twitter:description", content: "Raccolta di fiabe sonore raccontate dalla voce di Fata Pierina: storie da ascoltare per bambini e famiglie, in italiano e friulano." },
     ],
   }),
   loader: ({ context }) => context.queryClient.ensureQueryData(fiabeQ),

@@ -11,6 +11,8 @@ export const Route = createFileRoute("/contatti")({
       { title: "Contatti — Pierina Gallina" },
       { name: "description", content: "Scrivi a Pierina Gallina per presentazioni di libri, letture nelle scuole e collaborazioni." },
       { property: "og:title", content: "Contatti — Pierina Gallina" },
+      { property: "og:description", content: "Scrivi a Pierina Gallina per presentazioni di libri, letture nelle scuole, laboratori e collaborazioni in Friuli." },
+      { name: "twitter:description", content: "Scrivi a Pierina Gallina per presentazioni di libri, letture nelle scuole, laboratori e collaborazioni in Friuli." },
     ],
   }),
   component: ContactPage,
