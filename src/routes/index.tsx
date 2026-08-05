@@ -57,11 +57,11 @@ const homeData = queryOptions({
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Pierina Gallina — scrittrice di Codroipo, Friuli" },
+      { title: "Pierina Gallina — Scrittrice e paroliera friulana" },
       {
         name: "description",
         content:
-          "Pierina Gallina, scrittrice di Codroipo (Friuli) — paroliera per passione. Libri, fiabe sonore, poesie in friulano e italiano.",
+          "Il sito ufficiale di Pierina Gallina: libri per bambini e adulti, fiabe sonore, poesie in friulano e italiano, fotografie e racconti da Codroipo.",
       },
       { property: "og:title", content: "Pierina Gallina — paroliera per passione" },
       {
