@@ -29,8 +29,25 @@ export const Route = createFileRoute("/fiabe")({
       { property: "og:title", content: "Fiabe sonore — Pierina Gallina" },
       { property: "og:description", content: "Raccolta di fiabe sonore raccontate dalla voce di Fata Pierina: storie da ascoltare per bambini e famiglie, in italiano e friulano." },
       { name: "twitter:description", content: "Raccolta di fiabe sonore raccontate dalla voce di Fata Pierina: storie da ascoltare per bambini e famiglie, in italiano e friulano." },
+      { property: "og:url", content: "https://www.pierinagallina.it/fiabe" },
+    ],
+    links: [{ rel: "canonical", href: "https://www.pierinagallina.it/fiabe" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: "Fiabe sonore di Pierina Gallina",
+          description:
+            "Raccolta di fiabe sonore raccontate dalla voce di Fata Pierina: storie da ascoltare per bambini e famiglie, in italiano e friulano.",
+          url: "https://www.pierinagallina.it/fiabe",
+          inLanguage: "it-IT",
+        }),
+      },
     ],
   }),
+
   loader: ({ context }) => context.queryClient.ensureQueryData(fiabeQ),
   component: FiabePage,
   errorComponent: ({ error }) => <div className="p-10 text-center text-sm text-muted-foreground">{(error as Error).message}</div>,
