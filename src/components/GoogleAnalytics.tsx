@@ -16,7 +16,9 @@ export function GoogleAnalytics() {
     if (!GA_MEASUREMENT_ID) return;
 
     const apply = (c: Consent | null) => {
-      if (c?.analytics) loadGa4();
+      if (!c?.analytics || isGa4Loaded()) return;
+      loadGa4();
+      trackPageView(`${window.location.pathname}${window.location.search}`);
     };
 
     apply(getConsent());
