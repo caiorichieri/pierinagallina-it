@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
+import { trackContactSubmit } from "@/lib/ga4-events";
 import { useServerFn } from "@tanstack/react-start";
 import { notifyNewContactMessage } from "@/lib/contact-notify.functions";
 import { PageHero } from "@/components/PageHero";
@@ -59,6 +60,7 @@ function ContactPage() {
             return { ok: false, sent: false } as const;
           },
         );
+        trackContactSubmit(payload.subject ?? undefined);
         setStatus(notifyResult.ok && notifyResult.sent ? "ok" : "ok-no-mail");
         setForm({ name: "", email: "", subject: "", message: "" });
         setPrivacy(false);

@@ -4,6 +4,7 @@ import { db, type FiabaCollection, type FiabaTrack } from "@/integrations/pierin
 import { FiabeHero } from "@/components/FiabeHero";
 import { Reveal } from "@/components/Reveal";
 import { Headphones } from "lucide-react";
+import { trackAudioPlay } from "@/lib/ga4-events";
 
 const fiabeQ = queryOptions({
   queryKey: ["fiabe-all"],
@@ -97,7 +98,13 @@ function FiabePage() {
                               <Headphones size={16} className="shrink-0 text-accent" />
                               <span className="font-serif text-base leading-snug text-foreground md:text-lg">{t.title}</span>
                             </div>
-                            <audio controls preload="none" src={t.mp3_url} className="w-full md:w-72" />
+                            <audio
+                              controls
+                              preload="none"
+                              src={t.mp3_url}
+                              className="w-full md:w-72"
+                              onPlay={() => trackAudioPlay(t.title, c.title)}
+                            />
                           </li>
                         ))
                       )}

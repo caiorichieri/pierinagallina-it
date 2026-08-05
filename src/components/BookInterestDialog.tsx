@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { db } from "@/integrations/pierina/client";
 import { Send, X } from "lucide-react";
+import { trackBookInterest } from "@/lib/ga4-events";
 
 type Status = "idle" | "sending" | "ok" | "err";
 
@@ -42,6 +43,7 @@ export function BookInterestDialog({
       console.error(error);
       setStatus("err");
     } else {
+      trackBookInterest(bookTitle);
       setStatus("ok");
     }
   };
