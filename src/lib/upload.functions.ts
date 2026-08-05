@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
-import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
 type UploadInput = {
+  token: string;
   filename: string;
   contentType: string;
   dataBase64: string;
@@ -9,17 +9,20 @@ type UploadInput = {
 
 // 10 years (in seconds) for signed URL
 const TEN_YEARS = 60 * 60 * 24 * 365 * 10;
+const MAX_BYTES = 15 * 1024 * 1024;
 
 export const uploadMedia = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
-  .inputValidator((d: UploadInput) => d)
-  .handler(async ({ data, context }) => {
-    const { data: isAdmin, error: roleErr } = await context.supabase.rpc("has_role", {
-      _user_id: context.userId,
-      _role: "admin",
-    });
-    if (roleErr) throw new Error(roleErr.message);
-    if (!isAdmin) throw new Error("Forbidden");
+  .inputValidator((d: UploadInput) => {
+    if (!d.token) throw new Error("Sessione mancante: rifai il login.");
+    if (!d.filename) throw new Error("File mancante.");
+    if (!d.dataBase64) throw new Error("File vuoto.");
+    // base64 → bytes ≈ len * 3/4
+    if (d.dataBase64.length * 0.75 > MAX_BYTES) throw new Error("File troppo grande (max 15MB).");
+    return d;
+  })
+  .handler(async ({ data }) => {
+    const { assertPierinaAdmin } = await import("./newsletter.server");
+    await assertPierinaAdmin(data.token);
 
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const safeName = data.filename.replace(/[^a-zA-Z0-9._-]/g, "_");
