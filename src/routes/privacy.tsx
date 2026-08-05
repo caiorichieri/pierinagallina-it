@@ -5,21 +5,21 @@ import { PageHero } from "../components/PageHero";
 export const Route = createFileRoute("/privacy")({
   head: () => ({
     meta: [
-      { title: "Informativa Privacy — FriuliOn di Silvestre Richieri Caio" },
+      { title: "Informativa Privacy — Pierina Gallina" },
       {
         name: "description",
         content:
           "Informativa sul trattamento dei dati personali ai sensi del Regolamento UE 2016/679 (GDPR).",
       },
-      { property: "og:title", content: "Informativa Privacy — FriuliOn di Silvestre Richieri Caio" },
+      { property: "og:title", content: "Informativa Privacy — Pierina Gallina" },
       {
         property: "og:description",
         content:
           "Informativa sul trattamento dei dati personali ai sensi del Regolamento UE 2016/679 (GDPR).",
       },
-      { property: "og:url", content: "https://piergiorgioiacuzzo.it/privacy" },
+      { property: "og:url", content: "/privacy" },
     ],
-    links: [{ rel: "canonical", href: "https://piergiorgioiacuzzo.it/privacy" }],
+    links: [{ rel: "canonical", href: "/privacy" }],
   }),
   component: PrivacyPage,
 });
@@ -64,8 +64,8 @@ function ContentIT() {
     <>
       <H>1. Titolare del trattamento</H>
       <P>
-        Titolare del trattamento dei dati è <strong>FriuliOn di Silvestre Richieri Caio</strong>, Sia Sedegliano, 30,
-        Codroipo (Ud), Italia — P. IVA 0357410303.
+        Titolare del trattamento dei dati è <strong>Pierina Gallina</strong>, Sia Sedegliano, 30,
+        Codroipo (Ud), Italia.
       </P>
       <P>
         Per esercitare i propri diritti o per qualsiasi richiesta in materia di protezione dei dati è
@@ -159,8 +159,8 @@ function ContentEN() {
     <>
       <H>1. Data controller</H>
       <P>
-        The data controller is <strong>FriuliOn di Silvestre Richieri Caio</strong>, Sia Sedegliano, 30, Codroipo
-        (Ud), Italy — VAT number 0357410303.
+        The data controller is <strong>Pierina Gallina</strong>, Sia Sedegliano, 30, Codroipo
+        (Ud), Italy.
       </P>
       <P>
         To exercise your rights or for any data-protection request, please use the contact address
