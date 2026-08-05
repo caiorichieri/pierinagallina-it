@@ -28,8 +28,25 @@ export const Route = createFileRoute("/fotografie")({
       { property: "og:title", content: "Fotografie — Pierina Gallina" },
       { property: "og:description", content: "Galleria fotografica di Pierina Gallina: incontri con i lettori, presentazioni, letture nelle scuole e paesaggi del Friuli." },
       { name: "twitter:description", content: "Galleria fotografica di Pierina Gallina: incontri con i lettori, presentazioni, letture nelle scuole e paesaggi del Friuli." },
+      { property: "og:url", content: "https://www.pierinagallina.it/fotografie" },
+    ],
+    links: [{ rel: "canonical", href: "https://www.pierinagallina.it/fotografie" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: "Fotografie di Pierina Gallina",
+          description:
+            "Galleria fotografica di Pierina Gallina: incontri con i lettori, presentazioni, letture nelle scuole e paesaggi del Friuli.",
+          url: "https://www.pierinagallina.it/fotografie",
+          inLanguage: "it-IT",
+        }),
+      },
     ],
   }),
+
   loader: ({ context }) => context.queryClient.ensureQueryData(photosQ),
   component: FotografiePage,
   errorComponent: ({ error }) => <div className="p-10 text-center text-sm text-muted-foreground">{(error as Error).message}</div>,
