@@ -93,27 +93,23 @@ function PostEditor() {
             className="w-full rounded-md border border-border bg-card px-3 py-2 font-mono text-sm outline-none focus:border-accent"
           />
         </Field>
-        <Field label="Immagine in evidenza (URL)">
-          <input
-            value={form.featured_image ?? ""} onChange={(e) => update("featured_image", e.target.value)}
-            className="w-full rounded-md border border-border bg-card px-3 py-2 text-sm outline-none focus:border-accent"
-          />
-          {form.featured_image && (
-            <img src={form.featured_image} alt="" className="mt-2 h-32 w-auto rounded-md object-cover" />
-          )}
-        </Field>
-        <Field label="Estratto (HTML)">
-          <textarea
-            value={form.excerpt ?? ""} onChange={(e) => update("excerpt", e.target.value)}
-            rows={3}
-            className="w-full rounded-md border border-border bg-card px-3 py-2 text-sm outline-none focus:border-accent"
+        <ImageUpload
+          label="Immagine in evidenza"
+          value={form.featured_image ?? ""}
+          onChange={(url) => update("featured_image", url)}
+        />
+        <Field label="Estratto" hint="Breve testo di anteprima mostrato negli elenchi.">
+          <RichTextEditor
+            value={form.excerpt ?? ""}
+            onChange={(html) => update("excerpt", html)}
+            minHeight={100}
           />
         </Field>
-        <Field label="Contenuto (HTML)">
-          <textarea
-            value={form.content ?? ""} onChange={(e) => update("content", e.target.value)}
-            rows={18}
-            className="w-full rounded-md border border-border bg-card px-3 py-2 font-mono text-xs leading-relaxed outline-none focus:border-accent"
+        <Field label="Contenuto" hint="Usa la barra in alto per grassetto, titoli, elenchi, link e per inserire foto nel testo.">
+          <RichTextEditor
+            value={form.content ?? ""}
+            onChange={(html) => update("content", html)}
+            minHeight={380}
           />
         </Field>
         <Field label="Data di pubblicazione" hint="Lascia vuoto per salvare come bozza.">
