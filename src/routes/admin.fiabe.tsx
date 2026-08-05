@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { db, type FiabaCollection, type FiabaTrack } from "@/integrations/pierina/client";
 import { Plus, Trash2, Save, ChevronDown, ChevronRight } from "lucide-react";
+import { ImageUpload } from "@/components/ImageUpload";
 
 export const Route = createFileRoute("/admin/fiabe")({ component: AdminFiabe });
 
