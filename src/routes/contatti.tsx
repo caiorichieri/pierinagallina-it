@@ -126,6 +126,9 @@ function ContactPage() {
               {status === "sending" ? "Invio…" : "Invia"}
             </button>
             {status === "ok" && <span className="text-sm text-primary">Messaggio inviato, grazie!</span>}
+            {status === "ok-no-mail" && (
+              <span className="text-sm text-amber-600">Messaggio salvato, ma l'avviso email non è partito (dominio in attesa di verifica).</span>
+            )}
             {status === "err" && <span className="text-sm text-destructive">Errore nell'invio. Riprova.</span>}
           </div>
         </form>
