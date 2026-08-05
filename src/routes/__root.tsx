@@ -82,26 +82,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Pierina Gallina — scrittrice di Codroipo, Friuli" },
-      {
-        name: "description",
-        content:
-          "Pierina Gallina, scrittrice di Codroipo (Friuli) — paroliera per passione. Libri, fiabe sonore, poesie in friulano e italiano, fotografie e racconti.",
-      },
       { name: "author", content: "Pierina Gallina" },
       { name: "google-site-verification", content: "KSAZAf-9y3ywEoNCzXKhcGmqZdtQ4xXbaUgHNEJPwjU" },
 
       { property: "og:site_name", content: "Pierina Gallina" },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "it_IT" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:title", content: "Pierina Gallina — scrittrice di Codroipo, Friuli" },
-      { name: "twitter:title", content: "Pierina Gallina — scrittrice di Codroipo, Friuli" },
-      
-      { property: "og:description", content: "Pierina Gallina, scrittrice di Codroipo (Friuli) — paroliera per passione. Libri, fiabe sonore, poesie in friulano e italiano." },
-      { name: "twitter:description", content: "Pierina Gallina, scrittrice di Codroipo (Friuli) — paroliera per passione. Libri, fiabe sonore, poesie in friulano e italiano." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/iME4qutiMvQWTfEWBPjGKRFf98H3/social-images/social-1783412112132-18_marzo_26.webp" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/iME4qutiMvQWTfEWBPjGKRFf98H3/social-images/social-1783412112132-18_marzo_26.webp" },
+
     ],
     links: [
       { rel: "stylesheet", href: appCss },
