@@ -21,16 +21,46 @@ const postQuery = (slug: string) =>
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: ({ context, params }) => context.queryClient.ensureQueryData(postQuery(params.slug)),
-  head: ({ loaderData }) => ({
-    meta: loaderData
-      ? [
-          { title: `${loaderData.title} — Pierina Gallina` },
-          { name: "description", content: (loaderData.excerpt ?? "").replace(/<[^>]*>/g, "").slice(0, 160) },
-          { property: "og:title", content: loaderData.title },
-          ...(loaderData.featured_image ? [{ property: "og:image", content: loaderData.featured_image }] : []),
-        ]
-      : [{ title: "Articolo — Pierina Gallina" }],
-  }),
+  head: ({ loaderData, params }) => {
+    const url = `https://www.pierinagallina.it/blog/${params.slug}`;
+    if (!loaderData) return { meta: [{ title: "Articolo — Pierina Gallina" }] };
+    const desc = (loaderData.excerpt ?? "").replace(/<[^>]*>/g, "").slice(0, 160);
+    return {
+      meta: [
+        { title: `${loaderData.title} — Pierina Gallina` },
+        { name: "description", content: desc },
+        { property: "og:title", content: loaderData.title },
+        { property: "og:description", content: desc },
+        { property: "og:type", content: "article" },
+        { property: "og:url", content: url },
+        { name: "twitter:card", content: "summary_large_image" },
+        ...(loaderData.featured_image
+          ? [
+              { property: "og:image", content: loaderData.featured_image },
+              { name: "twitter:image", content: loaderData.featured_image },
+            ]
+          : []),
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: loaderData.title,
+            description: desc,
+            ...(loaderData.featured_image ? { image: loaderData.featured_image } : {}),
+            ...(loaderData.published_at ? { datePublished: loaderData.published_at } : {}),
+            mainEntityOfPage: url,
+            author: { "@type": "Person", name: "Pierina Gallina" },
+            publisher: { "@type": "Person", name: "Pierina Gallina" },
+          }),
+        },
+      ],
+    };
+  },
+
   component: PostPage,
   errorComponent: ({ error }) => (
     <div className="p-10 text-center text-sm text-muted-foreground">{(error as Error).message}</div>
