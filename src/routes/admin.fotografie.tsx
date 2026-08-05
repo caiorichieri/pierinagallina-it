@@ -65,10 +65,14 @@ function AdminFoto() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/40 p-4" onClick={() => setEditing(null)}>
           <div onClick={(e) => e.stopPropagation()} className="w-full max-w-lg space-y-3 rounded-lg bg-card p-6 shadow-xl">
             <h2 className="font-serif text-2xl italic text-primary">{editing.id ? "Modifica foto" : "Nuova foto"}</h2>
-            <L label="URL immagine"><input value={editing.image_url ?? ""} onChange={(e) => setEditing({ ...editing, image_url: e.target.value })} className={inp} /></L>
+            <ImageUpload
+              label="Immagine"
+              required
+              value={editing.image_url ?? ""}
+              onChange={(url) => setEditing({ ...editing, image_url: url })}
+            />
             <L label="Titolo"><input value={editing.title ?? ""} onChange={(e) => setEditing({ ...editing, title: e.target.value })} className={inp} /></L>
             <L label="Ordine"><input type="number" value={editing.sort_order ?? 0} onChange={(e) => setEditing({ ...editing, sort_order: Number(e.target.value) })} className={inp} /></L>
-            {editing.image_url && <img src={editing.image_url} alt="" className="max-h-60 rounded-md object-contain" />}
             <div className="flex justify-end gap-2 pt-2">
               <button onClick={() => setEditing(null)} className="rounded-md border border-border px-4 py-2 text-sm">Annulla</button>
               <button onClick={save} className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground"><Save size={14} /> Salva</button>
