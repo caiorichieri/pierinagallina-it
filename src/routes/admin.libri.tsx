@@ -79,7 +79,13 @@ function AdminLibri() {
               <L label="Prezzo (€)"><input type="number" step="0.01" value={editing.price ?? ""} onChange={(e) => setEditing({ ...editing, price: e.target.value ? Number(e.target.value) : null })} className={inp} /></L>
               <L label="Tipo"><input value={editing.type ?? ""} onChange={(e) => setEditing({ ...editing, type: e.target.value })} placeholder="poesia, racconti…" className={inp} /></L>
               <L label="Ordine"><input type="number" value={editing.sort_order ?? 0} onChange={(e) => setEditing({ ...editing, sort_order: Number(e.target.value) })} className={inp} /></L>
-              <L label="Copertina (URL)" full><input value={editing.cover_url ?? ""} onChange={(e) => setEditing({ ...editing, cover_url: e.target.value })} className={inp} /></L>
+              <div className="sm:col-span-2">
+                <ImageUpload
+                  label="Copertina"
+                  value={editing.cover_url ?? ""}
+                  onChange={(url) => setEditing({ ...editing, cover_url: url })}
+                />
+              </div>
               <L label="Link acquisto" full><input value={editing.buy_url ?? ""} onChange={(e) => setEditing({ ...editing, buy_url: e.target.value })} className={inp} /></L>
               <L label="YouTube ID" full><input value={editing.youtube_id ?? ""} onChange={(e) => setEditing({ ...editing, youtube_id: e.target.value })} className={inp} /></L>
               <L label="Descrizione" full><textarea rows={5} value={editing.description ?? ""} onChange={(e) => setEditing({ ...editing, description: e.target.value })} className={inp} /></L>
