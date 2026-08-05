@@ -136,9 +136,13 @@ function AdminFiabe() {
             </select>
           </L>
           <L label="Titolo"><input value={editTrack.title ?? ""} onChange={(e) => setEditTrack({ ...editTrack, title: e.target.value })} className={inp} /></L>
-          <L label="MP3 URL"><input value={editTrack.mp3_url ?? ""} onChange={(e) => setEditTrack({ ...editTrack, mp3_url: e.target.value })} className={inp} /></L>
+          <ImageUpload
+            label="Audio MP3"
+            accept="audio/*"
+            value={editTrack.mp3_url ?? ""}
+            onChange={(url) => setEditTrack({ ...editTrack, mp3_url: url })}
+          />
           <L label="Ordine"><input type="number" value={editTrack.sort_order ?? 0} onChange={(e) => setEditTrack({ ...editTrack, sort_order: Number(e.target.value) })} className={inp} /></L>
-          {editTrack.mp3_url && <audio controls src={editTrack.mp3_url} className="w-full" />}
           <Actions onCancel={() => setEditTrack(null)} onSave={saveTrack} />
         </Modal>
       )}
