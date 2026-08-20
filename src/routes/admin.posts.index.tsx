@@ -22,7 +22,7 @@ function AdminPosts() {
     const { data, error } = await db
       .from("posts")
       .select("id,title,slug,excerpt,published_at,created_at,featured_image")
-      .order("published_at", { ascending: false, nullsFirst: false })
+      .order("created_at", { ascending: false })
       .limit(500);
     if (error) setErr(error.message);
     else setPosts((data ?? []) as Post[]);
