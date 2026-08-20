@@ -77,7 +77,8 @@ function AdminPosts() {
             <thead className="bg-secondary/60 text-left text-xs uppercase tracking-wider text-muted-foreground">
               <tr>
                 <th className="px-4 py-3">Titolo</th>
-                <th className="w-[26%] px-4 py-3 hidden md:table-cell">Slug</th>
+                <th className="w-[20%] px-4 py-3 hidden md:table-cell">Slug</th>
+                <th className="w-[16%] px-4 py-3 hidden lg:table-cell">Etichetta</th>
                 <th className="w-[110px] px-4 py-3 hidden lg:table-cell">Pubblicato</th>
                 <th className="w-[90px] px-4 py-3 hidden text-right sm:table-cell">Letture 30gg</th>
                 <th className="w-[110px] px-4 py-3 text-right">Azioni</th>
