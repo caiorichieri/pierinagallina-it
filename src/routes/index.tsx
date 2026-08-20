@@ -9,28 +9,28 @@ import { db, type Post, type Book, type Poem } from "@/integrations/pierina/clie
 import { Reveal } from "@/components/Reveal";
 import { bookTextFor, isBookHidden } from "@/content/libri";
 import pierinaHome from "@/assets/pierina-home-v2.png.asset.json";
-import coverVitaEmotiva from "@/assets/libri/vita-da-emotiva.png.asset.json";
-import coverGastone from "@/assets/libri/gastone.png.asset.json";
-import coverFataNatura from "@/assets/libri/fata-natura.png.asset.json";
-import coverAnnoFiaba from "@/assets/libri/un-anno-da-fiaba.png.asset.json";
-import coverNonni from "@/assets/libri/nonni.png.asset.json";
-import coverPrincipessa from "@/assets/libri/principessa-tic.png.asset.json";
-import coverAngeli from "@/assets/libri/come-angeli.png.asset.json";
-import coverMassimo from "@/assets/libri/massimo-folletto.png.asset.json";
-import coverPetali from "@/assets/libri/petali-luna.png.asset.json";
-import coverAerei from "@/assets/libri/aerei-carta.png.asset.json";
+import coverVitaEmotiva from "@/assets/libri/vita-da-emotiva.png";
+import coverGastone from "@/assets/libri/gastone.png";
+import coverFataNatura from "@/assets/libri/fata-natura.png";
+import coverAnnoFiaba from "@/assets/libri/un-anno-da-fiaba.png";
+import coverNonni from "@/assets/libri/nonni.png";
+import coverPrincipessa from "@/assets/libri/principessa-tic.png";
+import coverAngeli from "@/assets/libri/come-angeli.png";
+import coverMassimo from "@/assets/libri/massimo-folletto.png";
+import coverPetali from "@/assets/libri/petali-luna.png";
+import coverAerei from "@/assets/libri/aerei-carta.png";
 
 const COVER_OVERRIDES: Record<string, string> = {
-  "vita da emotiva": coverVitaEmotiva.url,
-  "gastone, il tassista coccolone": coverGastone.url,
-  "fata natura e l'orto magico": coverFataNatura.url,
-  "un anno da fiaba": coverAnnoFiaba.url,
-  "nonni": coverNonni.url,
-  "la principessa tic e il pirata tac nel pianeta fifablu": coverPrincipessa.url,
-  "come angeli in vacanza": coverAngeli.url,
-  "il volo perfetto di massimo il folletto": coverMassimo.url,
-  "come petali di luna": coverPetali.url,
-  "come aerei di carta": coverAerei.url,
+  "vita da emotiva": coverVitaEmotiva,
+  "gastone, il tassista coccolone": coverGastone,
+  "fata natura e l'orto magico": coverFataNatura,
+  "un anno da fiaba": coverAnnoFiaba,
+  "nonni": coverNonni,
+  "la principessa tic e il pirata tac nel pianeta fifablu": coverPrincipessa,
+  "come angeli in vacanza": coverAngeli,
+  "il volo perfetto di massimo il folletto": coverMassimo,
+  "come petali di luna": coverPetali,
+  "come aerei di carta": coverAerei,
 };
 
 function coverFor(b: Book): string | null {
