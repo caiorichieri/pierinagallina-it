@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { db, type Category } from "@/integrations/pierina/client";
 import { Plus, Pencil, Trash2, Check, X } from "lucide-react";
