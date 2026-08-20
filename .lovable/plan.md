@@ -16,7 +16,8 @@ Nel form di `/admin/posts/...`, sotto lo Slug, un nuovo campo "Etichetta":
 
 Voce di menu nuova nella barra laterale, tra Articoli e Libri:
 
-- Elenco delle etichette con il numero di articoli associati.
+- Elenco di tutte le etichette già esistenti nel sito, comprese quelle usate dagli articoli vecchi, con il numero di articoli associati a ciascuna.
+- Se un articolo vecchio ha un'etichetta non più presente in elenco, viene recuperata e mostrata comunque, così nulla va perso.
 - Crea: nome (lo slug si genera in automatico dal nome).
 - Modifica: rinomina inline.
 - Elimina: chiede conferma; se ci sono articoli associati, avvisa quanti sono e, confermando, li lascia semplicemente senza etichetta (non cancella nessun articolo).
