@@ -76,25 +76,6 @@ export function BookShelfBanner() {
           />
         </div>
 
-        {/* Pierina — ferma a destra */}
-        <div className="relative z-10 hidden shrink-0 self-end md:block">
-          <div
-            aria-hidden
-            className="absolute inset-0 -z-10 rounded-full opacity-70 blur-2xl"
-            style={{
-              background:
-                "radial-gradient(ellipse at 50% 50%, rgba(232,184,74,0.5) 0%, rgba(124,24,24,0.15) 55%, transparent 80%)",
-            }}
-          />
-          <img
-            src={pierinaBanner.url}
-            alt="Pierina Gallina"
-            className="h-56 w-auto object-contain object-bottom drop-shadow-2xl lg:h-64"
-          />
-          <span className="absolute bottom-2 right-2 rounded-full bg-primary/85 px-3 py-1 font-sans text-[10px] uppercase tracking-[0.16em] text-primary-foreground">
-            www.pierinagallina.it
-          </span>
-        </div>
       </div>
     </section>
   );
