@@ -13,7 +13,7 @@ const photosQ = queryOptions({
     const { data, error } = await db
       .from("gallery_photos")
       .select("id,title,image_url,sort_order,created_at")
-      .order("sort_order", { ascending: true })
+      .order("created_at", { ascending: false })
       .limit(200);
     if (error) throw error;
     return (data as GalleryPhoto[] | null) ?? [];
