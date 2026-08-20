@@ -13,7 +13,7 @@ function AdminFoto() {
   const [err, setErr] = useState<string | null>(null);
 
   async function reload() {
-    const { data, error } = await db.from("gallery_photos").select("*").order("sort_order");
+    const { data, error } = await db.from("gallery_photos").select("*").order("created_at", { ascending: false });
     if (error) setErr(error.message); else setItems((data as GalleryPhoto[]) ?? []);
   }
   useEffect(() => { reload(); }, []);
