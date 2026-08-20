@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
-import { ArrowRight, Mail } from "lucide-react";
+import { ArrowRight, Mail, ChevronLeft, ChevronRight } from "lucide-react";
+import { useRef, useState, useEffect } from "react";
 import iconLibri from "@/assets/icone/libri.png";
 import iconScritti from "@/assets/icone/scritti.png";
 import iconFiabe from "@/assets/icone/fiabe.png";
