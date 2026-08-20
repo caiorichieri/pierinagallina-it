@@ -95,6 +95,12 @@ function AdminPosts() {
                     )}
                   </td>
                   <td className="px-4 py-3 hidden break-all font-mono text-xs text-muted-foreground md:table-cell">{p.slug}</td>
+                  <td className="px-4 py-3 hidden text-xs lg:table-cell">
+                    {p.category_id && cats.get(p.category_id)
+                      ? <span className="text-accent">{cats.get(p.category_id)}</span>
+                      : <span className="text-muted-foreground/60">—</span>}
+                  </td>
+
 
                   <td className="px-4 py-3 hidden text-xs text-muted-foreground lg:table-cell">
                     {p.published_at ? (
