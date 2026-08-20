@@ -22,6 +22,7 @@ type Row = Category & { used: number };
 
 function AdminEtichette() {
   const [rows, setRows] = useState<Row[]>([]);
+  const [noneCount, setNoneCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState<string | null>(null);
   const [newName, setNewName] = useState("");
