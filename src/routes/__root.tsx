@@ -15,6 +15,8 @@ import { LanguageProvider } from "../i18n";
 import { SiteHeader } from "../components/SiteHeader";
 import { SiteFooter } from "../components/SiteFooter";
 import { CookieBanner } from "../components/CookieBanner";
+import { NewsletterPopup } from "../components/NewsletterPopup";
+
 import { VisitTracker } from "../components/VisitTracker";
 import { GoogleAnalytics } from "../components/GoogleAnalytics";
 
@@ -161,6 +163,8 @@ function RootComponent() {
           </main>
           <SiteFooter />
           <CookieBanner />
+          <NewsletterPopup />
+
           <VisitTracker />
           <GoogleAnalytics />
         </div>

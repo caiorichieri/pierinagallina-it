@@ -32,11 +32,42 @@ function AdminNewsletter() {
   const [testTo, setTestTo] = useState("");
 
 
+  const [pending, setPending] = useState<{ id: string; email: string; name: string }[]>([]);
+  const [adding, setAdding] = useState(false);
+
   async function reload() {
     const { data, error } = await db.from("newsletter_subscribers").select("*").order("created_at", { ascending: false }).limit(2000);
     if (error) setErr(error.message); else setItems((data as Sub[]) ?? []);
+    const subs = new Set(((data as Sub[]) ?? []).map((s) => s.email.toLowerCase()));
+    const { data: reqs } = await db
+      .from("contact_messages")
+      .select("id,name,email")
+      .eq("subject", "Iscrizione newsletter")
+      .order("created_at", { ascending: false })
+      .limit(500);
+    const seen = new Set<string>();
+    const list: { id: string; email: string; name: string }[] = [];
+    for (const r of (reqs as any[]) ?? []) {
+      const e = (r.email ?? "").trim().toLowerCase();
+      if (!e || subs.has(e) || seen.has(e)) continue;
+      seen.add(e);
+      list.push({ id: r.id, email: e, name: r.name ?? "" });
+    }
+    setPending(list);
   }
   useEffect(() => { reload(); }, []);
+
+  async function addPending() {
+    if (pending.length === 0) return;
+    setAdding(true);
+    const { error } = await db
+      .from("newsletter_subscribers")
+      .insert(pending.map((p) => ({ email: p.email })));
+    setAdding(false);
+    if (error) { setErr(`Impossibile aggiungere: ${error.message}`); return; }
+    reload();
+  }
+
 
   useEffect(() => {
     db.from("posts")
@@ -327,7 +358,37 @@ function AdminNewsletter() {
 
 
 
+      {pending.length > 0 && (
+        <section className="mb-6 rounded-md border border-accent/40 bg-accent/5 p-4">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h2 className="font-serif text-lg italic text-primary">
+                Nuove richieste dal sito ({pending.length})
+              </h2>
+              <p className="mt-1 text-xs text-muted-foreground">
+                Arrivate dal popup «Cartolina da Codroipo». Aggiungile alla lista iscritti.
+              </p>
+            </div>
+            <button
+              onClick={addPending}
+              disabled={adding}
+              className="rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground hover:opacity-90 disabled:opacity-50"
+            >
+              {adding ? "Aggiungo…" : "Aggiungi tutte"}
+            </button>
+          </div>
+          <ul className="mt-3 flex flex-wrap gap-2 text-xs">
+            {pending.map((p) => (
+              <li key={p.id} className="rounded-full border border-border bg-card px-3 py-1">
+                {p.name ? `${p.name} · ` : ""}{p.email}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       {importMsg && (
+
         <div className="mb-3 rounded-md border border-border bg-card px-3 py-2 text-sm">{importMsg}</div>
       )}
       <p className="mb-3 text-xs text-muted-foreground">
