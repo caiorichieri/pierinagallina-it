@@ -451,3 +451,17 @@
 .rte-content img.img-full { max-width: 100%; }
 .rte-content img.ProseMirror-selectednode { outline: 2px solid hsl(var(--accent)); }
 .rte-content:focus { outline: none; }
+
+/* Popup newsletter: la cartolina si apre come la pagina di un libro */
+@keyframes postcard-open {
+  0%   { opacity: 0; transform: rotateY(-72deg) translateY(14px) scale(.96); }
+  60%  { opacity: 1; transform: rotateY(8deg) translateY(0) scale(1.01); }
+  100% { opacity: 1; transform: rotateY(0deg) translateY(0) scale(1); }
+}
+.postcard-pop {
+  transform-origin: left center;
+  animation: postcard-open .75s cubic-bezier(.22,.9,.28,1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .postcard-pop { animation: none; }
+}
