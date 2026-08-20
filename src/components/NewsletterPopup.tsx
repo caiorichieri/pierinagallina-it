@@ -83,9 +83,8 @@ export function NewsletterPopup() {
     const { error } = await db.from("contact_messages").insert({
       name: name.trim() || mail,
       email: mail,
-      subject: "Iscrizione newsletter",
       message:
-        `Richiesta di iscrizione alla newsletter dal sito.\n` +
+        `[NEWSLETTER] Richiesta di iscrizione alla newsletter dal sito.\n` +
         `Nome: ${name.trim() || "—"}\nEmail: ${mail}`,
     });
     if (error) {
