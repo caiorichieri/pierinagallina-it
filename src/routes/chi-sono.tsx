@@ -37,16 +37,27 @@ export const Route = createFileRoute("/chi-sono")({
 function ChiSonoPage() {
   return (
     <>
-      <PageHero
-        eyebrow="Chi sono"
-        title={<>Tessitrice <span className="italic" style={{ color: "var(--brand-gold)" }}>di storie.</span></>}
-        intro="Giornalista, scrittrice, poetessa."
-      />
+      <ChiSonoHero />
 
       <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
         <Reveal>
-          <div className="prose-pierina font-serif text-lg leading-relaxed text-foreground/90">
-            <p className="text-2xl italic text-primary">Scrivo anche quando non scrivo.</p>
+          <figure className="surface-bordeaux relative overflow-hidden rounded-md px-7 py-8 text-primary-foreground sm:px-10">
+            <span
+              aria-hidden
+              className="pointer-events-none absolute left-3 top-0 font-serif text-[7rem] leading-none opacity-30"
+              style={{ color: "var(--brand-gold)" }}
+            >
+              &ldquo;
+            </span>
+            <blockquote className="relative font-serif text-2xl italic leading-snug sm:text-3xl">
+              Scrivo anche quando non scrivo.
+            </blockquote>
+          </figure>
+        </Reveal>
+
+        <Reveal delay={80}>
+          <div className="prose-pierina mt-10 font-serif text-lg leading-relaxed text-foreground/90">
+
             <p className="mt-5">
               Raccolgo storie ed emozioni. A volte diventano poesie, altre fiabe, racconti o articoli
               di giornale.
