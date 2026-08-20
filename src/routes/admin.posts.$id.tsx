@@ -27,8 +27,18 @@ function PostEditor() {
   const [err, setErr] = useState<string | null>(null);
 
   const [form, setForm] = useState<Partial<Post>>({
-    title: "", slug: "", excerpt: "", content: "", featured_image: "", published_at: null,
+    title: "", slug: "", excerpt: "", content: "", featured_image: "", published_at: null, category_id: null,
   });
+  const [cats, setCats] = useState<Category[]>([]);
+  const [newCat, setNewCat] = useState("");
+  const [catBusy, setCatBusy] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await db.from("categories").select("id,name,slug,post_count").order("name", { ascending: true });
+      setCats((data as Category[] | null) ?? []);
+    })();
+  }, []);
 
   useEffect(() => {
     if (isNew) return;
@@ -44,6 +54,23 @@ function PostEditor() {
     setForm((f) => ({ ...f, [k]: v }));
   }
 
+  async function createCategory() {
+    const name = newCat.trim();
+    if (!name) return;
+    setCatBusy(true);
+    const { data, error } = await db
+      .from("categories")
+      .insert({ name, slug: slugifyTag(name), post_count: 0 })
+      .select("id,name,slug,post_count")
+      .single();
+    setCatBusy(false);
+    if (error) return setErr(error.message);
+    const c = data as Category;
+    setCats((l) => [...l, c].sort((a, b) => a.name.localeCompare(b.name)));
+    update("category_id", c.id);
+    setNewCat("");
+  }
+
   async function save(e: React.FormEvent) {
     e.preventDefault();
     setErr(null);
@@ -55,6 +82,7 @@ function PostEditor() {
       content: form.content || null,
       featured_image: form.featured_image || null,
       published_at: form.published_at || null,
+      category_id: form.category_id || null,
     };
     if (!payload.title) { setErr("Il titolo è obbligatorio."); setSaving(false); return; }
 
