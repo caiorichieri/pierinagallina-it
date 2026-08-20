@@ -41,8 +41,8 @@ function AdminNewsletter() {
     const subs = new Set(((data as Sub[]) ?? []).map((s) => s.email.toLowerCase()));
     const { data: reqs } = await db
       .from("contact_messages")
-      .select("id,name,email")
-      .eq("subject", "Iscrizione newsletter")
+      .select("id,name,email,message")
+      .ilike("message", "%[NEWSLETTER]%")
       .order("created_at", { ascending: false })
       .limit(500);
     const seen = new Set<string>();
