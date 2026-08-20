@@ -7,6 +7,7 @@ import iconFiabe from "@/assets/icone/fiabe.png";
 
 import { db, type Post, type Book, type Poem } from "@/integrations/pierina/client";
 import { Reveal } from "@/components/Reveal";
+import { bookTextFor, isBookHidden } from "@/content/libri";
 import pierinaHome from "@/assets/pierina-home-v2.png.asset.json";
 import coverVitaEmotiva from "@/assets/libri/vita-da-emotiva.png.asset.json";
 import coverGastone from "@/assets/libri/gastone.png.asset.json";
