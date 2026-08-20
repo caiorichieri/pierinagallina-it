@@ -4,11 +4,12 @@
  */
 
 const WORDS = [
-  { ch: "storie", x: 300, y: 78, size: 19, delay: 1.6 },
+  { ch: "storie", x: 316, y: 232, size: 19, delay: 1.6 },
   { ch: "poesie", x: 118, y: 62, size: 17, delay: 1.85 },
-  { ch: "fiabe", x: 336, y: 176, size: 16, delay: 2.1 },
+  { ch: "fiabe", x: 302, y: 300, size: 16, delay: 2.1 },
   { ch: "parole", x: 84, y: 196, size: 15, delay: 2.35 },
 ];
+
 
 export function ChiSonoHero() {
   return (
