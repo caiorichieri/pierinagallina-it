@@ -32,11 +32,42 @@ function AdminNewsletter() {
   const [testTo, setTestTo] = useState("");
 
 
+  const [pending, setPending] = useState<{ id: string; email: string; name: string }[]>([]);
+  const [adding, setAdding] = useState(false);
+
   async function reload() {
     const { data, error } = await db.from("newsletter_subscribers").select("*").order("created_at", { ascending: false }).limit(2000);
     if (error) setErr(error.message); else setItems((data as Sub[]) ?? []);
+    const subs = new Set(((data as Sub[]) ?? []).map((s) => s.email.toLowerCase()));
+    const { data: reqs } = await db
+      .from("contact_messages")
+      .select("id,name,email")
+      .eq("subject", "Iscrizione newsletter")
+      .order("created_at", { ascending: false })
+      .limit(500);
+    const seen = new Set<string>();
+    const list: { id: string; email: string; name: string }[] = [];
+    for (const r of (reqs as any[]) ?? []) {
+      const e = (r.email ?? "").trim().toLowerCase();
+      if (!e || subs.has(e) || seen.has(e)) continue;
+      seen.add(e);
+      list.push({ id: r.id, email: e, name: r.name ?? "" });
+    }
+    setPending(list);
   }
   useEffect(() => { reload(); }, []);
+
+  async function addPending() {
+    if (pending.length === 0) return;
+    setAdding(true);
+    const { error } = await db
+      .from("newsletter_subscribers")
+      .insert(pending.map((p) => ({ email: p.email })));
+    setAdding(false);
+    if (error) { setErr(`Impossibile aggiungere: ${error.message}`); return; }
+    reload();
+  }
+
 
   useEffect(() => {
     db.from("posts")
