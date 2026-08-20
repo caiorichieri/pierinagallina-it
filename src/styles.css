@@ -189,6 +189,32 @@
   mask-image: linear-gradient(to bottom, #000 0%, #000 62%, rgba(0,0,0,0.55) 82%, transparent 100%);
 }
 
+/* Scaffale di libri scorrevole */
+@keyframes bookMarquee {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+.book-marquee { overflow: hidden; }
+.book-marquee-track {
+  animation: bookMarquee 46s linear infinite;
+  will-change: transform;
+}
+.book-marquee:hover .book-marquee-track { animation-play-state: paused; }
+.book-marquee-item {
+  transition: transform 0.4s ease, filter 0.4s ease;
+  transform-origin: bottom center;
+}
+.book-marquee-item:hover {
+  transform: translateY(-10px) scale(1.06);
+  filter: drop-shadow(0 18px 28px rgba(60,20,20,0.35));
+}
+@media (prefers-reduced-motion: reduce) {
+  .book-marquee { overflow-x: auto; }
+  .book-marquee-track { animation: none; }
+}
+
+
+
 
 /* Subtle photo treatment */
 .photo-frame {
