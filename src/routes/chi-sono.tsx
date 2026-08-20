@@ -39,35 +39,43 @@ function ChiSonoPage() {
     <>
       <PageHero
         eyebrow="Chi sono"
-        title={<>Un'imbranata <span className="italic" style={{ color: "var(--brand-gold)" }}>cacciatrice di emozioni.</span></>}
-        intro="Le cerco, ma spesso sono loro a trovare me."
+        title={<>Tessitrice <span className="italic" style={{ color: "var(--brand-gold)" }}>di storie.</span></>}
+        intro="Giornalista, scrittrice, poetessa."
       />
 
       <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
         <Reveal>
           <div className="prose-pierina font-serif text-lg leading-relaxed text-foreground/90">
-            <p>
-              Scrivo perché le parole mi abitano e per lasciare una traccia, come i semi che il vento
-              porta lontano e che, chissà dove, mettono radice. Sono nata e cresciuta a Codroipo, nel
-              cuore del Friuli: la lingua di casa è il <em>furlan</em>, quella dei libri è l'italiano,
-              e da sempre vivo nel mezzo — fra le due.
+            <p className="text-2xl italic text-primary">Scrivo anche quando non scrivo.</p>
+            <p className="mt-5">
+              Raccolgo storie ed emozioni. A volte diventano poesie, altre fiabe, racconti o articoli
+              di giornale.
             </p>
             <p className="mt-5">
-              Sono una che scrive <em>anche quando non scrive</em>. Raccolgo immagini, ascolto dialoghi,
-              mi commuovo davanti a un dettaglio. Poi, quando è il momento, trasformo quel dettaglio in
-              un racconto umano, un viaggio in una riflessione sul tempo.
+              Per quarantadue anni ho insegnato nella Scuola dell'Infanzia (36 a Rivolto-Codroipo,
+              Udine) e, da oltre quarant'anni, collaboro come giornalista pubblicista con il
+              Messaggero Veneto, Il Ponte e Il Paese. Strade diverse, ma unite dallo stesso desiderio:
+              raccontare le persone e seminare parole che lascino traccia. Come Pollicino sulla strada
+              del bosco.
             </p>
             <p className="mt-5">
-              Per molti anni ho insegnato nelle scuole del Friuli. Da quell'esperienza sono nate le
-              fiabe, le filastrocche e i piccoli mondi di carta. Durante il lockdown del 2020 ho
-              cominciato a registrare le fiabe con la mia voce — <em>Fata Pierina</em> — per i bambini
-              che non potevano andare a scuola: un anno intero di storie, una per ogni settimana.
+              Ho pubblicato nove libri: tre raccolte di poesie (<em>Come aerei di carta</em>,{" "}
+              <em>Come petali di luna</em> e <em>Come angeli in vacanza</em>), quattro fiabe (
+              <em>Il volo perfetto di Massimo il Folletto</em>,{" "}
+              <em>La Principessa TIC e il Pirata TAC nel pianeta Fifablu</em>, <em>Un anno da Fiaba</em>{" "}
+              e <em>Gastone, il tassista coccolone</em>) e due saggi (<em>NONNI</em> e{" "}
+              <em>Vita da emotiva</em>).
             </p>
             <p className="mt-5">
-              Oggi continuo a scrivere fra le pagine, le radio locali, le presentazioni nelle
-              biblioteche e le letture nelle classi. Cerco di dare voce a ciò che rischierebbe di
-              passare inosservato: un gesto, uno sguardo, una parola detta piano.
+              Ho vinto numerosi concorsi letterari, tra cui il Premio Andersen. Ma il riconoscimento
+              più bello resta quando qualcuno mi dice: «Mi sono ritrovato nelle tue parole».
             </p>
+            <p className="mt-5">
+              Sono sette volte nonna, tre volte madre e una volta moglie, da oltre cinquant'anni. Amo
+              le persone, il canto, il ballo, il teatro, imparare e viaggiare. Annuso il mondo e poi lo
+              racconto. In lingua italiana e friulana.
+            </p>
+            <p className="mt-5">Sono nata nel 1952 a Codroipo (Ud), dove vivo.</p>
           </div>
         </Reveal>
 
