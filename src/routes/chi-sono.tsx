@@ -51,6 +51,13 @@ function ChiSonoPage() {
             </span>
             <blockquote className="relative font-serif text-2xl italic leading-snug sm:text-3xl">
               Scrivo anche quando non scrivo.
+              <span
+                aria-hidden
+                className="ml-1 align-baseline font-serif not-italic opacity-40"
+                style={{ color: "var(--brand-gold)" }}
+              >
+                &rdquo;
+              </span>
             </blockquote>
           </figure>
         </Reveal>
