@@ -4,7 +4,7 @@ import { ArrowRight, Mail } from "lucide-react";
 import iconLibri from "@/assets/icone/libri.png";
 import iconScritti from "@/assets/icone/scritti.png";
 import iconFiabe from "@/assets/icone/fiabe.png";
-import iconFotografie from "@/assets/icone/fotografie.png";
+
 import { db, type Post, type Book, type Poem } from "@/integrations/pierina/client";
 import { Reveal } from "@/components/Reveal";
 import pierinaHome from "@/assets/pierina-home-v2.png.asset.json";
