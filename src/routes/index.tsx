@@ -57,22 +57,22 @@ const homeData = queryOptions({
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Pierina Gallina — Scrittrice e paroliera friulana" },
+      { title: "Pierina Gallina — Tessitrice di storie" },
       {
         name: "description",
         content:
-          "Il sito ufficiale di Pierina Gallina: libri per bambini e adulti, fiabe sonore, poesie in friulano e italiano, fotografie e racconti da Codroipo.",
+          "Il sito ufficiale di Pierina Gallina, giornalista, scrittrice e poetessa di Codroipo (Friuli): libri illustrati, fiabe da ascoltare, poesie e articoli.",
       },
-      { property: "og:title", content: "Pierina Gallina — paroliera per passione" },
+      { property: "og:title", content: "Pierina Gallina — Tessitrice di storie" },
       {
         property: "og:description",
-        content: "Scrittrice di Codroipo (Friuli). Libri, fiabe sonore, poesie e fotografie.",
+        content: "Giornalista, scrittrice, poetessa di Codroipo (Friuli). Libri, fiabe sonore, poesie e scritti.",
       },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Pierina Gallina — paroliera per passione" },
+      { name: "twitter:title", content: "Pierina Gallina — Tessitrice di storie" },
       {
         name: "twitter:description",
-        content: "Scrittrice di Codroipo (Friuli). Libri, fiabe sonore, poesie e fotografie.",
+        content: "Giornalista, scrittrice, poetessa di Codroipo (Friuli). Libri, fiabe sonore, poesie e scritti.",
       },
       { property: "og:url", content: "https://www.pierinagallina.it/" },
       {
