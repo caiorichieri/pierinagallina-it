@@ -96,7 +96,8 @@ export const Route = createFileRoute("/libri")({
 });
 
 function LibriPage() {
-  const { data: books } = useSuspenseQuery(booksQ);
+  const { data: allBooks } = useSuspenseQuery(booksQ);
+  const books = allBooks.filter((b) => !isBookHidden(b.title));
   const [interest, setInterest] = useState<Book | null>(null);
 
   return (
@@ -104,7 +105,7 @@ function LibriPage() {
       <PageHero tone="libri"
         eyebrow="Libri"
         title={<>Le pagine che ho <span className="italic" style={{ color: "var(--brand-gold)" }}>seminato.</span></>}
-        intro="Fiabe, racconti per bambini e raccolte illustrate. Storie che nascono dalle scuole di Codroipo e dai paesi del Friuli."
+        intro={BOOKS_INTRO}
       />
 
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
