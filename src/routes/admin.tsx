@@ -54,7 +54,7 @@ function AdminLayout() {
             </button>
           </div>
         </aside>
-        <main className="min-h-screen p-6 md:p-10">
+        <main className="min-h-screen min-w-0 overflow-x-hidden p-6 md:p-10">
           <Outlet />
         </main>
       </div>

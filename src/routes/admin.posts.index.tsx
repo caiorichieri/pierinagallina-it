@@ -64,27 +64,29 @@ function AdminPosts() {
       {loading ? (
         <p className="text-sm text-muted-foreground">Caricamento…</p>
       ) : (
-        <div className="overflow-hidden rounded-md border border-border bg-card">
-          <table className="w-full text-sm">
+        <div className="w-full max-w-full overflow-hidden rounded-md border border-border bg-card">
+          <table className="w-full table-fixed text-sm">
             <thead className="bg-secondary/60 text-left text-xs uppercase tracking-wider text-muted-foreground">
               <tr>
                 <th className="px-4 py-3">Titolo</th>
-                <th className="px-4 py-3 hidden md:table-cell">Slug</th>
-                <th className="px-4 py-3 hidden lg:table-cell">Pubblicato</th>
-                <th className="px-4 py-3 hidden text-right sm:table-cell">Letture 30gg</th>
-                <th className="px-4 py-3 text-right">Azioni</th>
+                <th className="w-[26%] px-4 py-3 hidden md:table-cell">Slug</th>
+                <th className="w-[110px] px-4 py-3 hidden lg:table-cell">Pubblicato</th>
+                <th className="w-[90px] px-4 py-3 hidden text-right sm:table-cell">Letture 30gg</th>
+                <th className="w-[110px] px-4 py-3 text-right">Azioni</th>
               </tr>
             </thead>
+
             <tbody>
               {filtered.map((p) => (
                 <tr key={p.id} className="border-t border-border align-top">
                   <td className="px-4 py-3">
-                    <div className="font-serif text-base text-foreground">{p.title}</div>
+                    <div className="font-serif text-base text-foreground break-words">{p.title}</div>
                     {p.excerpt && (
-                      <div className="mt-0.5 line-clamp-1 text-xs text-muted-foreground" dangerouslySetInnerHTML={{ __html: sanitizeHtml(p.excerpt) }} />
+                      <div className="mt-0.5 line-clamp-1 break-words text-xs text-muted-foreground" dangerouslySetInnerHTML={{ __html: sanitizeHtml(p.excerpt) }} />
                     )}
                   </td>
-                  <td className="px-4 py-3 hidden font-mono text-xs text-muted-foreground md:table-cell">{p.slug}</td>
+                  <td className="px-4 py-3 hidden break-all font-mono text-xs text-muted-foreground md:table-cell">{p.slug}</td>
+
                   <td className="px-4 py-3 hidden text-xs text-muted-foreground lg:table-cell">
                     {p.published_at ? (
                       <span className="inline-flex items-center gap-1"><Eye size={12} />{new Date(p.published_at).toLocaleDateString("it-IT")}</span>
