@@ -65,22 +65,23 @@ function FotografiePage() {
         {photos.length === 0 ? (
           <p className="text-center text-muted-foreground">Nessuna foto disponibile.</p>
         ) : (
-          <div className="columns-2 gap-5 md:columns-3 lg:columns-4 [column-fill:_balance]">
+          <div className="grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4">
             {photos.map((p, i) => (
-              <Reveal key={p.id} delay={Math.min(i, 12) * 70} className="mb-6 break-inside-avoid">
+              <Reveal key={p.id} delay={Math.min(i, 12) * 70}>
                 <button
                   type="button"
                   aria-label={p.title || "Visualizza fotografia"}
                   onClick={() => setOpen(p)}
                   className="polaroid-card block w-full text-left"
-                  style={{ transform: `rotate(${(i % 5) - 2}deg)` }}
                 >
-                  <img
-                    src={p.image_url}
-                    alt={p.title ?? ""}
-                    loading="lazy"
-                    className="block h-auto w-full bg-secondary"
-                  />
+                  <div className="aspect-square overflow-hidden bg-secondary">
+                    <img
+                      src={p.image_url}
+                      alt={p.title ?? ""}
+                      loading="lazy"
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
                   <span className="polaroid-caption mt-3 block px-1 text-center text-sm text-foreground/70">
                     {p.title ?? "—"}
                   </span>
