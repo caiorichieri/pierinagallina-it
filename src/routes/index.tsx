@@ -224,19 +224,19 @@ function HomePage() {
               <span className="h-1.5 w-1.5 rounded-full bg-primary" /> Il mio mondo
             </div>
             <h2 className="mt-3 font-serif text-4xl leading-tight text-primary md:text-5xl">
-              Quattro sentieri di <span className="italic" style={{ color: "var(--brand-gold)" }}>parole.</span>
+              Tre sentieri di <span className="italic" style={{ color: "var(--brand-gold)" }}>parole.</span>
             </h2>
             <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-              Libri illustrati, fiabe da ascoltare, poesie in due lingue e fotografie del Friuli. Scegli da dove cominciare.
+              I miei libri illustrati, fiabe da ascoltare, poesie in italiano e, a volte, anche in
+              friulano, blog. Scegli da dove cominciare.
             </p>
           </div>
 
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {[
               { icon: iconLibri,      t: "Libri",        d: "Fiabe e racconti illustrati",       href: "/libri" as const },
               { icon: iconScritti,    t: "Scritti",      d: "Articoli, racconti e poesie",       href: "/scritti" as const },
               { icon: iconFiabe,      t: "Fiabe sonore", d: "Voci, suoni, storie da ascoltare",  href: "/fiabe" as const },
-              { icon: iconFotografie, t: "Fotografie",   d: "Momenti, incontri, paesaggi",       href: "/fotografie" as const },
             ].map((s, i) => (
               <Reveal key={s.t} delay={i * 80}>
                 <Link
