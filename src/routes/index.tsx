@@ -238,7 +238,7 @@ function HomePage() {
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {[
               { icon: iconLibri,      t: "Libri",        d: "Fiabe e racconti illustrati",       href: "/libri" as const },
-              { icon: iconScritti,    t: "Scritti",      d: "Articoli, racconti e poesie",       href: "/scritti" as const },
+              { icon: iconScritti,    t: "Scritti",      d: "Blog, racconti e poesie",       href: "/scritti" as const },
               { icon: iconFiabe,      t: "Fiabe sonore", d: "Voci, suoni, storie da ascoltare",  href: "/fiabe" as const },
             ].map((s, i) => (
               <Reveal key={s.t} delay={i * 80}>
