@@ -44,8 +44,17 @@ function Toolbar({ editor }: { editor: Editor }) {
       try {
         for (const f of files) {
           const url = await upload(f);
-          editor.chain().focus().setImage({ src: url, alt: f.name }).run();
+          const caption = window.prompt("Didascalia della foto (lascia vuoto per nessuna):", "")?.trim();
+          editor.chain().focus().setImage({ src: url, alt: caption || f.name }).run();
+          if (caption) {
+            editor
+              .chain()
+              .focus()
+              .insertContent(`<p><em>${caption.replace(/[<>&]/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;" })[c] as string)}</em></p>`)
+              .run();
+          }
         }
+
       } catch (e) {
         setErr(e instanceof Error ? e.message : "Errore upload");
       } finally {
