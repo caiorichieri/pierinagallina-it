@@ -7,6 +7,8 @@ import iconFiabe from "@/assets/icone/fiabe.png";
 
 import { db, type Post, type Book, type Poem } from "@/integrations/pierina/client";
 import { Reveal } from "@/components/Reveal";
+import { BookShelfBanner } from "@/components/BookShelfBanner";
+
 import { bookTextFor, isBookHidden } from "@/content/libri";
 import pierinaHome from "@/assets/pierina-home-v2.png.asset.json";
 import coverVitaEmotiva from "@/assets/libri/vita-da-emotiva.png";
@@ -208,8 +210,11 @@ function HomePage() {
 
       </section>
 
+      {/* BANNER — scaffale di libri scorrevole */}
+      <BookShelfBanner />
 
       {/* SEZIONI — mondo letterario */}
+
       <section className="relative z-0 overflow-hidden border-b border-border bg-[#fbf3ee] pt-6 md:pt-10">
         <div
           aria-hidden
