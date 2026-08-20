@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { db, type Category } from "@/integrations/pierina/client";
 import { Plus, Pencil, Trash2, Check, X } from "lucide-react";
@@ -22,6 +22,7 @@ type Row = Category & { used: number };
 
 function AdminEtichette() {
   const [rows, setRows] = useState<Row[]>([]);
+  const [noneCount, setNoneCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState<string | null>(null);
   const [newName, setNewName] = useState("");
@@ -42,9 +43,12 @@ function AdminEtichette() {
       return;
     }
     const counts = new Map<string, number>();
+    let none = 0;
     for (const p of (posts.data ?? []) as { category_id: string | null }[]) {
       if (p.category_id) counts.set(p.category_id, (counts.get(p.category_id) ?? 0) + 1);
+      else none++;
     }
+    setNoneCount(none);
     const list = ((cats.data as Category[] | null) ?? []).map((c) => ({
       ...c,
       used: counts.get(c.id) ?? c.post_count ?? 0,
@@ -59,6 +63,7 @@ function AdminEtichette() {
     setRows(list);
     setLoading(false);
   }
+
 
   useEffect(() => {
     reload();
@@ -163,11 +168,18 @@ function AdminEtichette() {
                         className="w-full rounded-md border border-border bg-background px-2 py-1 text-sm outline-none focus:border-accent"
                       />
                     ) : (
-                      <span className="font-serif text-base text-foreground break-words">{c.name}</span>
+                      <Link
+                        to="/admin/posts"
+                        search={{ cat: c.id }}
+                        className="font-serif text-base text-foreground break-words underline decoration-dotted underline-offset-4 hover:text-accent"
+                      >
+                        {c.name}
+                      </Link>
                     )}
                   </td>
                   <td className="px-4 py-3 hidden break-all font-mono text-xs text-muted-foreground md:table-cell">{c.slug}</td>
                   <td className="px-4 py-3 text-right tabular-nums text-xs text-muted-foreground">{c.used}</td>
+
                   <td className="px-4 py-3 text-right">
                     <div className="inline-flex gap-1">
                       {editId === c.id ? (
@@ -210,6 +222,22 @@ function AdminEtichette() {
                   </td>
                 </tr>
               ))}
+              <tr className="border-t border-border bg-secondary/30">
+                <td className="px-4 py-3">
+                  <Link
+                    to="/admin/posts"
+                    search={{ cat: "none" }}
+                    className="font-serif text-base text-foreground break-words underline decoration-dotted underline-offset-4 hover:text-accent"
+                  >
+                    Vuoto
+                  </Link>
+                  <div className="text-xs text-muted-foreground">Articoli senza etichetta</div>
+                </td>
+                <td className="px-4 py-3 hidden md:table-cell" />
+                <td className="px-4 py-3 text-right tabular-nums text-xs text-muted-foreground">{noneCount}</td>
+                <td className="px-4 py-3" />
+              </tr>
+
               {rows.length === 0 && (
                 <tr>
                   <td colSpan={4} className="px-4 py-10 text-center text-sm text-muted-foreground">

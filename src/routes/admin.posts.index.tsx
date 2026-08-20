@@ -6,6 +6,8 @@ import { useVisitStats } from "@/components/admin/VisitsPanel";
 import { Pencil, Plus, Trash2, Eye, EyeOff, Send } from "lucide-react";
 
 export const Route = createFileRoute("/admin/posts/")({
+  validateSearch: (s: Record<string, unknown>): { cat?: string } =>
+    typeof s.cat === "string" ? { cat: s.cat } : {},
   component: AdminPosts,
 });
 
@@ -46,14 +48,30 @@ function AdminPosts() {
     else reload();
   }
 
-  const filtered = posts.filter((p) => !q || p.title.toLowerCase().includes(q.toLowerCase()));
+  const { cat } = Route.useSearch();
+  const filtered = posts.filter(
+    (p) =>
+      (!q || p.title.toLowerCase().includes(q.toLowerCase())) &&
+      (!cat || (cat === "none" ? !p.category_id : p.category_id === cat)),
+  );
+  const catLabel = cat ? (cat === "none" ? "Vuoto (senza etichetta)" : cats.get(cat) ?? "Etichetta") : null;
 
   return (
     <div>
       <header className="mb-6 flex flex-wrap items-end justify-between gap-3">
         <div>
           <p className="text-xs uppercase tracking-widest text-muted-foreground">Contenuti</p>
-          <h1 className="mt-1 font-serif text-3xl italic text-primary">Articoli ({posts.length})</h1>
+          <h1 className="mt-1 font-serif text-3xl italic text-primary">
+            Articoli ({filtered.length}{cat ? ` di ${posts.length}` : ""})
+          </h1>
+          {catLabel && (
+            <p className="mt-1 text-sm text-muted-foreground">
+              Filtro etichetta: <span className="text-accent">{catLabel}</span>{" "}
+              <Link to="/admin/posts" search={{}} className="underline hover:text-foreground">
+                rimuovi filtro
+              </Link>
+            </p>
+          )}
         </div>
         <Link
           to="/admin/posts/$id" params={{ id: "new" }}
@@ -62,6 +80,7 @@ function AdminPosts() {
           <Plus size={14} /> Nuovo articolo
         </Link>
       </header>
+
 
       <input
         value={q} onChange={(e) => setQ(e.target.value)} placeholder="Cerca per titolo…"
