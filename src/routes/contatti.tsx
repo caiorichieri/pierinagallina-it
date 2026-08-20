@@ -3,7 +3,7 @@ import { useState } from "react";
 import { trackContactSubmit } from "@/lib/ga4-events";
 import { useServerFn } from "@tanstack/react-start";
 import { notifyNewContactMessage } from "@/lib/contact-notify.functions";
-import { PageHero } from "@/components/PageHero";
+import { ContattiHero } from "@/components/ContattiHero";
 import { db } from "@/integrations/pierina/client";
 import { MapPin, Send } from "lucide-react";
 import { SocialLinksRow } from "@/components/SocialLinks";
@@ -76,14 +76,11 @@ function ContactPage() {
 
   return (
     <>
-      <PageHero
-        eyebrow="Contatti"
-        title={<>Una parola, <span className="italic" style={{ color: "var(--brand-gold)" }}>e ci sentiamo.</span></>}
-        intro="Per presentazioni di libri, letture nelle scuole, collaborazioni con biblioteche e case editrici."
-      />
+      <ContattiHero />
 
       <section className="mx-auto grid max-w-6xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_320px]">
-        <form onSubmit={onSubmit} className="space-y-4">
+        <form onSubmit={onSubmit} className="paper-card space-y-4 p-6 sm:p-8">
+
           <div className="grid gap-4 sm:grid-cols-2">
             <label className="block">
               <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Nome</span>
@@ -122,36 +119,44 @@ function ContactPage() {
             <button
               type="submit"
               disabled={status === "sending"}
-              className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-60"
+              className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-60"
             >
-              <Send size={15} />
+              <Send
+                size={15}
+                className={`transition-transform duration-300 ${
+                  status === "sending"
+                    ? "-translate-y-1 translate-x-1.5 opacity-70"
+                    : "group-hover:-translate-y-0.5 group-hover:translate-x-1"
+                }`}
+              />
               {status === "sending" ? "Invio…" : "Invia"}
             </button>
-            {status === "ok" && <span className="text-sm text-primary">Messaggio inviato, grazie!</span>}
+            {status === "ok" && <span className="animate-in fade-in text-sm text-primary">Messaggio inviato, grazie!</span>}
             {status === "ok-no-mail" && (
-              <span className="text-sm text-amber-600">Messaggio salvato, ma l'avviso email non è partito (dominio in attesa di verifica).</span>
+              <span className="animate-in fade-in text-sm text-amber-600">Messaggio salvato, ma l'avviso email non è partito (dominio in attesa di verifica).</span>
             )}
-            {status === "err" && <span className="text-sm text-destructive">Errore nell'invio. Riprova.</span>}
+            {status === "err" && <span className="animate-in fade-in text-sm text-destructive">Errore nell'invio. Riprova.</span>}
           </div>
         </form>
 
-        <aside className="space-y-6 rounded-md border border-border bg-card p-6">
+        <aside className="surface-bordeaux h-fit space-y-6 rounded-md p-6 text-primary-foreground">
           <div>
-            <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.2em] text-accent">Dove sono</div>
-            <div className="flex gap-3 text-sm text-foreground/80">
-              <MapPin size={16} className="mt-0.5 shrink-0 text-primary" />
+            <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.2em]" style={{ color: "var(--brand-gold)" }}>Dove sono</div>
+            <div className="flex gap-3 text-sm text-primary-foreground/85">
+              <MapPin size={16} className="mt-0.5 shrink-0" style={{ color: "var(--brand-gold)" }} />
               <span>Codroipo, Friuli‑Venezia Giulia<br />Italia</span>
             </div>
           </div>
-          <div className="border-t border-border pt-6">
-            <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-accent">Social</div>
-            <SocialLinksRow variant="light" />
+          <div className="border-t border-primary-foreground/20 pt-6">
+            <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em]" style={{ color: "var(--brand-gold)" }}>Social</div>
+            <SocialLinksRow variant="dark" />
           </div>
-          <div className="border-t border-border pt-6 text-sm text-muted-foreground">
-            <div className="font-medium text-foreground">Pierina Gallina</div>
+          <div className="border-t border-primary-foreground/20 pt-6 text-sm text-primary-foreground/75">
+            <div className="font-medium text-primary-foreground">Pierina Gallina</div>
             <div className="mt-1 italic">Scrittrice, paroliera per passione</div>
           </div>
         </aside>
+
       </section>
     </>
   );
