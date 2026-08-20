@@ -6,7 +6,7 @@ import { SocialLinks } from "./SocialLinks";
 
 const navItems = [
   { to: "/", key: "nav_home", label: "Home" },
-  { to: "/scritti", key: "nav_scritti", label: "Scritti" },
+  { to: "/scritti", key: "nav_scritti", label: "Blog" },
   { to: "/fotografie", key: "nav_foto", label: "Fotografie" },
   { to: "/fiabe", key: "nav_fiabe", label: "Fiabe sonore" },
   { to: "/chi-sono", key: "nav_chi", label: "Chi Sono" },
