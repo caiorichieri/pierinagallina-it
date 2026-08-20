@@ -56,6 +56,9 @@ function LetterPlane() {
           <stop offset="0%" stopColor="#f3e5c8" />
           <stop offset="100%" stopColor="#e3cfa4" />
         </linearGradient>
+        <clipPath id="sheetClip">
+          <rect x="90" y="-20" width="230" height="270" />
+        </clipPath>
       </defs>
 
       {/* retro busta */}
@@ -64,7 +67,7 @@ function LetterPlane() {
       </g>
 
       {/* foglio che esce dalla busta */}
-      <g className="letter-sheet">
+      <g className="letter-sheet" clipPath="url(#sheetClip)">
         <rect x="130" y="58" width="140" height="150" rx="3" fill="url(#sheetPaper)" />
         <rect x="130" y="58" width="140" height="150" rx="3" fill="none" stroke="var(--brand-gold)" strokeWidth="1.4" strokeOpacity="0.6" />
         <g fill="none" stroke="#5b1526" strokeOpacity="0.75" strokeWidth="2" strokeLinecap="round">

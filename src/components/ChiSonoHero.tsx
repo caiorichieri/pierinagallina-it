@@ -99,7 +99,7 @@ function QuillScroll() {
 
       {/* penna d'oca */}
       <g className="quill">
-        <g transform="translate(240 40)">
+        <g transform="translate(214 10) scale(.78)">
           {/* piuma */}
           <path
             d="M8 168 C 26 120, 54 66, 96 22 C 116 2, 138 -6, 150 2 C 160 9, 158 30, 146 54 C 122 102, 78 146, 30 176 Z"
