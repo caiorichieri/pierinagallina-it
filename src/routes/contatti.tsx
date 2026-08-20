@@ -3,7 +3,7 @@ import { useState } from "react";
 import { trackContactSubmit } from "@/lib/ga4-events";
 import { useServerFn } from "@tanstack/react-start";
 import { notifyNewContactMessage } from "@/lib/contact-notify.functions";
-import { PageHero } from "@/components/PageHero";
+import { ContattiHero } from "@/components/ContattiHero";
 import { db } from "@/integrations/pierina/client";
 import { MapPin, Send } from "lucide-react";
 import { SocialLinksRow } from "@/components/SocialLinks";
