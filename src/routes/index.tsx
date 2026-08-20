@@ -134,16 +134,19 @@ function HomePage() {
             <h1 className="font-serif text-5xl leading-[1.02] tracking-tight text-primary sm:text-6xl md:text-7xl lg:text-8xl">
               Pierina Gallina
               <br />
-              <span className="italic" style={{ color: "var(--brand-gold)" }}>— Scrittrice e paroliera.</span>
+              <span className="italic" style={{ color: "var(--brand-gold)" }}>Tessitrice di storie</span>
             </h1>
+            <p className="mt-3 font-sans text-sm uppercase tracking-[0.22em] text-primary/80 md:text-base">
+              Giornalista, scrittrice, poetessa
+            </p>
 
             <p className="mt-6 max-w-2xl font-serif text-xl italic leading-snug text-foreground/90 md:text-2xl">
               Scrivo per dare voce a ciò che rischierebbe di <span className="ink-underline" style={{ color: "var(--brand-primary)" }}>passare inosservato.</span>
             </p>
 
             <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
-              Scrittrice di Codroipo, Friuli — paroliera per passione. Libri, fiabe sonore, poesie in
-              friulano e in italiano. Un'imbranata cacciatrice di emozioni.
+              Di Codroipo, in Friuli. Raccolgo storie ed emozioni: a volte diventano poesie, altre
+              fiabe, racconti o articoli di giornale.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
