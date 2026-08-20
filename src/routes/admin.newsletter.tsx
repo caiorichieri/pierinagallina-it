@@ -358,7 +358,37 @@ function AdminNewsletter() {
 
 
 
+      {pending.length > 0 && (
+        <section className="mb-6 rounded-md border border-accent/40 bg-accent/5 p-4">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h2 className="font-serif text-lg italic text-primary">
+                Nuove richieste dal sito ({pending.length})
+              </h2>
+              <p className="mt-1 text-xs text-muted-foreground">
+                Arrivate dal popup «Cartolina da Codroipo». Aggiungile alla lista iscritti.
+              </p>
+            </div>
+            <button
+              onClick={addPending}
+              disabled={adding}
+              className="rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground hover:opacity-90 disabled:opacity-50"
+            >
+              {adding ? "Aggiungo…" : "Aggiungi tutte"}
+            </button>
+          </div>
+          <ul className="mt-3 flex flex-wrap gap-2 text-xs">
+            {pending.map((p) => (
+              <li key={p.id} className="rounded-full border border-border bg-card px-3 py-1">
+                {p.name ? `${p.name} · ` : ""}{p.email}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       {importMsg && (
+
         <div className="mb-3 rounded-md border border-border bg-card px-3 py-2 text-sm">{importMsg}</div>
       )}
       <p className="mb-3 text-xs text-muted-foreground">
