@@ -158,7 +158,7 @@ function BooksCarousel({ books }: { books: Book[] }) {
               Le pagine che ho seminato.
             </h2>
           </div>
-          <div className="hidden items-center gap-2 sm:flex">
+          <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={() => scroll("left")}
