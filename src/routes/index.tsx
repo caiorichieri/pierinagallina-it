@@ -270,6 +270,31 @@ function HomePage() {
       </section>
 
 
+      {/* CHI SONO — breve */}
+      <section className="bg-background paper-grain">
+        <div className="mx-auto max-w-3xl px-4 py-20 text-center sm:px-6">
+          <Reveal>
+            <div className="inline-flex items-center gap-2 font-sans text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+              <span className="h-1.5 w-1.5 rounded-full bg-accent" /> Chi sono
+            </div>
+            <h2 className="mt-3 font-serif text-4xl leading-tight md:text-5xl">
+              Scrivo <span className="italic" style={{ color: "var(--brand-gold)" }}>anche quando non scrivo.</span>
+            </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+              Raccolgo storie ed emozioni. A volte diventano poesie, altre fiabe, racconti o articoli
+              di giornale. Quarantadue anni nella Scuola dell'Infanzia, oltre quarant'anni da
+              giornalista pubblicista, nove libri pubblicati.
+            </p>
+            <Link
+              to="/chi-sono"
+              className="mt-8 inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium text-foreground transition-colors hover:border-primary hover:text-primary"
+            >
+              Leggi di più <ArrowRight size={14} />
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+
       {/* BLOG RECENTI */}
       {data.posts.length > 0 && (
         <section className="relative overflow-hidden bg-background paper-grain">
