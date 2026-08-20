@@ -14,8 +14,11 @@ function AdminMessaggi() {
 
   async function reload() {
     const { data, error } = await db.from("contact_messages").select("*").order("created_at", { ascending: false }).limit(500);
-    if (error) setErr(error.message); else setItems((data as Msg[]) ?? []);
+    if (error) setErr(error.message);
+    // le richieste di iscrizione alla newsletter non sono messaggi: si vedono in "Iscritti newsletter"
+    else setItems(((data as Msg[]) ?? []).filter((m) => !(m.message ?? "").includes("[NEWSLETTER]")));
   }
+
   useEffect(() => { reload(); }, []);
 
   async function remove(id: string) {

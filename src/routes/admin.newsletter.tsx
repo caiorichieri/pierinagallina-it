@@ -35,7 +35,7 @@ function AdminNewsletter() {
   const [pending, setPending] = useState<{ id: string; email: string; name: string }[]>([]);
   const [adding, setAdding] = useState(false);
 
-  async function reload() {
+  async function reload(autoAdd = true) {
     const { data, error } = await db.from("newsletter_subscribers").select("*").order("created_at", { ascending: false }).limit(2000);
     if (error) setErr(error.message); else setItems((data as Sub[]) ?? []);
     const subs = new Set(((data as Sub[]) ?? []).map((s) => s.email.toLowerCase()));
@@ -53,9 +53,20 @@ function AdminNewsletter() {
       seen.add(e);
       list.push({ id: r.id, email: e, name: r.name ?? "" });
     }
+    // le iscrizioni dal popup/sito entrano subito nella lista iscritti
+    if (autoAdd && list.length > 0) {
+      const { error: insErr } = await db
+        .from("newsletter_subscribers")
+        .insert(list.map((p) => ({ email: p.email })));
+      if (!insErr) {
+        await reload(false);
+        return;
+      }
+    }
     setPending(list);
   }
   useEffect(() => { reload(); }, []);
+
 
   async function addPending() {
     if (pending.length === 0) return;
