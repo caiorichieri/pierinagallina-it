@@ -1,13 +1,13 @@
 /**
- * Hero "Contatti": una busta che si apre, un foglio con righe scritte a mano
- * che si disegnano e un aeroplanino di carta che vola via in loop.
+ * Hero "Contatti": una busta che si apre e da cui esce davvero un foglio
+ * di carta avorio (pieno, non traslucido) con righe scritte a mano.
  */
 
 const LINES = [
-  { d: "M150 118 C 176 110, 208 124, 240 114", delay: 0.9 },
-  { d: "M150 138 C 184 130, 214 144, 252 134", delay: 1.15 },
-  { d: "M150 158 C 172 152, 196 164, 228 154", delay: 1.4 },
-  { d: "M150 178 C 186 172, 212 184, 246 174", delay: 1.65 },
+  { d: "M148 92 C 174 84, 206 98, 240 88", delay: 1.5 },
+  { d: "M148 112 C 182 104, 212 118, 250 108", delay: 1.75 },
+  { d: "M148 132 C 170 126, 194 138, 226 128", delay: 2.0 },
+  { d: "M148 152 C 184 146, 210 158, 244 148", delay: 2.25 },
 ];
 
 export function ContattiHero() {
@@ -45,38 +45,56 @@ function LetterPlane() {
       viewBox="0 0 400 320"
       className="h-auto w-full"
       role="img"
-      aria-label="Una busta che si apre con un foglio scritto e un aeroplanino di carta che vola via"
+      aria-label="Una busta che si apre e un foglio scritto che esce, con un aeroplanino di carta che vola via"
     >
-      {/* foglio */}
+      <defs>
+        <linearGradient id="sheetPaper" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#fdf6e6" />
+          <stop offset="100%" stopColor="#f0e3c6" />
+        </linearGradient>
+        <linearGradient id="envBody" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#f3e5c8" />
+          <stop offset="100%" stopColor="#e3cfa4" />
+        </linearGradient>
+      </defs>
+
+      {/* retro busta */}
+      <g className="envelope-in">
+        <path d="M96 186 L 200 150 L 304 186 L 304 288 L 96 288 Z" fill="#dcc79b" />
+      </g>
+
+      {/* foglio che esce dalla busta */}
       <g className="letter-sheet">
-        <rect x="128" y="82" width="146" height="130" rx="4" fill="#f7ead0" fillOpacity="0.14" stroke="var(--brand-gold)" strokeWidth="1.8" strokeOpacity="0.75" />
-        <g fill="none" stroke="#f7ead0" strokeOpacity="0.7" strokeWidth="2" strokeLinecap="round">
+        <rect x="130" y="58" width="140" height="150" rx="3" fill="url(#sheetPaper)" />
+        <rect x="130" y="58" width="140" height="150" rx="3" fill="none" stroke="var(--brand-gold)" strokeWidth="1.4" strokeOpacity="0.6" />
+        <g fill="none" stroke="#5b1526" strokeOpacity="0.75" strokeWidth="2" strokeLinecap="round">
           {LINES.map((l) => (
             <path key={l.d} className="hand-line" d={l.d} style={{ animationDelay: `${l.delay}s` }} />
           ))}
         </g>
-        <path className="hand-line" style={{ animationDelay: "1.95s" }} d="M196 196 C 212 188, 220 200, 240 192" fill="none" stroke="var(--brand-gold)" strokeWidth="2" strokeLinecap="round" />
+        <path
+          className="hand-line"
+          style={{ animationDelay: "2.5s" }}
+          d="M186 178 C 202 170, 210 182, 230 174"
+          fill="none"
+          stroke="#8c2f3f"
+          strokeOpacity="0.8"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
       </g>
 
-      {/* busta */}
+      {/* fronte busta (davanti al foglio) */}
       <g className="envelope-in">
-        <path
-          d="M96 186 L 200 150 L 304 186 L 304 288 L 96 288 Z"
-          fill="#f7ead0"
-          fillOpacity="0.12"
-          stroke="var(--brand-gold)"
-          strokeWidth="2"
-          strokeOpacity="0.85"
-          strokeLinejoin="round"
-        />
-        <path d="M96 186 L 200 250 L 304 186" fill="none" stroke="var(--brand-gold)" strokeWidth="1.8" strokeOpacity="0.6" />
-        <path className="envelope-flap" d="M96 186 L 200 122 L 304 186 Z" fill="#f7ead0" fillOpacity="0.2" stroke="var(--brand-gold)" strokeWidth="1.8" strokeOpacity="0.7" strokeLinejoin="round" />
+        <path d="M96 186 L 200 250 L 304 186 L 304 288 L 96 288 Z" fill="url(#envBody)" stroke="var(--brand-gold)" strokeWidth="2" strokeOpacity="0.85" strokeLinejoin="round" />
+        <path d="M96 288 L 176 220 M 304 288 L 224 220" fill="none" stroke="#c8a566" strokeWidth="1.4" strokeOpacity="0.6" />
+        <path className="envelope-flap" d="M96 186 L 200 122 L 304 186 Z" fill="#e9d6ac" stroke="var(--brand-gold)" strokeWidth="1.8" strokeOpacity="0.8" strokeLinejoin="round" />
       </g>
 
       {/* aeroplanino */}
       <g className="paper-plane">
-        <path d="M0 0 L 44 16 L 18 22 L 12 40 Z" fill="#f7ead0" fillOpacity="0.9" />
-        <path d="M0 0 L 18 22 L 44 16 Z" fill="var(--brand-gold)" fillOpacity="0.75" />
+        <path d="M0 0 L 44 16 L 18 22 L 12 40 Z" fill="#fdf6e6" />
+        <path d="M0 0 L 18 22 L 44 16 Z" fill="var(--brand-gold)" fillOpacity="0.85" />
       </g>
     </svg>
   );
