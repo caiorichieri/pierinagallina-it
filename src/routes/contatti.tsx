@@ -76,14 +76,11 @@ function ContactPage() {
 
   return (
     <>
-      <PageHero
-        eyebrow="Contatti"
-        title={<>Una parola, <span className="italic" style={{ color: "var(--brand-gold)" }}>e ci sentiamo.</span></>}
-        intro="Per presentazioni di libri, letture nelle scuole, collaborazioni con biblioteche e case editrici."
-      />
+      <ContattiHero />
 
       <section className="mx-auto grid max-w-6xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_320px]">
-        <form onSubmit={onSubmit} className="space-y-4">
+        <form onSubmit={onSubmit} className="paper-card space-y-4 p-6 sm:p-8">
+
           <div className="grid gap-4 sm:grid-cols-2">
             <label className="block">
               <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Nome</span>
