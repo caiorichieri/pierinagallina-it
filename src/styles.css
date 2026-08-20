@@ -352,21 +352,20 @@
 /* --- Fiabe: personaggi che entrano in scena e note che salgono --- */
 @keyframes fiabaEnter {
   0%   { opacity: 0; transform: translate(var(--dx, 0), var(--dy2, 0)) scale(.9); }
-  60%  { opacity: 1; }
-  100% { opacity: 1; transform: translate(0, 0) scale(1); }
-}
-@keyframes fiabaBob {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-4px); }
+  12%  { opacity: 1; transform: translate(0, 0) scale(1); }
+  35%  { transform: translate(0, -4px) scale(1); }
+  58%  { transform: translate(0, 0) scale(1); }
+  80%  { transform: translate(0, -4px) scale(1); }
+  92%  { opacity: 1; transform: translate(0, 0) scale(1); }
+  100% { opacity: 0; transform: translate(0, 6px) scale(.94); }
 }
 .fiaba-char {
   transform-box: fill-box;
   transform-origin: center;
   opacity: 0;
-  animation:
-    fiabaEnter 1.5s cubic-bezier(.22,.9,.28,1) both,
-    fiabaBob 4s ease-in-out infinite;
+  animation: fiabaEnter 9s cubic-bezier(.22,.9,.28,1) infinite both;
 }
+
 
 @keyframes fiabaNote {
   0%   { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(.3); }
