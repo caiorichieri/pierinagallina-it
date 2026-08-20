@@ -360,7 +360,7 @@ function HomePage() {
             </h2>
 
             <div className="mt-12 grid gap-10 md:grid-cols-3">
-              {data.books.map((b, i) => (
+              {data.books.filter((b) => !isBookHidden(b.title)).slice(0, 3).map((b, i) => (
                 <Reveal key={b.id} delay={i * 100}>
                   <article className="group">
                     {(() => { const cover = coverFor(b); return cover ? (
@@ -376,11 +376,14 @@ function HomePage() {
                       <h3 className="font-serif text-2xl leading-tight text-foreground">{b.title}</h3>
                       {b.year && <span className="font-sans text-xs text-muted-foreground">{b.year}</span>}
                     </div>
-                    {b.description && (
-                      <p className="mt-3 text-sm leading-relaxed text-muted-foreground line-clamp-4">
-                        {b.description}
-                      </p>
-                    )}
+                    {(() => {
+                      const text = bookTextFor(b.title)?.description ?? b.description;
+                      return text ? (
+                        <p className="mt-3 text-sm leading-relaxed text-muted-foreground line-clamp-4">
+                          {text}
+                        </p>
+                      ) : null;
+                    })()}
                   </article>
                 </Reveal>
               ))}
