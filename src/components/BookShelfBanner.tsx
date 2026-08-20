@@ -1,3 +1,5 @@
+import { useRef } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { isBookHidden } from "@/content/libri";
 import coverVitaEmotiva from "@/assets/libri/vita-da-emotiva.png";
