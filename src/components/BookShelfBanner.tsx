@@ -24,7 +24,13 @@ const BOOKS: { title: string; cover: string }[] = [
 
 export function BookShelfBanner() {
   const books = BOOKS.filter((b) => !isBookHidden(b.title));
-  const loop = [...books, ...books];
+  const scrollerRef = useRef<HTMLDivElement>(null);
+
+  const scrollBy = (dir: 1 | -1) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * Math.max(240, el.clientWidth * 0.7), behavior: "smooth" });
+  };
 
   return (
     <section
@@ -40,42 +46,56 @@ export function BookShelfBanner() {
         }}
       />
 
-      <div className="relative flex items-end">
-        {/* scaffale scorrevole */}
-        <div className="book-marquee group relative min-w-0 flex-1 py-6 md:py-8">
-          <div className="book-marquee-track flex w-max items-end gap-6 md:gap-10">
-            {loop.map((b, i) => (
-              <Link
-                key={`${b.title}-${i}`}
-                to="/libri"
-                aria-hidden={i >= books.length ? true : undefined}
-                tabIndex={i >= books.length ? -1 : undefined}
-                className="book-marquee-item shrink-0"
-              >
+      <div className="relative flex items-center">
+        <button
+          type="button"
+          onClick={() => scrollBy(-1)}
+          aria-label="Scorri a sinistra"
+          className="absolute left-2 z-20 rounded-full border border-border bg-background/80 p-2 text-foreground shadow-sm backdrop-blur transition hover:bg-background"
+        >
+          <ChevronLeft className="h-4 w-4" />
+        </button>
+
+        <div
+          ref={scrollerRef}
+          className="no-scrollbar min-w-0 flex-1 overflow-x-auto scroll-smooth py-6 md:py-8"
+        >
+          <div className="flex w-max items-end gap-6 px-14 md:gap-10 md:px-20">
+            {books.map((b) => (
+              <Link key={b.title} to="/libri" className="shrink-0 transition-transform hover:-translate-y-1">
                 <img
                   src={b.cover}
-                  alt={i >= books.length ? "" : b.title}
+                  alt={b.title}
                   loading="lazy"
                   className="h-32 w-auto object-contain drop-shadow-xl sm:h-40 md:h-48"
                 />
               </Link>
             ))}
           </div>
-
-          {/* sfumature laterali */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-y-0 left-0 w-16 md:w-28"
-            style={{ background: "linear-gradient(to right, var(--background), transparent)" }}
-          />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-y-0 right-0 w-16 md:w-28"
-            style={{ background: "linear-gradient(to left, var(--background), transparent)" }}
-          />
         </div>
 
+        <button
+          type="button"
+          onClick={() => scrollBy(1)}
+          aria-label="Scorri a destra"
+          className="absolute right-2 z-20 rounded-full border border-border bg-background/80 p-2 text-foreground shadow-sm backdrop-blur transition hover:bg-background"
+        >
+          <ChevronRight className="h-4 w-4" />
+        </button>
+
+        {/* sfumature laterali */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 md:w-28"
+          style={{ background: "linear-gradient(to right, var(--background), transparent)" }}
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 md:w-28"
+          style={{ background: "linear-gradient(to left, var(--background), transparent)" }}
+        />
       </div>
     </section>
   );
 }
+
