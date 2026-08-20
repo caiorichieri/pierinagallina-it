@@ -6,6 +6,8 @@ import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { BookInterestDialog } from "@/components/BookInterestDialog";
 import { ExternalLink, Mail, Play } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { BOOKS_INTRO, bookTextFor, isBookHidden } from "@/content/libri";
 
 import coverVitaEmotiva from "@/assets/libri/vita-da-emotiva.png.asset.json";
 import coverGastone from "@/assets/libri/gastone.png.asset.json";
