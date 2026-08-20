@@ -6,6 +6,8 @@ import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { BookInterestDialog } from "@/components/BookInterestDialog";
 import { ExternalLink, Mail, Play } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { BOOKS_INTRO, bookTextFor, isBookHidden } from "@/content/libri";
 
 import coverVitaEmotiva from "@/assets/libri/vita-da-emotiva.png.asset.json";
 import coverGastone from "@/assets/libri/gastone.png.asset.json";
@@ -94,7 +96,8 @@ export const Route = createFileRoute("/libri")({
 });
 
 function LibriPage() {
-  const { data: books } = useSuspenseQuery(booksQ);
+  const { data: allBooks } = useSuspenseQuery(booksQ);
+  const books = allBooks.filter((b) => !isBookHidden(b.title));
   const [interest, setInterest] = useState<Book | null>(null);
 
   return (
@@ -102,7 +105,7 @@ function LibriPage() {
       <PageHero tone="libri"
         eyebrow="Libri"
         title={<>Le pagine che ho <span className="italic" style={{ color: "var(--brand-gold)" }}>seminato.</span></>}
-        intro="Fiabe, racconti per bambini e raccolte illustrate. Storie che nascono dalle scuole di Codroipo e dai paesi del Friuli."
+        intro={BOOKS_INTRO}
       />
 
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
@@ -129,9 +132,30 @@ function LibriPage() {
                   {b.type && (
                     <div className="mt-1 font-sans text-[11px] uppercase tracking-[0.18em] text-accent">{b.type}</div>
                   )}
-                  {b.description && (
-                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{b.description}</p>
-                  )}
+                  {(() => {
+                    const t = bookTextFor(b.title);
+                    if (!t) {
+                      return b.description ? (
+                        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{b.description}</p>
+                      ) : null;
+                    }
+                    return (
+                      <div className="mt-3 space-y-2 text-sm leading-relaxed text-muted-foreground">
+                        <p>{t.description}</p>
+                        {t.extra && (
+                          <p>
+                            {t.extra}{" "}
+                            <Link to="/fiabe" className="font-medium text-accent hover:underline">
+                              Vai alle Fiabe sonore →
+                            </Link>
+                          </p>
+                        )}
+                        {t.publisher && <p className="text-foreground/70">{t.publisher}</p>}
+                        {t.charity && <p className="italic">{t.charity}</p>}
+                        {t.copies && <p>{t.copies}</p>}
+                      </div>
+                    );
+                  })()}
                   <div className="mt-5 flex flex-wrap gap-3">
                     {isExternalBuy(b.buy_url) ? (
                       <a href={b.buy_url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-xs font-medium text-primary-foreground transition-transform hover:-translate-y-0.5">
