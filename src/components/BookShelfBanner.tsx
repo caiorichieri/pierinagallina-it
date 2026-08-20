@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
 import { isBookHidden } from "@/content/libri";
-import pierinaBanner from "@/assets/pierina-banner.png.asset.json";
 import coverVitaEmotiva from "@/assets/libri/vita-da-emotiva.png";
 import coverGastone from "@/assets/libri/gastone.png";
 import coverAnnoFiaba from "@/assets/libri/un-anno-da-fiaba.png";
