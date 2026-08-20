@@ -274,59 +274,60 @@
 
 /* --- Hero "Scritti": libro che si apre, lettere che diventano albero --- */
 @keyframes treeDraw {
-  from { stroke-dasharray: 200; stroke-dashoffset: 200; opacity: 0; }
-  to   { stroke-dasharray: 200; stroke-dashoffset: 0; opacity: 1; }
+  0%   { stroke-dasharray: 200; stroke-dashoffset: 200; opacity: 0; }
+  16%  { stroke-dasharray: 200; stroke-dashoffset: 0; opacity: 1; }
+  88%  { stroke-dashoffset: 0; opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
 }
 .tree-draw {
-  animation: treeDraw 1.1s ease-out both;
+  animation: treeDraw 9s ease-out infinite both;
 }
 
 @keyframes leafFly {
   0%   { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(.25) rotate(-25deg); }
-  55%  { opacity: 1; }
-  100% { opacity: 1; transform: translate(0, 0) scale(1) rotate(0deg); }
-}
-@keyframes leafSway {
-  0%, 100% { transform: translate(0, 0); }
-  50%      { transform: translate(0, -3px); }
+  10%  { opacity: 1; }
+  22%  { opacity: 1; transform: translate(0, 0) scale(1) rotate(0deg); }
+  45%  { transform: translate(0, -3px) scale(1) rotate(0deg); }
+  68%  { transform: translate(0, 0) scale(1) rotate(0deg); }
+  86%  { opacity: 1; transform: translate(0, -3px) scale(1) rotate(0deg); }
+  100% { opacity: 0; transform: translate(0, -10px) scale(.9) rotate(6deg); }
 }
 .leaf-letter {
   transform-box: fill-box;
   transform-origin: center;
   opacity: 0;
-  animation:
-    leafFly 1.5s cubic-bezier(.22,.9,.28,1) both,
-    leafSway 4.5s ease-in-out infinite;
+  animation: leafFly 9s cubic-bezier(.22,.9,.28,1) infinite both;
 }
 
 @keyframes bookOpen {
-  from { opacity: 0; transform: translateY(14px) scaleX(.6); }
-  to   { opacity: 1; transform: translateY(0) scaleX(1); }
+  0%   { opacity: 0; transform: translateY(14px) scaleX(.6); }
+  12%  { opacity: 1; transform: translateY(0) scaleX(1); }
+  88%  { opacity: 1; transform: translateY(0) scaleX(1); }
+  100% { opacity: 0; transform: translateY(6px) scaleX(.85); }
 }
 .book-open {
   transform-box: fill-box;
   transform-origin: center;
-  animation: bookOpen .9s cubic-bezier(.22,.9,.28,1) both;
+  animation: bookOpen 9s cubic-bezier(.22,.9,.28,1) infinite both;
 }
 
 /* --- Fotografie: polaroid che escono dalla macchina e si appendono --- */
 @keyframes polaroidFly {
   0%   { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(.35) rotate(-14deg); }
-  55%  { opacity: 1; }
-  100% { opacity: 1; transform: translate(0, 0) scale(1) rotate(var(--rot)); }
-}
-@keyframes polaroidSway {
-  0%, 100% { transform: rotate(var(--rot)); }
-  50%      { transform: rotate(calc(var(--rot) + 1.2deg)); }
+  10%  { opacity: 1; }
+  22%  { opacity: 1; transform: translate(0, 0) scale(1) rotate(var(--rot)); }
+  45%  { transform: translate(0, 0) scale(1) rotate(calc(var(--rot) + 1.2deg)); }
+  70%  { transform: translate(0, 0) scale(1) rotate(var(--rot)); }
+  88%  { opacity: 1; transform: translate(0, 0) scale(1) rotate(calc(var(--rot) + 1.2deg)); }
+  100% { opacity: 0; transform: translate(0, -8px) scale(.94) rotate(var(--rot)); }
 }
 .polaroid-shot {
   transform-box: fill-box;
   transform-origin: center top;
   opacity: 0;
-  animation:
-    polaroidFly 1.4s cubic-bezier(.22,.9,.28,1) both,
-    polaroidSway 5s ease-in-out infinite;
+  animation: polaroidFly 9s cubic-bezier(.22,.9,.28,1) infinite both;
 }
+
 
 /* Cornice polaroid per la galleria */
 .polaroid-card {
@@ -351,21 +352,20 @@
 /* --- Fiabe: personaggi che entrano in scena e note che salgono --- */
 @keyframes fiabaEnter {
   0%   { opacity: 0; transform: translate(var(--dx, 0), var(--dy2, 0)) scale(.9); }
-  60%  { opacity: 1; }
-  100% { opacity: 1; transform: translate(0, 0) scale(1); }
-}
-@keyframes fiabaBob {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-4px); }
+  12%  { opacity: 1; transform: translate(0, 0) scale(1); }
+  35%  { transform: translate(0, -4px) scale(1); }
+  58%  { transform: translate(0, 0) scale(1); }
+  80%  { transform: translate(0, -4px) scale(1); }
+  92%  { opacity: 1; transform: translate(0, 0) scale(1); }
+  100% { opacity: 0; transform: translate(0, 6px) scale(.94); }
 }
 .fiaba-char {
   transform-box: fill-box;
   transform-origin: center;
   opacity: 0;
-  animation:
-    fiabaEnter 1.5s cubic-bezier(.22,.9,.28,1) both,
-    fiabaBob 4s ease-in-out infinite;
+  animation: fiabaEnter 9s cubic-bezier(.22,.9,.28,1) infinite both;
 }
+
 
 @keyframes fiabaNote {
   0%   { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(.3); }
