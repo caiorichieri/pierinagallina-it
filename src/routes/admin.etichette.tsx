@@ -42,9 +42,12 @@ function AdminEtichette() {
       return;
     }
     const counts = new Map<string, number>();
+    let none = 0;
     for (const p of (posts.data ?? []) as { category_id: string | null }[]) {
       if (p.category_id) counts.set(p.category_id, (counts.get(p.category_id) ?? 0) + 1);
+      else none++;
     }
+    setNoneCount(none);
     const list = ((cats.data as Category[] | null) ?? []).map((c) => ({
       ...c,
       used: counts.get(c.id) ?? c.post_count ?? 0,
@@ -59,6 +62,7 @@ function AdminEtichette() {
     setRows(list);
     setLoading(false);
   }
+
 
   useEffect(() => {
     reload();
