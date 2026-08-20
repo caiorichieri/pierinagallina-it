@@ -161,6 +161,8 @@ function RootComponent() {
           </main>
           <SiteFooter />
           <CookieBanner />
+          <NewsletterPopup />
+
           <VisitTracker />
           <GoogleAnalytics />
         </div>
