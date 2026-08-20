@@ -11,6 +11,7 @@ export const Route = createFileRoute("/admin/posts/")({
 
 function AdminPosts() {
   const [posts, setPosts] = useState<Post[]>([]);
+  const [cats, setCats] = useState<Map<string, string>>(new Map());
   const [loading, setLoading] = useState(true);
   const [q, setQ] = useState("");
   const [err, setErr] = useState<string | null>(null);
@@ -21,7 +22,7 @@ function AdminPosts() {
     setLoading(true);
     const { data, error } = await db
       .from("posts")
-      .select("id,title,slug,excerpt,published_at,created_at,featured_image")
+      .select("id,title,slug,excerpt,published_at,created_at,featured_image,category_id")
       .order("created_at", { ascending: false })
       .limit(500);
     if (error) setErr(error.message);
@@ -30,6 +31,13 @@ function AdminPosts() {
   }
 
   useEffect(() => { reload(); }, []);
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await db.from("categories").select("id,name");
+      setCats(new Map(((data ?? []) as { id: string; name: string }[]).map((c) => [c.id, c.name])));
+    })();
+  }, []);
 
   async function remove(id: string) {
     if (!confirm("Eliminare l'articolo? L'azione non è reversibile.")) return;
