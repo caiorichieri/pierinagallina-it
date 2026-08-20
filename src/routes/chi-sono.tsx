@@ -90,7 +90,24 @@ function ChiSonoPage() {
           </div>
         </Reveal>
 
+        <Reveal delay={100}>
+          <div className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {[
+              { n: "42", l: "anni di scuola dell'infanzia" },
+              { n: "40+", l: "anni di giornalismo" },
+              { n: "9", l: "libri pubblicati" },
+              { n: "7", l: "volte nonna" },
+            ].map((s) => (
+              <div key={s.n} className="stat-card bg-card px-4 py-5 text-center">
+                <div className="font-serif text-3xl" style={{ color: "var(--brand-gold)" }}>{s.n}</div>
+                <div className="mt-1 text-xs leading-snug text-muted-foreground">{s.l}</div>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+
         <Reveal delay={120}>
+
           <div className="mt-12 flex flex-wrap gap-3">
             <Link
               to="/libri"
