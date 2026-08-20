@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
-import { ArrowRight, Mail } from "lucide-react";
+import { ArrowRight, Mail, ChevronLeft, ChevronRight } from "lucide-react";
+import { useRef, useState, useEffect } from "react";
 import iconLibri from "@/assets/icone/libri.png";
 import iconScritti from "@/assets/icone/scritti.png";
 import iconFiabe from "@/assets/icone/fiabe.png";
@@ -46,7 +47,7 @@ const homeData = queryOptions({
   queryFn: async (): Promise<{ posts: Post[]; books: Book[]; poems: Poem[] }> => {
     const [posts, books, poems] = await Promise.all([
       db.from("posts").select("id,title,slug,excerpt,featured_image,published_at,created_at").not("published_at", "is", null).order("published_at", { ascending: false }).limit(3),
-      db.from("books").select("id,title,year,price,description,buy_url,youtube_id,type,cover_url,sort_order").order("sort_order", { ascending: true }).limit(6),
+      db.from("books").select("id,title,year,price,description,buy_url,youtube_id,type,cover_url,sort_order").order("sort_order", { ascending: true }),
       db.from("poems").select("id,title,slug,content_friulian,content_italian,written_at,sort_order").order("sort_order", { ascending: true }).limit(2),
     ]);
     return {
@@ -112,6 +113,117 @@ function formatDateIt(dateStr: string | null | undefined): string {
   ][d.getUTCMonth()];
   const year = d.getUTCFullYear();
   return `${day} ${month} ${year}`;
+}
+
+function BooksCarousel({ books }: { books: Book[] }) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canLeft, setCanLeft] = useState(false);
+  const [canRight, setCanRight] = useState(false);
+
+  const update = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+    setCanLeft(el.scrollLeft > 1);
+    setCanRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 1);
+  };
+
+  useEffect(() => {
+    update();
+    const el = scrollRef.current;
+    if (!el) return;
+    el.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      el.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+
+  const scroll = (dir: "left" | "right") => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const amount = Math.max(el.clientWidth * 0.75, 260);
+    el.scrollBy({ left: dir === "left" ? -amount : amount, behavior: "smooth" });
+  };
+
+  return (
+    <section className="relative overflow-hidden border-y border-border bg-secondary/40">
+      <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+        <div className="flex items-end justify-between gap-4">
+          <div>
+            <div className="inline-flex items-center gap-2 font-sans text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+              <span className="h-1.5 w-1.5 rounded-full bg-accent" /> Libri
+            </div>
+            <h2 className="mt-3 max-w-3xl font-serif text-4xl leading-tight md:text-5xl">
+              Le pagine che ho seminato.
+            </h2>
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => scroll("left")}
+              disabled={!canLeft}
+              aria-label="Scorri libri a sinistra"
+              className="rounded-full border border-border bg-background/90 p-2.5 text-primary shadow-sm backdrop-blur transition-colors hover:bg-background hover:text-accent disabled:cursor-not-allowed disabled:opacity-30"
+            >
+              <ChevronLeft size={22} />
+            </button>
+            <button
+              type="button"
+              onClick={() => scroll("right")}
+              disabled={!canRight}
+              aria-label="Scorri libri a destra"
+              className="rounded-full border border-border bg-background/90 p-2.5 text-primary shadow-sm backdrop-blur transition-colors hover:bg-background hover:text-accent disabled:cursor-not-allowed disabled:opacity-30"
+            >
+              <ChevronRight size={22} />
+            </button>
+          </div>
+        </div>
+
+        <div className="relative mt-12">
+          <div
+            ref={scrollRef}
+            className="flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-6"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          >
+            {books.map((b, i) => {
+              const cover = coverFor(b);
+              const text = bookTextFor(b.title)?.description ?? b.description;
+              return (
+                <Reveal key={b.id} delay={i * 80}>
+                  <article className="group w-[240px] snap-start sm:w-[260px]">
+                    {cover ? (
+                      <div className="flex aspect-[3/4] items-center justify-center overflow-hidden rounded-xl bg-secondary/40 p-4">
+                        <img
+                          src={cover}
+                          alt={b.title}
+                          loading="lazy"
+                          className="max-h-full max-w-full object-contain drop-shadow-xl transition-transform duration-700 group-hover:scale-105"
+                        />
+                      </div>
+                    ) : (
+                      <div className="flex aspect-[3/4] items-center justify-center rounded-md bg-primary p-8 text-primary-foreground">
+                        <span className="text-center font-serif text-2xl italic leading-tight">{b.title}</span>
+                      </div>
+                    )}
+                    <div className="mt-5 flex items-baseline justify-between gap-3">
+                      <h3 className="font-serif text-2xl leading-tight text-foreground">{b.title}</h3>
+                      {b.year && <span className="font-sans text-xs text-muted-foreground">{b.year}</span>}
+                    </div>
+                    {text && (
+                      <p className="mt-3 line-clamp-4 text-sm leading-relaxed text-muted-foreground">
+                        {text}
+                      </p>
+                    )}
+                  </article>
+                </Reveal>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }
 
 function HomePage() {
@@ -355,46 +467,7 @@ function HomePage() {
 
       {/* LIBRI */}
       {data.books.length > 0 && (
-        <section className="relative overflow-hidden border-y border-border bg-secondary/40">
-          <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
-            <div className="inline-flex items-center gap-2 font-sans text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent" /> Libri
-            </div>
-            <h2 className="mt-3 max-w-3xl font-serif text-4xl leading-tight md:text-5xl">
-              Le pagine che ho seminato.
-            </h2>
-
-            <div className="mt-12 grid gap-10 md:grid-cols-3">
-              {data.books.filter((b) => !isBookHidden(b.title)).slice(0, 3).map((b, i) => (
-                <Reveal key={b.id} delay={i * 100}>
-                  <article className="group">
-                    {(() => { const cover = coverFor(b); return cover ? (
-                      <div className="overflow-hidden rounded-xl aspect-[3/4] bg-secondary/40 flex items-center justify-center p-4">
-                        <img src={cover} alt={b.title} loading="lazy" className="max-h-full max-w-full object-contain drop-shadow-xl transition-transform duration-700 group-hover:scale-105" />
-                      </div>
-                    ) : (
-                      <div className="flex aspect-[3/4] items-center justify-center rounded-md bg-primary p-8 text-primary-foreground">
-                        <span className="text-center font-serif text-2xl italic leading-tight">{b.title}</span>
-                      </div>
-                    ); })()}
-                    <div className="mt-5 flex items-baseline justify-between gap-3">
-                      <h3 className="font-serif text-2xl leading-tight text-foreground">{b.title}</h3>
-                      {b.year && <span className="font-sans text-xs text-muted-foreground">{b.year}</span>}
-                    </div>
-                    {(() => {
-                      const text = bookTextFor(b.title)?.description ?? b.description;
-                      return text ? (
-                        <p className="mt-3 text-sm leading-relaxed text-muted-foreground line-clamp-4">
-                          {text}
-                        </p>
-                      ) : null;
-                    })()}
-                  </article>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
+        <BooksCarousel books={data.books.filter((b) => !isBookHidden(b.title))} />
       )}
 
       {/* POESIA */}
