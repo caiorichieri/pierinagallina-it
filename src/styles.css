@@ -502,17 +502,6 @@
   box-shadow: 0 18px 30px -22px rgba(45, 8, 8, .55);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .tree-draw, .leaf-letter, .book-open, .polaroid-shot,
-  .fiaba-char, .fiaba-note, .fiaba-flame,
-  .thread-draw, .spool-in, .pen-in, .thread-word,
-  .envelope-in, .envelope-flap, .letter-sheet, .hand-line,
-  .paper-plane { animation: none; opacity: 1; }
-}
-
-
-
-
 /* ---- Contenuto articoli (editor + pagina pubblica) ---- */
 .prose-pierina p,
 .rte-content p { margin: 0 0 1.1em; }
