@@ -7,9 +7,9 @@ export const Route = createFileRoute("/chi-sono")({
   head: () => ({
     meta: [
       { title: "Chi sono — Pierina Gallina" },
-      { name: "description", content: "Pierina Gallina, scrittrice di Codroipo (Friuli). Un'imbranata cacciatrice di emozioni: le cerca, ma spesso sono loro a trovarla." },
+      { name: "description", content: "Pierina Gallina, tessitrice di storie: giornalista, scrittrice e poetessa di Codroipo (Friuli). Nove libri, poesie, fiabe e articoli." },
       { property: "og:title", content: "Chi sono — Pierina Gallina" },
-      { property: "og:description", content: "Pierina Gallina, scrittrice di Codroipo (Friuli). Un'imbranata cacciatrice di emozioni." },
+      { property: "og:description", content: "Giornalista, scrittrice, poetessa di Codroipo (Friuli). Scrivo anche quando non scrivo." },
       { property: "og:type", content: "profile" },
       { property: "og:url", content: "https://www.pierinagallina.it/chi-sono" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -22,8 +22,8 @@ export const Route = createFileRoute("/chi-sono")({
           "@context": "https://schema.org",
           "@type": "Person",
           name: "Pierina Gallina",
-          jobTitle: "Scrittrice e paroliera",
-          description: "Scrittrice di Codroipo (Friuli), autrice di fiabe, racconti e poesie.",
+          jobTitle: "Giornalista, scrittrice, poetessa",
+          description: "Tessitrice di storie: giornalista pubblicista, scrittrice e poetessa di Codroipo (Friuli), autrice di nove libri.",
           url: "https://www.pierinagallina.it/chi-sono",
           address: { "@type": "PostalAddress", addressLocality: "Codroipo", addressRegion: "Friuli-Venezia Giulia", addressCountry: "IT" },
         }),
