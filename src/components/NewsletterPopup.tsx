@@ -163,12 +163,12 @@ export function NewsletterPopup() {
                 className="flex h-16 w-14 flex-col items-center justify-center rounded-[2px] text-primary-foreground"
                 style={{
                   background: "hsl(var(--primary))",
+                  outline: "2px dashed color-mix(in oklab, hsl(var(--primary)) 35%, transparent)",
+                  outlineOffset: "3px",
                   filter: "drop-shadow(0 1px 2px rgba(0,0,0,.25))",
-                  maskImage:
-                    "radial-gradient(circle at 3px 3px, transparent 3px, black 3.5px)",
-                  maskSize: "7px 7px",
                 }}
               >
+
                 <Feather size={18} />
                 <span className="mt-1 font-mono text-[8px] uppercase tracking-widest opacity-80">
                   Friuli
