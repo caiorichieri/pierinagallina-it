@@ -272,6 +272,8 @@ function HomePage() {
         </div>
       </section>
 
+      {/* BANNER — scaffale di libri scorrevole */}
+      <BookShelfBanner />
 
       {/* CHI SONO — breve */}
       <section className="bg-background paper-grain">
