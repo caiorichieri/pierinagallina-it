@@ -37,7 +37,7 @@ export function ScrittiHero() {
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/20 bg-primary-foreground/5 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.18em] text-primary-foreground/80">
             <span className="h-1.5 w-1.5 rounded-full" style={{ background: "var(--brand-gold)" }} />
-            Scritti
+            Blog
           </div>
           <h1 className="mt-6 max-w-2xl font-serif text-4xl leading-[1.08] tracking-tight text-primary-foreground sm:text-5xl md:text-6xl">
             Parole che{" "}

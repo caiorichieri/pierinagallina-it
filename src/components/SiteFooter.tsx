@@ -48,7 +48,7 @@ export function SiteFooter() {
           <ul className="grid grid-cols-2 gap-y-1.5 text-sm">
             {[
               ["/", "Home"],
-              ["/scritti", "Scritti"],
+              ["/scritti", "Blog"],
               ["/fotografie", "Fotografie"],
               ["/fiabe", "Fiabe sonore"],
               ["/libri", "Libri"],
