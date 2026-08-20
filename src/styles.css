@@ -389,52 +389,43 @@
   animation: fiabaFlame 1.6s ease-in-out infinite;
 }
 
-/* --- Chi sono: filo dorato, gomitolo e penna --- */
-@keyframes threadDraw {
-  from { stroke-dasharray: 600; stroke-dashoffset: 600; opacity: 0; }
-  to   { stroke-dasharray: 600; stroke-dashoffset: 0; opacity: 1; }
+/* --- Chi sono: pergamena e penna d'oca --- */
+@keyframes scrollIn {
+  from { opacity: 0; transform: translateY(18px) scale(.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
 }
-.thread-draw { animation: threadDraw 2s ease-out both; }
-
-@keyframes spoolIn {
-  from { opacity: 0; transform: translateY(16px) scale(.85) rotate(-12deg); }
-  to   { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
-}
-.spool-in {
+.scroll-in {
   transform-box: fill-box; transform-origin: center;
-  animation: spoolIn 1s cubic-bezier(.22,.9,.28,1) both;
+  animation: scrollIn .9s cubic-bezier(.22,.9,.28,1) both;
 }
 
-@keyframes penIn {
-  0%   { opacity: 0; transform: translate(-26px, 22px) rotate(-10deg); }
-  100% { opacity: 1; transform: translate(0, 0) rotate(0deg); }
+@keyframes inkWrite {
+  0%   { stroke-dasharray: 260; stroke-dashoffset: 260; }
+  16%  { stroke-dashoffset: 0; }
+  88%  { stroke-dashoffset: 0; opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
 }
-@keyframes penFloat {
-  0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  50%      { transform: translate(0, -5px) rotate(-1.2deg); }
-}
-.pen-in {
-  transform-box: fill-box; transform-origin: center;
-  opacity: 0;
-  animation:
-    penIn 1.2s cubic-bezier(.22,.9,.28,1) 1s both,
-    penFloat 5s ease-in-out 2.2s infinite;
+.ink-line {
+  stroke-dasharray: 260;
+  animation: inkWrite 8s linear infinite both;
 }
 
-@keyframes wordRise {
-  0%   { opacity: 0; transform: translateY(10px); }
-  100% { opacity: .8; transform: translateY(0); }
+@keyframes quillWrite {
+  0%   { opacity: 0; transform: translate(-87px, -35px) rotate(3deg); }
+  5%   { opacity: 1; transform: translate(-87px, -25px) rotate(3deg); }
+  16%  { transform: translate(77px, -25px) rotate(3deg); }
+  18%  { transform: translate(-87px, 5px) rotate(3deg); }
+  33%  { transform: translate(71px, 5px) rotate(3deg); }
+  35%  { transform: translate(-87px, 35px) rotate(3deg); }
+  50%  { transform: translate(57px, 35px) rotate(3deg); }
+  52%  { transform: translate(-87px, 61px) rotate(3deg); }
+  62%  { transform: translate(-35px, 61px) rotate(3deg); }
+  88%  { opacity: 1; transform: translate(-35px, 55px) rotate(1deg); }
+  100% { opacity: 0; transform: translate(-87px, -35px) rotate(3deg); }
 }
-@keyframes wordSway {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-4px); }
-}
-.thread-word {
+.quill {
   transform-box: fill-box; transform-origin: center;
-  opacity: 0;
-  animation:
-    wordRise 1s ease-out both,
-    wordSway 5.5s ease-in-out infinite;
+  animation: quillWrite 8s cubic-bezier(.4,0,.5,1) infinite both;
 }
 
 /* --- Contatti: busta, foglio scritto e aeroplanino --- */
@@ -455,14 +446,21 @@
   animation: flapOpen 1s cubic-bezier(.22,.9,.28,1) .5s both;
 }
 @keyframes sheetOut {
-  0%   { opacity: 0; transform: translateY(64px) scale(.9); }
-  100% { opacity: 1; transform: translateY(0) scale(1); }
+  0%   { transform: translateY(150px); }
+  55%  { transform: translateY(0); }
+  100% { transform: translateY(0); }
+}
+@keyframes sheetFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-6px) rotate(-.8deg); }
 }
 .letter-sheet {
   transform-box: fill-box; transform-origin: center bottom;
-  opacity: 0;
-  animation: sheetOut 1.1s cubic-bezier(.22,.9,.28,1) .8s both;
+  animation:
+    sheetOut 1.6s cubic-bezier(.22,.9,.28,1) 1s both,
+    sheetFloat 6s ease-in-out 2.8s infinite;
 }
+
 @keyframes handWrite {
   from { stroke-dasharray: 140; stroke-dashoffset: 140; opacity: 0; }
   to   { stroke-dasharray: 140; stroke-dashoffset: 0; opacity: 1; }

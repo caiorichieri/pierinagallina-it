@@ -1,15 +1,13 @@
 /**
- * Hero "Chi sono": un gomitolo dorato da cui parte un filo che si disegna,
- * si intreccia e diventa una penna. Line-art oro su fondo bordeaux.
+ * Hero "Chi sono": una penna d'oca che scrive su una pergamena.
+ * Carta color avorio piena (non traslucida), inchiostro bordeaux, dettagli oro.
  */
 
-const WORDS = [
-  { ch: "storie", x: 316, y: 232, size: 19, delay: 1.6 },
-  { ch: "poesie", x: 118, y: 62, size: 17, delay: 1.85 },
-  { ch: "fiabe", x: 302, y: 300, size: 16, delay: 2.1 },
-  { ch: "parole", x: 84, y: 196, size: 15, delay: 2.35 },
+const INK_LINES = [
+  { d: "M118 146 C 150 138, 178 152, 206 142 C 232 133, 256 148, 282 140", delay: 0.2 },
+  { d: "M118 176 C 146 168, 170 182, 200 172 C 228 163, 250 178, 276 168", delay: 1.5 },
+  { d: "M118 206 C 144 198, 168 212, 196 202 C 220 194, 240 206, 262 198", delay: 2.8 },
 ];
-
 
 export function ChiSonoHero() {
   return (
@@ -32,87 +30,100 @@ export function ChiSonoHero() {
           </p>
         </div>
 
-        <div className="relative mx-auto w-full max-w-[420px]">
-          <ThreadPen />
+        <div className="relative mx-auto w-full max-w-[430px]">
+          <QuillScroll />
         </div>
       </div>
     </section>
   );
 }
 
-function ThreadPen() {
+function QuillScroll() {
   return (
     <svg
       viewBox="0 0 400 340"
       className="h-auto w-full"
       role="img"
-      aria-label="Un gomitolo dorato da cui parte un filo che si intreccia e diventa una penna"
+      aria-label="Una penna d'oca che scrive righe di inchiostro su una pergamena"
     >
-      {/* filo che si intreccia */}
-      <g fill="none" stroke="var(--brand-gold)" strokeLinecap="round" strokeOpacity="0.75">
-        <path
-          className="thread-draw"
-          strokeWidth="2.4"
-          d="M96 262 C 150 250, 156 196, 118 178 C 84 162, 74 118, 122 106 C 176 92, 206 138, 250 120"
-        />
-        <path
-          className="thread-draw"
-          style={{ animationDelay: ".5s" }}
-          strokeWidth="2"
-          strokeOpacity="0.5"
-          d="M104 258 C 168 236, 200 208, 236 216 C 274 224, 288 190, 268 158"
-        />
-        <path
-          className="thread-draw"
-          style={{ animationDelay: ".85s" }}
-          strokeWidth="1.6"
-          strokeOpacity="0.4"
-          d="M112 268 C 180 274, 240 258, 296 232"
-        />
-      </g>
+      <defs>
+        <linearGradient id="parchment" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#faf1de" />
+          <stop offset="100%" stopColor="#eddfc2" />
+        </linearGradient>
+        <linearGradient id="feather" x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0%" stopColor="#fbf3e2" />
+          <stop offset="100%" stopColor="#e6cf9a" />
+        </linearGradient>
+        <clipPath id="scrollClip">
+          <rect x="72" y="104" width="256" height="132" />
+        </clipPath>
+      </defs>
 
-      {/* gomitolo */}
-      <g className="spool-in">
-        <circle cx="88" cy="266" r="34" fill="#f7ead0" fillOpacity="0.14" stroke="var(--brand-gold)" strokeWidth="2" strokeOpacity="0.8" />
-        <g fill="none" stroke="var(--brand-gold)" strokeOpacity="0.55" strokeWidth="1.4">
-          <path d="M60 254 C 78 274, 96 282, 116 278" />
-          <path d="M60 278 C 80 262, 98 252, 116 254" />
-          <path d="M74 240 C 84 264, 92 280, 104 292" />
+      <g className="scroll-in">
+        {/* corpo pergamena */}
+        <path
+          d="M78 104 C 120 96, 280 96, 322 104 L 322 236 C 280 244, 120 244, 78 236 Z"
+          fill="url(#parchment)"
+        />
+        {/* righe di inchiostro scritte dalla penna */}
+        <g clipPath="url(#scrollClip)" fill="none" strokeLinecap="round">
+          {INK_LINES.map((l) => (
+            <path
+              key={l.d}
+              className="ink-line"
+              d={l.d}
+              stroke="#5b1526"
+              strokeWidth="2.4"
+              strokeOpacity="0.85"
+              style={{ animationDelay: `${l.delay}s` }}
+            />
+          ))}
+          <path
+            className="ink-line"
+            d="M118 232 C 138 224, 152 236, 170 228"
+            stroke="#8c2f3f"
+            strokeWidth="2"
+            strokeOpacity="0.7"
+            style={{ animationDelay: "4.1s" }}
+          />
+        </g>
+        {/* rulli superiore e inferiore */}
+        <g>
+          <path d="M62 96 C 62 86, 338 86, 338 96 C 338 108, 62 108, 62 96 Z" fill="#e2cfa6" />
+          <path d="M62 96 C 62 86, 338 86, 338 96" fill="none" stroke="var(--brand-gold)" strokeWidth="2" strokeOpacity="0.8" />
+          <path d="M62 244 C 62 234, 338 234, 338 244 C 338 256, 62 256, 62 244 Z" fill="#e2cfa6" />
+          <path d="M62 256 C 62 246, 338 246, 338 256" fill="none" stroke="var(--brand-gold)" strokeWidth="2" strokeOpacity="0.8" />
         </g>
       </g>
 
-      {/* penna */}
-      <g className="pen-in">
-        <path
-          d="M250 120 L 320 50 C 330 40, 344 40, 352 48 C 360 56, 360 70, 350 80 L 280 150 L 244 162 Z"
-          fill="#f7ead0"
-          fillOpacity="0.16"
-          stroke="var(--brand-gold)"
-          strokeWidth="2"
-          strokeOpacity="0.85"
-          strokeLinejoin="round"
-        />
-        <path d="M244 162 L 262 132 L 274 144 Z" fill="var(--brand-gold)" fillOpacity="0.85" />
-        <path d="M300 70 L 330 100" stroke="var(--brand-gold)" strokeWidth="1.6" strokeOpacity="0.5" />
-      </g>
-
-      {/* parole che affiorano */}
-      <g className="font-serif" fontStyle="italic">
-        {WORDS.map((w) => (
-          <text
-            key={w.ch}
-            x={w.x}
-            y={w.y}
-            className="thread-word"
-            textAnchor="middle"
-            fontSize={w.size}
-            fill="#f7ead0"
-            fillOpacity="0.8"
-            style={{ animationDelay: `${w.delay}s, ${w.delay + 1.1}s` }}
-          >
-            {w.ch}
-          </text>
-        ))}
+      {/* penna d'oca */}
+      <g className="quill">
+        <g transform="translate(214 10) scale(.78)">
+          {/* piuma */}
+          <path
+            d="M8 168 C 26 120, 54 66, 96 22 C 116 2, 138 -6, 150 2 C 160 9, 158 30, 146 54 C 122 102, 78 146, 30 176 Z"
+            fill="url(#feather)"
+            stroke="var(--brand-gold)"
+            strokeWidth="1.4"
+            strokeOpacity="0.7"
+            strokeLinejoin="round"
+          />
+          {/* rachide */}
+          <path d="M4 182 C 40 140, 92 82, 148 4" fill="none" stroke="#b9955a" strokeWidth="1.6" strokeOpacity="0.85" />
+          {/* barbe */}
+          <g fill="none" stroke="#c8a566" strokeWidth="1" strokeOpacity="0.65">
+            <path d="M120 40 C 128 46, 132 56, 130 66" />
+            <path d="M104 60 C 112 66, 116 76, 114 86" />
+            <path d="M88 80 C 96 86, 100 96, 98 106" />
+            <path d="M72 100 C 80 106, 84 116, 82 126" />
+            <path d="M56 120 C 64 126, 68 136, 66 146" />
+            <path d="M40 140 C 48 146, 52 154, 50 164" />
+          </g>
+          {/* fusto e pennino */}
+          <path d="M4 182 L -12 200" stroke="#f3e6cb" strokeWidth="3.2" strokeLinecap="round" />
+          <path d="M-8 196 L -18 206 L -12 194 Z" fill="#5b1526" />
+        </g>
       </g>
     </svg>
   );
