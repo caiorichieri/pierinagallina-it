@@ -222,6 +222,22 @@ function AdminEtichette() {
                   </td>
                 </tr>
               ))}
+              <tr className="border-t border-border bg-secondary/30">
+                <td className="px-4 py-3">
+                  <Link
+                    to="/admin/posts"
+                    search={{ cat: "none" }}
+                    className="font-serif text-base text-foreground break-words underline decoration-dotted underline-offset-4 hover:text-accent"
+                  >
+                    Vuoto
+                  </Link>
+                  <div className="text-xs text-muted-foreground">Articoli senza etichetta</div>
+                </td>
+                <td className="px-4 py-3 hidden md:table-cell" />
+                <td className="px-4 py-3 text-right tabular-nums text-xs text-muted-foreground">{noneCount}</td>
+                <td className="px-4 py-3" />
+              </tr>
+
               {rows.length === 0 && (
                 <tr>
                   <td colSpan={4} className="px-4 py-10 text-center text-sm text-muted-foreground">
