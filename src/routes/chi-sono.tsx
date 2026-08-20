@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { PageHero } from "@/components/PageHero";
+import { ChiSonoHero } from "@/components/ChiSonoHero";
 import { Reveal } from "@/components/Reveal";
 import { ArrowRight } from "lucide-react";
 
