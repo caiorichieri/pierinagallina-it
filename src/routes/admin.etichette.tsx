@@ -168,11 +168,18 @@ function AdminEtichette() {
                         className="w-full rounded-md border border-border bg-background px-2 py-1 text-sm outline-none focus:border-accent"
                       />
                     ) : (
-                      <span className="font-serif text-base text-foreground break-words">{c.name}</span>
+                      <Link
+                        to="/admin/posts"
+                        search={{ cat: c.id }}
+                        className="font-serif text-base text-foreground break-words underline decoration-dotted underline-offset-4 hover:text-accent"
+                      >
+                        {c.name}
+                      </Link>
                     )}
                   </td>
                   <td className="px-4 py-3 hidden break-all font-mono text-xs text-muted-foreground md:table-cell">{c.slug}</td>
                   <td className="px-4 py-3 text-right tabular-nums text-xs text-muted-foreground">{c.used}</td>
+
                   <td className="px-4 py-3 text-right">
                     <div className="inline-flex gap-1">
                       {editId === c.id ? (
