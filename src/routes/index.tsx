@@ -4,9 +4,10 @@ import { ArrowRight, Mail } from "lucide-react";
 import iconLibri from "@/assets/icone/libri.png";
 import iconScritti from "@/assets/icone/scritti.png";
 import iconFiabe from "@/assets/icone/fiabe.png";
-import iconFotografie from "@/assets/icone/fotografie.png";
+
 import { db, type Post, type Book, type Poem } from "@/integrations/pierina/client";
 import { Reveal } from "@/components/Reveal";
+import { bookTextFor, isBookHidden } from "@/content/libri";
 import pierinaHome from "@/assets/pierina-home-v2.png.asset.json";
 import coverVitaEmotiva from "@/assets/libri/vita-da-emotiva.png.asset.json";
 import coverGastone from "@/assets/libri/gastone.png.asset.json";
@@ -43,7 +44,7 @@ const homeData = queryOptions({
   queryFn: async (): Promise<{ posts: Post[]; books: Book[]; poems: Poem[] }> => {
     const [posts, books, poems] = await Promise.all([
       db.from("posts").select("id,title,slug,excerpt,featured_image,published_at,created_at").not("published_at", "is", null).order("published_at", { ascending: false }).limit(3),
-      db.from("books").select("id,title,year,price,description,buy_url,youtube_id,type,cover_url,sort_order").order("sort_order", { ascending: true }).limit(3),
+      db.from("books").select("id,title,year,price,description,buy_url,youtube_id,type,cover_url,sort_order").order("sort_order", { ascending: true }).limit(6),
       db.from("poems").select("id,title,slug,content_friulian,content_italian,written_at,sort_order").order("sort_order", { ascending: true }).limit(2),
     ]);
     return {
@@ -57,22 +58,22 @@ const homeData = queryOptions({
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Pierina Gallina — Scrittrice e paroliera friulana" },
+      { title: "Pierina Gallina — Tessitrice di storie" },
       {
         name: "description",
         content:
-          "Il sito ufficiale di Pierina Gallina: libri per bambini e adulti, fiabe sonore, poesie in friulano e italiano, fotografie e racconti da Codroipo.",
+          "Il sito ufficiale di Pierina Gallina, giornalista, scrittrice e poetessa di Codroipo (Friuli): libri illustrati, fiabe da ascoltare, poesie e articoli.",
       },
-      { property: "og:title", content: "Pierina Gallina — paroliera per passione" },
+      { property: "og:title", content: "Pierina Gallina — Tessitrice di storie" },
       {
         property: "og:description",
-        content: "Scrittrice di Codroipo (Friuli). Libri, fiabe sonore, poesie e fotografie.",
+        content: "Giornalista, scrittrice, poetessa di Codroipo (Friuli). Libri, fiabe sonore, poesie e scritti.",
       },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Pierina Gallina — paroliera per passione" },
+      { name: "twitter:title", content: "Pierina Gallina — Tessitrice di storie" },
       {
         name: "twitter:description",
-        content: "Scrittrice di Codroipo (Friuli). Libri, fiabe sonore, poesie e fotografie.",
+        content: "Giornalista, scrittrice, poetessa di Codroipo (Friuli). Libri, fiabe sonore, poesie e scritti.",
       },
       { property: "og:url", content: "https://www.pierinagallina.it/" },
       {
@@ -134,16 +135,19 @@ function HomePage() {
             <h1 className="font-serif text-5xl leading-[1.02] tracking-tight text-primary sm:text-6xl md:text-7xl lg:text-8xl">
               Pierina Gallina
               <br />
-              <span className="italic" style={{ color: "var(--brand-gold)" }}>— Scrittrice e paroliera.</span>
+              <span className="italic" style={{ color: "var(--brand-gold)" }}>Tessitrice di storie</span>
             </h1>
+            <p className="mt-3 font-sans text-sm uppercase tracking-[0.22em] text-primary/80 md:text-base">
+              Giornalista, scrittrice, poetessa
+            </p>
 
             <p className="mt-6 max-w-2xl font-serif text-xl italic leading-snug text-foreground/90 md:text-2xl">
               Scrivo per dare voce a ciò che rischierebbe di <span className="ink-underline" style={{ color: "var(--brand-primary)" }}>passare inosservato.</span>
             </p>
 
             <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
-              Scrittrice di Codroipo, Friuli — paroliera per passione. Libri, fiabe sonore, poesie in
-              friulano e in italiano. Un'imbranata cacciatrice di emozioni.
+              Di Codroipo, in Friuli. Raccolgo storie ed emozioni: a volte diventano poesie, altre
+              fiabe, racconti o articoli di giornale.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
@@ -221,19 +225,19 @@ function HomePage() {
               <span className="h-1.5 w-1.5 rounded-full bg-primary" /> Il mio mondo
             </div>
             <h2 className="mt-3 font-serif text-4xl leading-tight text-primary md:text-5xl">
-              Quattro sentieri di <span className="italic" style={{ color: "var(--brand-gold)" }}>parole.</span>
+              Tre sentieri di <span className="italic" style={{ color: "var(--brand-gold)" }}>parole.</span>
             </h2>
             <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-              Libri illustrati, fiabe da ascoltare, poesie in due lingue e fotografie del Friuli. Scegli da dove cominciare.
+              I miei libri illustrati, fiabe da ascoltare, poesie in italiano e, a volte, anche in
+              friulano, blog. Scegli da dove cominciare.
             </p>
           </div>
 
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {[
               { icon: iconLibri,      t: "Libri",        d: "Fiabe e racconti illustrati",       href: "/libri" as const },
               { icon: iconScritti,    t: "Scritti",      d: "Articoli, racconti e poesie",       href: "/scritti" as const },
               { icon: iconFiabe,      t: "Fiabe sonore", d: "Voci, suoni, storie da ascoltare",  href: "/fiabe" as const },
-              { icon: iconFotografie, t: "Fotografie",   d: "Momenti, incontri, paesaggi",       href: "/fotografie" as const },
             ].map((s, i) => (
               <Reveal key={s.t} delay={i * 80}>
                 <Link
@@ -266,6 +270,31 @@ function HomePage() {
         </div>
       </section>
 
+
+      {/* CHI SONO — breve */}
+      <section className="bg-background paper-grain">
+        <div className="mx-auto max-w-3xl px-4 py-20 text-center sm:px-6">
+          <Reveal>
+            <div className="inline-flex items-center gap-2 font-sans text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+              <span className="h-1.5 w-1.5 rounded-full bg-accent" /> Chi sono
+            </div>
+            <h2 className="mt-3 font-serif text-4xl leading-tight md:text-5xl">
+              Scrivo <span className="italic" style={{ color: "var(--brand-gold)" }}>anche quando non scrivo.</span>
+            </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+              Raccolgo storie ed emozioni. A volte diventano poesie, altre fiabe, racconti o articoli
+              di giornale. Quarantadue anni nella Scuola dell'Infanzia, oltre quarant'anni da
+              giornalista pubblicista, nove libri pubblicati.
+            </p>
+            <Link
+              to="/chi-sono"
+              className="mt-8 inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium text-foreground transition-colors hover:border-primary hover:text-primary"
+            >
+              Leggi di più <ArrowRight size={14} />
+            </Link>
+          </Reveal>
+        </div>
+      </section>
 
       {/* BLOG RECENTI */}
       {data.posts.length > 0 && (
@@ -332,7 +361,7 @@ function HomePage() {
             </h2>
 
             <div className="mt-12 grid gap-10 md:grid-cols-3">
-              {data.books.map((b, i) => (
+              {data.books.filter((b) => !isBookHidden(b.title)).slice(0, 3).map((b, i) => (
                 <Reveal key={b.id} delay={i * 100}>
                   <article className="group">
                     {(() => { const cover = coverFor(b); return cover ? (
@@ -348,11 +377,14 @@ function HomePage() {
                       <h3 className="font-serif text-2xl leading-tight text-foreground">{b.title}</h3>
                       {b.year && <span className="font-sans text-xs text-muted-foreground">{b.year}</span>}
                     </div>
-                    {b.description && (
-                      <p className="mt-3 text-sm leading-relaxed text-muted-foreground line-clamp-4">
-                        {b.description}
-                      </p>
-                    )}
+                    {(() => {
+                      const text = bookTextFor(b.title)?.description ?? b.description;
+                      return text ? (
+                        <p className="mt-3 text-sm leading-relaxed text-muted-foreground line-clamp-4">
+                          {text}
+                        </p>
+                      ) : null;
+                    })()}
                   </article>
                 </Reveal>
               ))}
