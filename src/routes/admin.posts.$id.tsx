@@ -124,6 +124,33 @@ function PostEditor() {
             className="w-full rounded-md border border-border bg-card px-3 py-2 font-mono text-sm outline-none focus:border-accent"
           />
         </Field>
+        <Field label="Etichetta" hint="Puoi lasciarla vuota e aggiungerla in un secondo momento.">
+          <div className="flex flex-wrap items-center gap-2">
+            <select
+              value={form.category_id ?? ""}
+              onChange={(e) => update("category_id", e.target.value || null)}
+              className="rounded-md border border-border bg-card px-3 py-2 text-sm outline-none focus:border-accent"
+            >
+              <option value="">— Nessuna —</option>
+              {cats.map((c) => (
+                <option key={c.id} value={c.id}>{c.name}</option>
+              ))}
+            </select>
+            <input
+              value={newCat}
+              onChange={(e) => setNewCat(e.target.value)}
+              onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); createCategory(); } }}
+              placeholder="Nuova etichetta…"
+              className="rounded-md border border-border bg-card px-3 py-2 text-sm outline-none focus:border-accent"
+            />
+            <button
+              type="button" onClick={createCategory} disabled={catBusy || !newCat.trim()}
+              className="inline-flex items-center gap-1 rounded-md border border-border px-3 py-2 text-sm text-foreground hover:bg-secondary disabled:opacity-50"
+            >
+              <Plus size={14} /> Crea
+            </button>
+          </div>
+        </Field>
         <ImageUpload
           label="Immagine in evidenza"
           value={form.featured_image ?? ""}
