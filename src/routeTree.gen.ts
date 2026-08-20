@@ -24,6 +24,7 @@ import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as ScrittiRouteImport } from './routes/scritti'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminEtichetteRouteImport } from './routes/admin.etichette'
 import { Route as AdminFiabeRouteImport } from './routes/admin.fiabe'
 import { Route as AdminFotografieRouteImport } from './routes/admin.fotografie'
 import { Route as AdminLibriRouteImport } from './routes/admin.libri'
@@ -110,6 +111,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminEtichetteRoute = AdminEtichetteRouteImport.update({
+  id: '/etichette',
+  path: '/etichette',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminFiabeRoute = AdminFiabeRouteImport.update({
   id: '/fiabe',
   path: '/fiabe',
@@ -176,6 +182,7 @@ export interface FileRoutesByFullPath {
   '/robots.txt': typeof RobotsDottxtRoute
   '/scritti': typeof ScrittiRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin/etichette': typeof AdminEtichetteRoute
   '/admin/fiabe': typeof AdminFiabeRoute
   '/admin/fotografie': typeof AdminFotografieRoute
   '/admin/libri': typeof AdminLibriRoute
@@ -202,6 +209,7 @@ export interface FileRoutesByTo {
   '/robots.txt': typeof RobotsDottxtRoute
   '/scritti': typeof ScrittiRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin/etichette': typeof AdminEtichetteRoute
   '/admin/fiabe': typeof AdminFiabeRoute
   '/admin/fotografie': typeof AdminFotografieRoute
   '/admin/libri': typeof AdminLibriRoute
@@ -229,6 +237,7 @@ export interface FileRoutesById {
   '/robots.txt': typeof RobotsDottxtRoute
   '/scritti': typeof ScrittiRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin/etichette': typeof AdminEtichetteRoute
   '/admin/fiabe': typeof AdminFiabeRoute
   '/admin/fotografie': typeof AdminFotografieRoute
   '/admin/libri': typeof AdminLibriRoute
@@ -258,6 +267,7 @@ export interface FileRouteTypes {
     | '/robots.txt'
     | '/scritti'
     | '/sitemap.xml'
+    | '/admin/etichette'
     | '/admin/fiabe'
     | '/admin/fotografie'
     | '/admin/libri'
@@ -284,6 +294,7 @@ export interface FileRouteTypes {
     | '/robots.txt'
     | '/scritti'
     | '/sitemap.xml'
+    | '/admin/etichette'
     | '/admin/fiabe'
     | '/admin/fotografie'
     | '/admin/libri'
@@ -310,6 +321,7 @@ export interface FileRouteTypes {
     | '/robots.txt'
     | '/scritti'
     | '/sitemap.xml'
+    | '/admin/etichette'
     | '/admin/fiabe'
     | '/admin/fotografie'
     | '/admin/libri'
@@ -448,6 +460,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/etichette': {
+      id: '/admin/etichette'
+      path: '/etichette'
+      fullPath: '/admin/etichette'
+      preLoaderRoute: typeof AdminEtichetteRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/fiabe': {
       id: '/admin/fiabe'
       path: '/fiabe'
@@ -536,6 +555,7 @@ const AdminPostsRouteWithChildren = AdminPostsRoute._addFileChildren(
 )
 
 interface AdminRouteChildren {
+  AdminEtichetteRoute: typeof AdminEtichetteRoute
   AdminFiabeRoute: typeof AdminFiabeRoute
   AdminFotografieRoute: typeof AdminFotografieRoute
   AdminLibriRoute: typeof AdminLibriRoute
@@ -547,6 +567,7 @@ interface AdminRouteChildren {
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminEtichetteRoute: AdminEtichetteRoute,
   AdminFiabeRoute: AdminFiabeRoute,
   AdminFotografieRoute: AdminFotografieRoute,
   AdminLibriRoute: AdminLibriRoute,

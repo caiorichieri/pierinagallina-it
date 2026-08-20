@@ -1,10 +1,11 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { db, type Post } from "@/integrations/pierina/client";
-import { ArrowLeft, Save } from "lucide-react";
+import { db, type Post, type Category } from "@/integrations/pierina/client";
+import { ArrowLeft, Save, Plus } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { ImageUpload } from "@/components/ImageUpload";
 import { RichTextEditor } from "@/components/RichTextEditor";
+import { slugifyTag } from "@/routes/admin.etichette";
 
 export const Route = createFileRoute("/admin/posts/$id")({
   component: PostEditor,
@@ -26,8 +27,18 @@ function PostEditor() {
   const [err, setErr] = useState<string | null>(null);
 
   const [form, setForm] = useState<Partial<Post>>({
-    title: "", slug: "", excerpt: "", content: "", featured_image: "", published_at: null,
+    title: "", slug: "", excerpt: "", content: "", featured_image: "", published_at: null, category_id: null,
   });
+  const [cats, setCats] = useState<Category[]>([]);
+  const [newCat, setNewCat] = useState("");
+  const [catBusy, setCatBusy] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await db.from("categories").select("id,name,slug,post_count").order("name", { ascending: true });
+      setCats((data as Category[] | null) ?? []);
+    })();
+  }, []);
 
   useEffect(() => {
     if (isNew) return;
@@ -43,6 +54,23 @@ function PostEditor() {
     setForm((f) => ({ ...f, [k]: v }));
   }
 
+  async function createCategory() {
+    const name = newCat.trim();
+    if (!name) return;
+    setCatBusy(true);
+    const { data, error } = await db
+      .from("categories")
+      .insert({ name, slug: slugifyTag(name), post_count: 0 })
+      .select("id,name,slug,post_count")
+      .single();
+    setCatBusy(false);
+    if (error) return setErr(error.message);
+    const c = data as Category;
+    setCats((l) => [...l, c].sort((a, b) => a.name.localeCompare(b.name)));
+    update("category_id", c.id);
+    setNewCat("");
+  }
+
   async function save(e: React.FormEvent) {
     e.preventDefault();
     setErr(null);
@@ -54,6 +82,7 @@ function PostEditor() {
       content: form.content || null,
       featured_image: form.featured_image || null,
       published_at: form.published_at || null,
+      category_id: form.category_id || null,
     };
     if (!payload.title) { setErr("Il titolo è obbligatorio."); setSaving(false); return; }
 
@@ -94,6 +123,33 @@ function PostEditor() {
             placeholder={slugify(form.title ?? "")}
             className="w-full rounded-md border border-border bg-card px-3 py-2 font-mono text-sm outline-none focus:border-accent"
           />
+        </Field>
+        <Field label="Etichetta" hint="Puoi lasciarla vuota e aggiungerla in un secondo momento.">
+          <div className="flex flex-wrap items-center gap-2">
+            <select
+              value={form.category_id ?? ""}
+              onChange={(e) => update("category_id", e.target.value || null)}
+              className="rounded-md border border-border bg-card px-3 py-2 text-sm outline-none focus:border-accent"
+            >
+              <option value="">— Nessuna —</option>
+              {cats.map((c) => (
+                <option key={c.id} value={c.id}>{c.name}</option>
+              ))}
+            </select>
+            <input
+              value={newCat}
+              onChange={(e) => setNewCat(e.target.value)}
+              onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); createCategory(); } }}
+              placeholder="Nuova etichetta…"
+              className="rounded-md border border-border bg-card px-3 py-2 text-sm outline-none focus:border-accent"
+            />
+            <button
+              type="button" onClick={createCategory} disabled={catBusy || !newCat.trim()}
+              className="inline-flex items-center gap-1 rounded-md border border-border px-3 py-2 text-sm text-foreground hover:bg-secondary disabled:opacity-50"
+            >
+              <Plus size={14} /> Crea
+            </button>
+          </div>
         </Field>
         <ImageUpload
           label="Immagine in evidenza"
