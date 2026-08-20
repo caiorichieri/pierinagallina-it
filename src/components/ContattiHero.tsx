@@ -61,9 +61,10 @@ function LetterPlane() {
         </clipPath>
       </defs>
 
-      {/* retro busta */}
+      {/* retro busta + aletta aperta (dietro al foglio) */}
       <g className="envelope-in">
         <path d="M96 186 L 200 150 L 304 186 L 304 288 L 96 288 Z" fill="#dcc79b" />
+        <path className="envelope-flap" d="M96 186 L 200 122 L 304 186 Z" fill="#d9c295" stroke="var(--brand-gold)" strokeWidth="1.8" strokeOpacity="0.7" strokeLinejoin="round" />
       </g>
 
       {/* foglio che esce dalla busta */}
