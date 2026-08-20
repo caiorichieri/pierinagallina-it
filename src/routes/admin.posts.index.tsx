@@ -6,9 +6,8 @@ import { useVisitStats } from "@/components/admin/VisitsPanel";
 import { Pencil, Plus, Trash2, Eye, EyeOff, Send } from "lucide-react";
 
 export const Route = createFileRoute("/admin/posts/")({
-  validateSearch: (s: Record<string, unknown>) => ({
-    cat: typeof s.cat === "string" ? s.cat : undefined,
-  }),
+  validateSearch: (s: Record<string, unknown>): { cat?: string } =>
+    typeof s.cat === "string" ? { cat: s.cat } : {},
   component: AdminPosts,
 });
 
