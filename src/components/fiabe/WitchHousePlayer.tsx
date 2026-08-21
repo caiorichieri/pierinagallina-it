@@ -227,24 +227,19 @@ export function WitchHousePlayer(p: PlayerProps) {
       </div>
 
       {/* ---------- Mobile / tablet: barra compatta ---------- */}
-      <div
-        className="pointer-events-auto relative block border-t px-3 py-3 shadow-2xl lg:hidden"
-        style={{
-          background: "linear-gradient(180deg, #2a1710 0%, #1c100a 100%)",
-          borderColor: "rgba(232,184,74,0.4)",
-        }}
-      >
-        {p.onClose && (
-          <button
-            type="button"
-            onClick={p.onClose}
-            aria-label="Chiudi player"
-            className="absolute right-3 top-3 z-10 grid h-8 w-8 place-items-center rounded-full border transition-colors hover:bg-white/10"
-            style={{ borderColor: "rgba(232,184,74,0.5)", color: "#e8c48a" }}
-          >
-            <X size={16} />
-          </button>
+      <div className="pointer-events-none relative block lg:hidden">
+        {closeBtn && (
+          <div className="pointer-events-auto absolute right-3 -top-12 z-50">
+            {closeBtn}
+          </div>
         )}
+        <div
+          className="pointer-events-auto relative block border-t px-3 py-3 shadow-2xl"
+          style={{
+            background: "linear-gradient(180deg, #2a1710 0%, #1c100a 100%)",
+            borderColor: "rgba(232,184,74,0.4)",
+          }}
+        >
 
         {p.playing && (
           <div aria-hidden="true" className="pointer-events-none absolute right-6 top-0 h-0 w-0">
