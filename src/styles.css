@@ -632,8 +632,8 @@
 
 @keyframes fiabaChimney {
   0%   { opacity: 0; transform: translate(-50%, 0) scale(.5); }
-  20%  { opacity: .75; }
-  100% { opacity: 0; transform: translate(calc(-50% + 34px), -120px) scale(2.4); }
+  18%  { opacity: .9; }
+  100% { opacity: 0; transform: translate(calc(-50% + 34px), -140px) scale(3); }
 }
 .fiaba-chimney-smoke {
   animation: fiabaChimney 4.5s ease-out infinite;
