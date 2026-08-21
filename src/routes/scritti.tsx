@@ -226,16 +226,14 @@ function ScrittiPage() {
         {/* ARTICOLI */}
         {showArticoli && filteredPosts.length > 0 && (
           <div className="mb-20">
-            {tab === "tutti" && (
-              <div className="mb-8 flex items-center gap-3">
-                <FileText size={16} className="text-accent" />
-                <h2 className="font-serif text-2xl italic text-foreground">Articoli e racconti</h2>
-                <span className="font-sans text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-                  {filteredPosts.length}
-                </span>
-              </div>
-            )}
-            <div className="grid gap-10 md:grid-cols-2">
+            <div className="mb-8 flex items-center gap-3">
+              <FileText size={16} className="text-accent" />
+              <h2 className="font-serif text-2xl italic text-foreground">Articoli e racconti</h2>
+              <span className="font-sans text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                {filteredPosts.length}
+              </span>
+            </div>
+            <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
               {visiblePosts.map((p, i) => (
                 <Reveal key={p.id} delay={Math.min(i, 6) * 80}>
                   <Link to="/blog/$slug" params={{ slug: p.slug }} className="group block">
@@ -268,7 +266,7 @@ function ScrittiPage() {
               <div className="mt-12 flex justify-center">
                 <button
                   type="button"
-                  onClick={() => setVisible((v) => v + 12)}
+                  onClick={() => setVisible((v) => v + 9)}
                   className="rounded-full border border-border px-6 py-2.5 text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:border-accent hover:text-accent"
                 >
                   Mostra altri articoli
@@ -283,12 +281,10 @@ function ScrittiPage() {
         {/* POESIE */}
         {showPoesie && filteredPoems.length > 0 && (
           <div>
-            {tab === "tutti" && (
-              <div className="mb-8 flex items-center gap-3">
-                <Feather size={16} className="text-accent" />
-                <h2 className="font-serif text-2xl italic text-foreground">Poesie</h2>
-              </div>
-            )}
+            <div className="mb-8 flex items-center gap-3">
+              <Feather size={16} className="text-accent" />
+              <h2 className="font-serif text-2xl italic text-foreground">Poesie</h2>
+            </div>
             <div className="space-y-16">
               {filteredPoems.map((p, i) => (
                 <Reveal key={p.id} delay={Math.min(i, 6) * 80}>
