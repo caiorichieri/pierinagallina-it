@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Play, Pause, SkipBack, SkipForward, Volume2 } from "lucide-react";
-import playerArt from "@/assets/witch-house-player.jpg.asset.json";
+import playerArt from "@/assets/witch-house-player.png.asset.json";
 
 export type PlayerProps = {
   title: string;
@@ -27,20 +27,37 @@ export function WitchHousePlayer(p: PlayerProps) {
   const [showVol, setShowVol] = useState(false);
 
   return (
-    <div className="fiaba-player-enter fixed inset-x-0 bottom-0 z-40 pb-[env(safe-area-inset-bottom)]">
-      {/* ---------- Desktop: illustrazione intera con comandi sovrapposti ---------- */}
+    <div className="fiaba-player-enter pointer-events-none fixed inset-x-0 bottom-0 z-40 pb-[env(safe-area-inset-bottom)]">
+      {/* ---------- Desktop: illustrazione trasparente con comandi sovrapposti ---------- */}
       <div
-        className="relative mx-auto hidden bg-cover bg-center bg-no-repeat shadow-2xl lg:block"
+        className="pointer-events-auto relative mx-auto hidden bg-contain bg-bottom bg-no-repeat lg:block"
         style={{
           backgroundImage: `url(${playerArt.url})`,
-          aspectRatio: "1920 / 539",
-          height: "clamp(150px, 17vw, 235px)",
-          width: "min(100%, calc(clamp(150px, 17vw, 235px) * 3.562))",
+          aspectRatio: "1866 / 532",
+          height: "clamp(148px, 16vw, 226px)",
+          width: "min(100%, calc(clamp(148px, 16vw, 226px) * 3.508))",
+          filter: "drop-shadow(0 12px 26px rgba(0,0,0,0.45))",
         }}
       >
+        {/* fumo dal camino durante la riproduzione */}
+        {p.playing && (
+          <div aria-hidden="true" className="pointer-events-none absolute left-[76.6%] top-[13%] h-0 w-0">
+            {[0, 1.5, 3].map((d) => (
+              <span
+                key={d}
+                className="fiaba-chimney-smoke absolute block h-[46px] w-[46px] rounded-full"
+                style={{
+                  animationDelay: `${d}s`,
+                  background: "radial-gradient(circle, rgba(226,214,200,0.55), rgba(226,214,200,0) 70%)",
+                }}
+              />
+            ))}
+          </div>
+        )}
+
         {/* targa che copre il titolo disegnato */}
         <div
-          className="pointer-events-none absolute left-[10.5%] top-[46%] h-[22%] w-[20.5%] rounded-[6px]"
+          className="pointer-events-none absolute left-[10.2%] top-[47%] h-[20%] w-[20%] rounded-[6px]"
           style={{
             background: "linear-gradient(180deg, #3a2820 0%, #2c1d16 100%)",
             boxShadow: "inset 0 0 10px rgba(0,0,0,0.7)",
@@ -48,7 +65,7 @@ export function WitchHousePlayer(p: PlayerProps) {
         />
 
         {/* titolo */}
-        <div className="pointer-events-none absolute left-[12%] top-[56%] w-[19%] -translate-y-1/2">
+        <div className="pointer-events-none absolute left-[11.5%] top-[56%] w-[18.5%] -translate-y-1/2">
           <p
             className="truncate font-serif italic leading-tight"
             style={{ color: "#e2a45c", fontSize: "clamp(12px, 1.1vw, 20px)" }}
@@ -63,20 +80,19 @@ export function WitchHousePlayer(p: PlayerProps) {
             >
               {p.collection}
             </p>
-
           )}
         </div>
 
         {/* tempo trascorso */}
         <span
-          className="pointer-events-none absolute right-[83.5%] top-[69%] -translate-y-1/2 font-mono"
+          className="pointer-events-none absolute right-[85%] top-[67%] -translate-y-1/2 font-mono"
           style={{ color: "#d8c3a0", fontSize: "clamp(9px, 0.8vw, 14px)" }}
         >
           {fmt(p.current)}
         </span>
 
         {/* barra di avanzamento sopra il tratto disegnato */}
-        <div className="absolute left-[18.1%] top-[69%] h-[7%] w-[25.6%] -translate-y-1/2">
+        <div className="absolute left-[16.4%] top-[67%] h-[8%] w-[26.3%] -translate-y-1/2">
           <div
             className="absolute left-0 top-1/2 h-[26%] -translate-y-1/2 rounded-full"
             style={{ width: `${pct}%`, background: "var(--brand-gold)", boxShadow: "0 0 8px rgba(232,184,74,0.6)" }}
@@ -99,7 +115,7 @@ export function WitchHousePlayer(p: PlayerProps) {
 
         {/* durata totale */}
         <span
-          className="pointer-events-none absolute left-[92.5%] top-[69%] -translate-y-1/2 font-mono"
+          className="pointer-events-none absolute left-[93%] top-[67%] -translate-y-1/2 font-mono"
           style={{ color: "#d8c3a0", fontSize: "clamp(9px, 0.8vw, 14px)" }}
         >
           {fmt(p.duration)}
@@ -110,19 +126,19 @@ export function WitchHousePlayer(p: PlayerProps) {
           type="button"
           onClick={p.onPrev}
           aria-label="Fiaba precedente"
-          className={`${HIT} left-[28.4%] top-[83.6%] h-[22%] w-[5%]`}
+          className={`${HIT} left-[27.5%] top-[81%] h-[22%] w-[5%]`}
         />
         <button
           type="button"
           onClick={p.onToggle}
           aria-label={p.playing ? "Metti in pausa" : "Ascolta"}
-          className={`${HIT} left-[35.2%] top-[83.6%] h-[22%] w-[5.5%]`}
+          className={`${HIT} left-[34.1%] top-[81%] h-[22%] w-[5.5%]`}
         />
         <button
           type="button"
           onClick={p.onNext}
           aria-label="Fiaba successiva"
-          className={`${HIT} left-[41.7%] top-[83.6%] h-[22%] w-[5%]`}
+          className={`${HIT} left-[40.8%] top-[81%] h-[22%] w-[5%]`}
         />
 
         {/* calderone: comando principale */}
@@ -130,13 +146,10 @@ export function WitchHousePlayer(p: PlayerProps) {
           type="button"
           onClick={p.onToggle}
           aria-label={p.playing ? "Metti in pausa" : "Ascolta"}
-          className={`${HIT} left-[51.3%] top-[66%] grid h-[26%] w-[6%] place-items-center`}
+          className={`${HIT} left-[49.6%] top-[82%] grid h-[28%] w-[6.5%] place-items-center`}
         >
           {p.playing && (
-            <Pause
-              size={30}
-              style={{ color: "#e2a45c", filter: "drop-shadow(0 0 6px rgba(0,0,0,0.7))" }}
-            />
+            <Pause size={28} style={{ color: "#e2a45c", filter: "drop-shadow(0 0 6px rgba(0,0,0,0.7))" }} />
           )}
         </button>
 
@@ -144,13 +157,13 @@ export function WitchHousePlayer(p: PlayerProps) {
         {p.playing && (
           <span
             aria-hidden="true"
-            className="fiaba-smoke pointer-events-none absolute left-[51.3%] top-[52%] h-[18%] w-[4%] -translate-x-1/2 rounded-full"
+            className="fiaba-smoke pointer-events-none absolute left-[49.6%] top-[62%] h-[18%] w-[4%] -translate-x-1/2 rounded-full"
             style={{ background: "radial-gradient(circle, rgba(150,255,190,0.35), transparent 70%)" }}
           />
         )}
 
         {/* volume */}
-        <div className="absolute left-[59.4%] top-[83.6%] -translate-x-1/2 -translate-y-1/2">
+        <div className="absolute left-[58.8%] top-[81%] -translate-x-1/2 -translate-y-1/2">
           <button
             type="button"
             onClick={() => setShowVol((v) => !v)}
@@ -187,25 +200,38 @@ export function WitchHousePlayer(p: PlayerProps) {
             onClick={() => p.onRate(r)}
             aria-label={`Velocità ${r}x`}
             aria-pressed={p.rate === r}
-            className={`${HIT} top-[83.6%] h-[26%] w-[4.2%]`}
+            className={`${HIT} top-[81%] h-[28%] w-[4.2%]`}
             style={{
-              left: `${[64.2, 68.9, 73.5][i]}%`,
+              left: `${[64, 68.7, 73.5][i]}%`,
               boxShadow: p.rate === r ? "0 0 0 2px var(--brand-gold), 0 0 14px rgba(232,184,74,0.6)" : undefined,
             }}
           />
         ))}
       </div>
 
-      {/* ---------- Mobile / tablet: ritaglio centrale + comandi ---------- */}
+      {/* ---------- Mobile / tablet: barra compatta ---------- */}
       <div
-        className="relative block border-t px-3 py-3 shadow-2xl lg:hidden"
+        className="pointer-events-auto relative block border-t px-3 py-3 shadow-2xl lg:hidden"
         style={{
-          backgroundImage: `linear-gradient(rgba(28,16,10,0.72), rgba(28,16,10,0.82)), url(${playerArt.url})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
+          background: "linear-gradient(180deg, #2a1710 0%, #1c100a 100%)",
           borderColor: "rgba(232,184,74,0.4)",
         }}
       >
+        {p.playing && (
+          <div aria-hidden="true" className="pointer-events-none absolute right-6 top-0 h-0 w-0">
+            {[0, 2].map((d) => (
+              <span
+                key={d}
+                className="fiaba-chimney-smoke absolute block h-[34px] w-[34px] rounded-full"
+                style={{
+                  animationDelay: `${d}s`,
+                  background: "radial-gradient(circle, rgba(226,214,200,0.35), rgba(226,214,200,0) 70%)",
+                }}
+              />
+            ))}
+          </div>
+        )}
+
         <p className="truncate font-serif text-base italic leading-tight" style={{ color: "#e8c48a" }}>
           {p.title}
         </p>
