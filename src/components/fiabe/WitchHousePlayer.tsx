@@ -257,7 +257,6 @@ export function WitchHousePlayer(p: PlayerProps) {
             style={{
               backgroundImage: `url(${playerArt.url})`,
               backgroundSize: "auto 150%",
-              backgroundРepeatFix: undefined,
               backgroundRepeat: "no-repeat",
               backgroundPosition: "82% bottom",
               filter: "drop-shadow(0 8px 18px rgba(0,0,0,0.4))",
