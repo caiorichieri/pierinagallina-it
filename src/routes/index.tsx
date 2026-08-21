@@ -467,11 +467,6 @@ function HomePage() {
         </section>
       )}
 
-      {/* LIBRI */}
-      {data.books.length > 0 && (
-        <BooksCarousel books={data.books.filter((b) => !isBookHidden(b.title))} />
-      )}
-
       {/* POESIA */}
       {data.poems.length > 0 && (
         <section className="surface-bordeaux surface-bordeaux-glow relative overflow-hidden text-primary-foreground">
@@ -510,6 +505,11 @@ function HomePage() {
             </div>
           </div>
         </section>
+      )}
+
+      {/* LIBRI */}
+      {data.books.length > 0 && (
+        <BooksCarousel books={data.books.filter((b) => !isBookHidden(b.title))} />
       )}
 
       {/* CTA contatti */}
