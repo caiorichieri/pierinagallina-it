@@ -188,32 +188,40 @@ function BooksCarousel({ books }: { books: Book[] }) {
               const text = bookTextFor(b.title)?.description ?? b.description;
               return (
                 <Reveal key={b.id} delay={i * 80}>
-                  <article className="group w-[240px] snap-start sm:w-[260px]">
-                    {cover ? (
-                      <div className="flex aspect-[3/4] items-center justify-center overflow-hidden rounded-xl bg-secondary/40 p-4">
-                        <img
-                          src={cover}
-                          alt={b.title}
-                          loading="lazy"
-                          className="max-h-full max-w-full object-contain drop-shadow-xl transition-transform duration-700 group-hover:scale-105"
-                        />
+                  <Link
+                    to="/libri"
+                    hash={`libro-${b.id}`}
+                    aria-label={`Apri la scheda del libro ${b.title}`}
+                    className="block"
+                  >
+                    <article className="group w-[240px] snap-start sm:w-[260px]">
+                      {cover ? (
+                        <div className="flex aspect-[3/4] items-center justify-center overflow-hidden rounded-xl bg-secondary/40 p-4">
+                          <img
+                            src={cover}
+                            alt={b.title}
+                            loading="lazy"
+                            className="max-h-full max-w-full object-contain drop-shadow-xl transition-transform duration-700 group-hover:scale-105"
+                          />
+                        </div>
+                      ) : (
+                        <div className="flex aspect-[3/4] items-center justify-center rounded-md bg-primary p-8 text-primary-foreground">
+                          <span className="text-center font-serif text-2xl italic leading-tight">{b.title}</span>
+                        </div>
+                      )}
+                      <div className="mt-5 flex items-baseline justify-between gap-3">
+                        <h3 className="font-serif text-2xl leading-tight text-foreground transition-colors group-hover:text-accent">{b.title}</h3>
+                        {b.year && <span className="font-sans text-xs text-muted-foreground">{b.year}</span>}
                       </div>
-                    ) : (
-                      <div className="flex aspect-[3/4] items-center justify-center rounded-md bg-primary p-8 text-primary-foreground">
-                        <span className="text-center font-serif text-2xl italic leading-tight">{b.title}</span>
-                      </div>
-                    )}
-                    <div className="mt-5 flex items-baseline justify-between gap-3">
-                      <h3 className="font-serif text-2xl leading-tight text-foreground">{b.title}</h3>
-                      {b.year && <span className="font-sans text-xs text-muted-foreground">{b.year}</span>}
-                    </div>
-                    {text && (
-                      <p className="mt-3 line-clamp-4 text-sm leading-relaxed text-muted-foreground">
-                        {text}
-                      </p>
-                    )}
-                  </article>
+                      {text && (
+                        <p className="mt-3 line-clamp-4 text-sm leading-relaxed text-muted-foreground">
+                          {text}
+                        </p>
+                      )}
+                    </article>
+                  </Link>
                 </Reveal>
+
               );
             })}
           </div>

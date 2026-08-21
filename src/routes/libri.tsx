@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { db, type Book } from "@/integrations/pierina/client";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
@@ -100,6 +100,17 @@ function LibriPage() {
   const books = allBooks.filter((b) => !isBookHidden(b.title));
   const [interest, setInterest] = useState<Book | null>(null);
 
+  useEffect(() => {
+    const id = window.location.hash.slice(1);
+    if (!id) return;
+    const t = window.setTimeout(() => {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 150);
+    return () => window.clearTimeout(t);
+  }, [books.length]);
+
+
+
   return (
     <>
       <PageHero tone="libri"
@@ -115,7 +126,8 @@ function LibriPage() {
           <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
             {books.map((b, i) => (
               <Reveal key={b.id} delay={Math.min(i, 6) * 80}>
-                <article className="group flex h-full flex-col">
+                <article id={`libro-${b.id}`} className="group flex h-full flex-col scroll-mt-28">
+
                   {(() => { const cover = coverFor(b); return cover ? (
                     <div className="overflow-hidden rounded-xl aspect-[3/4] flex items-center justify-center p-4">
                       <img src={cover} alt={b.title} loading="lazy" className="max-h-full max-w-full object-contain transition-transform duration-700 group-hover:scale-105 drop-shadow-xl" />
