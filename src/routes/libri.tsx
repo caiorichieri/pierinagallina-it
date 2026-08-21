@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { db, type Book } from "@/integrations/pierina/client";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
