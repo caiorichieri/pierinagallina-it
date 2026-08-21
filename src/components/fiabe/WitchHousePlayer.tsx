@@ -59,10 +59,11 @@ export function WitchHousePlayer(p: PlayerProps) {
           {p.collection && (
             <p
               className="truncate font-mono uppercase tracking-[0.18em]"
-              style={{ color: "#c9b79a", fontSize: "clamp(9px, 0.85vw, 15px)" }}
+              style={{ color: "#c9b79a", fontSize: "clamp(8px, 0.65vw, 12px)" }}
             >
               {p.collection}
             </p>
+
           )}
         </div>
 
