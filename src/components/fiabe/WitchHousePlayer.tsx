@@ -262,8 +262,8 @@ export function WitchHousePlayer(p: PlayerProps) {
               filter: "drop-shadow(0 10px 22px rgba(0,0,0,0.45))",
             }}
           >
-            {/* titolo sul frontone */}
-            <div className="pointer-events-none absolute left-1/2 top-[17.7%] w-[52%] -translate-x-1/2 -translate-y-1/2 text-center">
+            {/* titolo appena sopra il fumo del calderone */}
+            <div className="pointer-events-none absolute left-1/2 top-[30%] w-[58%] -translate-x-1/2 -translate-y-1/2 text-center">
               <p className="truncate font-serif text-[15px] italic leading-tight" style={{ color: "#e2a45c" }}>
                 {p.title}
               </p>
@@ -275,6 +275,7 @@ export function WitchHousePlayer(p: PlayerProps) {
             </div>
 
             {/* calderone = play/pausa */}
+
             <button
               type="button"
               onClick={p.onToggle}
@@ -327,19 +328,14 @@ export function WitchHousePlayer(p: PlayerProps) {
               />
             ))}
 
-            {/* tempi */}
+            {/* contatore del tempo unico */}
             <span
-              className="pointer-events-none absolute left-[27.6%] top-[90.6%] -translate-x-1/2 -translate-y-1/2 font-mono text-[11px]"
+              className="pointer-events-none absolute left-1/2 top-[94.6%] -translate-x-1/2 -translate-y-1/2 font-mono text-[11px]"
               style={{ color: "#d8c3a0" }}
             >
-              {fmt(p.current)}
+              {fmt(p.current)} / {fmt(p.duration)}
             </span>
-            <span
-              className="pointer-events-none absolute left-[73%] top-[90.6%] -translate-x-1/2 -translate-y-1/2 font-mono text-[11px]"
-              style={{ color: "#d8c3a0" }}
-            >
-              {fmt(p.duration)}
-            </span>
+
 
             {/* barra di avanzamento */}
             <div className="absolute left-[32.3%] top-[90.6%] h-[5%] w-[35.4%] -translate-y-1/2">
