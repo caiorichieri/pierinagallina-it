@@ -35,7 +35,6 @@ export function WitchHousePlayer(p: PlayerProps) {
           backgroundImage: `url(${playerArt.url})`,
           backgroundSize: "100% 100%",
           backgroundRepeat: "no-repeat",
-          backgroundRepeat: "no-repeat",
           backgroundPosition: "bottom center",
           aspectRatio: "1866 / 532",
           height: "clamp(148px, 16vw, 226px)",
