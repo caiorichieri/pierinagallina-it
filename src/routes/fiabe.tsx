@@ -180,9 +180,10 @@ function FiabePage() {
                                   preload="metadata"
                                   src={t.mp3_url}
                                   className="hidden"
-                                  onLoadedMetadata={(e) =>
-                                    setDurations((d) => ({ ...d, [t.id]: e.currentTarget.duration }))
-                                  }
+                                  onLoadedMetadata={(e) => {
+                                    const el = e.target as HTMLAudioElement;
+                                    setDurations((d) => ({ ...d, [t.id]: el.duration }));
+                                  }}
                                 />
                               </div>
                             );
@@ -200,8 +201,8 @@ function FiabePage() {
 
       <audio
         ref={audioRef}
-        onTimeUpdate={(e) => setCurrent(e.currentTarget.currentTime)}
-        onLoadedMetadata={(e) => setDuration(e.currentTarget.duration)}
+        onTimeUpdate={(e) => setCurrent((e.target as HTMLAudioElement).currentTime)}
+        onLoadedMetadata={(e) => setDuration((e.target as HTMLAudioElement).duration)}
         onEnded={() => step(1)}
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
