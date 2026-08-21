@@ -388,19 +388,6 @@ export function WitchHousePlayer(p: PlayerProps) {
   );
 }
 
-function IconBtn({ label, onClick, children }: { label: string; onClick: () => void; children: React.ReactNode }) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-label={label}
-      className="grid h-10 w-10 place-items-center rounded-full border transition-colors hover:bg-white/10"
-      style={{ borderColor: "rgba(232,184,74,0.4)", color: "#e8c48a" }}
-    >
-      {children}
-    </button>
-  );
-}
 
 function fmt(s: number) {
   if (!isFinite(s) || s <= 0) return "0:00";
