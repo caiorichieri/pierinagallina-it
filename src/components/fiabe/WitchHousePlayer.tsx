@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Play, Pause, SkipBack, SkipForward, Volume2, X } from "lucide-react";
+import { Pause, Volume2, X } from "lucide-react";
 import playerArt from "@/assets/witch-house-player.png.asset.json";
+import mobileArt from "@/assets/witch-house-mobile.png.asset.json";
 
 export type PlayerProps = {
   title: string;
