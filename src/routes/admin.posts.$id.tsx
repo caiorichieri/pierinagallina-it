@@ -6,6 +6,7 @@ import { Link } from "@tanstack/react-router";
 import { ImageUpload } from "@/components/ImageUpload";
 import { RichTextEditor } from "@/components/RichTextEditor";
 import { slugifyTag } from "@/routes/admin.etichette";
+import { readPostMeta, writePostMeta } from "@/lib/post-meta";
 
 export const Route = createFileRoute("/admin/posts/$id")({
   component: PostEditor,
@@ -32,6 +33,8 @@ function PostEditor() {
   const [cats, setCats] = useState<Category[]>([]);
   const [newCat, setNewCat] = useState("");
   const [catBusy, setCatBusy] = useState(false);
+  const [tags, setTags] = useState<string[]>([]);
+  const [coverFull, setCoverFull] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -45,13 +48,25 @@ function PostEditor() {
     (async () => {
       const { data, error } = await db.from("posts").select("*").eq("id", id).maybeSingle();
       if (error) setErr(error.message);
-      else if (data) setForm(data as Post);
+      else if (data) {
+        const p = data as Post;
+        const { meta, clean } = readPostMeta(p.excerpt);
+        setForm({ ...p, excerpt: clean });
+        const ids = new Set<string>(meta.tags);
+        if (p.category_id) ids.add(p.category_id);
+        setTags([...ids]);
+        setCoverFull(meta.coverFull);
+      }
       setLoading(false);
     })();
   }, [id, isNew]);
 
   function update<K extends keyof Post>(k: K, v: Post[K]) {
     setForm((f) => ({ ...f, [k]: v }));
+  }
+
+  function toggleTag(tagId: string) {
+    setTags((t) => (t.includes(tagId) ? t.filter((x) => x !== tagId) : [...t, tagId]));
   }
 
   async function createCategory() {
@@ -67,7 +82,7 @@ function PostEditor() {
     if (error) return setErr(error.message);
     const c = data as Category;
     setCats((l) => [...l, c].sort((a, b) => a.name.localeCompare(b.name)));
-    update("category_id", c.id);
+    setTags((t) => [...t, c.id]);
     setNewCat("");
   }
 
@@ -75,14 +90,15 @@ function PostEditor() {
     e.preventDefault();
     setErr(null);
     setSaving(true);
+    const [first, ...extra] = tags;
     const payload = {
       title: form.title ?? "",
       slug: form.slug?.trim() ? form.slug.trim() : slugify(form.title ?? ""),
-      excerpt: form.excerpt || null,
+      excerpt: writePostMeta(form.excerpt ?? "", { tags: extra, coverFull }) || null,
       content: form.content || null,
       featured_image: form.featured_image || null,
       published_at: form.published_at || null,
-      category_id: form.category_id || null,
+      category_id: first ?? null,
     };
     if (!payload.title) { setErr("Il titolo è obbligatorio."); setSaving(false); return; }
 
@@ -124,18 +140,34 @@ function PostEditor() {
             className="w-full rounded-md border border-border bg-card px-3 py-2 font-mono text-sm outline-none focus:border-accent"
           />
         </Field>
-        <Field label="Etichetta" hint="Puoi lasciarla vuota e aggiungerla in un secondo momento.">
-          <div className="flex flex-wrap items-center gap-2">
-            <select
-              value={form.category_id ?? ""}
-              onChange={(e) => update("category_id", e.target.value || null)}
-              className="rounded-md border border-border bg-card px-3 py-2 text-sm outline-none focus:border-accent"
-            >
-              <option value="">— Nessuna —</option>
-              {cats.map((c) => (
-                <option key={c.id} value={c.id}>{c.name}</option>
-              ))}
-            </select>
+        <Field
+          label="Etichette"
+          hint="Puoi sceglierne più di una: l'articolo comparirà sotto ognuna di esse."
+        >
+          <div className="flex flex-wrap gap-2">
+            {cats.map((c) => {
+              const on = tags.includes(c.id);
+              return (
+                <button
+                  key={c.id}
+                  type="button"
+                  onClick={() => toggleTag(c.id)}
+                  className={
+                    "rounded-full border px-3 py-1.5 text-sm transition-colors " +
+                    (on
+                      ? "border-accent bg-accent/10 text-accent"
+                      : "border-border text-muted-foreground hover:border-accent hover:text-accent")
+                  }
+                >
+                  {c.name}
+                </button>
+              );
+            })}
+            {cats.length === 0 && (
+              <span className="text-sm text-muted-foreground">Nessuna etichetta ancora creata.</span>
+            )}
+          </div>
+          <div className="mt-3 flex flex-wrap items-center gap-2">
             <input
               value={newCat}
               onChange={(e) => setNewCat(e.target.value)}
@@ -156,6 +188,15 @@ function PostEditor() {
           value={form.featured_image ?? ""}
           onChange={(url) => update("featured_image", url)}
         />
+        <label className="flex items-center gap-2 text-sm text-foreground">
+          <input
+            type="checkbox"
+            checked={coverFull}
+            onChange={(e) => setCoverFull(e.target.checked)}
+            className="h-4 w-4 accent-[hsl(var(--accent))]"
+          />
+          Mostra la foto di copertina intera (senza taglio) nella pagina dell'articolo
+        </label>
         <Field label="Estratto" hint="Breve testo di anteprima mostrato negli elenchi.">
           <RichTextEditor
             value={form.excerpt ?? ""}

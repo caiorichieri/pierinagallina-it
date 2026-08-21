@@ -339,23 +339,25 @@ function HomePage() {
               <span className="h-1.5 w-1.5 rounded-full bg-primary" /> Il mio mondo
             </div>
             <h2 className="mt-3 font-serif text-4xl leading-tight text-primary md:text-5xl">
-              Tre sentieri di <span className="italic" style={{ color: "var(--brand-gold)" }}>parole.</span>
+              Quattro sentieri di <span className="italic" style={{ color: "var(--brand-gold)" }}>parole.</span>
             </h2>
             <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-              I miei libri illustrati, fiabe da ascoltare, poesie in italiano e, a volte, anche in
-              friulano, blog. Scegli da dove cominciare.
+              I miei libri illustrati, fiabe da ascoltare, poesie e racconti in italiano e, a volte,
+              anche in friulano, e il blog. Scegli da dove cominciare.
             </p>
           </div>
 
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { icon: iconLibri,      t: "Libri",        d: "Fiabe e racconti illustrati",       href: "/libri" as const },
-              { icon: iconScritti,    t: "Blog",      d: "Blog, racconti e poesie",       href: "/scritti" as const },
-              { icon: iconFiabe,      t: "Fiabe sonore", d: "Voci, suoni, storie da ascoltare",  href: "/fiabe" as const },
+              { icon: iconScritti,    t: "Blog",                d: "Gli ultimi post e articoli",        href: "/scritti" as const, hash: undefined },
+              { icon: iconLibri,      t: "I miei libri",        d: "Fiabe e racconti illustrati",       href: "/libri" as const, hash: undefined },
+              { icon: iconScritti,    t: "Poesie e racconti",   d: "Versi e storie brevi",              href: "/scritti" as const, hash: "poesie" },
+              { icon: iconFiabe,      t: "Fiabe sonore",        d: "Voci, suoni, storie da ascoltare",  href: "/fiabe" as const, hash: undefined },
             ].map((s, i) => (
               <Reveal key={s.t} delay={i * 80}>
                 <Link
                   to={s.href}
+                  {...(s.hash ? { hash: s.hash } : {})}
                   className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-primary hover:shadow-xl"
                 >
                   <div
@@ -419,9 +421,9 @@ function HomePage() {
             <div className="flex items-end justify-between gap-6">
               <div>
                 <div className="inline-flex items-center gap-2 font-sans text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-                  <span className="h-1.5 w-1.5 rounded-full bg-accent" /> Dagli scritti
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent" /> Dal blog
                 </div>
-                <h2 className="mt-3 font-serif text-4xl leading-tight md:text-5xl">Ultimi racconti</h2>
+                <h2 className="mt-3 font-serif text-4xl leading-tight md:text-5xl">Ultimi post</h2>
               </div>
               <Link to="/scritti" className="hidden text-sm font-medium text-primary hover:text-accent sm:inline-flex sm:items-center sm:gap-1.5">
                 Tutti gli scritti <ArrowRight size={14} />

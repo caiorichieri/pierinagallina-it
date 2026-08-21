@@ -13,6 +13,7 @@ import coverPetali from "@/assets/libri/petali-luna.png";
 import coverAerei from "@/assets/libri/aerei-carta.png";
 
 const BOOKS: { title: string; cover: string }[] = [
+  { title: "Vita da emotiva", cover: coverVitaEmotiva },
   { title: "Come aerei di carta", cover: coverAerei },
   { title: "Come angeli in vacanza", cover: coverAngeli },
   { title: "Come petali di luna", cover: coverPetali },
@@ -21,7 +22,6 @@ const BOOKS: { title: string; cover: string }[] = [
   { title: "La Principessa TIC e il Pirata TAC nel pianeta Fifablu", cover: coverPrincipessa },
   { title: "Un anno da Fiaba", cover: coverAnnoFiaba },
   { title: "Gastone, il tassista coccolone", cover: coverGastone },
-  { title: "Vita da emotiva", cover: coverVitaEmotiva },
 ];
 
 export function BookShelfBanner() {
@@ -53,23 +53,23 @@ export function BookShelfBanner() {
           type="button"
           onClick={() => scrollBy(-1)}
           aria-label="Scorri a sinistra"
-          className="absolute left-2 z-20 rounded-full border border-border bg-background/80 p-2 text-foreground shadow-sm backdrop-blur transition hover:bg-background"
+          className="absolute left-2 z-20 rounded-full border border-border bg-background/80 p-2 text-foreground shadow-sm backdrop-blur transition hover:bg-background lg:hidden"
         >
           <ChevronLeft className="h-4 w-4" />
         </button>
 
         <div
           ref={scrollerRef}
-          className="no-scrollbar min-w-0 flex-1 overflow-x-auto scroll-smooth py-6 md:py-8"
+          className="no-scrollbar min-w-0 flex-1 overflow-x-auto scroll-smooth py-6 md:py-8 lg:overflow-x-visible"
         >
-          <div className="flex w-max items-end gap-6 px-14 md:gap-10 md:px-20">
+          <div className="flex w-max items-end gap-6 px-14 md:gap-10 md:px-20 lg:w-full lg:justify-center lg:gap-3 lg:px-8 xl:gap-5">
             {books.map((b) => (
-              <Link key={b.title} to="/libri" className="shrink-0 transition-transform hover:-translate-y-1">
+              <Link key={b.title} to="/libri" className="shrink-0 transition-transform hover:-translate-y-1 lg:min-w-0 lg:shrink">
                 <img
                   src={b.cover}
                   alt={b.title}
                   loading="lazy"
-                  className="h-32 w-auto object-contain drop-shadow-xl sm:h-40 md:h-48"
+                  className="h-32 w-auto object-contain drop-shadow-xl sm:h-40 md:h-48 lg:h-36 xl:h-44"
                 />
               </Link>
             ))}
@@ -80,7 +80,7 @@ export function BookShelfBanner() {
           type="button"
           onClick={() => scrollBy(1)}
           aria-label="Scorri a destra"
-          className="absolute right-2 z-20 rounded-full border border-border bg-background/80 p-2 text-foreground shadow-sm backdrop-blur transition hover:bg-background"
+          className="absolute right-2 z-20 rounded-full border border-border bg-background/80 p-2 text-foreground shadow-sm backdrop-blur transition hover:bg-background lg:hidden"
         >
           <ChevronRight className="h-4 w-4" />
         </button>
@@ -88,15 +88,16 @@ export function BookShelfBanner() {
         {/* sfumature laterali */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 md:w-28"
+          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 md:w-28 lg:hidden"
           style={{ background: "linear-gradient(to right, var(--background), transparent)" }}
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 md:w-28"
+          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 md:w-28 lg:hidden"
           style={{ background: "linear-gradient(to left, var(--background), transparent)" }}
         />
       </div>
+
     </section>
   );
 }

@@ -541,20 +541,31 @@
 .rte-content strong { font-weight: 700; }
 .prose-pierina hr,
 .rte-content hr { border: 0; border-top: 1px solid hsl(var(--border)); margin: 2em auto; width: 40%; }
+/* Le foto sono inline-block: piccole e medie si affiancano automaticamente
+   sulla stessa riga, invece di impilarsi una sotto l'altra. */
 .prose-pierina img,
 .rte-content img {
-  display: block;
-  margin: 1.6em auto;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0.6em 0.5% 0.6em;
   border-radius: 0.5rem;
   max-width: 100%;
   height: auto;
 }
 .prose-pierina img.img-sm,
-.rte-content img.img-sm { max-width: 240px; }
+.rte-content img.img-sm { width: 31.5%; }
 .prose-pierina img.img-md,
-.rte-content img.img-md { max-width: 480px; }
+.rte-content img.img-md { width: 48.5%; }
 .prose-pierina img.img-full,
-.rte-content img.img-full { max-width: 100%; }
+.prose-pierina img.img-lg,
+.rte-content img.img-full,
+.rte-content img.img-lg { width: 100%; display: block; margin: 1.4em auto; }
+@media (max-width: 640px) {
+  .prose-pierina img.img-sm,
+  .rte-content img.img-sm { width: 48%; }
+  .prose-pierina img.img-md,
+  .rte-content img.img-md { width: 100%; display: block; margin: 1em auto; }
+}
 .rte-content img.ProseMirror-selectednode { outline: 2px solid hsl(var(--accent)); }
 .rte-content:focus { outline: none; }
 

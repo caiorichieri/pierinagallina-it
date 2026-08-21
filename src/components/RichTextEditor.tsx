@@ -42,10 +42,16 @@ function Toolbar({ editor }: { editor: Editor }) {
       setErr(null);
       setBusy(true);
       try {
+        // Caricando più foto insieme vengono affiancate: 2 per riga, 3 se sono tante.
+        const cls = files.length >= 3 ? "img-sm" : files.length === 2 ? "img-md" : "img-lg";
         for (const f of files) {
           const url = await upload(f);
-          const caption = window.prompt("Didascalia della foto (lascia vuoto per nessuna):", "")?.trim();
+          const caption =
+            files.length > 1
+              ? ""
+              : window.prompt("Didascalia della foto (lascia vuoto per nessuna):", "")?.trim();
           editor.chain().focus().setImage({ src: url, alt: caption || f.name }).run();
+          editor.chain().focus().updateAttributes("image", { class: cls }).run();
           if (caption) {
             editor
               .chain()
@@ -54,6 +60,7 @@ function Toolbar({ editor }: { editor: Editor }) {
               .run();
           }
         }
+
 
       } catch (e) {
         setErr(e instanceof Error ? e.message : "Errore upload");
@@ -121,9 +128,9 @@ function Toolbar({ editor }: { editor: Editor }) {
       {imageActive && (
         <div className="ml-auto flex items-center gap-1 text-[11px] text-muted-foreground">
           Foto:
-          <button type="button" onClick={() => imgWidth("img-sm")} className="rounded border border-border px-1.5 py-0.5 hover:text-accent">piccola</button>
-          <button type="button" onClick={() => imgWidth("img-md")} className="rounded border border-border px-1.5 py-0.5 hover:text-accent">media</button>
-          <button type="button" onClick={() => imgWidth("img-full")} className="rounded border border-border px-1.5 py-0.5 hover:text-accent">piena</button>
+          <button type="button" title="3 per riga" onClick={() => imgWidth("img-sm")} className="rounded border border-border px-1.5 py-0.5 hover:text-accent">piccola</button>
+          <button type="button" title="2 per riga" onClick={() => imgWidth("img-md")} className="rounded border border-border px-1.5 py-0.5 hover:text-accent">media</button>
+          <button type="button" title="tutta la larghezza" onClick={() => imgWidth("img-lg")} className="rounded border border-border px-1.5 py-0.5 hover:text-accent">grande</button>
         </div>
       )}
     </div>
@@ -134,7 +141,7 @@ const ImageWithClass = Image.extend({
   addAttributes() {
     return {
       ...this.parent?.(),
-      class: { default: "img-full" },
+      class: { default: "img-lg" },
     };
   },
 });
