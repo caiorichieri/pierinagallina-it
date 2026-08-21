@@ -64,8 +64,8 @@ export function WitchHousePlayer(p: PlayerProps) {
                 className="fiaba-chimney-smoke absolute block h-[46px] w-[46px] rounded-full"
                 style={{
                   animationDelay: `${d}s`,
-                  background: "radial-gradient(circle, rgba(60,45,45,0.72), rgba(60,45,45,0) 70%)",
-                  filter: "blur(2px)",
+                  background: "radial-gradient(circle, rgba(168,28,46,0.78), rgba(168,28,46,0) 72%)",
+                  filter: "blur(1px)",
                 }}
               />
             ))}
@@ -242,8 +242,8 @@ export function WitchHousePlayer(p: PlayerProps) {
                 className="fiaba-chimney-smoke absolute block h-[34px] w-[34px] rounded-full"
                 style={{
                   animationDelay: `${d}s`,
-                  background: "radial-gradient(circle, rgba(60,45,45,0.65), rgba(60,45,45,0) 70%)",
-                  filter: "blur(2px)",
+                  background: "radial-gradient(circle, rgba(168,28,46,0.72), rgba(168,28,46,0) 72%)",
+                  filter: "blur(1px)",
                 }}
               />
             ))}
