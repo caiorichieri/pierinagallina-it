@@ -28,7 +28,7 @@ const DESC =
 export const Route = createFileRoute("/audiolibri-per-bambini")({
   head: () => ({
     meta: [
-      { title: "Audiolibri per bambini da ascoltare gratis — Pierina Gallina" },
+      { title: "Audiolibri per bambini gratis — Pierina Gallina" },
       { name: "description", content: DESC },
       { property: "og:title", content: "Audiolibri per bambini da ascoltare gratis" },
       { property: "og:description", content: DESC },
