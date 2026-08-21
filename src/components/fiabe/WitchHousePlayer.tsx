@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Play, Pause, SkipBack, SkipForward, Volume2 } from "lucide-react";
+import { Play, Pause, SkipBack, SkipForward, Volume2, X } from "lucide-react";
 import playerArt from "@/assets/witch-house-player.png.asset.json";
 
 export type PlayerProps = {
@@ -16,6 +16,7 @@ export type PlayerProps = {
   onSeek: (t: number) => void;
   onVolume: (v: number) => void;
   onRate: (r: number) => void;
+  onClose?: () => void;
 };
 
 const RATES = [0.75, 1, 1.25];
@@ -42,6 +43,18 @@ export function WitchHousePlayer(p: PlayerProps) {
           filter: "drop-shadow(0 12px 26px rgba(0,0,0,0.45))",
         }}
       >
+        {p.onClose && (
+          <button
+            type="button"
+            onClick={p.onClose}
+            aria-label="Chiudi player"
+            className="absolute right-3 top-3 z-10 grid h-8 w-8 place-items-center rounded-full border transition-colors hover:bg-white/10"
+            style={{ borderColor: "rgba(232,184,74,0.5)", color: "#e8c48a" }}
+          >
+            <X size={16} />
+          </button>
+        )}
+
         {/* fumo dal camino durante la riproduzione */}
         {p.playing && (
           <div aria-hidden="true" className="pointer-events-none absolute left-[76.6%] top-[13%] h-0 w-0">
@@ -209,6 +222,18 @@ export function WitchHousePlayer(p: PlayerProps) {
           borderColor: "rgba(232,184,74,0.4)",
         }}
       >
+        {p.onClose && (
+          <button
+            type="button"
+            onClick={p.onClose}
+            aria-label="Chiudi player"
+            className="absolute right-3 top-3 z-10 grid h-8 w-8 place-items-center rounded-full border transition-colors hover:bg-white/10"
+            style={{ borderColor: "rgba(232,184,74,0.5)", color: "#e8c48a" }}
+          >
+            <X size={16} />
+          </button>
+        )}
+
         {p.playing && (
           <div aria-hidden="true" className="pointer-events-none absolute right-6 top-0 h-0 w-0">
             {[0, 2].map((d) => (
