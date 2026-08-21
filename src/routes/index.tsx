@@ -149,35 +149,13 @@ function BooksCarousel({ books }: { books: Book[] }) {
   return (
     <section className="relative overflow-hidden border-y border-border bg-secondary/40">
       <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
-        <div className="flex items-end justify-between gap-4">
-          <div>
-            <div className="inline-flex items-center gap-2 font-sans text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent" /> Libri
-            </div>
-            <h2 className="mt-3 max-w-3xl font-serif text-4xl leading-tight md:text-5xl">
-              Le pagine che ho seminato.
-            </h2>
+        <div>
+          <div className="inline-flex items-center gap-2 font-sans text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent" /> Libri
           </div>
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={() => scroll("left")}
-              disabled={!canLeft}
-              aria-label="Scorri libri a sinistra"
-              className="rounded-full border border-border bg-background/90 p-2.5 text-primary shadow-sm backdrop-blur transition-colors hover:bg-background hover:text-accent disabled:cursor-not-allowed disabled:opacity-30"
-            >
-              <ChevronLeft size={22} />
-            </button>
-            <button
-              type="button"
-              onClick={() => scroll("right")}
-              disabled={!canRight}
-              aria-label="Scorri libri a destra"
-              className="rounded-full border border-border bg-background/90 p-2.5 text-primary shadow-sm backdrop-blur transition-colors hover:bg-background hover:text-accent disabled:cursor-not-allowed disabled:opacity-30"
-            >
-              <ChevronRight size={22} />
-            </button>
-          </div>
+          <h2 className="mt-3 max-w-3xl font-serif text-4xl leading-tight md:text-5xl">
+            Le pagine che ho seminato.
+          </h2>
         </div>
 
         <div className="relative mt-12">
