@@ -353,6 +353,42 @@ export function WitchHousePlayer(p: PlayerProps) {
             <SkipForward size={18} />
           </IconBtn>
         </div>
+
+        <div className="mt-3 flex items-center justify-between gap-3">
+          <div className="flex items-center gap-1">
+            {RATES.map((r) => (
+              <button
+                key={r}
+                type="button"
+                onClick={() => p.onRate(r)}
+                aria-pressed={p.rate === r}
+                aria-label={`Velocità ${r}x`}
+                className="rounded-full border px-2 py-1 font-mono text-[11px] transition-colors"
+                style={{
+                  borderColor: p.rate === r ? "var(--brand-gold)" : "rgba(232,184,74,0.35)",
+                  color: p.rate === r ? "#2a1710" : "#e8c48a",
+                  background: p.rate === r ? "var(--brand-gold)" : "transparent",
+                }}
+              >
+                {r}x
+              </button>
+            ))}
+          </div>
+          <div className="flex min-w-0 flex-1 items-center justify-end gap-2">
+            <Volume2 size={16} style={{ color: "var(--brand-gold)" }} />
+            <input
+              type="range"
+              min={0}
+              max={1}
+              step={0.05}
+              value={p.volume}
+              onChange={(e) => p.onVolume(Number(e.target.value))}
+              aria-label="Livello del volume"
+              className="h-1 w-24 cursor-pointer accent-[var(--brand-gold)]"
+            />
+          </div>
+        </div>
+
       </div>
       </div>
     </div>
