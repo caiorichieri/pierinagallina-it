@@ -6,14 +6,11 @@ La pagina oggi mostra solo elenchi di titoli con il player HTML grigio di defaul
 
 1. **Selettore raccolta**: in alto, i titoli delle raccolte come "capitoli" cliccabili (stile serif corsivo con sottolineatura oro).
 2. **Lista fiabe a sinistra**: le tracce della raccolta scelta, ognuna con numero, titolo serif e durata; quella in ascolto si evidenzia in oro con un piccolo indicatore di onde animate.
-3. **Player a destra (sopra su mobile)**: pannello bordeaux con
-   - titolo della fiaba e raccolta,
-   - pulsante play/pausa grande e rotondo in oro,
-   - precedente / successivo,
-   - barra di avanzamento trascinabile con tempo trascorso e totale,
-   - controllo volume e velocità (0.75x / 1x / 1.25x),
-   - passaggio automatico alla fiaba seguente a fine traccia.
-4. **Sticky su mobile**: quando si scorre la lista, una barra compatta del player resta in basso, così si può cambiare fiaba senza perdere i comandi.
+3. **Player stilizzato — su PC a lato, su cellulare in basso**:
+   - Desktop: pannello fisso nella colonna destra (sticky, resta visibile mentre si scorre la lista).
+   - Mobile: barra player ancorata in basso allo schermo, sempre raggiungibile.
+   Contiene: titolo della fiaba e raccolta, pulsante play/pausa grande e rotondo in oro, precedente / successivo, barra di avanzamento trascinabile con tempo trascorso e totale, volume, velocità (0.75x / 1x / 1.25x) e passaggio automatico alla fiaba seguente.
+
 5. L'hero animato attuale resta invariato, così come il link agli audiolibri e il tracciamento GA4 al play.
 
 ## Dettagli tecnici
