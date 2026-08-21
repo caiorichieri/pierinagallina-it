@@ -27,33 +27,44 @@ export function WitchHousePlayer(p: PlayerProps) {
   const pct = p.duration > 0 ? (p.current / p.duration) * 100 : 0;
   const [showVol, setShowVol] = useState(false);
 
+  const closeBtn = p.onClose ? (
+    <button
+      type="button"
+      onClick={p.onClose}
+      aria-label="Chiudi player"
+      className="pointer-events-auto grid h-9 w-9 place-items-center rounded-full border-2 shadow-lg transition-transform hover:scale-110 active:scale-95"
+      style={{
+        borderColor: "var(--brand-gold)",
+        background: "var(--brand-primary)",
+        color: "var(--brand-gold)",
+        boxShadow: "0 4px 14px rgba(0,0,0,0.35)",
+      }}
+    >
+      <X size={18} />
+    </button>
+  ) : null;
+
   return (
     <div className="fiaba-player-enter pointer-events-none fixed inset-x-0 bottom-0 z-40 pb-[env(safe-area-inset-bottom)]">
       {/* ---------- Desktop: illustrazione trasparente con comandi sovrapposti ---------- */}
-      <div
-        className="pointer-events-auto relative mx-auto hidden lg:block"
-        style={{
-          backgroundImage: `url(${playerArt.url})`,
-          backgroundSize: "100% 100%",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "bottom center",
-          aspectRatio: "1866 / 532",
-          height: "clamp(148px, 16vw, 226px)",
-          width: "min(100%, calc(clamp(148px, 16vw, 226px) * 3.508))",
-          filter: "drop-shadow(0 12px 26px rgba(0,0,0,0.45))",
-        }}
-      >
-        {p.onClose && (
-          <button
-            type="button"
-            onClick={p.onClose}
-            aria-label="Chiudi player"
-            className="absolute right-3 top-3 z-10 grid h-8 w-8 place-items-center rounded-full border transition-colors hover:bg-white/10"
-            style={{ borderColor: "rgba(232,184,74,0.5)", color: "#e8c48a" }}
-          >
-            <X size={16} />
-          </button>
+      <div className="pointer-events-none relative mx-auto hidden lg:block" style={{ width: "min(100%, calc(clamp(148px, 16vw, 226px) * 3.508))" }}>
+        {closeBtn && (
+          <div className="pointer-events-auto absolute -right-3 -top-12 z-50">
+            {closeBtn}
+          </div>
         )}
+        <div
+          className="pointer-events-auto relative w-full"
+          style={{
+            backgroundImage: `url(${playerArt.url})`,
+            backgroundSize: "100% 100%",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "bottom center",
+            aspectRatio: "1866 / 532",
+            height: "clamp(148px, 16vw, 226px)",
+            filter: "drop-shadow(0 12px 26px rgba(0,0,0,0.45))",
+          }}
+        >
 
         {/* fumo dal camino durante la riproduzione */}
         {p.playing && (
@@ -213,26 +224,22 @@ export function WitchHousePlayer(p: PlayerProps) {
           />
         ))}
       </div>
+      </div>
 
       {/* ---------- Mobile / tablet: barra compatta ---------- */}
-      <div
-        className="pointer-events-auto relative block border-t px-3 py-3 shadow-2xl lg:hidden"
-        style={{
-          background: "linear-gradient(180deg, #2a1710 0%, #1c100a 100%)",
-          borderColor: "rgba(232,184,74,0.4)",
-        }}
-      >
-        {p.onClose && (
-          <button
-            type="button"
-            onClick={p.onClose}
-            aria-label="Chiudi player"
-            className="absolute right-3 top-3 z-10 grid h-8 w-8 place-items-center rounded-full border transition-colors hover:bg-white/10"
-            style={{ borderColor: "rgba(232,184,74,0.5)", color: "#e8c48a" }}
-          >
-            <X size={16} />
-          </button>
+      <div className="pointer-events-none relative block lg:hidden">
+        {closeBtn && (
+          <div className="pointer-events-auto absolute right-3 -top-12 z-50">
+            {closeBtn}
+          </div>
         )}
+        <div
+          className="pointer-events-auto relative block border-t px-3 py-3 shadow-2xl"
+          style={{
+            background: "linear-gradient(180deg, #2a1710 0%, #1c100a 100%)",
+            borderColor: "rgba(232,184,74,0.4)",
+          }}
+        >
 
         {p.playing && (
           <div aria-hidden="true" className="pointer-events-none absolute right-6 top-0 h-0 w-0">
@@ -305,6 +312,7 @@ export function WitchHousePlayer(p: PlayerProps) {
             <SkipForward size={18} />
           </IconBtn>
         </div>
+      </div>
       </div>
     </div>
   );
