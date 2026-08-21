@@ -144,26 +144,14 @@ export function WitchHousePlayer(p: PlayerProps) {
           className={`${HIT} left-[40.8%] top-[81%] h-[22%] w-[5%]`}
         />
 
-        {/* calderone: comando principale */}
+        {/* calderone: comando principale (nessuna icona: il disegno basta) */}
         <button
           type="button"
           onClick={p.onToggle}
           aria-label={p.playing ? "Metti in pausa" : "Ascolta"}
-          className={`${HIT} left-[49.6%] top-[82%] grid h-[28%] w-[6.5%] place-items-center`}
-        >
-          {p.playing && (
-            <Pause size={28} style={{ color: "#e2a45c", filter: "drop-shadow(0 0 6px rgba(0,0,0,0.7))" }} />
-          )}
-        </button>
+          className={`${HIT} left-[49.6%] top-[82%] h-[28%] w-[6.5%]`}
+        />
 
-        {/* fumo animato sopra il calderone */}
-        {p.playing && (
-          <span
-            aria-hidden="true"
-            className="fiaba-smoke pointer-events-none absolute left-[49.6%] top-[62%] h-[18%] w-[4%] -translate-x-1/2 rounded-full"
-            style={{ background: "radial-gradient(circle, rgba(150,255,190,0.35), transparent 70%)" }}
-          />
-        )}
 
         {/* volume */}
         <div className="absolute left-[58.8%] top-[81%] -translate-x-1/2 -translate-y-1/2">
