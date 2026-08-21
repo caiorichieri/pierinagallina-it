@@ -234,6 +234,36 @@ export function WitchHousePlayer(p: PlayerProps) {
             {closeBtn}
           </div>
         )}
+
+        {/* casetta della strega (versione compatta) */}
+        <div className="pointer-events-none relative h-[92px] w-full overflow-hidden">
+          {p.playing && (
+            <div aria-hidden="true" className="pointer-events-none absolute left-[22%] top-[10%] z-0 h-0 w-0">
+              {[0, 1.5, 3].map((d) => (
+                <span
+                  key={d}
+                  className="fiaba-chimney-smoke absolute block h-[34px] w-[34px] rounded-full"
+                  style={{
+                    animationDelay: `${d}s`,
+                    background: "radial-gradient(circle, rgba(168,28,46,0.9), rgba(168,28,46,0) 70%)",
+                    filter: "blur(0.5px)",
+                  }}
+                />
+              ))}
+            </div>
+          )}
+          <div
+            className="absolute inset-0 z-10"
+            style={{
+              backgroundImage: `url(${playerArt.url})`,
+              backgroundSize: "auto 150%",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "82% bottom",
+              filter: "drop-shadow(0 8px 18px rgba(0,0,0,0.4))",
+            }}
+          />
+        </div>
+
         <div
           className="pointer-events-auto relative block border-t px-3 py-3 shadow-2xl"
           style={{
