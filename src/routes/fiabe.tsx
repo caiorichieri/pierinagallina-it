@@ -127,6 +127,19 @@ function FiabePage() {
     setDuration(0);
   };
 
+  const close = () => {
+    const a = audioRef.current;
+    if (a) {
+      a.pause();
+      a.currentTime = 0;
+      a.src = "";
+    }
+    setIndex(null);
+    setPlaying(false);
+    setCurrent(0);
+    setDuration(0);
+  };
+
   return (
     <>
       <FiabeHero />
@@ -216,6 +229,7 @@ function FiabePage() {
           }}
           onVolume={setVolume}
           onRate={setRate}
+          onClose={close}
         />
       )}
     </>
