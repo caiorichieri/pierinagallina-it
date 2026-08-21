@@ -224,6 +224,7 @@ export function WitchHousePlayer(p: PlayerProps) {
           />
         ))}
       </div>
+      </div>
 
       {/* ---------- Mobile / tablet: barra compatta ---------- */}
       <div
