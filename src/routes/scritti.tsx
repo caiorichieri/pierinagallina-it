@@ -7,7 +7,7 @@ import { postTagIds } from "@/lib/post-meta";
 import { Reveal } from "@/components/Reveal";
 import { ArrowRight, Feather, FileText, Search, X } from "lucide-react";
 
-type Tab = "tutti" | "articoli" | "poesie";
+type Tab = "articoli" | "poesie";
 
 const scrittiQ = queryOptions({
   queryKey: ["scritti-all"],
@@ -78,11 +78,11 @@ function formatDateIt(dateStr: string | null | undefined): string {
 
 function ScrittiPage() {
   const { data } = useSuspenseQuery(scrittiQ);
-  const [tab, setTab] = useState<Tab>("tutti");
+  const [tab, setTab] = useState<Tab>("articoli");
   useEffect(() => {
     if (typeof window !== "undefined" && window.location.hash === "#poesie") setTab("poesie");
   }, []);
-  const [visible, setVisible] = useState(12);
+  const [visible, setVisible] = useState(9);
   const [q, setQ] = useState("");
   const [cat, setCat] = useState<string | null>(null);
 
@@ -126,8 +126,8 @@ function ScrittiPage() {
     );
   }, [data.poems, needle]);
 
-  const showArticoli = tab === "tutti" || tab === "articoli";
-  const showPoesie = (tab === "tutti" || tab === "poesie") && !cat;
+  const showArticoli = tab === "articoli";
+  const showPoesie = tab === "poesie";
   const visiblePosts = filteredPosts.slice(0, visible);
   const nothing =
     (!showArticoli || filteredPosts.length === 0) &&
@@ -135,7 +135,7 @@ function ScrittiPage() {
 
   function reset(fn: () => void) {
     fn();
-    setVisible(12);
+    setVisible(9);
   }
 
   return (
@@ -166,9 +166,8 @@ function ScrittiPage() {
 
 
         {/* filtro tipo */}
-        <div className="mb-5 flex flex-wrap items-center justify-center gap-2">
+        <div className="mb-6 flex flex-wrap items-center justify-center gap-3">
           {([
-            { k: "tutti", label: "Tutti" },
             { k: "articoli", label: "Articoli" },
             { k: "poesie", label: "Poesie" },
           ] as { k: Tab; label: string }[]).map((t) => {
@@ -179,10 +178,10 @@ function ScrittiPage() {
                 type="button"
                 onClick={() => reset(() => setTab(t.k))}
                 className={
-                  "rounded-full border px-5 py-2 text-xs font-medium uppercase tracking-[0.16em] transition-colors " +
+                  "rounded-full border-2 px-8 py-3 text-sm font-semibold uppercase tracking-[0.18em] transition-all " +
                   (active
-                    ? "border-primary bg-primary text-primary-foreground"
-                    : "border-border text-muted-foreground hover:border-accent hover:text-accent")
+                    ? "border-primary bg-primary text-primary-foreground shadow-lg"
+                    : "border-accent/40 bg-card text-foreground hover:border-accent hover:text-accent")
                 }
               >
                 {t.label}
@@ -227,16 +226,14 @@ function ScrittiPage() {
         {/* ARTICOLI */}
         {showArticoli && filteredPosts.length > 0 && (
           <div className="mb-20">
-            {tab === "tutti" && (
-              <div className="mb-8 flex items-center gap-3">
-                <FileText size={16} className="text-accent" />
-                <h2 className="font-serif text-2xl italic text-foreground">Articoli e racconti</h2>
-                <span className="font-sans text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-                  {filteredPosts.length}
-                </span>
-              </div>
-            )}
-            <div className="grid gap-10 md:grid-cols-2">
+            <div className="mb-8 flex items-center gap-3">
+              <FileText size={16} className="text-accent" />
+              <h2 className="font-serif text-2xl italic text-foreground">Articoli e racconti</h2>
+              <span className="font-sans text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                {filteredPosts.length}
+              </span>
+            </div>
+            <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
               {visiblePosts.map((p, i) => (
                 <Reveal key={p.id} delay={Math.min(i, 6) * 80}>
                   <Link to="/blog/$slug" params={{ slug: p.slug }} className="group block">
@@ -269,7 +266,7 @@ function ScrittiPage() {
               <div className="mt-12 flex justify-center">
                 <button
                   type="button"
-                  onClick={() => setVisible((v) => v + 12)}
+                  onClick={() => setVisible((v) => v + 9)}
                   className="rounded-full border border-border px-6 py-2.5 text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:border-accent hover:text-accent"
                 >
                   Mostra altri articoli
@@ -284,12 +281,10 @@ function ScrittiPage() {
         {/* POESIE */}
         {showPoesie && filteredPoems.length > 0 && (
           <div>
-            {tab === "tutti" && (
-              <div className="mb-8 flex items-center gap-3">
-                <Feather size={16} className="text-accent" />
-                <h2 className="font-serif text-2xl italic text-foreground">Poesie</h2>
-              </div>
-            )}
+            <div className="mb-8 flex items-center gap-3">
+              <Feather size={16} className="text-accent" />
+              <h2 className="font-serif text-2xl italic text-foreground">Poesie</h2>
+            </div>
             <div className="space-y-16">
               {filteredPoems.map((p, i) => (
                 <Reveal key={p.id} delay={Math.min(i, 6) * 80}>
