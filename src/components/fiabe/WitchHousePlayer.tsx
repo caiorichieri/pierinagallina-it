@@ -26,21 +26,65 @@ export function WitchHousePlayer(p: PlayerProps) {
   return (
     <div className="fiaba-player-enter fixed inset-x-0 bottom-0 z-40 px-2 pb-[env(safe-area-inset-bottom)] sm:px-4 sm:pb-4">
       <div className="relative mx-auto max-w-4xl">
-        {/* tetto della casetta */}
+        {/* tetto della casetta — cottage disegnato */}
         <svg
-          viewBox="0 0 400 60"
+          viewBox="0 0 400 120"
           preserveAspectRatio="none"
-          className="pointer-events-none block h-9 w-full sm:h-12"
+          className="pointer-events-none block h-16 w-full sm:h-24"
           aria-hidden="true"
         >
-          <path d="M2 58 L58 16 L206 4 L350 18 L398 58 Z" fill="var(--brand-primary)" stroke={GOLD} strokeWidth="1.5" />
-          <path d="M28 42 H372 M60 28 H340" stroke={GOLD} strokeOpacity="0.35" strokeWidth="1" />
-          {/* camino */}
-          <path d="M300 24 h20 v-18 h-20 z" fill="var(--brand-primary)" stroke={GOLD} strokeWidth="1.5" />
+          <defs>
+            <linearGradient id="fiabaRoof" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="color-mix(in oklab, var(--brand-primary) 70%, black)" />
+              <stop offset="100%" stopColor="var(--brand-primary)" />
+            </linearGradient>
+            <clipPath id="fiabaRoofClip">
+              <path d="M4 116 L54 56 C 96 22, 150 6, 200 10 C 252 14, 306 32, 346 62 L396 116 Z" />
+            </clipPath>
+          </defs>
+
+          {/* comignolo in mattoni */}
+          <g>
+            <path d="M296 60 h30 v-40 h-30 z" fill="url(#fiabaRoof)" stroke={GOLD} strokeWidth="1.6" />
+            <path d="M292 22 h38 v-9 h-38 z" fill="url(#fiabaRoof)" stroke={GOLD} strokeWidth="1.6" />
+            <g stroke={GOLD} strokeOpacity="0.32" strokeWidth="1">
+              <path d="M296 32 H326 M296 44 H326 M311 22 V32 M304 32 V44 M318 32 V44 M311 44 V56" />
+            </g>
+          </g>
+
+          {/* falda del tetto */}
+          <path
+            d="M4 116 L54 56 C 96 22, 150 6, 200 10 C 252 14, 306 32, 346 62 L396 116 Z"
+            fill="url(#fiabaRoof)"
+            stroke={GOLD}
+            strokeWidth="1.8"
+          />
+
+          {/* tegole a scaglie */}
+          <g clipPath="url(#fiabaRoofClip)" stroke={GOLD} strokeOpacity="0.28" strokeWidth="1" fill="none">
+            {[38, 58, 78, 98].map((y, r) => (
+              <g key={y}>
+                {Array.from({ length: 22 }).map((_, i) => {
+                  const x = -10 + i * 20 + (r % 2 ? 10 : 0);
+                  return <path key={i} d={`M${x} ${y} a10 9 0 0 1 20 0`} />;
+                })}
+              </g>
+            ))}
+          </g>
+
+          {/* colmo e abbaino */}
+          <path d="M56 58 C 100 26, 152 10, 200 12 C 250 14, 304 34, 344 64" stroke={GOLD} strokeOpacity="0.5" strokeWidth="1.2" fill="none" />
+          <path d="M150 116 V78 C 150 60, 186 60, 186 78 V116 Z" fill="url(#fiabaRoof)" stroke={GOLD} strokeWidth="1.6" />
+          <path d="M144 80 C 152 62, 184 62, 192 80" fill="none" stroke={GOLD} strokeWidth="1.6" />
+          <path d="M168 86 v24 M158 96 h20" stroke={GOLD} strokeOpacity="0.55" strokeWidth="1.1" />
+          <circle cx="168" cy="84" r="9" fill="none" stroke={GOLD} strokeWidth="1.2" />
+
+          {/* banderuola */}
+          <path d="M200 10 V-2 M200 2 l16 4 -16 4 z" stroke={GOLD} strokeWidth="1.4" fill="none" />
         </svg>
 
         {/* fumo */}
-        <div className="pointer-events-none absolute left-[76%] top-0 -translate-y-6" aria-hidden="true">
+        <div className="pointer-events-none absolute left-[77%] top-0 -translate-y-4" aria-hidden="true">
           {[0, 1, 2].map((i) => (
             <span
               key={i}
