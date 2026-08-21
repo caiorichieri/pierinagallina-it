@@ -235,14 +235,14 @@ export function WitchHousePlayer(p: PlayerProps) {
           </div>
         )}
 
-        {/* casetta della strega (versione compatta) */}
-        <div className="pointer-events-none relative h-[92px] w-full overflow-hidden">
+        {/* casetta della strega (intera, cliccabile) */}
+        <div className="pointer-events-none relative w-full" style={{ aspectRatio: "1866 / 532" }}>
           {p.playing && (
-            <div aria-hidden="true" className="pointer-events-none absolute left-[22%] top-[10%] z-0 h-0 w-0">
+            <div aria-hidden="true" className="pointer-events-none absolute left-[76.6%] top-[13%] z-0 h-0 w-0">
               {[0, 1.5, 3].map((d) => (
                 <span
                   key={d}
-                  className="fiaba-chimney-smoke absolute block h-[34px] w-[34px] rounded-full"
+                  className="fiaba-chimney-smoke absolute block h-[30px] w-[30px] rounded-full"
                   style={{
                     animationDelay: `${d}s`,
                     background: "radial-gradient(circle, rgba(168,28,46,0.9), rgba(168,28,46,0) 70%)",
@@ -253,16 +253,40 @@ export function WitchHousePlayer(p: PlayerProps) {
             </div>
           )}
           <div
-            className="absolute inset-0 z-10"
+            className="pointer-events-auto absolute inset-0 z-10"
             style={{
               backgroundImage: `url(${playerArt.url})`,
-              backgroundSize: "auto 150%",
+              backgroundSize: "100% 100%",
               backgroundRepeat: "no-repeat",
-              backgroundPosition: "82% bottom",
+              backgroundPosition: "bottom center",
               filter: "drop-shadow(0 8px 18px rgba(0,0,0,0.4))",
             }}
-          />
+          >
+            {/* calderone: play/pausa direttamente sul disegno */}
+            <button
+              type="button"
+              onClick={p.onToggle}
+              aria-label={p.playing ? "Metti in pausa" : "Ascolta"}
+              className={`${HIT} left-[49.6%] top-[82%] h-[34%] w-[9%]`}
+            />
+            {/* boccette della velocità */}
+            {RATES.map((r, i) => (
+              <button
+                key={r}
+                type="button"
+                onClick={() => p.onRate(r)}
+                aria-label={`Velocità ${r}x`}
+                aria-pressed={p.rate === r}
+                className={`${HIT} top-[81%] h-[34%] w-[6%]`}
+                style={{
+                  left: `${[64, 68.7, 73.5][i]}%`,
+                  boxShadow: p.rate === r ? "0 0 0 2px var(--brand-gold), 0 0 14px rgba(232,184,74,0.6)" : undefined,
+                }}
+              />
+            ))}
+          </div>
         </div>
+
 
         <div
           className="pointer-events-auto relative block border-t px-3 py-3 shadow-2xl"
