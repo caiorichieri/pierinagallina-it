@@ -4,6 +4,7 @@ import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
 import { ArrowLeft } from "lucide-react";
 import { db, type Post } from "@/integrations/pierina/client";
 import { sanitizeHtml } from "@/lib/sanitize";
+import { readPostMeta } from "@/lib/post-meta";
 import { trackArticleRead, trackArticleView } from "@/lib/ga4-events";
 
 const postQuery = (slug: string) =>
@@ -80,6 +81,7 @@ export const Route = createFileRoute("/blog/$slug")({
 function PostPage() {
   const { slug } = Route.useParams();
   const { data: p } = useSuspenseQuery(postQuery(slug));
+  const coverFull = readPostMeta(p.excerpt).meta.coverFull;
 
   // Report "pagine più lette": apertura + lettura completata (>=75% di scroll)
   useEffect(() => {
@@ -101,12 +103,20 @@ function PostPage() {
 
   return (
     <article className="bg-background">
-      {p.featured_image && (
+      {p.featured_image && (coverFull ? (
+        <div className="w-full bg-primary/5">
+          <img
+            src={p.featured_image}
+            alt={p.title}
+            className="mx-auto block max-h-[80vh] w-auto max-w-full object-contain"
+          />
+        </div>
+      ) : (
         <div className="relative h-[42vh] w-full overflow-hidden bg-primary">
           <img src={p.featured_image} alt={p.title} className="h-full w-full object-cover opacity-90" />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
         </div>
-      )}
+      ))}
 
       <header className="mx-auto max-w-3xl px-4 pt-12 sm:px-6">
         <Link to="/scritti" className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-accent">

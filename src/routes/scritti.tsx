@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { db, type Post, type Poem, type Category } from "@/integrations/pierina/client";
 import { ScrittiHero } from "@/components/ScrittiHero";
+import { postTagIds } from "@/lib/post-meta";
 import { Reveal } from "@/components/Reveal";
 import { ArrowRight, Feather, FileText, Search, X } from "lucide-react";
 
@@ -78,6 +79,9 @@ function formatDateIt(dateStr: string | null | undefined): string {
 function ScrittiPage() {
   const { data } = useSuspenseQuery(scrittiQ);
   const [tab, setTab] = useState<Tab>("tutti");
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.location.hash === "#poesie") setTab("poesie");
+  }, []);
   const [visible, setVisible] = useState(12);
   const [q, setQ] = useState("");
   const [cat, setCat] = useState<string | null>(null);
@@ -91,7 +95,7 @@ function ScrittiPage() {
   const usedCategories = useMemo(() => {
     const counts = new Map<string, number>();
     for (const p of data.posts) {
-      if (p.category_id) counts.set(p.category_id, (counts.get(p.category_id) ?? 0) + 1);
+      for (const t of postTagIds(p)) counts.set(t, (counts.get(t) ?? 0) + 1);
     }
     return [...counts.entries()]
       .map(([id, n]) => ({ cat: catById.get(id), n }))
@@ -103,7 +107,7 @@ function ScrittiPage() {
 
   const filteredPosts = useMemo(() => {
     return data.posts.filter((p) => {
-      if (cat && p.category_id !== cat) return false;
+      if (cat && !postTagIds(p).includes(cat)) return false;
       if (!needle) return true;
       return (
         p.title.toLowerCase().includes(needle) ||
@@ -242,10 +246,10 @@ function ScrittiPage() {
                       </div>
                     )}
                     <div className="flex flex-wrap items-center gap-2 font-sans text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-                      {p.category_id && catById.get(p.category_id) && (
-                        <span className="text-accent">{catById.get(p.category_id)!.name}</span>
-                      )}
-                      {p.category_id && catById.get(p.category_id) && p.published_at && <span className="opacity-50">·</span>}
+                      {postTagIds(p).map((t) => catById.get(t)).filter(Boolean).map((c) => (
+                        <span key={c!.id} className="text-accent">{c!.name}</span>
+                      ))}
+                      {postTagIds(p).some((t) => catById.get(t)) && p.published_at && <span className="opacity-50">·</span>}
                       {p.published_at && <span>{formatDateIt(p.published_at)}</span>}
                     </div>
                     <h3 className="mt-2 font-serif text-2xl leading-snug text-foreground transition-colors group-hover:text-accent">

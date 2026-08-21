@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { db, type Category } from "@/integrations/pierina/client";
 import { Plus, Pencil, Trash2, Check, X } from "lucide-react";
+import { postTagIds } from "@/lib/post-meta";
 
 export const Route = createFileRoute("/admin/etichette")({
   component: AdminEtichette,
@@ -35,7 +36,7 @@ function AdminEtichette() {
     setErr(null);
     const [cats, posts] = await Promise.all([
       db.from("categories").select("id,name,slug,post_count").order("name", { ascending: true }),
-      db.from("posts").select("category_id").limit(5000),
+      db.from("posts").select("category_id,excerpt").limit(5000),
     ]);
     if (cats.error) {
       setErr(cats.error.message);
@@ -44,9 +45,10 @@ function AdminEtichette() {
     }
     const counts = new Map<string, number>();
     let none = 0;
-    for (const p of (posts.data ?? []) as { category_id: string | null }[]) {
-      if (p.category_id) counts.set(p.category_id, (counts.get(p.category_id) ?? 0) + 1);
-      else none++;
+    for (const p of (posts.data ?? []) as { category_id: string | null; excerpt: string | null }[]) {
+      const ids = postTagIds(p);
+      if (ids.length === 0) none++;
+      for (const t of ids) counts.set(t, (counts.get(t) ?? 0) + 1);
     }
     setNoneCount(none);
     const list = ((cats.data as Category[] | null) ?? []).map((c) => ({
