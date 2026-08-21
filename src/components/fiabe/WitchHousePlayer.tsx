@@ -296,21 +296,7 @@ export function WitchHousePlayer(p: PlayerProps) {
           }}
         >
 
-        {p.playing && (
-          <div aria-hidden="true" className="pointer-events-none absolute right-6 top-0 h-0 w-0">
-            {[0, 2].map((d) => (
-              <span
-                key={d}
-                className="fiaba-chimney-smoke absolute block h-[34px] w-[34px] rounded-full"
-                style={{
-                  animationDelay: `${d}s`,
-                  background: "radial-gradient(circle, rgba(168,28,46,0.85), rgba(168,28,46,0) 70%)",
-                  filter: "blur(0.5px)",
-                }}
-              />
-            ))}
-          </div>
-        )}
+
 
         <p className="truncate font-serif text-base italic leading-tight" style={{ color: "#e8c48a" }}>
           {p.title}
