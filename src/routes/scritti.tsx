@@ -82,7 +82,7 @@ function ScrittiPage() {
   useEffect(() => {
     if (typeof window !== "undefined" && window.location.hash === "#poesie") setTab("poesie");
   }, []);
-  const [visible, setVisible] = useState(12);
+  const [visible, setVisible] = useState(9);
   const [q, setQ] = useState("");
   const [cat, setCat] = useState<string | null>(null);
 
@@ -135,7 +135,7 @@ function ScrittiPage() {
 
   function reset(fn: () => void) {
     fn();
-    setVisible(12);
+    setVisible(9);
   }
 
   return (
