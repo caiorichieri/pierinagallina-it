@@ -313,6 +313,7 @@ export function WitchHousePlayer(p: PlayerProps) {
           </IconBtn>
         </div>
       </div>
+      </div>
     </div>
   );
 }
