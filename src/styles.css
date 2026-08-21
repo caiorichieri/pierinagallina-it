@@ -590,3 +590,42 @@
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+/* --- Fiabe: card cliccabili e player "casetta della strega" --- */
+@keyframes fiabaWave {
+  0%, 100% { height: 5px; }
+  50%      { height: 15px; }
+}
+.fiaba-wave {
+  height: 6px;
+  animation: fiabaWave 0.9s ease-in-out infinite;
+}
+
+.fiaba-card:hover .fiaba-card-icon {
+  transform: rotate(-8deg) scale(1.08);
+}
+
+@keyframes fiabaSmoke {
+  0%   { opacity: 0; transform: translate(0, 0) scale(.6); }
+  25%  { opacity: .8; }
+  100% { opacity: 0; transform: translate(-16px, -46px) scale(1.7); }
+}
+.fiaba-smoke {
+  animation: fiabaSmoke 3s ease-out infinite;
+}
+
+@keyframes fiabaWindow {
+  0%, 100% { filter: brightness(1); opacity: .85; }
+  50%      { filter: brightness(1.5); opacity: 1; }
+}
+.fiaba-window {
+  animation: fiabaWindow 2.4s ease-in-out infinite;
+}
+
+@keyframes fiabaPlayerIn {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fiaba-player-enter {
+  animation: fiabaPlayerIn .5s cubic-bezier(.22,.9,.28,1) both;
+}
