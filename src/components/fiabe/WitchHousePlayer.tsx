@@ -30,9 +30,13 @@ export function WitchHousePlayer(p: PlayerProps) {
     <div className="fiaba-player-enter pointer-events-none fixed inset-x-0 bottom-0 z-40 pb-[env(safe-area-inset-bottom)]">
       {/* ---------- Desktop: illustrazione trasparente con comandi sovrapposti ---------- */}
       <div
-        className="pointer-events-auto relative mx-auto hidden bg-contain bg-bottom bg-no-repeat lg:block"
+        className="pointer-events-auto relative mx-auto hidden lg:block"
         style={{
           backgroundImage: `url(${playerArt.url})`,
+          backgroundSize: "100% 100%",
+          backgroundРepeatX: undefined,
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "bottom center",
           aspectRatio: "1866 / 532",
           height: "clamp(148px, 16vw, 226px)",
           width: "min(100%, calc(clamp(148px, 16vw, 226px) * 3.508))",
