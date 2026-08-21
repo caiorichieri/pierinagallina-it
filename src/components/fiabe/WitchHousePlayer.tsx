@@ -227,22 +227,20 @@ export function WitchHousePlayer(p: PlayerProps) {
       </div>
       </div>
 
-      {/* ---------- Mobile / tablet: barra compatta ---------- */}
+      {/* ---------- Mobile / tablet: casetta verticale interattiva ---------- */}
       <div className="pointer-events-none relative block lg:hidden">
-        {closeBtn && (
-          <div className="pointer-events-auto absolute right-3 -top-12 z-50">
-            {closeBtn}
-          </div>
-        )}
+        <div className="pointer-events-none relative mx-auto w-full max-w-[520px]">
+          {closeBtn && (
+            <div className="pointer-events-auto absolute right-2 -top-11 z-50">{closeBtn}</div>
+          )}
 
-        {/* casetta della strega: solo decorazione, i comandi stanno nella barra sotto */}
-        <div className="pointer-events-none relative h-[110px] w-full overflow-hidden">
+          {/* fumo dal calderone */}
           {p.playing && (
-            <div aria-hidden="true" className="pointer-events-none absolute left-[64%] top-[6%] z-0 h-0 w-0">
+            <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-[34%] z-0 h-0 w-0">
               {[0, 1.5, 3].map((d) => (
                 <span
                   key={d}
-                  className="fiaba-chimney-smoke absolute block h-[32px] w-[32px] rounded-full"
+                  className="fiaba-chimney-smoke absolute block h-[34px] w-[34px] rounded-full"
                   style={{
                     animationDelay: `${d}s`,
                     background: "radial-gradient(circle, rgba(168,28,46,0.9), rgba(168,28,46,0) 70%)",
@@ -252,123 +250,139 @@ export function WitchHousePlayer(p: PlayerProps) {
               ))}
             </div>
           )}
+
           <div
-            className="absolute inset-0 z-10"
+            className="pointer-events-auto relative z-10 w-full"
             style={{
-              backgroundImage: `url(${playerArt.url})`,
-              backgroundSize: "auto 165%",
+              backgroundImage: `url(${mobileArt.url})`,
+              backgroundSize: "100% 100%",
               backgroundRepeat: "no-repeat",
-              backgroundPosition: "78% bottom",
-              filter: "drop-shadow(0 8px 18px rgba(0,0,0,0.4))",
+              aspectRatio: "1 / 1",
+              filter: "drop-shadow(0 10px 22px rgba(0,0,0,0.45))",
             }}
-          />
-        </div>
-
-
-
-        <div
-          className="pointer-events-auto relative block border-t px-3 py-3 shadow-2xl"
-          style={{
-            background: "linear-gradient(180deg, #2a1710 0%, #1c100a 100%)",
-            borderColor: "rgba(232,184,74,0.4)",
-          }}
-        >
-
-
-
-        <p className="truncate font-serif text-base italic leading-tight" style={{ color: "#e8c48a" }}>
-          {p.title}
-        </p>
-        {p.collection && (
-          <p className="truncate font-mono text-[10px] uppercase tracking-[0.18em]" style={{ color: "#c9b79a" }}>
-            {p.collection}
-          </p>
-        )}
-
-        <div className="mt-2 flex items-center gap-2">
-          <span className="w-9 shrink-0 text-right font-mono text-[11px]" style={{ color: "#d8c3a0" }}>
-            {fmt(p.current)}
-          </span>
-          <div className="relative h-4 min-w-0 flex-1">
-            <div
-              className="absolute inset-x-0 top-1/2 h-[6px] -translate-y-1/2 rounded-full"
-              style={{ background: "rgba(232,184,74,0.2)" }}
-            />
-            <div
-              className="absolute left-0 top-1/2 h-[6px] -translate-y-1/2 rounded-full"
-              style={{ width: `${pct}%`, background: "var(--brand-gold)" }}
-            />
-            <input
-              type="range"
-              min={0}
-              max={p.duration || 0}
-              step={0.1}
-              value={p.current}
-              onChange={(e) => p.onSeek(Number(e.target.value))}
-              aria-label="Avanzamento della fiaba"
-              className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
-            />
-          </div>
-          <span className="w-9 shrink-0 font-mono text-[11px]" style={{ color: "#d8c3a0" }}>
-            {fmt(p.duration)}
-          </span>
-        </div>
-
-        <div className="mt-3 flex items-center justify-center gap-4">
-          <IconBtn label="Fiaba precedente" onClick={p.onPrev}>
-            <SkipBack size={18} />
-          </IconBtn>
-          <button
-            type="button"
-            onClick={p.onToggle}
-            aria-label={p.playing ? "Metti in pausa" : "Ascolta"}
-            className="grid h-14 w-14 place-items-center rounded-full transition-transform hover:scale-105 active:scale-95"
-            style={{ background: "var(--brand-gold)", color: "#2a1710" }}
           >
-            {p.playing ? <Pause size={24} /> : <Play size={24} className="ml-0.5" />}
-          </button>
-          <IconBtn label="Fiaba successiva" onClick={p.onNext}>
-            <SkipForward size={18} />
-          </IconBtn>
-        </div>
+            {/* titolo sul frontone */}
+            <div className="pointer-events-none absolute left-1/2 top-[17.7%] w-[52%] -translate-x-1/2 -translate-y-1/2 text-center">
+              <p className="truncate font-serif text-[15px] italic leading-tight" style={{ color: "#e2a45c" }}>
+                {p.title}
+              </p>
+              {p.collection && (
+                <p className="truncate font-mono text-[9px] uppercase tracking-[0.18em]" style={{ color: "#c9b79a" }}>
+                  {p.collection}
+                </p>
+              )}
+            </div>
 
-        <div className="mt-3 flex items-center justify-between gap-3">
-          <div className="flex items-center gap-1">
-            {RATES.map((r) => (
+            {/* calderone = play/pausa */}
+            <button
+              type="button"
+              onClick={p.onToggle}
+              aria-label={p.playing ? "Metti in pausa" : "Ascolta"}
+              className={`${HIT} left-[50%] top-[40%] h-[14%] w-[18%]`}
+            />
+
+            {/* pergamene prev / next e disco play */}
+            <button
+              type="button"
+              onClick={p.onPrev}
+              aria-label="Fiaba precedente"
+              className={`${HIT} left-[34.6%] top-[54%] h-[8%] w-[10%]`}
+            />
+            <button
+              type="button"
+              onClick={p.onToggle}
+              aria-label={p.playing ? "Metti in pausa" : "Ascolta"}
+              className={`${HIT} left-[50%] top-[53.6%] h-[13%] w-[13%]`}
+            >
+              {p.playing && (
+                <span
+                  className="absolute inset-0 grid place-items-center"
+                  style={{ color: "#e8b84a" }}
+                >
+                  <Pause size={22} />
+                </span>
+              )}
+            </button>
+            <button
+              type="button"
+              onClick={p.onNext}
+              aria-label="Fiaba successiva"
+              className={`${HIT} left-[65.5%] top-[54%] h-[8%] w-[10%]`}
+            />
+
+            {/* boccette velocità */}
+            {RATES.map((r, i) => (
               <button
                 key={r}
                 type="button"
                 onClick={() => p.onRate(r)}
-                aria-pressed={p.rate === r}
                 aria-label={`Velocità ${r}x`}
-                className="rounded-full border px-2 py-1 font-mono text-[11px] transition-colors"
+                aria-pressed={p.rate === r}
+                className={`${HIT} top-[68.2%] h-[9%] w-[8%]`}
                 style={{
-                  borderColor: p.rate === r ? "var(--brand-gold)" : "rgba(232,184,74,0.35)",
-                  color: p.rate === r ? "#2a1710" : "#e8c48a",
-                  background: p.rate === r ? "var(--brand-gold)" : "transparent",
+                  left: `${[41, 50, 59.4][i]}%`,
+                  boxShadow: p.rate === r ? "0 0 0 2px var(--brand-gold), 0 0 14px rgba(232,184,74,0.6)" : undefined,
                 }}
-              >
-                {r}x
-              </button>
+              />
             ))}
-          </div>
-          <div className="flex min-w-0 flex-1 items-center justify-end gap-2">
-            <Volume2 size={16} style={{ color: "var(--brand-gold)" }} />
-            <input
-              type="range"
-              min={0}
-              max={1}
-              step={0.05}
-              value={p.volume}
-              onChange={(e) => p.onVolume(Number(e.target.value))}
-              aria-label="Livello del volume"
-              className="h-1 w-24 cursor-pointer accent-[var(--brand-gold)]"
-            />
+
+            {/* tempi */}
+            <span
+              className="pointer-events-none absolute left-[27.6%] top-[90.6%] -translate-x-1/2 -translate-y-1/2 font-mono text-[11px]"
+              style={{ color: "#d8c3a0" }}
+            >
+              {fmt(p.current)}
+            </span>
+            <span
+              className="pointer-events-none absolute left-[73%] top-[90.6%] -translate-x-1/2 -translate-y-1/2 font-mono text-[11px]"
+              style={{ color: "#d8c3a0" }}
+            >
+              {fmt(p.duration)}
+            </span>
+
+            {/* barra di avanzamento */}
+            <div className="absolute left-[32.3%] top-[90.6%] h-[5%] w-[35.4%] -translate-y-1/2">
+              <div
+                className="absolute left-0 top-1/2 h-[5px] -translate-y-1/2 rounded-full"
+                style={{ width: `${pct}%`, background: "var(--brand-gold)", boxShadow: "0 0 8px rgba(232,184,74,0.6)" }}
+              />
+              <span
+                className="pointer-events-none absolute top-1/2 h-[13px] w-[13px] -translate-x-1/2 -translate-y-1/2 rounded-full"
+                style={{ left: `${pct}%`, background: "var(--brand-gold)" }}
+              />
+              <input
+                type="range"
+                min={0}
+                max={p.duration || 0}
+                step={0.1}
+                value={p.current}
+                onChange={(e) => p.onSeek(Number(e.target.value))}
+                aria-label="Avanzamento della fiaba"
+                className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
+              />
+            </div>
+
+            {/* volume verticale sulla porta */}
+            <div className="absolute left-[88.5%] top-[80.5%] h-[14%] w-[10%] -translate-x-1/2 -translate-y-1/2">
+              <input
+                type="range"
+                min={0}
+                max={1}
+                step={0.05}
+                value={p.volume}
+                onChange={(e) => p.onVolume(Number(e.target.value))}
+                aria-label="Livello del volume"
+                className="absolute left-1/2 top-1/2 h-6 w-[110%] -translate-x-1/2 -translate-y-1/2 -rotate-90 cursor-pointer opacity-0"
+              />
+              <span
+                className="pointer-events-none absolute left-1/2 h-[10px] w-[10px] -translate-x-1/2 rounded-full"
+                style={{ bottom: `${p.volume * 100}%`, background: "var(--brand-gold)" }}
+              />
+            </div>
           </div>
         </div>
+      </div>
 
-      </div>
-      </div>
     </div>
   );
 }
