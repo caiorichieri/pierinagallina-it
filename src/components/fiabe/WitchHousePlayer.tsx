@@ -53,22 +53,10 @@ export function WitchHousePlayer(p: PlayerProps) {
             {closeBtn}
           </div>
         )}
-        <div
-          className="pointer-events-auto relative w-full"
-          style={{
-            backgroundImage: `url(${playerArt.url})`,
-            backgroundSize: "100% 100%",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "bottom center",
-            aspectRatio: "1866 / 532",
-            height: "clamp(148px, 16vw, 226px)",
-            filter: "drop-shadow(0 12px 26px rgba(0,0,0,0.45))",
-          }}
-        >
 
-        {/* fumo dal camino durante la riproduzione */}
+        {/* fumo dal camino durante la riproduzione (dietro la casetta) */}
         {p.playing && (
-          <div aria-hidden="true" className="pointer-events-none absolute left-[76.6%] top-[13%] h-0 w-0">
+          <div aria-hidden="true" className="pointer-events-none absolute left-[76.6%] top-[13%] z-0 h-0 w-0">
             {[0, 1.5, 3].map((d) => (
               <span
                 key={d}
@@ -82,6 +70,19 @@ export function WitchHousePlayer(p: PlayerProps) {
             ))}
           </div>
         )}
+
+        <div
+          className="pointer-events-auto relative z-10 w-full"
+          style={{
+            backgroundImage: `url(${playerArt.url})`,
+            backgroundSize: "100% 100%",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "bottom center",
+            aspectRatio: "1866 / 532",
+            height: "clamp(148px, 16vw, 226px)",
+            filter: "drop-shadow(0 12px 26px rgba(0,0,0,0.45))",
+          }}
+        >
 
         {/* targa che copre il titolo disegnato */}
         <div
