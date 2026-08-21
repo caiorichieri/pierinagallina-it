@@ -100,6 +100,17 @@ function LibriPage() {
   const books = allBooks.filter((b) => !isBookHidden(b.title));
   const [interest, setInterest] = useState<Book | null>(null);
 
+  useEffect(() => {
+    const id = window.location.hash.slice(1);
+    if (!id) return;
+    const t = window.setTimeout(() => {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 150);
+    return () => window.clearTimeout(t);
+  }, [books.length]);
+
+
+
   return (
     <>
       <PageHero tone="libri"
