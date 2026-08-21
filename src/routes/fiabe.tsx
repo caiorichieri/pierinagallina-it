@@ -77,7 +77,6 @@ function FiabePage() {
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(1);
   const [rate, setRate] = useState(1);
-  const [durations, setDurations] = useState<Record<string, number>>({});
 
   const currentItem = index === null ? null : flat[index];
 
@@ -171,19 +170,9 @@ function FiabePage() {
                                 <FiabaCard
                                   title={t.title}
                                   index={ti}
-                                  duration={durations[t.id]}
                                   active={gi === index}
                                   playing={gi === index && playing}
                                   onSelect={() => select(gi)}
-                                />
-                                <audio
-                                  preload="metadata"
-                                  src={t.mp3_url}
-                                  className="hidden"
-                                  onLoadedMetadata={(e) => {
-                                    const el = e.target as HTMLAudioElement;
-                                    setDurations((d) => ({ ...d, [t.id]: el.duration }));
-                                  }}
                                 />
                               </div>
                             );
