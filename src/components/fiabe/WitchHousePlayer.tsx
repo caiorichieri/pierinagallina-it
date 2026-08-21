@@ -328,19 +328,14 @@ export function WitchHousePlayer(p: PlayerProps) {
               />
             ))}
 
-            {/* tempi */}
+            {/* contatore del tempo unico */}
             <span
-              className="pointer-events-none absolute left-[27.6%] top-[90.6%] -translate-x-1/2 -translate-y-1/2 font-mono text-[11px]"
+              className="pointer-events-none absolute left-1/2 top-[94.6%] -translate-x-1/2 -translate-y-1/2 font-mono text-[11px]"
               style={{ color: "#d8c3a0" }}
             >
-              {fmt(p.current)}
+              {fmt(p.current)} / {fmt(p.duration)}
             </span>
-            <span
-              className="pointer-events-none absolute left-[73%] top-[90.6%] -translate-x-1/2 -translate-y-1/2 font-mono text-[11px]"
-              style={{ color: "#d8c3a0" }}
-            >
-              {fmt(p.duration)}
-            </span>
+
 
             {/* barra di avanzamento */}
             <div className="absolute left-[32.3%] top-[90.6%] h-[5%] w-[35.4%] -translate-y-1/2">
