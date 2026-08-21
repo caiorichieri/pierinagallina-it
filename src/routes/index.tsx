@@ -159,6 +159,25 @@ function BooksCarousel({ books }: { books: Book[] }) {
         </div>
 
         <div className="relative mt-12">
+          <button
+            type="button"
+            onClick={() => scroll("left")}
+            disabled={!canLeft}
+            aria-label="Scorri libri a sinistra"
+            className="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full border border-border bg-background/95 p-3 text-primary shadow-lg backdrop-blur transition-colors hover:bg-background hover:text-accent disabled:cursor-not-allowed disabled:opacity-30 md:left-0 md:-translate-x-1/2"
+          >
+            <ChevronLeft size={24} />
+          </button>
+          <button
+            type="button"
+            onClick={() => scroll("right")}
+            disabled={!canRight}
+            aria-label="Scorri libri a destra"
+            className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full border border-border bg-background/95 p-3 text-primary shadow-lg backdrop-blur transition-colors hover:bg-background hover:text-accent disabled:cursor-not-allowed disabled:opacity-30 md:right-0 md:translate-x-1/2"
+          >
+            <ChevronRight size={24} />
+          </button>
+
           <div
             ref={scrollRef}
             className="flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-6"
