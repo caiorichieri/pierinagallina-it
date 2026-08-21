@@ -30,17 +30,32 @@ export function WitchHousePlayer(p: PlayerProps) {
     <div className="fiaba-player-enter fixed inset-x-0 bottom-0 z-40 pb-[env(safe-area-inset-bottom)]">
       {/* ---------- Desktop: illustrazione intera con comandi sovrapposti ---------- */}
       <div
-        className="relative mx-auto hidden w-full max-w-[1600px] bg-cover bg-center bg-no-repeat shadow-2xl lg:block"
-        style={{ backgroundImage: `url(${playerArt.url})`, aspectRatio: "1920 / 538" }}
+        className="relative mx-auto hidden bg-cover bg-center bg-no-repeat shadow-2xl lg:block"
+        style={{
+          backgroundImage: `url(${playerArt.url})`,
+          aspectRatio: "1920 / 539",
+          height: "clamp(150px, 17vw, 235px)",
+          width: "min(100%, calc(clamp(150px, 17vw, 235px) * 3.562))",
+        }}
       >
+        {/* targa che copre il titolo disegnato */}
+        <div
+          className="pointer-events-none absolute left-[10.5%] top-[46%] h-[22%] w-[20.5%] rounded-[6px]"
+          style={{
+            background: "linear-gradient(180deg, #3a2820 0%, #2c1d16 100%)",
+            boxShadow: "inset 0 0 10px rgba(0,0,0,0.7)",
+          }}
+        />
+
         {/* titolo */}
-        <div className="pointer-events-none absolute left-[13%] top-[52%] w-[26%] -translate-y-1/2">
+        <div className="pointer-events-none absolute left-[12%] top-[56%] w-[19%] -translate-y-1/2">
           <p
-            className="truncate font-serif text-[1.6cqw] italic leading-tight"
-            style={{ color: "#e2a45c", fontSize: "clamp(14px, 1.5vw, 26px)" }}
+            className="truncate font-serif italic leading-tight"
+            style={{ color: "#e2a45c", fontSize: "clamp(12px, 1.1vw, 20px)" }}
           >
             {p.title}
           </p>
+
           {p.collection && (
             <p
               className="truncate font-mono uppercase tracking-[0.18em]"
