@@ -7,7 +7,7 @@ import { postTagIds } from "@/lib/post-meta";
 import { Reveal } from "@/components/Reveal";
 import { ArrowRight, Feather, FileText, Search, X } from "lucide-react";
 
-type Tab = "tutti" | "articoli" | "poesie";
+type Tab = "articoli" | "poesie";
 
 const scrittiQ = queryOptions({
   queryKey: ["scritti-all"],
@@ -78,7 +78,7 @@ function formatDateIt(dateStr: string | null | undefined): string {
 
 function ScrittiPage() {
   const { data } = useSuspenseQuery(scrittiQ);
-  const [tab, setTab] = useState<Tab>("tutti");
+  const [tab, setTab] = useState<Tab>("articoli");
   useEffect(() => {
     if (typeof window !== "undefined" && window.location.hash === "#poesie") setTab("poesie");
   }, []);
@@ -126,8 +126,8 @@ function ScrittiPage() {
     );
   }, [data.poems, needle]);
 
-  const showArticoli = tab === "tutti" || tab === "articoli";
-  const showPoesie = (tab === "tutti" || tab === "poesie") && !cat;
+  const showArticoli = tab === "articoli";
+  const showPoesie = tab === "poesie";
   const visiblePosts = filteredPosts.slice(0, visible);
   const nothing =
     (!showArticoli || filteredPosts.length === 0) &&
@@ -166,9 +166,8 @@ function ScrittiPage() {
 
 
         {/* filtro tipo */}
-        <div className="mb-5 flex flex-wrap items-center justify-center gap-2">
+        <div className="mb-6 flex flex-wrap items-center justify-center gap-3">
           {([
-            { k: "tutti", label: "Tutti" },
             { k: "articoli", label: "Articoli" },
             { k: "poesie", label: "Poesie" },
           ] as { k: Tab; label: string }[]).map((t) => {
@@ -179,10 +178,10 @@ function ScrittiPage() {
                 type="button"
                 onClick={() => reset(() => setTab(t.k))}
                 className={
-                  "rounded-full border px-5 py-2 text-xs font-medium uppercase tracking-[0.16em] transition-colors " +
+                  "rounded-full border-2 px-8 py-3 text-sm font-semibold uppercase tracking-[0.18em] transition-all " +
                   (active
-                    ? "border-primary bg-primary text-primary-foreground"
-                    : "border-border text-muted-foreground hover:border-accent hover:text-accent")
+                    ? "border-primary bg-primary text-primary-foreground shadow-lg"
+                    : "border-accent/40 bg-card text-foreground hover:border-accent hover:text-accent")
                 }
               >
                 {t.label}
