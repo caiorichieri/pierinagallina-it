@@ -1,3 +1,5 @@
+import type React from "react";
+
 /**
  * Piccoli disegni a tratto oro scelti in base alle parole chiave del titolo
  * della fiaba. Tutti condividono lo stesso viewBox 48x48 e il tratto sottile.
@@ -51,7 +53,7 @@ export function FiabaIcon({ title, className }: { title: string; className?: str
   );
 }
 
-const shapes: Record<Kind, JSX.Element> = {
+const shapes: Record<Kind, React.ReactElement> = {
   corona: (
     <g {...S}>
       <path d="M10 32 L8 16 L17 23 L24 12 L31 23 L40 16 L38 32 Z" />
