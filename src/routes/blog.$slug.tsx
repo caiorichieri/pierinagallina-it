@@ -2,10 +2,11 @@ import { useEffect } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
 import { ArrowLeft } from "lucide-react";
-import { db, type Post } from "@/integrations/pierina/client";
+import { db, type Post, type Category } from "@/integrations/pierina/client";
 import { sanitizeHtml } from "@/lib/sanitize";
-import { readPostMeta } from "@/lib/post-meta";
+import { readPostMeta, postTagIds } from "@/lib/post-meta";
 import { trackArticleRead, trackArticleView } from "@/lib/ga4-events";
+import { PostComments } from "@/components/PostComments";
 
 const postQuery = (slug: string) =>
   queryOptions({
@@ -90,7 +91,10 @@ export const Route = createFileRoute("/blog/$slug")({
 function PostPage() {
   const { slug } = Route.useParams();
   const { data: p } = useSuspenseQuery(postQuery(slug));
+  const { data: categories } = useQuery(categoriesQuery);
   const coverFull = readPostMeta(p.excerpt).meta.coverFull;
+  const catById = new Map((categories ?? []).map((c) => [c.id, c]));
+  const tags = postTagIds(p).map((id) => catById.get(id)).filter((c): c is Category => Boolean(c));
 
   // Report "pagine più lette": apertura + lettura completata (>=75% di scroll)
   useEffect(() => {
