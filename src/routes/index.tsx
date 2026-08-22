@@ -65,18 +65,18 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Il sito ufficiale di Pierina Gallina, giornalista, scrittrice e poetessa di Codroipo (Friuli): libri illustrati, fiabe da ascoltare, poesie e articoli.",
+          "Il sito ufficiale di Pierina Gallina, giornalista, scrittrice e poetessa di Codroipo (Friuli): libri illustrati, fiabe da ascoltare, poesie, articoli e racconti di viaggio.",
       },
       { property: "og:title", content: "Pierina Gallina — Tessitrice di storie" },
       {
         property: "og:description",
-        content: "Giornalista, scrittrice, poetessa di Codroipo (Friuli). Libri, fiabe sonore, poesie e scritti.",
+        content: "Giornalista, scrittrice, poetessa di Codroipo (Friuli). Libri, fiabe sonore, poesie, scritti e viaggi.",
       },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Pierina Gallina — Tessitrice di storie" },
       {
         name: "twitter:description",
-        content: "Giornalista, scrittrice, poetessa di Codroipo (Friuli). Libri, fiabe sonore, poesie e scritti.",
+        content: "Giornalista, scrittrice, poetessa di Codroipo (Friuli). Libri, fiabe sonore, poesie, scritti e viaggi.",
       },
       { property: "og:url", content: "https://www.pierinagallina.it/" },
       {
