@@ -238,6 +238,39 @@ export type Database = {
         }
         Relationships: []
       }
+      post_comments: {
+        Row: {
+          approved: boolean
+          author_email: string | null
+          author_name: string
+          body: string
+          created_at: string
+          id: string
+          post_slug: string
+          post_title: string | null
+        }
+        Insert: {
+          approved?: boolean
+          author_email?: string | null
+          author_name: string
+          body: string
+          created_at?: string
+          id?: string
+          post_slug: string
+          post_title?: string | null
+        }
+        Update: {
+          approved?: boolean
+          author_email?: string | null
+          author_name?: string
+          body?: string
+          created_at?: string
+          id?: string
+          post_slug?: string
+          post_title?: string | null
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -261,7 +294,30 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      post_comments_public: {
+        Row: {
+          author_name: string | null
+          body: string | null
+          created_at: string | null
+          id: string | null
+          post_slug: string | null
+        }
+        Insert: {
+          author_name?: string | null
+          body?: string | null
+          created_at?: string | null
+          id?: string | null
+          post_slug?: string | null
+        }
+        Update: {
+          author_name?: string | null
+          body?: string | null
+          created_at?: string | null
+          id?: string | null
+          post_slug?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       has_role: {
