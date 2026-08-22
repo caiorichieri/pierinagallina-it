@@ -13,7 +13,7 @@ const postQuery = (slug: string) =>
     queryFn: async (): Promise<Post> => {
       const { data, error } = await db
         .from("posts")
-        .select("id,title,slug,excerpt,content,featured_image,published_at,created_at")
+        .select("id,title,slug,excerpt,content,featured_image,published_at,created_at,category_id")
         .eq("slug", slug)
         .maybeSingle();
       if (error) throw error;
@@ -21,6 +21,15 @@ const postQuery = (slug: string) =>
       return data as Post;
     },
   });
+
+const categoriesQuery = queryOptions({
+  queryKey: ["blog-categories"],
+  queryFn: async (): Promise<Category[]> => {
+    const { data, error } = await db.from("categories").select("id,name,slug,post_count");
+    if (error) throw error;
+    return (data as Category[] | null) ?? [];
+  },
+});
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: ({ context, params }) => context.queryClient.ensureQueryData(postQuery(params.slug)),
