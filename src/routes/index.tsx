@@ -65,18 +65,18 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Il sito ufficiale di Pierina Gallina, giornalista, scrittrice e poetessa di Codroipo (Friuli): libri illustrati, fiabe da ascoltare, poesie e articoli.",
+          "Il sito ufficiale di Pierina Gallina, giornalista, scrittrice e poetessa di Codroipo (Friuli): libri illustrati, fiabe da ascoltare, poesie, articoli e racconti di viaggio.",
       },
       { property: "og:title", content: "Pierina Gallina — Tessitrice di storie" },
       {
         property: "og:description",
-        content: "Giornalista, scrittrice, poetessa di Codroipo (Friuli). Libri, fiabe sonore, poesie e scritti.",
+        content: "Giornalista, scrittrice, poetessa di Codroipo (Friuli). Libri, fiabe sonore, poesie, scritti e viaggi.",
       },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Pierina Gallina — Tessitrice di storie" },
       {
         name: "twitter:description",
-        content: "Giornalista, scrittrice, poetessa di Codroipo (Friuli). Libri, fiabe sonore, poesie e scritti.",
+        content: "Giornalista, scrittrice, poetessa di Codroipo (Friuli). Libri, fiabe sonore, poesie, scritti e viaggi.",
       },
       { property: "og:url", content: "https://www.pierinagallina.it/" },
       {
@@ -265,8 +265,8 @@ function HomePage() {
             </p>
 
             <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
-              Di Codroipo, in Friuli. Raccolgo storie ed emozioni: a volte diventano poesie, altre
-              fiabe, racconti o articoli di giornale.
+              Di Codroipo, in Friuli. Raccolgo storie ed emozioni, qui e in giro per il mondo: a
+              volte diventano poesie, altre fiabe, racconti, articoli di giornale o diari di viaggio.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">

@@ -98,10 +98,11 @@ function ChiSonoPage() {
         </Reveal>
 
         <Reveal delay={100}>
-          <div className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <div className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
             {[
               { n: "42", l: "anni di scuola dell'infanzia" },
               { n: "40+", l: "anni di giornalismo" },
+              { n: "30", l: "anni di viaggi" },
               { n: "9", l: "libri pubblicati" },
               { n: "7", l: "volte nonna" },
             ].map((s) => (

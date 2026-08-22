@@ -55,9 +55,9 @@ export function FotografieHero() {
             </span>
           </h1>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-primary-foreground/85 md:text-lg">
-            Presentazioni, letture nelle scuole, radio, amici e paesaggi del
-            Friuli. Una polaroid dopo l&apos;altra, fino a comporre un pannello
-            di ricordi.
+            Eventi, presentazioni, letture nelle scuole, radio, amici, viaggi e
+            paesaggi del Friuli. Una polaroid dopo l&apos;altra, fino a comporre
+            un pannello di ricordi.
           </p>
         </div>
 

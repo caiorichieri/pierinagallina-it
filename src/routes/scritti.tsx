@@ -56,6 +56,9 @@ export const Route = createFileRoute("/scritti")({
     ],
   }),
 
+  validateSearch: (search: Record<string, unknown>) => ({
+    cat: typeof search["cat"] === "string" ? (search["cat"] as string) : undefined,
+  }),
   loader: ({ context }) => context.queryClient.ensureQueryData(scrittiQ),
   component: ScrittiPage,
   errorComponent: ({ error }) => <div className="p-10 text-center text-sm text-muted-foreground">{(error as Error).message}</div>,
@@ -84,7 +87,11 @@ function ScrittiPage() {
   }, []);
   const [visible, setVisible] = useState(9);
   const [q, setQ] = useState("");
-  const [cat, setCat] = useState<string | null>(null);
+  const search = Route.useSearch();
+  const [cat, setCat] = useState<string | null>(search.cat ?? null);
+  useEffect(() => {
+    if (search.cat) setCat(search.cat);
+  }, [search.cat]);
 
   const catById = useMemo(
     () => new Map(data.categories.map((c) => [c.id, c])),

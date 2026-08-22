@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
+import { useSuspenseQuery, useQuery, queryOptions } from "@tanstack/react-query";
 import { ArrowLeft } from "lucide-react";
-import { db, type Post } from "@/integrations/pierina/client";
+import { db, type Post, type Category } from "@/integrations/pierina/client";
 import { sanitizeHtml } from "@/lib/sanitize";
-import { readPostMeta } from "@/lib/post-meta";
+import { readPostMeta, postTagIds } from "@/lib/post-meta";
 import { trackArticleRead, trackArticleView } from "@/lib/ga4-events";
+import { PostComments } from "@/components/PostComments";
 
 const postQuery = (slug: string) =>
   queryOptions({
@@ -13,7 +14,7 @@ const postQuery = (slug: string) =>
     queryFn: async (): Promise<Post> => {
       const { data, error } = await db
         .from("posts")
-        .select("id,title,slug,excerpt,content,featured_image,published_at,created_at")
+        .select("id,title,slug,excerpt,content,featured_image,published_at,created_at,category_id")
         .eq("slug", slug)
         .maybeSingle();
       if (error) throw error;
@@ -21,6 +22,15 @@ const postQuery = (slug: string) =>
       return data as Post;
     },
   });
+
+const categoriesQuery = queryOptions({
+  queryKey: ["blog-categories"],
+  queryFn: async (): Promise<Category[]> => {
+    const { data, error } = await db.from("categories").select("id,name,slug,post_count");
+    if (error) throw error;
+    return (data as Category[] | null) ?? [];
+  },
+});
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: ({ context, params }) => context.queryClient.ensureQueryData(postQuery(params.slug)),
@@ -81,7 +91,10 @@ export const Route = createFileRoute("/blog/$slug")({
 function PostPage() {
   const { slug } = Route.useParams();
   const { data: p } = useSuspenseQuery(postQuery(slug));
+  const { data: categories } = useQuery(categoriesQuery);
   const coverFull = readPostMeta(p.excerpt).meta.coverFull;
+  const catById = new Map((categories ?? []).map((c) => [c.id, c]));
+  const tags = postTagIds(p).map((id) => catById.get(id)).filter((c): c is Category => Boolean(c));
 
   // Report "pagine più lette": apertura + lettura completata (>=75% di scroll)
   useEffect(() => {
@@ -130,6 +143,20 @@ function PostPage() {
         <h1 className="mt-3 font-serif text-4xl leading-[1.05] tracking-tight md:text-6xl">
           {p.title}
         </h1>
+        {tags.length > 0 && (
+          <div className="mt-5 flex flex-wrap gap-2">
+            {tags.map((c) => (
+              <Link
+                key={c.id}
+                to="/scritti"
+                search={{ cat: c.id }}
+                className="rounded-full border border-accent/40 bg-accent/10 px-3 py-1 font-sans text-[11px] uppercase tracking-[0.16em] text-accent transition-colors hover:bg-accent hover:text-primary-foreground"
+              >
+                {c.name}
+              </Link>
+            ))}
+          </div>
+        )}
       </header>
 
       <div
@@ -137,7 +164,11 @@ function PostPage() {
         dangerouslySetInnerHTML={{ __html: sanitizeHtml(p.content) }}
       />
 
-      <div className="mx-auto max-w-3xl px-4 pb-20 sm:px-6">
+      <div className="mx-auto max-w-3xl px-4 sm:px-6">
+        <PostComments postSlug={p.slug} postTitle={p.title} />
+      </div>
+
+      <div className="mx-auto max-w-3xl px-4 pb-20 pt-12 sm:px-6">
         <Link to="/scritti" className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-accent">
           <ArrowLeft size={14} /> Torna agli scritti
         </Link>
