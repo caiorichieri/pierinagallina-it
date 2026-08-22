@@ -265,8 +265,8 @@ function HomePage() {
             </p>
 
             <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
-              Di Codroipo, in Friuli. Raccolgo storie ed emozioni: a volte diventano poesie, altre
-              fiabe, racconti o articoli di giornale.
+              Di Codroipo, in Friuli. Raccolgo storie ed emozioni, qui e in giro per il mondo: a
+              volte diventano poesie, altre fiabe, racconti, articoli di giornale o diari di viaggio.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
