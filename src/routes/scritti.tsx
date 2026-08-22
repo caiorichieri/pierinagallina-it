@@ -87,7 +87,11 @@ function ScrittiPage() {
   }, []);
   const [visible, setVisible] = useState(9);
   const [q, setQ] = useState("");
-  const [cat, setCat] = useState<string | null>(null);
+  const search = Route.useSearch();
+  const [cat, setCat] = useState<string | null>(search.cat ?? null);
+  useEffect(() => {
+    if (search.cat) setCat(search.cat);
+  }, [search.cat]);
 
   const catById = useMemo(
     () => new Map(data.categories.map((c) => [c.id, c])),
