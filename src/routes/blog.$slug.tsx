@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
+import { useSuspenseQuery, useQuery, queryOptions } from "@tanstack/react-query";
 import { ArrowLeft } from "lucide-react";
 import { db, type Post, type Category } from "@/integrations/pierina/client";
 import { sanitizeHtml } from "@/lib/sanitize";
@@ -143,6 +143,20 @@ function PostPage() {
         <h1 className="mt-3 font-serif text-4xl leading-[1.05] tracking-tight md:text-6xl">
           {p.title}
         </h1>
+        {tags.length > 0 && (
+          <div className="mt-5 flex flex-wrap gap-2">
+            {tags.map((c) => (
+              <Link
+                key={c.id}
+                to="/scritti"
+                search={{ cat: c.id }}
+                className="rounded-full border border-accent/40 bg-accent/10 px-3 py-1 font-sans text-[11px] uppercase tracking-[0.16em] text-accent transition-colors hover:bg-accent hover:text-primary-foreground"
+              >
+                {c.name}
+              </Link>
+            ))}
+          </div>
+        )}
       </header>
 
       <div
@@ -150,7 +164,11 @@ function PostPage() {
         dangerouslySetInnerHTML={{ __html: sanitizeHtml(p.content) }}
       />
 
-      <div className="mx-auto max-w-3xl px-4 pb-20 sm:px-6">
+      <div className="mx-auto max-w-3xl px-4 sm:px-6">
+        <PostComments postSlug={p.slug} postTitle={p.title} />
+      </div>
+
+      <div className="mx-auto max-w-3xl px-4 pb-20 pt-12 sm:px-6">
         <Link to="/scritti" className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-accent">
           <ArrowLeft size={14} /> Torna agli scritti
         </Link>
