@@ -4,6 +4,8 @@ import { useT } from "../i18n";
 import { openCookiePreferences } from "./CookieBanner";
 import { SocialLinks } from "./SocialLinks";
 import { trackNewsletterIntent } from "@/lib/ga4-events";
+import friulionLogo from "@/assets/friulion-logo.png.asset.json";
+
 
 export function SiteFooter() {
   const { t } = useT();
