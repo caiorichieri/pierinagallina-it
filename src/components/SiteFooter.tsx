@@ -136,11 +136,11 @@ export function SiteFooter() {
 
         <div className="border-t border-primary-foreground/10">
           <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-3 gap-y-2 px-4 py-4 text-[11px] text-primary-foreground/55 sm:px-6">
-            <span className="inline-flex items-center gap-1.5">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-primary-foreground/90 px-2.5 py-1">
               <img
                 src={friulionLogo.url}
                 alt="Friulion"
-                className="h-4 w-auto"
+                className="h-6 w-auto sm:h-7"
               />
             </span>
             <span>
