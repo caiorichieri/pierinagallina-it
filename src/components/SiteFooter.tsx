@@ -4,7 +4,7 @@ import { useT } from "../i18n";
 import { openCookiePreferences } from "./CookieBanner";
 import { SocialLinks } from "./SocialLinks";
 import { trackNewsletterIntent } from "@/lib/ga4-events";
-import friulionLogo from "@/assets/friulion-logo.png.asset.json";
+import friulionLogo from "@/assets/friulion-wordmark.png.asset.json";
 
 
 export function SiteFooter() {
@@ -158,10 +158,10 @@ export function SiteFooter() {
             <span>P.Iva 03157410303</span>
             <span className="hidden sm:inline" aria-hidden="true">·</span>
             <a
-              href="mailto:privacy@friulion.it"
+              href="mailto:contato@friulion.it"
               className="inline-flex items-center gap-1.5 text-primary-foreground/75 hover:text-accent"
             >
-              <Mail size={12} /> privacy@friulion.it
+              <Mail size={12} /> contato@friulion.it
             </a>
           </div>
         </div>
