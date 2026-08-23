@@ -2,10 +2,11 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { EditorContent, useEditor, type Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
+import YoutubeExt from "@tiptap/extension-youtube";
 import { useUpload } from "@/lib/use-upload";
 import {
   Bold, Italic, Underline as UnderlineIcon, Strikethrough, Heading2, Heading3,
-  List, ListOrdered, Quote, Link2, Link2Off, Minus, Undo2, Redo2, ImagePlus, Code2,
+  List, ListOrdered, Quote, Link2, Link2Off, Minus, Undo2, Redo2, ImagePlus, Code2, Youtube,
 } from "lucide-react";
 
 type Props = {
@@ -184,6 +185,7 @@ export function RichTextEditor({ value, onChange, placeholder, minHeight = 320 }
         link: { openOnClick: false, autolink: true, HTMLAttributes: { rel: "noopener noreferrer", target: "_blank" } },
       }),
       ImageWithClass.configure({ inline: false, allowBase64: false }),
+      YoutubeExt.configure({ nocookie: true, controls: true, modestBranding: true, width: 640, height: 360 }),
     ],
     content: value || "",
     editorProps: {
