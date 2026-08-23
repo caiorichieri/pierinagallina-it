@@ -111,6 +111,8 @@ function Toolbar({ editor }: { editor: Editor }) {
     editor.commands.focus();
   }
 
+  const imageActive = editor.isActive("image");
+
   function insertYoutube() {
     const url = window.prompt("Incolla il link del video YouTube:", "https://www.youtube.com/watch?v=");
     if (!url?.trim()) return;

@@ -56,9 +56,8 @@ export const Route = createFileRoute("/scritti")({
     ],
   }),
 
-  validateSearch: (search: Record<string, unknown>) => ({
-    cat: typeof search["cat"] === "string" ? (search["cat"] as string) : undefined,
-  }),
+  validateSearch: (search: Record<string, unknown>): { cat?: string } =>
+    typeof search["cat"] === "string" ? { cat: search["cat"] as string } : {},
   loader: ({ context }) => context.queryClient.ensureQueryData(scrittiQ),
   component: ScrittiPage,
   errorComponent: ({ error }) => <div className="p-10 text-center text-sm text-muted-foreground">{(error as Error).message}</div>,
