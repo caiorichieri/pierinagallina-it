@@ -147,6 +147,7 @@ function Toolbar({ editor }: { editor: Editor }) {
           if (files.length) void insertImages(files);
         }}
       />
+      <Btn title="Inserisci video YouTube" onClick={insertYoutube}><Youtube size={15} /></Btn>
       <span className="mx-1 h-5 w-px bg-border" />
       <Btn title="Annulla" onClick={() => editor.chain().focus().undo().run()}><Undo2 size={15} /></Btn>
       <Btn title="Ripeti" onClick={() => editor.chain().focus().redo().run()}><Redo2 size={15} /></Btn>
@@ -154,14 +155,12 @@ function Toolbar({ editor }: { editor: Editor }) {
       {busy && <span className="ml-2 text-[11px] text-muted-foreground">Caricamento foto…</span>}
       {err && <span className="ml-2 text-[11px] text-destructive">{err}</span>}
 
-      {imageActive && (
-        <div className="ml-auto flex items-center gap-1 text-[11px] text-muted-foreground">
-          Foto:
-          <button type="button" title="3 per riga" onClick={() => imgWidth("img-sm")} className="rounded border border-border px-1.5 py-0.5 hover:text-accent">piccola</button>
-          <button type="button" title="2 per riga" onClick={() => imgWidth("img-md")} className="rounded border border-border px-1.5 py-0.5 hover:text-accent">media</button>
-          <button type="button" title="tutta la larghezza" onClick={() => imgWidth("img-lg")} className="rounded border border-border px-1.5 py-0.5 hover:text-accent">grande</button>
-        </div>
-      )}
+      <div className="ml-auto flex items-center gap-1 text-[11px] text-muted-foreground">
+        {imageActive ? "Foto selezionata:" : "Ultima foto:"}
+        <button type="button" title="3 per riga" onClick={() => imgWidth("img-sm")} className="rounded border border-border px-1.5 py-0.5 hover:text-accent">piccola</button>
+        <button type="button" title="2 per riga" onClick={() => imgWidth("img-md")} className="rounded border border-border px-1.5 py-0.5 hover:text-accent">media</button>
+        <button type="button" title="tutta la larghezza" onClick={() => imgWidth("img-lg")} className="rounded border border-border px-1.5 py-0.5 hover:text-accent">grande</button>
+      </div>
     </div>
   );
 }
