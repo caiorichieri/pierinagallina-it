@@ -6,9 +6,25 @@ const ALLOWED_TAGS = [
   "ul", "ol", "li",
   "a", "img", "figure", "figcaption",
   "hr", "span", "div",
+  "iframe",
 ];
 
-const ALLOWED_ATTR = ["href", "title", "target", "rel", "src", "alt", "class"];
+const ALLOWED_ATTR = [
+  "href", "title", "target", "rel", "src", "alt", "class",
+  "allow", "allowfullscreen", "frameborder", "width", "height", "loading",
+];
+
+// Solo i video YouTube possono essere incorporati.
+const YOUTUBE_EMBED = /^https:\/\/(?:www\.)?(?:youtube\.com\/embed\/|youtube-nocookie\.com\/embed\/)[A-Za-z0-9_-]{6,20}(?:\?[^"'<>\s]*)?$/;
+
+/** Rimuove ogni iframe che non punti a un video YouTube. */
+function stripForeignIframes(html: string): string {
+  return html.replace(/<iframe\b([^>]*)>([\s\S]*?)<\/iframe\s*>/gi, (full, attrs: string) => {
+    const m = /src\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'>]+))/i.exec(attrs);
+    const src = (m?.[1] ?? m?.[2] ?? m?.[3] ?? "").trim();
+    return YOUTUBE_EMBED.test(src) ? full : "";
+  });
+}
 
 const VOID_TAGS = new Set(["br", "hr", "img"]);
 const TAG_SET = new Set(ALLOWED_TAGS);
@@ -26,10 +42,11 @@ function escapeAttr(s: string): string {
 
 // Allowlist sanitizer used during SSR (DOMPurify needs a DOM).
 // Mirrors the client-side DOMPurify configuration so markup matches on hydration.
-function sanitizeOnServer(input: string): string {
+function sanitizeOnServer(rawInput: string): string {
+  const input = stripForeignIframes(rawInput);
   // Drop dangerous elements together with their content.
   let html = input.replace(
-    /<(script|style|iframe|object|embed|noscript|template)\b[\s\S]*?<\/\1\s*>/gi,
+    /<(script|style|object|embed|noscript|template)\b[\s\S]*?<\/\1\s*>/gi,
     "",
   );
   html = html.replace(/<!--[\s\S]*?-->/g, "");
@@ -54,6 +71,12 @@ function sanitizeOnServer(input: string): string {
       if (idx === -1) continue;
       while (open.length > idx) out += `</${open.pop()}>`;
       continue;
+    }
+
+    if (name === "iframe") {
+      const srcMatch = /src\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'>]+))/i.exec(m[2] ?? "");
+      const src = (srcMatch?.[1] ?? srcMatch?.[2] ?? srcMatch?.[3] ?? "").trim();
+      if (!YOUTUBE_EMBED.test(src)) continue;
     }
 
     let attrs = "";
@@ -83,9 +106,11 @@ function sanitizeOnServer(input: string): string {
 export function sanitizeHtml(dirty: string | null | undefined): string {
   const input = dirty ?? "";
   if (typeof window === "undefined") return sanitizeOnServer(input);
-  return DOMPurify.sanitize(input, {
+  return DOMPurify.sanitize(stripForeignIframes(input), {
     ALLOWED_TAGS,
     ALLOWED_ATTR,
     ALLOW_DATA_ATTR: false,
+    ADD_TAGS: ["iframe"],
+    ADD_ATTR: ["allow", "allowfullscreen", "frameborder"],
   });
 }

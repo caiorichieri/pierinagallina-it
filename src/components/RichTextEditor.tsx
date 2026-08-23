@@ -2,10 +2,11 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { EditorContent, useEditor, type Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
+import YoutubeExt from "@tiptap/extension-youtube";
 import { useUpload } from "@/lib/use-upload";
 import {
   Bold, Italic, Underline as UnderlineIcon, Strikethrough, Heading2, Heading3,
-  List, ListOrdered, Quote, Link2, Link2Off, Minus, Undo2, Redo2, ImagePlus, Code2,
+  List, ListOrdered, Quote, Link2, Link2Off, Minus, Undo2, Redo2, ImagePlus, Code2, Youtube,
 } from "lucide-react";
 
 type Props = {
@@ -82,11 +83,40 @@ function Toolbar({ editor }: { editor: Editor }) {
     editor.chain().focus().extendMarkRange("link").setLink({ href: url.trim() }).run();
   }
 
+  /**
+   * Applica la dimensione alla foto selezionata; se non c'è una selezione
+   * sull'immagine, aggiorna l'ultima foto inserita prima del cursore.
+   */
   function imgWidth(cls: string) {
-    editor.chain().focus().updateAttributes("image", { class: cls }).run();
+    if (editor.isActive("image")) {
+      editor.chain().focus().updateAttributes("image", { class: cls }).run();
+      return;
+    }
+    const { state, view } = editor;
+    const cursor = state.selection.from;
+    let target: number | null = null;
+    state.doc.descendants((node, pos) => {
+      if (node.type.name === "image" && pos <= cursor) target = pos;
+    });
+    if (target === null) {
+      // nessuna foto prima del cursore: prendo la prima del documento
+      state.doc.descendants((node, pos) => {
+        if (target === null && node.type.name === "image") target = pos;
+      });
+    }
+    if (target === null) return;
+    const node = state.doc.nodeAt(target);
+    if (!node) return;
+    view.dispatch(state.tr.setNodeMarkup(target, undefined, { ...node.attrs, class: cls }));
+    editor.commands.focus();
   }
 
-  const imageActive = editor.isActive("image");
+  function insertYoutube() {
+    const url = window.prompt("Incolla il link del video YouTube:", "https://www.youtube.com/watch?v=");
+    if (!url?.trim()) return;
+    const ok = editor.commands.setYoutubeVideo({ src: url.trim(), width: 640, height: 360 });
+    if (!ok) setErr("Link YouTube non valido");
+  }
 
   return (
     <div className="sticky top-0 z-10 flex flex-wrap items-center gap-0.5 rounded-t-md border-b border-border bg-card px-2 py-1.5">
@@ -118,6 +148,7 @@ function Toolbar({ editor }: { editor: Editor }) {
           if (files.length) void insertImages(files);
         }}
       />
+      <Btn title="Inserisci video YouTube" onClick={insertYoutube}><Youtube size={15} /></Btn>
       <span className="mx-1 h-5 w-px bg-border" />
       <Btn title="Annulla" onClick={() => editor.chain().focus().undo().run()}><Undo2 size={15} /></Btn>
       <Btn title="Ripeti" onClick={() => editor.chain().focus().redo().run()}><Redo2 size={15} /></Btn>
@@ -125,14 +156,12 @@ function Toolbar({ editor }: { editor: Editor }) {
       {busy && <span className="ml-2 text-[11px] text-muted-foreground">Caricamento foto…</span>}
       {err && <span className="ml-2 text-[11px] text-destructive">{err}</span>}
 
-      {imageActive && (
-        <div className="ml-auto flex items-center gap-1 text-[11px] text-muted-foreground">
-          Foto:
-          <button type="button" title="3 per riga" onClick={() => imgWidth("img-sm")} className="rounded border border-border px-1.5 py-0.5 hover:text-accent">piccola</button>
-          <button type="button" title="2 per riga" onClick={() => imgWidth("img-md")} className="rounded border border-border px-1.5 py-0.5 hover:text-accent">media</button>
-          <button type="button" title="tutta la larghezza" onClick={() => imgWidth("img-lg")} className="rounded border border-border px-1.5 py-0.5 hover:text-accent">grande</button>
-        </div>
-      )}
+      <div className="ml-auto flex items-center gap-1 text-[11px] text-muted-foreground">
+        {imageActive ? "Foto selezionata:" : "Ultima foto:"}
+        <button type="button" title="3 per riga" onClick={() => imgWidth("img-sm")} className="rounded border border-border px-1.5 py-0.5 hover:text-accent">piccola</button>
+        <button type="button" title="2 per riga" onClick={() => imgWidth("img-md")} className="rounded border border-border px-1.5 py-0.5 hover:text-accent">media</button>
+        <button type="button" title="tutta la larghezza" onClick={() => imgWidth("img-lg")} className="rounded border border-border px-1.5 py-0.5 hover:text-accent">grande</button>
+      </div>
     </div>
   );
 }
@@ -156,6 +185,7 @@ export function RichTextEditor({ value, onChange, placeholder, minHeight = 320 }
         link: { openOnClick: false, autolink: true, HTMLAttributes: { rel: "noopener noreferrer", target: "_blank" } },
       }),
       ImageWithClass.configure({ inline: false, allowBase64: false }),
+      YoutubeExt.configure({ nocookie: true, controls: true, modestBranding: true, width: 640, height: 360 }),
     ],
     content: value || "",
     editorProps: {
