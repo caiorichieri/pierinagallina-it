@@ -18,6 +18,7 @@ const NAV = [
   { to: "/admin/fiabe", label: "Fiabe sonore", icon: Headphones },
   { to: "/admin/poesie", label: "Poesie", icon: Feather },
   { to: "/admin/fotografie", label: "Fotografie", icon: ImageIcon },
+  { to: "/admin/commenti", label: "Commenti", icon: MessageCircle },
   { to: "/admin/messaggi", label: "Messaggi", icon: Mail },
   { to: "/admin/newsletter", label: "Newsletter", icon: Send },
 ] as const;
