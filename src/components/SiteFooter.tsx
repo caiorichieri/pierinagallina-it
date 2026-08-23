@@ -4,6 +4,8 @@ import { useT } from "../i18n";
 import { openCookiePreferences } from "./CookieBanner";
 import { SocialLinks } from "./SocialLinks";
 import { trackNewsletterIntent } from "@/lib/ga4-events";
+import friulionLogo from "@/assets/friulion-logo.png.asset.json";
+
 
 export function SiteFooter() {
   const { t } = useT();
@@ -131,7 +133,40 @@ export function SiteFooter() {
             </button>
           </div>
         </div>
+
+        <div className="border-t border-primary-foreground/10">
+          <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-3 gap-y-2 px-4 py-4 text-[11px] text-primary-foreground/55 sm:px-6">
+            <span className="inline-flex items-center gap-1.5">
+              <img
+                src={friulionLogo.url}
+                alt="Friulion"
+                className="h-4 w-auto"
+              />
+            </span>
+            <span>
+              Realizzazione:{" "}
+              <a
+                href="https://www.friulion.it"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary-foreground/75 hover:text-accent"
+              >
+                Friulion
+              </a>
+            </span>
+            <span className="hidden sm:inline" aria-hidden="true">·</span>
+            <span>P.Iva 03157410303</span>
+            <span className="hidden sm:inline" aria-hidden="true">·</span>
+            <a
+              href="mailto:privacy@friulion.it"
+              className="inline-flex items-center gap-1.5 text-primary-foreground/75 hover:text-accent"
+            >
+              <Mail size={12} /> privacy@friulion.it
+            </a>
+          </div>
+        </div>
       </div>
     </footer>
   );
 }
+
