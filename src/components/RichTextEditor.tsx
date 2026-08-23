@@ -82,11 +82,40 @@ function Toolbar({ editor }: { editor: Editor }) {
     editor.chain().focus().extendMarkRange("link").setLink({ href: url.trim() }).run();
   }
 
+  /**
+   * Applica la dimensione alla foto selezionata; se non c'è una selezione
+   * sull'immagine, aggiorna l'ultima foto inserita prima del cursore.
+   */
   function imgWidth(cls: string) {
-    editor.chain().focus().updateAttributes("image", { class: cls }).run();
+    if (editor.isActive("image")) {
+      editor.chain().focus().updateAttributes("image", { class: cls }).run();
+      return;
+    }
+    const { state, view } = editor;
+    const cursor = state.selection.from;
+    let target: number | null = null;
+    state.doc.descendants((node, pos) => {
+      if (node.type.name === "image" && pos <= cursor) target = pos;
+    });
+    if (target === null) {
+      // nessuna foto prima del cursore: prendo la prima del documento
+      state.doc.descendants((node, pos) => {
+        if (target === null && node.type.name === "image") target = pos;
+      });
+    }
+    if (target === null) return;
+    const node = state.doc.nodeAt(target);
+    if (!node) return;
+    view.dispatch(state.tr.setNodeMarkup(target, undefined, { ...node.attrs, class: cls }));
+    editor.commands.focus();
   }
 
-  const imageActive = editor.isActive("image");
+  function insertYoutube() {
+    const url = window.prompt("Incolla il link del video YouTube:", "https://www.youtube.com/watch?v=");
+    if (!url?.trim()) return;
+    const ok = editor.commands.setYoutubeVideo({ src: url.trim(), width: 640, height: 360 });
+    if (!ok) setErr("Link YouTube non valido");
+  }
 
   return (
     <div className="sticky top-0 z-10 flex flex-wrap items-center gap-0.5 rounded-t-md border-b border-border bg-card px-2 py-1.5">
