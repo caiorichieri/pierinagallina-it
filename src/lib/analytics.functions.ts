@@ -111,8 +111,14 @@ export const getVisitStats = createServerFn({ method: "POST" })
 
     // Exclude internal pages, then collapse repeated hits of the same page by
     // the same visitor within 30 minutes (reloads, back/forward navigation).
+    const BOT_PATH =
+      /^\/(wp-|xmlrpc|wlwmanifest|vendor\/|\.env|\.git|category\/|tag\/|feed|comments\/feed)/i;
     const raw = ([...((rows ?? []) as VisitRow[]), ...legacy] as VisitRow[]).filter(
-      (r) => r.path && !r.path.startsWith("/admin") && !r.path.startsWith("/auth"),
+      (r) =>
+        r.path &&
+        !r.path.startsWith("/admin") &&
+        !r.path.startsWith("/auth") &&
+        !BOT_PATH.test(r.path),
     );
     const lastSeen = new Map<string, number>();
     const visits = raw
