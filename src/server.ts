@@ -40,9 +40,13 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
 /** Paesi bloccati (traffico bot massiccio, nessun lettore reale del sito). */
 const BLOCKED_COUNTRIES = new Set(["CN"]);
 
-/** Percorsi tipici degli scanner WordPress: 404 immediato, zero lavoro. */
+/** Percorsi tipici degli scanner e residui del vecchio WordPress. */
 const BOT_PATH_RE =
-  /^\/(wp-(?:includes|admin|content|login)|xmlrpc\.php|wlwmanifest|vendor\/|\.env|\.git)/i;
+  /^\/(wp-|xmlrpc\.php|wlwmanifest|vendor\/|\.env|\.git|autodiscover|owa\/|cgi-bin|phpmyadmin|category\/|tag\/|feed\/?$|comments\/feed|author\/|\?p=|\d{4}\/\d{2}\/)/i;
+
+/** User-agent di crawler/scraper non desiderati (i motori di ricerca restano ammessi). */
+const BOT_UA_RE =
+  /(python-requests|curl\/|wget|libwww|httpclient|scrapy|go-http-client|java\/|okhttp|masscan|zgrab|nmap|semrush|ahrefs|mj12bot|dotbot|petalbot|bytespider|dataforseo|serpstat|blexbot|seekport|censys|nikto|sqlmap|headlesschrome|phantomjs|axios\/|node-fetch)/i;
 
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
@@ -53,10 +57,16 @@ export default {
         return new Response("Not found", { status: 404 });
       }
 
+      const ua = request.headers.get("user-agent") ?? "";
+      if (!ua || BOT_UA_RE.test(ua)) {
+        return new Response("Access denied", { status: 403 });
+      }
+
       const country = (request as unknown as { cf?: { country?: string } }).cf?.country;
       if (country && BLOCKED_COUNTRIES.has(country)) {
         return new Response("Access denied", { status: 403 });
       }
+
 
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
