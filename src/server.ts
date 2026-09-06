@@ -53,18 +53,30 @@ export default {
     try {
       const url = new URL(request.url);
 
-      if (BOT_PATH_RE.test(url.pathname)) {
-        return new Response("Not found", { status: 404 });
-      }
+      // Richieste interne dell'app (server functions, API, asset): mai filtrate.
+      const isInternal =
+        url.pathname.startsWith("/_serverFn") ||
+        url.pathname.startsWith("/_server") ||
+        url.pathname.startsWith("/api/") ||
+        url.pathname.startsWith("/@") ||
+        url.pathname.startsWith("/assets/") ||
+        url.pathname.startsWith("/node_modules/") ||
+        url.pathname.startsWith("/src/");
 
-      const ua = request.headers.get("user-agent") ?? "";
-      if (!ua || BOT_UA_RE.test(ua)) {
-        return new Response("Access denied", { status: 403 });
-      }
+      if (!isInternal) {
+        if (BOT_PATH_RE.test(url.pathname)) {
+          return new Response("Not found", { status: 404 });
+        }
 
-      const country = (request as unknown as { cf?: { country?: string } }).cf?.country;
-      if (country && BLOCKED_COUNTRIES.has(country)) {
-        return new Response("Access denied", { status: 403 });
+        const ua = request.headers.get("user-agent") ?? "";
+        if (ua && BOT_UA_RE.test(ua)) {
+          return new Response("Access denied", { status: 403 });
+        }
+
+        const country = (request as unknown as { cf?: { country?: string } }).cf?.country;
+        if (country && BLOCKED_COUNTRIES.has(country)) {
+          return new Response("Access denied", { status: 403 });
+        }
       }
 
 
