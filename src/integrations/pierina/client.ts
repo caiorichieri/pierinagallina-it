@@ -76,7 +76,7 @@ export type GalleryPhoto = {
 // browser publishable key and is safe to ship to the client.
 const PIERINA_URL = "https://muhsqviepidroymvsevd.supabase.co";
 const PIERINA_ANON_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11aHNxdmllcGlkcm95bXZzZXZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3MDQ0NzYsImV4cCI6MjA3MjgwNDc2fQ.q54hqVp0suYtSkibtCacYShhkuE_UNLJw5x0BJ6pAA0";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11aHNxdmllcGlkcm95bXZzZXZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3MDQ0NzYsImV4cCI6MjA5NzI4MDQ3Nn0.q54hqVp0suYtSkibtCacYShhkuE_UNLJw5x0BJ6pAA0";
 
 function build() {
   return createClient(PIERINA_URL, PIERINA_ANON_KEY, {
