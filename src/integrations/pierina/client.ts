@@ -1,8 +1,10 @@
-// Untyped Supabase client pointed at pierina-archive-transfer.
-// Types live next to each query in routes/lib because the auto-generated
-// types.ts is bound to the original Lovable Cloud project.
+// Untyped Supabase client pointed at the project's Lovable Cloud backend.
+// It reuses the same auth session as the main integration so that admin
+// routes can read and write the content tables (posts, books, poems, etc.)
+// that were migrated from the old pierina-archive-transfer project.
 
 import { createClient } from "@supabase/supabase-js";
+import { brokeredPreviewStorage } from "@/integrations/supabase/previewAuthStorage";
 
 export type Post = {
   id: string
@@ -70,18 +72,16 @@ export type GalleryPhoto = {
   created_at: string
 }
 
-// Hardcoded — Lovable Cloud manages .env for the default project, so we
-// cannot rely on VITE_SUPABASE_* here. These point at the pierina-archive-transfer
-// project (anon/publishable key is safe to ship to the browser).
-const PIERINA_URL = "https://foubruudcsrbfucuavob.supabase.co";
+// Use the current project's Lovable Cloud backend. The anon key is the
+// browser publishable key and is safe to ship to the client.
+const PIERINA_URL = "https://muhsqviepidroymvsevd.supabase.co";
 const PIERINA_ANON_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZvdWJydXVkY3NyYmZ1Y3Vhdm9iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUxNjY4NTYsImV4cCI6MjA5MDc0Mjg1Nn0.Dz21-VyUZHQ2Vk29U4SQP0Img9CJoln_12s4D2DLfvw";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11aHNxdmllcGlkcm95bXZzZXZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3MDQ0NzYsImV4cCI6MjA3MjgwNDc2fQ.q54hqVp0suYtSkibtCacYShhkuE_UNLJw5x0BJ6pAA0";
 
 function build() {
   return createClient(PIERINA_URL, PIERINA_ANON_KEY, {
     auth: {
-      storage: typeof window !== "undefined" ? window.localStorage : undefined,
-      storageKey: "sb-pierina-auth",
+      storage: brokeredPreviewStorage(),
       persistSession: true,
       autoRefreshToken: true,
     },

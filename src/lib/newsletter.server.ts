@@ -5,9 +5,10 @@
 import process from "node:process";
 import { NEWSLETTER_FROM, NEWSLETTER_REPLY_TO } from "./newsletter-config";
 
-const PIERINA_URL = "https://foubruudcsrbfucuavob.supabase.co";
+// Usa il backend Lovable Cloud attuale del progetto.
+const PIERINA_URL = "https://muhsqviepidroymvsevd.supabase.co";
 const PIERINA_ANON_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZvdWJydXVkY3NyYmZ1Y3Vhdm9iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUxNjY4NTYsImV4cCI6MjA5MDc0Mjg1Nn0.Dz21-VyUZHQ2Vk29U4SQP0Img9CJoln_12s4D2DLfvw";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11aHNxdmllcGlkcm95bXZzZXZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3MDQ0NzYsImV4cCI6MjA3MjgwNDc2fQ.q54hqVp0suYtSkibtCacYShhkuE_UNLJw5x0BJ6pAA0";
 
 const GATEWAY = "https://connector-gateway.lovable.dev/resend";
 
