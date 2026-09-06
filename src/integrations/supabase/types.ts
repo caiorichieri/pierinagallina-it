@@ -577,13 +577,6 @@ export type Database = {
         }
         Returns: boolean
       }
-      import_posts_json: {
-        Args: { posts_json: Json }
-        Returns: {
-          inserted: number
-          updated: number
-        }[]
-      }
     }
     Enums: {
       app_role: "admin"
