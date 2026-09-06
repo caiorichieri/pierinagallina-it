@@ -14,6 +14,72 @@ export type Database = {
   }
   public: {
     Tables: {
+      books: {
+        Row: {
+          buy_url: string | null
+          cover_url: string | null
+          created_at: string
+          description: string | null
+          id: string
+          price: number | null
+          sort_order: number
+          title: string
+          type: string | null
+          year: number | null
+          youtube_id: string | null
+        }
+        Insert: {
+          buy_url?: string | null
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          price?: number | null
+          sort_order?: number
+          title: string
+          type?: string | null
+          year?: number | null
+          youtube_id?: string | null
+        }
+        Update: {
+          buy_url?: string | null
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          price?: number | null
+          sort_order?: number
+          title?: string
+          type?: string | null
+          year?: number | null
+          youtube_id?: string | null
+        }
+        Relationships: []
+      }
+      categories: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          post_count: number
+          slug: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          post_count?: number
+          slug: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          post_count?: number
+          slug?: string
+        }
+        Relationships: []
+      }
       contact_messages: {
         Row: {
           created_at: string
@@ -38,6 +104,30 @@ export type Database = {
           message?: string
           name?: string
           subject?: string | null
+        }
+        Relationships: []
+      }
+      content_gallery_photos: {
+        Row: {
+          created_at: string
+          id: string
+          image_url: string
+          sort_order: number
+          title: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          image_url: string
+          sort_order?: number
+          title?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          image_url?: string
+          sort_order?: number
+          title?: string | null
         }
         Relationships: []
       }
@@ -82,6 +172,68 @@ export type Database = {
           url?: string | null
         }
         Relationships: []
+      }
+      fiabe_collections: {
+        Row: {
+          created_at: string
+          id: string
+          slug: string
+          sort_order: number
+          subtitle: string | null
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          slug: string
+          sort_order?: number
+          subtitle?: string | null
+          title: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          slug?: string
+          sort_order?: number
+          subtitle?: string | null
+          title?: string
+        }
+        Relationships: []
+      }
+      fiabe_tracks: {
+        Row: {
+          collection_id: string | null
+          created_at: string
+          id: string
+          mp3_url: string
+          sort_order: number
+          title: string
+        }
+        Insert: {
+          collection_id?: string | null
+          created_at?: string
+          id?: string
+          mp3_url: string
+          sort_order?: number
+          title: string
+        }
+        Update: {
+          collection_id?: string | null
+          created_at?: string
+          id?: string
+          mp3_url?: string
+          sort_order?: number
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fiabe_tracks_collection_id_fkey"
+            columns: ["collection_id"]
+            isOneToOne: false
+            referencedRelation: "fiabe_collections"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       gallery_albums: {
         Row: {
@@ -205,6 +357,27 @@ export type Database = {
         }
         Relationships: []
       }
+      newsletter_subscribers: {
+        Row: {
+          confirmed: boolean
+          created_at: string
+          email: string
+          id: string
+        }
+        Insert: {
+          confirmed?: boolean
+          created_at?: string
+          email: string
+          id?: string
+        }
+        Update: {
+          confirmed?: boolean
+          created_at?: string
+          email?: string
+          id?: string
+        }
+        Relationships: []
+      }
       page_visits: {
         Row: {
           created_at: string
@@ -235,6 +408,39 @@ export type Database = {
           post_title?: string | null
           referrer?: string | null
           session_id?: string | null
+        }
+        Relationships: []
+      }
+      poems: {
+        Row: {
+          content_friulian: string | null
+          content_italian: string | null
+          created_at: string
+          id: string
+          slug: string
+          sort_order: number
+          title: string
+          written_at: string | null
+        }
+        Insert: {
+          content_friulian?: string | null
+          content_italian?: string | null
+          created_at?: string
+          id?: string
+          slug: string
+          sort_order?: number
+          title: string
+          written_at?: string | null
+        }
+        Update: {
+          content_friulian?: string | null
+          content_italian?: string | null
+          created_at?: string
+          id?: string
+          slug?: string
+          sort_order?: number
+          title?: string
+          written_at?: string | null
         }
         Relationships: []
       }
@@ -270,6 +476,50 @@ export type Database = {
           post_title?: string | null
         }
         Relationships: []
+      }
+      posts: {
+        Row: {
+          category_id: string | null
+          content: string
+          created_at: string
+          excerpt: string
+          featured_image: string | null
+          id: string
+          published_at: string | null
+          slug: string
+          title: string
+        }
+        Insert: {
+          category_id?: string | null
+          content?: string
+          created_at?: string
+          excerpt?: string
+          featured_image?: string | null
+          id?: string
+          published_at?: string | null
+          slug: string
+          title: string
+        }
+        Update: {
+          category_id?: string | null
+          content?: string
+          created_at?: string
+          excerpt?: string
+          featured_image?: string | null
+          id?: string
+          published_at?: string | null
+          slug?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "posts_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_roles: {
         Row: {

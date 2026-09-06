@@ -1,0 +1,1 @@
+DROP FUNCTION IF EXISTS public.import_posts_json(JSONB);
