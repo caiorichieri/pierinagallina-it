@@ -80,7 +80,29 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
+// Modalità manutenzione: tutte le pagine pubbliche rimandano a /aggiornamento.
+// Per riaprire il sito basta mettere MAINTENANCE = false.
+const MAINTENANCE = true;
+
+const MAINTENANCE_ALLOWED = [
+  "/aggiornamento",
+  "/admin",
+  "/auth",
+  "/contatti",
+  "/privacy",
+  "/cookie-policy",
+  "/robots.txt",
+  "/sitemap.xml",
+  "/api",
+];
+
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+  beforeLoad: ({ location }) => {
+    if (!MAINTENANCE) return;
+    const path = location.pathname.replace(/\/+$/, "") || "/";
+    if (MAINTENANCE_ALLOWED.some((p) => path === p || path.startsWith(`${p}/`))) return;
+    throw redirect({ to: "/aggiornamento" });
+  },
   head: () => ({
     meta: [
       { charSet: "utf-8" },
