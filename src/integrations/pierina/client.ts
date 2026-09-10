@@ -74,9 +74,9 @@ export type GalleryPhoto = {
 
 // Use the current project's Lovable Cloud backend. The anon key is the
 // browser publishable key and is safe to ship to the client.
-const PIERINA_URL = "https://muhsqviepidroymvsevd.supabase.co";
+const PIERINA_URL = "https://foubruudcsrbfucuavob.supabase.co";
 const PIERINA_ANON_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11aHNxdmllcGlkcm95bXZzZXZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3MDQ0NzYsImV4cCI6MjA5NzI4MDQ3Nn0.q54hqVp0suYtSkibtCacYShhkuE_UNLJw5x0BJ6pAA0";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZvdWJydXVkY3NyYmZ1Y3Vhdm9iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUxNjY4NTYsImV4cCI6MjA5MDc0Mjg1Nn0.Dz21-VyUZHQ2Vk29U4SQP0Img9CJoln_12s4D2DLfvw";
 
 function build() {
   return createClient(PIERINA_URL, PIERINA_ANON_KEY, {
