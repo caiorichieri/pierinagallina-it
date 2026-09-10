@@ -7,8 +7,6 @@ type UploadInput = {
   dataBase64: string;
 };
 
-// 10 years (in seconds) for signed URL
-const TEN_YEARS = 60 * 60 * 24 * 365 * 10;
 const MAX_BYTES = 15 * 1024 * 1024;
 
 export const uploadMedia = createServerFn({ method: "POST" })
