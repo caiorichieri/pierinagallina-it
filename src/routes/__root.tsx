@@ -83,7 +83,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 
 // Modalità manutenzione: tutte le pagine pubbliche rimandano a /aggiornamento.
 // Per riaprire il sito basta mettere MAINTENANCE = false.
-const MAINTENANCE = true;
+const MAINTENANCE = false;
 
 const MAINTENANCE_ALLOWED = [
   "/aggiornamento",
