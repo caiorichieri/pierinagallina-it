@@ -13,7 +13,7 @@ function AdminFoto() {
   const [err, setErr] = useState<string | null>(null);
 
   async function reload() {
-    const { data, error } = await db.from("gallery_photos").select("*").order("created_at", { ascending: false });
+    const { data, error } = await db.from("content_gallery_photos").select("*").order("created_at", { ascending: false });
     if (error) setErr(error.message); else setItems((data as GalleryPhoto[]) ?? []);
   }
   useEffect(() => { reload(); }, []);
@@ -22,7 +22,7 @@ function AdminFoto() {
     if (!editing) return;
     const { id, created_at, ...payload } = editing as GalleryPhoto & { id?: string };
     if (!payload.image_url) return setErr("URL immagine richiesto");
-    const op = id ? db.from("gallery_photos").update(payload).eq("id", id) : db.from("gallery_photos").insert(payload);
+    const op = id ? db.from("content_gallery_photos").update(payload).eq("id", id) : db.from("content_gallery_photos").insert(payload);
     const { error } = await op;
     if (error) return setErr(error.message);
     setEditing(null); reload();
@@ -30,13 +30,13 @@ function AdminFoto() {
   async function addMany(urls: string[]) {
     const base = items.length;
     const rows = urls.map((image_url, i) => ({ image_url, title: "", sort_order: base + i }));
-    const { error } = await db.from("gallery_photos").insert(rows);
+    const { error } = await db.from("content_gallery_photos").insert(rows);
     if (error) return setErr(error.message);
     reload();
   }
   async function remove(id: string) {
     if (!confirm("Eliminare la fotografia?")) return;
-    const { error } = await db.from("gallery_photos").delete().eq("id", id);
+    const { error } = await db.from("content_gallery_photos").delete().eq("id", id);
     if (error) return alert(error.message);
     reload();
   }
