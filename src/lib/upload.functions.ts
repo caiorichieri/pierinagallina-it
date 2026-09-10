@@ -7,8 +7,6 @@ type UploadInput = {
   dataBase64: string;
 };
 
-// 10 years (in seconds) for signed URL
-const TEN_YEARS = 60 * 60 * 24 * 365 * 10;
 const MAX_BYTES = 15 * 1024 * 1024;
 
 export const uploadMedia = createServerFn({ method: "POST" })
@@ -34,10 +32,8 @@ export const uploadMedia = createServerFn({ method: "POST" })
       .upload(path, bytes, { contentType: data.contentType, upsert: false });
     if (upErr) throw new Error(upErr.message);
 
-    const { data: signed, error: signErr } = await supabaseAdmin.storage
-      .from("media")
-      .createSignedUrl(path, TEN_YEARS);
-    if (signErr) throw new Error(signErr.message);
+    // URL stabile servita dalla rotta proxy /api/public/media/*
+    const url = `/api/public/media/${path.split("/").map(encodeURIComponent).join("/")}`;
 
-    return { url: signed.signedUrl, path };
+    return { url, path };
   });
