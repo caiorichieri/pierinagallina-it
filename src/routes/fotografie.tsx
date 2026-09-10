@@ -11,7 +11,7 @@ const photosQ = queryOptions({
   queryKey: ["gallery-all"],
   queryFn: async (): Promise<GalleryPhoto[]> => {
     const { data, error } = await db
-      .from("content_gallery_photos")
+      .from("gallery_photos")
       .select("id,title,image_url,sort_order,created_at")
       .order("created_at", { ascending: false })
       .limit(200);
